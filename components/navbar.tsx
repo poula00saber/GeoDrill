@@ -1,15 +1,25 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Menu, X, Globe, ArrowUpRight } from 'lucide-react'
+import { Menu, X, Globe, ArrowUpRight, Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { Logo } from '@/components/logo'
 import { useLanguage } from '@/components/language-provider'
 import { cn } from '@/lib/utils'
 
 export function Navbar() {
   const { t, toggle } = useLanguage()
+  const { resolvedTheme, setTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Wait until the client has mounted so the theme icon doesn't
+  // mismatch between server and client renders (next-themes returns
+  // undefined for resolvedTheme during SSR).
+  useEffect(() => setMounted(true), [])
+
+  const isDark = mounted && resolvedTheme === 'dark'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -60,6 +70,20 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            className={cn(
+              'inline-flex size-10 items-center justify-center rounded-lg transition-colors',
+              solid
+                ? 'text-foreground/80 hover:bg-muted hover:text-primary'
+                : 'text-white/90 hover:bg-white/10',
+            )}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </button>
+
           <button
             type="button"
             onClick={toggle}

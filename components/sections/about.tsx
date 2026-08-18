@@ -41,7 +41,7 @@ export function About() {
             {a.stats.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 90} className="bg-card">
                 <div className="flex flex-col gap-1 p-6">
-                  <span className="text-3xl font-bold text-navy md:text-4xl">
+                  <span className="text-3xl font-bold text-foreground md:text-4xl">
                     <CountUp end={stat.value} suffix={stat.suffix} format={stat.value < 1000} />
                   </span>
                   <span className="text-sm text-muted-foreground">{stat.label}</span>

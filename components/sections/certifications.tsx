@@ -42,7 +42,7 @@ export function Certifications() {
                     </svg>
                   </span>
                   <div>
-                    <p className="font-mono text-sm font-bold text-navy">{cert.code}</p>
+                    <p className="font-mono text-sm font-bold text-foreground">{cert.code}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{cert.name}</p>
                   </div>
                 </div>

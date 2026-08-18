@@ -72,7 +72,7 @@ export function Contact() {
                 </label>
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center rounded-xl bg-navy px-6 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-teal hover:text-primary-foreground"
+                  className="mt-2 inline-flex items-center justify-center rounded-xl bg-navy px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal hover:text-white"
                 >
                   {c.form.send}
                 </button>

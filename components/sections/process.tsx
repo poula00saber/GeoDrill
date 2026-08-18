@@ -27,8 +27,8 @@ export function Process() {
                   </span>
                   <span className="h-px flex-1 bg-gradient-to-r from-teal/40 to-transparent rtl:bg-gradient-to-l" aria-hidden />
                 </div>
-                <h3 className="text-base font-semibold text-background">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-background/60">{step.text}</p>
+                <h3 className="text-base font-semibold text-white">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-white/60">{step.text}</p>
               </div>
             </Reveal>
           ))}

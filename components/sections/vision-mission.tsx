@@ -30,8 +30,8 @@ export function VisionMission() {
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-teal/15 text-teal">
                 <EyeIcon />
               </div>
-              <h3 className="mb-4 text-xl font-bold text-background md:text-2xl">{v.visionTitle}</h3>
-              <p className="leading-relaxed text-background/70">{v.vision}</p>
+              <h3 className="mb-4 text-xl font-bold text-white md:text-2xl">{v.visionTitle}</h3>
+              <p className="leading-relaxed text-white/70">{v.vision}</p>
             </article>
           </Reveal>
 
@@ -40,8 +40,8 @@ export function VisionMission() {
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-teal text-navy">
                 <TargetIcon />
               </div>
-              <h3 className="mb-4 text-xl font-bold text-background md:text-2xl">{v.missionTitle}</h3>
-              <p className="leading-relaxed text-background/70">{v.mission}</p>
+              <h3 className="mb-4 text-xl font-bold text-white md:text-2xl">{v.missionTitle}</h3>
+              <p className="leading-relaxed text-white/70">{v.mission}</p>
             </article>
           </Reveal>
         </div>

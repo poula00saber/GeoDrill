@@ -114,7 +114,7 @@ export const content: Record<Lang, Dict> = {
       { id: 'contact', label: 'Contact' },
     ],
     cta: {
-      quote: 'Get a Quote',
+      quote: 'Contact Us',
       services: 'Explore Our Services',
       projects: 'View Projects',
       contact: 'Contact Us',
@@ -264,7 +264,7 @@ export const content: Record<Lang, Dict> = {
       { id: 'contact', label: 'تواصل معنا' },
     ],
     cta: {
-      quote: 'اطلب عرض سعر',
+      quote: 'تواصل معنا',
       services: 'استكشف خدماتنا',
       projects: 'عرض المشاريع',
       contact: 'تواصل معنا',

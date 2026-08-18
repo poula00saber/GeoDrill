@@ -2,6 +2,9 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
+/* Class-based dark mode (toggled by next-themes on the <html> element) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -72,6 +75,51 @@
   --teal-dark: oklch(0.55 0.1 195);
 }
 
+/*
+  === THEME PALETTE (GLOBAL) ===
+  Change any variable below and the ENTIRE website updates automatically.
+  Theme is applied by toggling the `.dark` class on the <html> element
+  (managed by next-themes). Semantic tokens (bg-background, text-foreground,
+  bg-card, bg-muted, border-border, etc.) all resolve to these variables.
+*/
+.dark {
+  color-scheme: dark;
+
+  /* Dark background / base */
+  --background: oklch(0.15 0.018 245);
+  --foreground: oklch(0.97 0.004 90);
+
+  /* Cards & popovers */
+  --card: oklch(0.19 0.02 245);
+  --card-foreground: oklch(0.97 0.004 90);
+  --popover: oklch(0.19 0.02 245);
+  --popover-foreground: oklch(0.97 0.004 90);
+
+  /* Brand primary (teal) — brightened for dark surfaces */
+  --primary: oklch(0.72 0.11 195);
+  --primary-foreground: oklch(0.15 0.018 245);
+
+  --secondary: oklch(0.9 0.004 90);
+  --secondary-foreground: oklch(0.15 0.018 245);
+
+  --muted: oklch(0.24 0.02 245);
+  --muted-foreground: oklch(0.72 0.015 245);
+
+  --accent: oklch(0.27 0.02 245);
+  --accent-foreground: oklch(0.97 0.004 90);
+
+  --destructive: oklch(0.66 0.21 27);
+
+  --border: oklch(0.28 0.02 245);
+  --input: oklch(0.28 0.02 245);
+  --ring: oklch(0.72 0.11 195);
+
+  /* Brand blues (used for dedicated dark sections) */
+  --navy: oklch(0.12 0.018 245);
+  --teal: oklch(0.72 0.11 195);
+  --teal-dark: oklch(0.62 0.1 198);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -85,6 +133,34 @@
   }
   [dir='rtl'] {
     font-family: var(--font-arabic);
+  }
+
+  /* Smooth cross-fade whenever next-themes flips the theme */
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition:
+      background-color 0.4s ease,
+      border-color 0.4s ease,
+      color 0.4s ease,
+      fill 0.4s ease,
+      stroke 0.4s ease !important;
+  }
+
+  /* Gentle fade/slide used when the language/route changes */
+  .lang-enter {
+    animation: lang-fade 0.35s ease both;
+  }
+  @keyframes lang-fade {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
