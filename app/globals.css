@@ -213,4 +213,123 @@
       transform: translateX(50%);
     }
   }
+
+  /* ---- Cinematic hero Ken Burns zooms (GPU-only transform) ---- */
+  @keyframes kb-1 {
+    from {
+      transform: scale(1.03) translate(-1.5%, 0%);
+    }
+    to {
+      transform: scale(1.08) translate(2%, 1%);
+    }
+  }
+  @keyframes kb-2 {
+    from {
+      transform: scale(1.05) translate(1%, -1%);
+    }
+    to {
+      transform: scale(1.1) translate(-1%, 1%);
+    }
+  }
+  @keyframes kb-3 {
+    from {
+      transform: scale(1.03) translate(2%, 1%);
+    }
+    to {
+      transform: scale(1.08) translate(-2%, -1%);
+    }
+  }
+  @keyframes kb-4 {
+    from {
+      transform: scale(1.06) translate(-1%, 1%);
+    }
+    to {
+      transform: scale(1.09) translate(1%, -1%);
+    }
+  }
+  /* Reduced zoom + shorter travel on small screens (perf & immersion) */
+  @media (max-width: 767px) {
+    @keyframes kb-1 {
+      from {
+        transform: scale(1.02) translate(-0.5%, 0);
+      }
+      to {
+        transform: scale(1.05) translate(0.5%, 0.25%);
+      }
+    }
+    @keyframes kb-2 {
+      from {
+        transform: scale(1.03) translate(0.5%, -0.25%);
+      }
+      to {
+        transform: scale(1.05) translate(-0.5%, 0.25%);
+      }
+    }
+    @keyframes kb-3 {
+      from {
+        transform: scale(1.02) translate(0.5%, 0.25%);
+      }
+      to {
+        transform: scale(1.05) translate(-0.5%, -0.25%);
+      }
+    }
+    @keyframes kb-4 {
+      from {
+        transform: scale(1.03) translate(-0.5%, 0.25%);
+      }
+      to {
+        transform: scale(1.05) translate(0.5%, -0.25%);
+      }
+    }
+  }
+
+  /* Ken Burns animation classes (5s = autoplay cadence) */
+  .hero-kb-1 {
+    animation: kb-1 5s ease-out forwards;
+  }
+  .hero-kb-2 {
+    animation: kb-2 5s ease-out forwards;
+  }
+  .hero-kb-3 {
+    animation: kb-3 5s ease-out forwards;
+  }
+  .hero-kb-4 {
+    animation: kb-4 5s ease-out forwards;
+  }
+
+  /* Elegant scroll-mouse indicator */
+  .scroll-mouse {
+    position: relative;
+    width: 26px;
+    height: 42px;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.6;
+  }
+  .scroll-mouse::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 3px;
+    height: 8px;
+    margin-left: -1.5px;
+    border-radius: 999px;
+    background: currentColor;
+    animation: scroll-wheel 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll-wheel {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+  }
 }
