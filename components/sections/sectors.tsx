@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import { useLanguage } from '@/components/language-provider'
 import { Reveal } from '@/components/reveal'
@@ -7,7 +8,7 @@ import { SectionHeading } from '@/components/section-heading'
 import { cn } from '@/lib/utils'
 
 export function Sectors() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const s = t.sectors
 
   return (
@@ -25,7 +26,10 @@ export function Sectors() {
                 i === 0 && 'md:col-span-2 md:row-span-1',
               )}
             >
-              <article className="group relative h-full min-h-44 overflow-hidden rounded-2xl">
+              <Link
+                href={`/${lang}/sectors/${sector.key}`}
+                className="group relative block h-full min-h-44 overflow-hidden rounded-2xl"
+              >
                 <Image
                   src={sector.image || '/placeholder.svg'}
                   alt={sector.name}
@@ -43,7 +47,7 @@ export function Sectors() {
                     </svg>
                   </span>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>

@@ -80,6 +80,17 @@ export type Dict = {
     contactTitle: string
     rights: string
     group: string
+    home: string
+    aboutPage: string
+    servicesPage: string
+    projectsPage: string
+    contactPage: string
+  }
+  page: {
+    about: { kicker: string; title: string; sub: string; image: string }
+    services: { kicker: string; title: string; sub: string; image: string }
+    projects: { kicker: string; title: string; sub: string; image: string }
+    contact: { kicker: string; title: string; sub: string; image: string }
   }
 }
 
@@ -250,6 +261,37 @@ export const content: Record<Lang, Dict> = {
       contactTitle: 'Contact',
       rights: 'GeoDrill Construction Experts. All rights reserved.',
       group: 'Part of the GeoDrill Group',
+      home: 'Home',
+      aboutPage: 'About Us',
+      servicesPage: 'Our Services',
+      projectsPage: 'Our Projects',
+      contactPage: 'Contact Us',
+    },
+    page: {
+      about: {
+        kicker: 'About GeoDrill',
+        title: 'A trusted partner for construction and engineering excellence',
+        sub: 'GeoDrill Construction Experts combines deep geotechnical expertise with full general-contracting capability to deliver reliable, high-quality projects across the Kingdom.',
+        image: '/images/sector-industrial.png',
+      },
+      services: {
+        kicker: 'Capabilities',
+        title: 'Integrated services from ground works to finishing',
+        sub: 'A full spectrum of construction disciplines under one roof, executed with certified quality, safety and precision.',
+        image: '/images/service-concrete.png',
+      },
+      projects: {
+        kicker: 'Our Portfolio',
+        title: 'Selected projects that speak for us',
+        sub: 'A look across our ground works, structures, MEP and finishing works in active sites across the Kingdom.',
+        image: '/images/project-warehouse.png',
+      },
+      contact: {
+        kicker: 'Get in Touch',
+        title: 'Let us build something that lasts',
+        sub: 'Tell us about your project and our team will respond shortly.',
+        image: '/images/skyline.png',
+      },
     },
   },
   ar: {
@@ -400,6 +442,37 @@ export const content: Record<Lang, Dict> = {
       contactTitle: 'تواصل',
       rights: 'جيو دريل خبراء الإنشاء. جميع الحقوق محفوظة.',
       group: 'جزء من مجموعة جيو دريل',
+      home: 'الرئيسية',
+      aboutPage: 'من نحن',
+      servicesPage: 'خدماتنا',
+      projectsPage: 'مشاريعنا',
+      contactPage: 'تواصل معنا',
+    },
+    page: {
+      about: {
+        kicker: 'عن جيو دريل',
+        title: 'شريك موثوق للتميز في البناء والهندسة',
+        sub: 'تجمع جيو دريل خبراء الإنشاء بين عمق الخبرة الجيوتقنية وقدرة كاملة على التعاقد العام لتسليم مشاريع موثوقة وعالية الجودة في جميع أنحاء المملكة.',
+        image: '/images/sector-industrial.png',
+      },
+      services: {
+        kicker: 'قدراتنا',
+        title: 'خدمات متكاملة من أعمال التربة حتى التشطيبات',
+        sub: 'طيف كامل من التخصصات الإنشائية تحت سقف واحد، تنفَّذ بجودة وسلامة ودقة معتمدة.',
+        image: '/images/service-concrete.png',
+      },
+      projects: {
+        kicker: 'أعمالنا',
+        title: 'مشاريع مختارة تتحدث عنا',
+        sub: 'نظرة شاملة على أعمال التربة والهياكل والكهروميكانيكا والتشطيبات في مواقع نشطة في جميع أنحاء المملكة.',
+        image: '/images/project-warehouse.png',
+      },
+      contact: {
+        kicker: 'تواصل معنا',
+        title: 'لنبنِ شيئًا يدوم',
+        sub: 'أخبرنا عن مشروعك وسيتواصل معك فريقنا في أقرب وقت.',
+        image: '/images/skyline.png',
+      },
     },
   },
 }

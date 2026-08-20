@@ -48,7 +48,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 py-3 md:px-8">
         <a href="#home" aria-label="GeoDrill home" onClick={() => setOpen(false)}>
-          <Logo onDark={!solid} />
+          <Logo onDark={!solid} size="h-9" />
         </a>
 
         <ul className="hidden items-center gap-1 lg:flex">
