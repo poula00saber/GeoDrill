@@ -214,7 +214,7 @@ export const content: Record<Lang, Dict> = {
       ],
     },
     projects: {
-      kicker: 'Our Work',
+      kicker: 'Our Projects',
       title: 'A look at what we build',
       sub: 'Selected imagery from earthworks, structures, MEP, and finishing across active sites.',
     },
@@ -395,7 +395,7 @@ export const content: Record<Lang, Dict> = {
       ],
     },
     projects: {
-      kicker: 'أعمالنا',
+      kicker: 'مشاريعنا',
       title: 'نظرة على ما نبنيه',
       sub: 'صور مختارة من أعمال التربة والهياكل والكهروميكانيكا والتشطيبات في مواقعنا.',
     },
