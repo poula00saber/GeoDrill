@@ -9,8 +9,10 @@ import { Process } from '@/components/sections/process'
 import { Projects } from '@/components/sections/projects'
 import { Clients } from '@/components/sections/clients'
 import { Certifications } from '@/components/sections/certifications'
+import { Location } from '@/components/sections/location'
 import { Contact } from '@/components/sections/contact'
 import { Footer } from '@/components/footer'
+import { WhatsAppButton } from '@/components/whatsapp-button'
 
 export default async function Page({
   params,
@@ -34,8 +36,10 @@ export default async function Page({
       <Projects />
       <Clients />
       <Certifications />
+      <Location />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </main>
   )
 }

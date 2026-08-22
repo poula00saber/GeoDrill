@@ -9,7 +9,7 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 const copy = {
-  eyebrow: { en: "Welcome to GeoDrill", ar: "أهلاً بكم في جيودريل" },
+  eyebrow: { en: "Welcome to GEODRILL", ar: "أهلاً بكم في جيودريل" },
   headline: {
     en: [
       { text: "Built on ", tone: "plain" },
@@ -158,7 +158,7 @@ export default function Page() {
 
       <a
         href="/en"
-        aria-label="GeoDrill home"
+        aria-label="GEODRILL home"
         className="absolute top-6 start-6 z-20"
       >
         <Logo onDark={isDark} />
@@ -407,7 +407,7 @@ function Logo({ onDark = false }: { onDark?: boolean }) {
   return (
     <Image
       src={onDark ? "/logo2.png" : "/logo.png"}
-      alt="GeoDrill"
+      alt="GEODRILL"
       width={150}
       height={40}
       priority

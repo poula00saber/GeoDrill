@@ -17,18 +17,6 @@ export function Certifications() {
             <Reveal delay={140}>
               <p className="text-base leading-relaxed text-muted-foreground md:text-lg">{c.line}</p>
             </Reveal>
-            <Reveal delay={200}>
-              <ul className="flex flex-wrap gap-2">
-                {c.extra.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-full border border-border bg-muted px-4 py-2 text-sm text-foreground/80"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">

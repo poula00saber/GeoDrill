@@ -71,6 +71,7 @@ export type Dict = {
     address: string
     phoneLabel: string
     emailLabel: string
+    whatsapp: string
   }
   footer: {
     tagline: string
@@ -85,6 +86,13 @@ export type Dict = {
     servicesPage: string
     projectsPage: string
     contactPage: string
+    followLabel: string
+    locationsTitle: string
+    social: {
+      instagram: string
+      x: string
+      linkedin: string
+    }
   }
   page: {
     about: { kicker: string; title: string; sub: string; image: string }
@@ -131,15 +139,15 @@ export const content: Record<Lang, Dict> = {
       contact: 'Contact Us',
     },
     hero: {
-      tag: 'Since 2025',
+      tag: 'GEODRILL Construction Experts',
       headline: 'Strength in Execution. Precision in Delivery.',
-      sub: 'GeoDrill Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia — from ground works to finishing, built to the highest standards of quality, safety, and innovation.',
+      sub: 'GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia — from ground works to finishing, built to the highest standards of quality, safety, and innovation.',
       badges: ['ISO 9001', 'ISO 45001', 'ISO 14001'],
     },
     about: {
       kicker: 'Who We Are',
       title: 'Building trust across the Kingdom',
-      body: 'Since its establishment, GeoDrill has been committed to delivering integrated engineering and construction solutions that meet the highest standards of quality and innovation. We specialize in general contracting, infrastructure, concrete works, finishing, and steel structures — supported by experienced professionals and modern execution methodologies. Through excellence, safety, and timely delivery, we strive to create lasting value for our clients while contributing to the goals of Saudi Vision 2030.',
+      body: 'Since its establishment, GEODRILL has been committed to delivering integrated engineering and construction solutions that meet the highest standards of quality and innovation. We specialize in general contracting, infrastructure, concrete works, finishing, and steel structures — supported by experienced professionals and modern execution methodologies. Through excellence, safety, and timely delivery, we strive to create lasting value for our clients while contributing to the goals of Saudi Vision 2030.',
       stats: [
         { value: 20, suffix: '+', label: 'Sectors Served' },
         { value: 3, suffix: '', label: 'ISO Certifications' },
@@ -154,13 +162,13 @@ export const content: Record<Lang, Dict> = {
         'To become the preferred leader in general contracting and infrastructure across the Kingdom of Saudi Arabia by delivering innovative and sustainable construction solutions that set new standards of quality, efficiency, and reliability, while contributing to the objectives of Saudi Vision 2030.',
       missionTitle: 'Our Mission',
       mission:
-        'At GeoDrill, we are committed to delivering integrated solutions in general contracting and infrastructure through high-quality execution, operational excellence, innovation, and the highest standards of safety and sustainability.',
+        'At GEODRILL, we are committed to delivering integrated solutions in general contracting and infrastructure through high-quality execution, operational excellence, innovation, and the highest standards of safety and sustainability.',
     },
     why: {
-      kicker: 'Why GeoDrill',
+      kicker: 'Why GEODRILL',
       title: 'We build more than projects — we build trust',
       intro:
-        "At GeoDrill, we don't just build projects — we build trust. Backed by experienced professionals, proven methodologies, and an uncompromising commitment to quality.",
+        "At GEODRILL, we don't just build projects — we build trust. Backed by experienced professionals, proven methodologies, and an uncompromising commitment to quality.",
       features: [
         { key: 'experience', title: 'Experience', text: 'Accumulated expertise across complex builds.' },
         { key: 'quality', title: 'Quality', text: 'Uncompromising standards at every stage.' },
@@ -233,7 +241,7 @@ export const content: Record<Lang, Dict> = {
         { code: 'ISO 45001:2018', name: 'Occupational Health & Safety' },
         { code: 'ISO 14001:2015', name: 'Environmental Management' },
       ],
-      extra: ['Riyadh Chamber Membership', 'Commercial Registration', 'Civil Defense License'],
+      extra: [],
     },
     contact: {
       kicker: 'Get in Touch',
@@ -252,6 +260,7 @@ export const content: Record<Lang, Dict> = {
       address: 'Riyadh, Al Fayha District, Prince Saad Ibn Abdulrahman Branch Road',
       phoneLabel: '+966 5X XXX XXXX',
       emailLabel: 'info@geodrill.sa',
+      whatsapp: 'https://wa.me/966500000000',
     },
     footer: {
       tagline: 'Strength in Execution. Precision in Delivery.',
@@ -259,19 +268,26 @@ export const content: Record<Lang, Dict> = {
       servicesTitle: 'Services',
       sectorsTitle: 'Sectors',
       contactTitle: 'Contact',
-      rights: 'GeoDrill Construction Experts. All rights reserved.',
-      group: 'Part of the GeoDrill Group',
+      rights: 'GEODRILL Construction Experts. All rights reserved.',
+      group: 'Part of the GEODRILL Group',
       home: 'Home',
       aboutPage: 'About Us',
       servicesPage: 'Our Services',
       projectsPage: 'Our Projects',
       contactPage: 'Contact Us',
+      followLabel: 'Follow Us',
+      locationsTitle: 'Our Location',
+      social: {
+        instagram: 'https://instagram.com/geodrill',
+        x: 'https://x.com/geodrill',
+        linkedin: 'https://linkedin.com/company/geodrill',
+      },
     },
     page: {
       about: {
-        kicker: 'About GeoDrill',
+        kicker: 'About GEODRILL',
         title: 'A trusted partner for construction and engineering excellence',
-        sub: 'GeoDrill Construction Experts combines deep geotechnical expertise with full general-contracting capability to deliver reliable, high-quality projects across the Kingdom.',
+        sub: 'GEODRILL Construction Experts combines deep geotechnical expertise with full general-contracting capability to deliver reliable, high-quality projects across the Kingdom.',
         image: '/images/sector-industrial.png',
       },
       services: {
@@ -312,7 +328,7 @@ export const content: Record<Lang, Dict> = {
       contact: 'تواصل معنا',
     },
     hero: {
-      tag: 'منذ 2025',
+      tag: 'جيو دريل خبراء الإنشاء',
       headline: 'قوة في التنفيذ. دقة في الإنجاز.',
       sub: 'تقدم جيو دريل خبراء الإنشاء حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية — من أعمال التربة حتى التشطيبات، وفق أعلى معايير الجودة والسلامة والابتكار.',
       badges: ['آيزو 9001', 'آيزو 45001', 'آيزو 14001'],
@@ -414,7 +430,7 @@ export const content: Record<Lang, Dict> = {
         { code: 'آيزو 45001:2018', name: 'الصحة والسلامة المهنية' },
         { code: 'آيزو 14001:2015', name: 'الإدارة البيئية' },
       ],
-      extra: ['عضوية غرفة الرياض', 'السجل التجاري', 'رخصة الدفاع المدني'],
+      extra: [],
     },
     contact: {
       kicker: 'تواصل معنا',
@@ -433,6 +449,7 @@ export const content: Record<Lang, Dict> = {
       address: 'الرياض، حي الفيحاء، طريق الأمير سعد بن عبدالرحمن الفرعي',
       phoneLabel: '+966 5X XXX XXXX',
       emailLabel: 'info@geodrill.sa',
+      whatsapp: 'https://wa.me/966500000000',
     },
     footer: {
       tagline: 'قوة في التنفيذ. دقة في الإنجاز.',
@@ -447,6 +464,13 @@ export const content: Record<Lang, Dict> = {
       servicesPage: 'خدماتنا',
       projectsPage: 'مشاريعنا',
       contactPage: 'تواصل معنا',
+      followLabel: 'تابعنا',
+      locationsTitle: 'موقعنا',
+      social: {
+        instagram: 'https://instagram.com/geodrill',
+        x: 'https://x.com/geodrill',
+        linkedin: 'https://linkedin.com/company/geodrill',
+      },
     },
     page: {
       about: {

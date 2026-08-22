@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sector = getSectorByKey(slug)
   const locale = lang === 'ar' ? 'ar' : 'en'
   return {
-    title: sector ? `${sector.name[locale]} | GeoDrill` : 'GeoDrill',
+    title: sector ? `${sector.name[locale]} | GEODRILL` : 'GEODRILL',
     description: sector?.short[locale],
   }
 }

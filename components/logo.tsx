@@ -16,7 +16,7 @@ export function Logo({
     <span className={cn('inline-flex items-center', className)}>
       <Image
         src="/logo2.png"
-        alt="GeoDrill — Construction Experts"
+        alt="GEODRILL — Construction Experts"
         width={180}
         height={48}
         priority
