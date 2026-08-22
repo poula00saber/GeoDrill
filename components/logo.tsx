@@ -9,17 +9,18 @@ export function Logo({
   className?: string
   /** Height utility applied to the logo image (e.g. 'h-9', 'h-10', 'h-12'). */
   size?: string
+  /** Kept for API compatibility; the localized site always uses logo2.png. */
   onDark?: boolean
 }) {
   return (
     <span className={cn('inline-flex items-center', className)}>
       <Image
-        src="/logo.png"
+        src="/logo2.png"
         alt="GeoDrill — Construction Experts"
         width={180}
         height={48}
         priority
-        className={cn(size, 'w-auto object-contain', onDark && 'brightness-0 invert')}
+        className={cn(size, 'w-auto object-contain')}
       />
     </span>
   )
