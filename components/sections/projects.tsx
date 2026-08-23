@@ -239,20 +239,17 @@ export function Projects() {
     setFocused((prev) => (prev + dir + total) % total);
   };
 
-  // Scroll active thumbnail into center view automatically
+  // Keep the active thumbnail horizontally centered inside the filmstrip
+  // WITHOUT scrolling the page — scrollIntoView would jump the page down to
+  // the projects section on mount, so we adjust only the container's scrollLeft.
   useEffect(() => {
-    if (thumbContainerRef.current) {
-      const activeEl = thumbContainerRef.current.children[
-        heroIdx
-      ] as HTMLElement;
-      if (activeEl) {
-        activeEl.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }
+    const container = thumbContainerRef.current;
+    if (!container) return;
+    const activeEl = container.children[heroIdx] as HTMLElement | undefined;
+    if (!activeEl) return;
+    const targetLeft =
+      activeEl.offsetLeft - container.clientWidth / 2 + activeEl.clientWidth / 2;
+    container.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, [heroIdx, displayed]);
 
   const meta = useMemo(

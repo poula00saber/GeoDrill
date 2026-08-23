@@ -96,6 +96,7 @@ export function Hero() {
   return (
     <section
       id="home"
+      data-hero-banner
       className="relative h-svh min-h-[520px] overflow-hidden bg-navy text-white select-none"
     >
       {/* -- Full-bleed draggable track (photos never crop: all slides fill 100vw) -- */}
@@ -109,14 +110,14 @@ export function Hero() {
       >
         {SLIDES.map((slide, i) => {
           /* distance of slide i from the centered viewport */
-          const slideRel = useTransform(x, (v: number) => v + i * width)
-          const dist = useTransform(slideRel, (d: number) => Math.abs(d))
+          const slideRel = useTransform(x, (v: number) => v + i * width);
+          const dist = useTransform(slideRel, (d: number) => Math.abs(d));
           const scale = useTransform(dist, (d: number) =>
-            Math.max(0.9, 1 - d / Math.max(1, width * 0.9) * 0.1),
-          )
+            Math.max(0.9, 1 - (d / Math.max(1, width * 0.9)) * 0.1),
+          );
           const opacity = useTransform(dist, (d: number) =>
             Math.max(0.55, 1 - d / Math.max(1, width * 0.9)),
-          )
+          );
           return (
             <motion.div
               key={slide.src}
@@ -129,11 +130,11 @@ export function Hero() {
                 fill
                 sizes="100vw"
                 priority={i === 0}
-                loading={i === 0 ? 'eager' : 'lazy'}
+                loading={i === 0 ? "eager" : "lazy"}
                 className={`object-cover ${KB[i % KB.length]}`}
               />
             </motion.div>
-          )
+          );
         })}
       </motion.div>
 
@@ -144,11 +145,14 @@ export function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 55%, rgba(4,10,14,0.55) 100%)',
+            "radial-gradient(ellipse at center, transparent 55%, rgba(4,10,14,0.55) 100%)",
         }}
       />
       <div className="pointer-events-none absolute start-0 top-0 h-full w-2/3 bg-[radial-gradient(ellipse_at_left,rgba(15,181,185,0.18),transparent_60%)]" />
-      <div className="dot-grid pointer-events-none absolute end-6 top-24 size-40 text-amber-200/30" aria-hidden />
+      <div
+        className="dot-grid pointer-events-none absolute end-6 top-24 size-40 text-amber-200/30"
+        aria-hidden
+      />
 
       {/* ── Fixed, staged text ── */}
       <div className="pointer-events-none relative z-10 mx-auto flex min-h-svh max-w-7xl flex-col justify-center px-5 pt-28 pb-16 md:px-8">
@@ -160,21 +164,21 @@ export function Hero() {
 
           <h1
             className="animate-in fade-in slide-in-from-bottom-6 fill-mode-both mt-6 text-balance text-4xl font-extrabold leading-[1.05] tracking-tight duration-700 md:text-6xl lg:text-7xl"
-            style={{ animationDelay: '120ms' }}
+            style={{ animationDelay: "120ms" }}
           >
             {t.hero.headline}
           </h1>
 
           <p
             className="animate-in fade-in slide-in-from-bottom-6 fill-mode-both mt-6 max-w-xl text-base leading-relaxed text-white/75 duration-700 md:text-lg"
-            style={{ animationDelay: '240ms' }}
+            style={{ animationDelay: "240ms" }}
           >
             {t.hero.sub}
           </p>
 
           <div
             className="animate-in fade-in slide-in-from-bottom-6 fill-mode-both mt-9 flex flex-wrap items-center gap-3 duration-700"
-            style={{ animationDelay: '360ms' }}
+            style={{ animationDelay: "360ms" }}
           >
             <a
               href="#services"
@@ -194,7 +198,7 @@ export function Hero() {
           {/* Trust badges */}
           <div
             className="animate-in fade-in fill-mode-both mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-6 duration-1000"
-            style={{ animationDelay: '520ms' }}
+            style={{ animationDelay: "520ms" }}
           >
             {t.hero.badges.map((b) => (
               <span
@@ -213,9 +217,11 @@ export function Hero() {
 
       {/* Slide counter */}
       <div className="absolute bottom-8 end-7 z-10 hidden items-center gap-2 font-mono text-xs tracking-widest text-white/50 md:flex">
-        <span className="text-amber-200">{String(index + 1).padStart(2, '0')}</span>
+        <span className="text-amber-200">
+          {String(index + 1).padStart(2, "0")}
+        </span>
         <span className="h-px w-8 bg-white/30" />
-        <span>{String(SLIDES.length).padStart(2, '0')}</span>
+        <span>{String(SLIDES.length).padStart(2, "0")}</span>
       </div>
 
       {/* Scroll mouse indicator */}
@@ -227,5 +233,5 @@ export function Hero() {
         <span className="scroll-mouse mx-auto" />
       </a>
     </section>
-  )
+  );
 }

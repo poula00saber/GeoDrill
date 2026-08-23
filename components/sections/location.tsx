@@ -10,12 +10,11 @@ export function Location() {
   const c = t.contact;
   const isAr = lang === "ar";
 
-  const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
-    c.address,
-  )}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+  const mapEmbedUrl =
+    "https://maps.google.com/maps?q=24.7135517,46.6752957&t=&z=12&ie=UTF8&iwloc=&output=embed";
 
   const mapsExternalUrl =
-    "https://maps.google.com/?q=" + encodeURIComponent(c.address);
+    "https://www.google.com/maps/place/Riyadh+Saudi+Arabia/@24.7065664,44.4822918,8z/data=!3m1!4b1!4m6!3m5!1s0x3e2f03890d489399:0xba974d1c98e79fd5!8m2!3d24.7135517!4d46.6752957!16zL20vMGRsbV8!5m1!1e2?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D";
 
   const rows = [
     {

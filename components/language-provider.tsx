@@ -1,54 +1,66 @@
-'use client'
+"use client";
 
-import { createContext, useContext, useEffect, type ReactNode } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import { content, type Dict, type Lang } from '@/lib/content'
+import { createContext, useContext, useEffect, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { content, type Dict, type Lang } from "@/lib/content";
 
 type LanguageContextValue = {
-  lang: Lang
-  dir: 'ltr' | 'rtl'
-  t: Dict
-  toggle: () => void
-}
+  lang: Lang;
+  dir: "ltr" | "rtl";
+  t: Dict;
+  toggle: () => void;
+};
 
-const LanguageContext = createContext<LanguageContextValue | null>(null)
+const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function langFromPathname(pathname: string): Lang {
-  return pathname.split('/')[1] === 'ar' ? 'ar' : 'en'
+  return pathname.split("/")[1] === "ar" ? "ar" : "en";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const pathname = usePathname()
-  const router = useRouter()
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const lang = langFromPathname(pathname)
-  const dir = content[lang].dir
+  const lang = langFromPathname(pathname);
+  const dir = content[lang].dir;
 
   // Keep the <html> language/direction in sync with the URL.
   useEffect(() => {
-    const root = document.documentElement
-    root.lang = lang
-    root.dir = dir
-  }, [lang, dir])
+    const root = document.documentElement;
+    root.lang = lang;
+    root.dir = dir;
+  }, [lang, dir]);
 
   const toggle = () => {
-    const target: Lang = lang === 'en' ? 'ar' : 'en'
-    router.push(`/${target}`)
-  }
+    const target: Lang = lang === "en" ? "ar" : "en";
+    const segments = pathname.split("/");
+
+    // Check if the first segment after root is a valid locale
+    if (segments[1] === "en" || segments[1] === "ar") {
+      segments[1] = target;
+      router.push(segments.join("/"));
+    } else {
+      // Fallback for root path or un-prefixed routes
+      router.push(`/${target}`);
+    }
+  };
 
   const value: LanguageContextValue = {
     lang,
     dir,
     t: content[lang],
     toggle,
-  }
+  };
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
 }
 
 export function useLanguage() {
-  const ctx = useContext(LanguageContext)
-  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider')
-  return ctx
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
+  return ctx;
 }
-

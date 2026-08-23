@@ -1,53 +1,96 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { useLanguage } from '@/components/language-provider'
-import { SectionHeading } from '@/components/section-heading'
-import { SECTION_IDS } from '@/lib/content'
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+import { SectionHeading } from "@/components/section-heading";
+import { SECTION_IDS } from "@/lib/content";
+import { CLIENT_LOGOS, type ClientLogo } from "@/lib/clients-data";
 
 export function Clients() {
-  const { t } = useLanguage()
-  const c = t.clients
-  const row = [...c.list, ...c.list]
+  const { t, lang } = useLanguage();
+  const c = t.clients;
+  const viewAllLabel =
+    (c as { viewAll?: string }).viewAll ??
+    (lang === "ar" ? "عرض كل العملاء" : "View All Clients");
+
+  const half = Math.ceil(CLIENT_LOGOS.length / 2);
+  const rowA = [...CLIENT_LOGOS.slice(0, half), ...CLIENT_LOGOS.slice(0, half)];
+  const rowB = [...CLIENT_LOGOS.slice(half), ...CLIENT_LOGOS.slice(half)];
 
   return (
     <section id={SECTION_IDS.clients} className="bg-muted py-20 md:py-28">
-      <div className="mx-auto mb-12 max-w-7xl px-6">
-        <SectionHeading kicker={c.kicker} title={c.title} sub={c.sub} align="center" />
+      <div className="mx-auto mb-14 max-w-7xl px-6">
+        <SectionHeading
+          kicker={c.kicker}
+          title={c.title}
+          sub={c.sub}
+          align="center"
+        />
       </div>
 
-      <div className="relative flex flex-col gap-4">
-        <div
-          className="pointer-events-none absolute inset-y-0 start-0 z-10 w-24 bg-gradient-to-r from-muted to-transparent rtl:bg-gradient-to-l"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-y-0 end-0 z-10 w-24 bg-gradient-to-l from-muted to-transparent rtl:bg-gradient-to-r"
-          aria-hidden
-        />
+      <div className="flex flex-col gap-8" dir="ltr">
+        <LogoRow logos={rowA} />
+        <LogoRow logos={rowB} reverse />
+      </div>
 
-        <div className="flex overflow-hidden">
-          <ul className="marquee-track flex shrink-0 items-center gap-4">
-            {row.map((name, i) => (
-              <motion.li
-                key={`${name}-${i}`}
-                whileHover={{ y: -4 }}
-                transition={{ type: 'spring', stiffness: 320, damping: 20 }}
-                className="group/hover relative flex h-16 shrink-0 cursor-default select-none items-center gap-3 overflow-hidden whitespace-nowrap rounded-xl border border-border bg-card px-7 transition-[border-color,box-shadow,background-color] duration-300 hover:border-primary/60 hover:bg-primary/[0.04] hover:shadow-lg hover:shadow-primary/10"
-              >
-                {/* Logo slot — drop an <Image src="/clients/xxx.png" /> here later */}
-                <span className="flex size-6 items-center justify-center rounded-md bg-muted text-[10px] font-bold uppercase text-muted-foreground transition-colors group-hover/hover:bg-primary group-hover/hover:text-primary-foreground">
-                  {name.charAt(0)}
-                </span>
-                <span className="text-sm font-medium text-foreground/80 transition-colors duration-300 group-hover/hover:text-primary">
-                  {name}
-                </span>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
+      {/* View all */}
+      <div className="mx-auto mt-14 flex max-w-7xl flex-col items-center gap-3 px-6 text-center">
+        <p className="text-sm text-muted-foreground">
+          {lang === "ar"
+            ? `أكثر من ${CLIENT_LOGOS.length} جهة تثق في جيودريل عبر المملكة`
+            : `${CLIENT_LOGOS.length}+ organizations trust GeoDrill across the Kingdom`}
+        </p>
+        <Link
+          href={`/${lang ?? "en"}/clients`}
+          className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-teal transition-all duration-300 hover:bg-teal hover:text-navy hover:shadow-lg hover:shadow-teal/20"
+        >
+          {viewAllLabel}
+          <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
+        </Link>
       </div>
     </section>
-  )
+  );
+}
+
+function LogoRow({
+  logos,
+  reverse,
+}: {
+  logos: ClientLogo[];
+  reverse?: boolean;
+}) {
+  return (
+    <div className="relative overflow-hidden" dir="ltr">
+      <div
+        className="pointer-events-none absolute inset-y-0 start-0 z-10 w-28 bg-gradient-to-r from-muted to-transparent"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 end-0 z-10 w-28 bg-gradient-to-l from-muted to-transparent"
+        aria-hidden
+      />
+
+      <ul
+        className={`${reverse ? "marquee-b" : "marquee-a"} flex w-max shrink-0 items-center gap-5`}
+      >
+        {logos.map((logo, i) => (
+          <li key={`${logo.src}-${i}`} className="shrink-0">
+            <div className="group/logo relative flex h-28 w-[210px] items-center justify-center rounded-2xl border border-border bg-white px-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/15 sm:h-32 sm:w-[230px]">
+              <span className="relative block h-14 w-[150px] sm:h-16 sm:w-[170px]">
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  fill
+                  sizes="200px"
+                  className="object-contain grayscale transition-all duration-300 group-hover/logo:grayscale-0"
+                />
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

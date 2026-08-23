@@ -92,6 +92,7 @@ export type Dict = {
       instagram: string
       x: string
       linkedin: string
+      facebook: string
     }
   }
   page: {
@@ -278,9 +279,10 @@ export const content: Record<Lang, Dict> = {
       followLabel: 'Follow Us',
       locationsTitle: 'Our Location',
       social: {
-        instagram: 'https://instagram.com/geodrill',
-        x: 'https://x.com/geodrill',
-        linkedin: 'https://linkedin.com/company/geodrill',
+        instagram: 'https://www.instagram.com/geodrillksa',
+        x: 'https://x.com/geodrillksa',
+        linkedin: 'https://www.linkedin.com/company/geodrillksa/home/',
+        facebook: 'https://www.facebook.com/geodrillksa',
       },
     },
     page: {
@@ -467,9 +469,10 @@ export const content: Record<Lang, Dict> = {
       followLabel: 'تابعنا',
       locationsTitle: 'موقعنا',
       social: {
-        instagram: 'https://instagram.com/geodrill',
-        x: 'https://x.com/geodrill',
-        linkedin: 'https://linkedin.com/company/geodrill',
+        instagram: 'https://www.instagram.com/geodrillksa',
+        x: 'https://x.com/geodrillksa',
+        linkedin: 'https://www.linkedin.com/company/geodrillksa/home/',
+        facebook: 'https://www.facebook.com/geodrillksa',
       },
     },
     page: {

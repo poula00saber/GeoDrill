@@ -214,6 +214,38 @@
     }
   }
 
+  /* Two-row clients carousel: opposite directions. Forced LTR so the physical
+     direction stays unambiguous regardless of the page language (RTL flips glow). */
+  .marquee-a {
+    animation: marquee-a 40s linear infinite;
+  }
+  .marquee-a:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee-a {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-b {
+    animation: marquee-b 40s linear infinite;
+  }
+  .marquee-b:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee-b {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
   /* ---- Cinematic hero Ken Burns zooms (GPU-only transform) ---- */
   @keyframes kb-1 {
     from {
