@@ -116,46 +116,48 @@ export function Hero() {
       data-hero-banner
       className="relative h-svh min-h-[580px] overflow-hidden bg-navy text-white select-none touch-pan-y"
     >
-      {/* Draggable Background Track */}
+      {/* Draggable Background Track - Forced to LTR */}
       {width > 0 && (
-        <motion.div
-          drag="x"
-          dragConstraints={{ left: -(SLIDES.length - 1) * width, right: 0 }}
-          dragElastic={0.12}
-          onDragEnd={onDragEnd}
-          style={{ x }}
-          className="absolute inset-0 flex cursor-grab active:cursor-grabbing"
-        >
-          {SLIDES.map((slide, i) => {
-            const isActive = index === i;
-            return (
-              <div
-                key={slide.src}
-                className="relative h-svh w-screen shrink-0 overflow-hidden"
-              >
-                <motion.div
-                  className="relative size-full"
-                  initial={false}
-                  animate={{ scale: isActive ? 1.08 : 1 }}
-                  transition={{
-                    duration: AUTOPLAY_MS / 1000,
-                    ease: "linear",
-                  }}
+        <div dir="ltr" className="absolute inset-0">
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: -(SLIDES.length - 1) * width, right: 0 }}
+            dragElastic={0.12}
+            onDragEnd={onDragEnd}
+            style={{ x }}
+            className="flex size-full cursor-grab active:cursor-grabbing"
+          >
+            {SLIDES.map((slide, i) => {
+              const isActive = index === i;
+              return (
+                <div
+                  key={slide.src}
+                  className="relative h-svh w-screen shrink-0 overflow-hidden"
                 >
-                  <Image
-                    src={slide.src}
-                    alt={slide.alt}
-                    fill
-                    sizes="100vw"
-                    priority={i === 0}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    className="object-cover"
-                  />
-                </motion.div>
-              </div>
-            );
-          })}
-        </motion.div>
+                  <motion.div
+                    className="relative size-full"
+                    initial={{ scale: 1 }}
+                    animate={{ scale: isActive ? 1.08 : 1 }}
+                    transition={{
+                      duration: isActive ? AUTOPLAY_MS / 1000 : 0.4,
+                      ease: isActive ? "linear" : "easeOut",
+                    }}
+                  >
+                    <Image
+                      src={slide.src}
+                      alt={slide.alt}
+                      fill
+                      sizes="100vw"
+                      priority={i === 0}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      className="object-cover"
+                    />
+                  </motion.div>
+                </div>
+              );
+            })}
+          </motion.div>
+        </div>
       )}
 
       {/* ── Softened Overlays ── */}
@@ -178,7 +180,7 @@ export function Hero() {
           </h1>
 
           <p
-            className="animate-in fade-in slide-in-from-bottom-6 fill-mode-both mt-4 max-w-xl text-sm leading-relaxed text-white/85 duration-700 sm:text-base md:text-lg"
+            className="animate-in fade-in slide-in-from-bottom-6 fill-mode-both mt-4 max-w-xl min-h-[6.5rem] text-sm leading-relaxed text-white/85 duration-700 sm:text-base md:text-lg"
             style={{ animationDelay: "240ms" }}
           >
             {t.hero.sub}
@@ -205,7 +207,7 @@ export function Hero() {
 
           {/* Trust Badges */}
           <div
-            className="animate-in fade-in fill-mode-both mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/15 pt-5 duration-1000"
+            className="animate-in fade-in fill-mode-both mt-8 rtl:mt-14 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/15 pt-5 duration-1000"
             style={{ animationDelay: "520ms" }}
           >
             {t.hero.badges.map((b) => (
@@ -232,7 +234,6 @@ export function Hero() {
         <span>{String(SLIDES.length).padStart(2, "0")}</span>
       </div>
 
-      {/* Scroll Mouse Indicator */}
       {/* Smooth Scroll Arrow Button */}
       <a
         href="#about"
