@@ -3,7 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Compass, Hammer, ArrowRight, Moon, Sun, Hexagon, Globe } from "lucide-react";
+import {
+  Compass,
+  Hammer,
+  ArrowRight,
+  Moon,
+  Sun,
+  Hexagon,
+  Globe,
+} from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -122,11 +130,8 @@ const headVariants: Variants = {
 };
 
 export default function Page() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
   const [lang, setLang] = useState<"en" | "ar">("en");
 
-  // Initialise to the browser's preferred language (SSR → en).
   useEffect(() => {
     const l = navigator.language || "en";
     setLang(l.startsWith("ar") ? "ar" : "en");
@@ -140,9 +145,20 @@ export default function Page() {
       dir={lang === "ar" ? "rtl" : "ltr"}
       className="lang-enter relative flex min-h-screen w-full flex-col items-center justify-center gap-10 overflow-hidden bg-background px-5 py-16 text-foreground dark:bg-navy dark:text-white"
     >
-      {/* Shared decorative grid */}
+      {/* Brand-colored gradient wash — yellow (geotechnical) vs teal (construction),
+         echoing the actual left/right split of the page, not decoration for its own sake */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
+        <div className="absolute -top-32 start-[-10%] size-[42rem] rounded-full bg-yellow-400/25 blur-[110px] dark:bg-yellow-400/[0.12]" />
+        <div className="absolute -top-32 end-[-10%] size-[42rem] rounded-full bg-teal-400/25 blur-[110px] dark:bg-teal-400/[0.14]" />
+        <div className="absolute bottom-[-20%] start-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-navy/[0.05] blur-[100px] dark:bg-white/[0.04]" />
+      </div>
+
+      {/* Dot grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.06]"
         style={{
           backgroundImage:
             "radial-gradient(currentColor 1px, transparent 1px), radial-gradient(currentColor 1px, transparent 1px)",
@@ -152,7 +168,10 @@ export default function Page() {
       />
 
       <div className="absolute top-6 end-6 z-20 flex items-center gap-2">
-        <LanguageToggle lang={lang} onToggle={() => setLang((l) => (l === "en" ? "ar" : "en"))} />
+        <LanguageToggle
+          lang={lang}
+          onToggle={() => setLang((l) => (l === "en" ? "ar" : "en"))}
+        />
         <ThemeToggle />
       </div>
 
@@ -161,7 +180,7 @@ export default function Page() {
         aria-label="GEODRILL home"
         className="absolute top-6 start-6 z-20"
       >
-        <Logo onDark={isDark} />
+        <Logo />
       </a>
 
       {/* Hero heading */}
@@ -182,13 +201,13 @@ export default function Page() {
             <span key={i}>
               <span
                 className={cn(
-                  chunk.tone === "yellow" && "text-yellow-600 dark:text-yellow-400",
+                  chunk.tone === "yellow" &&
+                    "text-yellow-600 dark:text-yellow-400",
                   chunk.tone === "teal" && "text-teal-600 dark:text-teal-400",
                 )}
               >
                 {chunk.text}
               </span>
-              {/* {chunk.tone && <br />} */}
             </span>
           ))}
         </h1>
@@ -198,7 +217,7 @@ export default function Page() {
         </p>
       </motion.div>
 
-      {/* Portal cards */}
+      {/* Portal cards + connecting divider */}
       <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-4 sm:grid-cols-2 sm:gap-6 md:gap-8">
         {portals.map((p, i) => (
           <Portal
@@ -209,6 +228,27 @@ export default function Page() {
             lang={lang}
           />
         ))}
+
+        {/* Center connector — visual "fork in the road", sm+ only */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.5, delay: 0.65 },
+          }}
+          className="pointer-events-none absolute start-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:flex"
+        >
+          <span className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-lg dark:border-white/15 dark:bg-navy">
+            <span className="relative flex size-3.5 items-center justify-center">
+              <span className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-400 to-teal-400 opacity-70 blur-[3px]" />
+              <Hexagon
+                className="relative size-3.5 text-foreground/70 dark:text-white/70"
+                strokeWidth={2}
+              />
+            </span>
+          </span>
+        </motion.div>
       </div>
 
       {/* Footer tagline */}
@@ -217,12 +257,22 @@ export default function Page() {
         animate={{ opacity: 1, transition: { duration: 0.7, delay: 0.8 } }}
         className="relative z-10 flex flex-col items-center gap-2 text-center"
       >
-        <Hexagon className="size-5 text-foreground/30 dark:text-white/30" strokeWidth={1.5} />
+        <span className="mb-1 h-px w-16 bg-gradient-to-r from-yellow-400/50 via-border to-teal-400/50 dark:via-white/15" />
+        <Hexagon
+          className="size-5 text-foreground/30 dark:text-white/30"
+          strokeWidth={1.5}
+        />
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45 dark:text-white/45">
           {lang === "en" ? (
             <>
-              Power in <span className="text-yellow-600 dark:text-yellow-400">Execution</span> ·
-              Precision in <span className="text-teal-600 dark:text-teal-400">Completion</span>
+              Power in{" "}
+              <span className="text-yellow-600 dark:text-yellow-400">
+                Execution
+              </span>{" "}
+              · Precision in{" "}
+              <span className="text-teal-600 dark:text-teal-400">
+                Completion
+              </span>
             </>
           ) : (
             copy.footer.ar
@@ -296,7 +346,6 @@ function Portal({
         ))}
       </ul>
 
-      {/* Full-width CTA button */}
       <div
         className={cn(
           "mt-6 flex items-center justify-between rounded-xl px-5 py-3.5 text-sm font-bold uppercase tracking-wide text-navy transition-transform duration-300 group-hover:scale-[1.02]",
@@ -326,7 +375,6 @@ function Portal({
         !isYellow && "hover:shadow-teal-500/20",
       )}
     >
-      {/* Background photo of the division */}
       <div className="absolute inset-0">
         <Image
           src={portal.img}
@@ -339,7 +387,6 @@ function Portal({
         <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/50 to-navy/25" />
       </div>
 
-      {/* Soft branded gradient accent */}
       <div
         className={cn(
           "absolute -inset-px opacity-50 blur-2xl",
@@ -348,7 +395,6 @@ function Portal({
         aria-hidden
       />
 
-      {/* Dotted side accent, echoing the brand's dot-grid mark */}
       <div
         className="pointer-events-none absolute inset-y-0 start-3 z-10 hidden w-6 opacity-40 sm:grid"
         style={{
@@ -375,7 +421,6 @@ function Portal({
         {content}
       </div>
 
-      {/* Hover reveal tint */}
       <div
         className={cn(
           "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-15",
@@ -403,15 +448,27 @@ function Portal({
   );
 }
 
-function Logo({ onDark = false }: { onDark?: boolean }) {
+// Fixed: theme wasn't guarded against the pre-hydration undefined state, so a
+// dark-mode visit briefly flashed logo.png (the light logo) before switching
+// to logo2.png. Rendering nothing until mounted removes the flash entirely.
+function Logo() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return <span className="block h-10 w-[150px]" aria-hidden />;
+  }
+
+  const isDark = resolvedTheme === "dark";
   return (
     <Image
-      src={onDark ? "/logo2.png" : "/logo.png"}
+      src={isDark ? "/logo2.png" : "/logo.png"}
       alt="GEODRILL"
       width={150}
       height={40}
       priority
-      className="h-10 w-auto object-contain"
+      className="h-10 w-auto object-contain transition-opacity duration-300"
     />
   );
 }
