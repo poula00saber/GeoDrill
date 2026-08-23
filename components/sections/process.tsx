@@ -97,29 +97,7 @@ export function Process() {
           })}
         </ol>
 
-        {/* Bottom Highlights Bar */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((h, i) => {
-            const Icon = HIGHLIGHT_ICONS[i % HIGHLIGHT_ICONS.length];
-            return (
-              <Reveal key={h.title} delay={i * 60}>
-                <div className="group flex items-start gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-teal hover:bg-teal hover:text-navy">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-teal/10 text-teal transition-colors duration-300 group-hover:bg-navy group-hover:text-teal">
-                    <Icon className="size-4" strokeWidth={1.75} />
-                  </span>
-                  <div>
-                    <h4 className="text-xs font-semibold text-white transition-colors duration-300 group-hover:text-navy">
-                      {h.title}
-                    </h4>
-                    <p className="mt-0.5 text-[11px] text-white/50 transition-colors duration-300 group-hover:text-navy/80">
-                      {h.text}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
+        
       </div>
     </section>
   );
