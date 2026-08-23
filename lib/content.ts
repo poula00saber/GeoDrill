@@ -142,7 +142,7 @@ export const content: Record<Lang, Dict> = {
     hero: {
       tag: "GEODRILL Construction Experts",
       headline: "Strength in Execution. Precision in Delivery.",
-      sub: "GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia — from ground works to finishing, built to the highest standards of quality, safety, and innovation.",
+      sub: "GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia, from ground works to finishing, built to the highest standards of quality, safety, and innovation.",
       badges: ["ISO 9001", "ISO 45001", "ISO 14001"],
     },
     about: {
@@ -152,7 +152,6 @@ export const content: Record<Lang, Dict> = {
       stats: [
         { value: 20, suffix: "+", label: "Sectors Served" },
         { value: 3, suffix: "", label: "ISO Certifications" },
-        { value: 2025, suffix: "", label: "Established" },
         { value: 34, suffix: "+", label: "Completed Milestones" },
       ],
     },
@@ -462,7 +461,7 @@ export const content: Record<Lang, Dict> = {
       tag: "جيو دريل خبراء الإنشاء",
       headline: "قوة في التنفيذ. دقة في الإنجاز.",
       // In your translation file:
-      sub: "تقدم جيو دريل خبراء الإنشاء حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية — بدءاً من أعمال التربة والحفر وحتى التأسيس والتسطيح، وفق أعلى معايير الجودة والسلامة والابتكار لتلبية وتجاوز تطلعات العملاء.",
+      sub: "تقدم جيو دريل خبراء الإنشاء حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية، بدءاً من أعمال التربة والحفر وحتى التأسيس والتسطيح، وفق أعلى معايير الجودة والسلامة والابتكار لتلبية وتجاوز تطلعات العملاء.",
       badges: ["آيزو 9001", "آيزو 45001", "آيزو 14001"],
     },
     about: {
@@ -472,7 +471,6 @@ export const content: Record<Lang, Dict> = {
       stats: [
         { value: 20, suffix: "+", label: "قطاعًا نخدمه" },
         { value: 3, suffix: "", label: "شهادات آيزو" },
-        { value: 2025, suffix: "", label: "سنة التأسيس" },
         { value: 34, suffix: "+", label: "إنجازًا مكتملاً" },
       ],
     },

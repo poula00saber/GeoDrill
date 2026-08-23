@@ -121,6 +121,18 @@
   --teal-dark: oklch(0.62 0.1 198);
 }
 
+/*
+  Favicon scheme probe — used by components/theme-favicon.tsx to swap the tab icon
+  for the BROWSER/OS color scheme (`prefers-color-scheme`), independent of the
+  site's own theme toggle. The custom property reads back as "dark" only when
+  the browser/OS requests a dark appearance; otherwise it stays unset/light.
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --prefers-color-scheme: dark;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

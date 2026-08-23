@@ -37,7 +37,7 @@ export function About() {
             <p className="text-base leading-relaxed text-muted-foreground md:text-lg">{a.body}</p>
           </Reveal>
 
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-border bg-border">
             {a.stats.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 90} className="bg-card">
                 <div className="flex flex-col gap-1 p-6">

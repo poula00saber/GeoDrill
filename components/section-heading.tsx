@@ -26,11 +26,10 @@ export function SectionHeading({
       <Reveal>
         <span
           className={cn(
-            'inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]',
+            'inline-flex items-center text-sm font-semibold uppercase tracking-[0.18em]',
             invert ? 'text-teal' : 'text-teal-dark',
           )}
         >
-          <span className="h-px w-6 bg-teal" aria-hidden />
           {kicker}
         </span>
       </Reveal>

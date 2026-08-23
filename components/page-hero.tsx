@@ -30,7 +30,7 @@ export function PageHero({
         alt=""
         fill
         priority
-        className="object-cover opacity-40"
+        className="object-cover opacity-90"
         sizes="100vw"
       />
       <div
@@ -55,8 +55,7 @@ export function PageHero({
         </nav>
 
         <div className="mt-6 max-w-3xl">
-          <span className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-amber-200 duration-700">
-            <span className="h-px w-6 bg-amber-300" aria-hidden />
+          <span className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both inline-flex items-center text-sm font-semibold uppercase tracking-[0.18em] text-amber-200 duration-700">
             {kicker}
           </span>
           <h1

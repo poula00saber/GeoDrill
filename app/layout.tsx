@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Cairo } from 'next/font/google'
 import { LanguageProvider } from '@/components/language-provider'
 import { ThemeProvider } from '@/components/theme-provider'
+import ThemeFavicon from '@/components/theme-favicon'
 import './globals.css'
 
 const inter = Inter({
@@ -22,6 +23,13 @@ export const metadata: Metadata = {
   description:
     'GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia — general contracting, infrastructure, concrete, steel, MEP, and finishing.',
   generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: '/logo.png', media: '(prefers-color-scheme: light)' },
+      { url: '/logo2.png', media: '(prefers-color-scheme: dark)' },
+    ],
+    apple: '/logo.png',
+  },
 }
 
 export const viewport: Viewport = {
@@ -52,6 +60,7 @@ export default function RootLayout({
         >
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
+        <ThemeFavicon />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
