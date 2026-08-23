@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Award, FolderCheck, Target, Sparkles } from "lucide-react";
+import { Award, Target, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/page-hero";
@@ -45,11 +45,6 @@ export default async function SectorPage({ params }: Props) {
       : "Capabilities we deliver in this sector";
 
   const statItems = [
-    {
-      value: `${sector.gallery.length}`,
-      label: locale === "ar" ? "مشاريع منفذة" : "Projects",
-      icon: FolderCheck,
-    },
     {
       value: "ISO",
       label: locale === "ar" ? "شهادات معتمدة" : "Certified",
@@ -96,7 +91,7 @@ export default async function SectorPage({ params }: Props) {
           </div>
 
           {/* Glassmorphic Stat Cards (Using theme CSS variables) */}
-          <div className="grid flex-shrink-0 grid-cols-3 gap-3 sm:gap-4 lg:w-[480px]">
+          <div className="grid flex-shrink-0 grid-cols-2 gap-3 sm:gap-4 lg:w-[480px]">
             {statItems.map((item) => {
               const Icon = item.icon;
               return (

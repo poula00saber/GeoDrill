@@ -70,6 +70,7 @@ export function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-wider text-teal">{f.contactTitle}</h3>
           <ul className="flex flex-col gap-2.5 text-sm text-white/60">
             <li>{t.contact.address}</li>
+            {/* TODO: replace with verified real phone/email from client */}
             <li dir="ltr" className="ltr:text-left rtl:text-right">
               {t.contact.phoneLabel}
             </li>

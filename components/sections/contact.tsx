@@ -28,6 +28,7 @@ export function Contact() {
 
             <div className="flex flex-col gap-4">
               <InfoRow icon={<PinIcon />} label={c.infoTitle} value={c.address} />
+              {/* TODO: replace with verified real phone/email from client */}
               <InfoRow icon={<PhoneIcon />} value={c.phoneLabel} dir="ltr" />
               <InfoRow icon={<MailIcon />} value={c.emailLabel} dir="ltr" />
             </div>

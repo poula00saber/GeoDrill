@@ -150,7 +150,10 @@ export const content: Record<Lang, Dict> = {
       title: "Building trust across the Kingdom",
       body: "Since its establishment, GEODRILL has been committed to delivering integrated engineering and construction solutions that meet the highest standards of quality and innovation. We specialize in general contracting, infrastructure, concrete works, finishing, and steel structures — supported by experienced professionals and modern execution methodologies. Through excellence, safety, and timely delivery, we strive to create lasting value for our clients while contributing to the goals of Saudi Vision 2030.",
       stats: [
-        { value: 20, suffix: "+", label: "Sectors Served" },
+        // Verified: profile lists exactly 7 sectors (Industrial, Commercial,
+        // Education, Healthcare, Residential, Hospitality, Government).
+        { value: 7, suffix: "", label: "Sectors Served" },
+        // Verified: ISO 9001:2015, ISO 45001:2018, ISO 14001:2015.
         { value: 3, suffix: "", label: "ISO Certifications" },
         { value: 34, suffix: "+", label: "Completed Milestones" },
       ],
@@ -350,9 +353,9 @@ export const content: Record<Lang, Dict> = {
       ],
     },
     projects: {
-      kicker: "Our Projects",
+      kicker: "Our Work",
       title: "A look at what we build",
-      sub: "Selected imagery from earthworks, structures, MEP, and finishing across active sites.",
+      sub: "A look at the disciplines behind every GeoDrill build.",
     },
     clients: {
       kicker: "Our Clients",
@@ -387,6 +390,7 @@ export const content: Record<Lang, Dict> = {
       infoTitle: "Contact Details",
       address:
         "Riyadh, Al Fayha District, Prince Saad Ibn Abdulrahman Branch Road",
+      // TODO: replace with verified real phone/email from client
       phoneLabel: "+966 5X XXX XXXX",
       emailLabel: "info@geodrill.sa",
       whatsapp: "https://wa.me/966500000000",
@@ -469,7 +473,9 @@ export const content: Record<Lang, Dict> = {
       title: "نبني الثقة في جميع أنحاء المملكة",
       body: "منذ تأسيسها، تلتزم جيو دريل بتقديم حلول هندسية وإنشائية متكاملة تلبي أعلى معايير الجودة والابتكار. تمتلك الشركة خبرة واسعة في تنفيذ مشاريع المقاولات العامة، والبنية التحتية، والأعمال الخرسانية، والتشطيبات والهياكل المعدنية، مع الاعتماد على كوادر متخصصة ومنهجيات تنفيذ حديثة. نسعى إلى بناء قيمة مستدامة لعملائنا من خلال الجودة والسلامة والتميز في التنفيذ، والمساهمة في دعم رؤية المملكة 2030.",
       stats: [
-        { value: 20, suffix: "+", label: "قطاعًا نخدمه" },
+        // مؤكد: قائمة الملف الشخصي تذكر 7 قطاعات بالضبط.
+        { value: 7, suffix: "", label: "قطاعات نخدمها" },
+        // مؤكد: آيزو 9001:2015، آيزو 45001:2018، آيزو 14001:2015.
         { value: 3, suffix: "", label: "شهادات آيزو" },
         { value: 34, suffix: "+", label: "إنجازًا مكتملاً" },
       ],
@@ -653,9 +659,9 @@ export const content: Record<Lang, Dict> = {
       ],
     },
     projects: {
-      kicker: "مشاريعنا",
+      kicker: "أعمالنا",
       title: "نظرة على ما نبنيه",
-      sub: "صور مختارة من أعمال التربة والهياكل والكهروميكانيكا والتشطيبات في مواقعنا.",
+      sub: "نظرة على التخصصات التي تقف خلف كل بناء تقدمه جيو دريل.",
     },
     clients: {
       kicker: "عملاؤنا",
@@ -688,7 +694,8 @@ export const content: Record<Lang, Dict> = {
         sent: "شكرًا لك — سنتواصل معك قريبًا.",
       },
       infoTitle: "بيانات التواصل",
-      address: "الرياض، حي الفيحاء، طريق الأمير سعد بن عبدالرحمن الفرعي",
+      address: "الرياض، ",
+      // TODO: استبدال رقم الهاتف والبريد ببيانات تواصل حقيقية موثقة من العميل
       phoneLabel: "+966 5X XXX XXXX",
       emailLabel: "info@geodrill.sa",
       whatsapp: "https://wa.me/966500000000",
