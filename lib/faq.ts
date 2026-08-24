@@ -2,11 +2,6 @@ import type { Lang } from "@/lib/content";
 
 export type FaqItem = { q: string; a: string };
 
-/**
- * Frequently asked questions shown on the home slider (`FaqSlider`) and the
- * full accordion page (`/faq`). Keep entries factual and specific to
- * GEODRILL's services — no invented numbers.
- */
 export const FAQS: Record<Lang, FaqItem[]> = {
   en: [
     {

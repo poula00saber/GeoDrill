@@ -37,7 +37,7 @@ export default async function Page({
         <Process />
         <Projects />
         <Clients />
-        <FaqSlider />
+        <FaqSlider locale={locale} />
         <Certifications />
         <Contact />
         <Blog locale={locale} />

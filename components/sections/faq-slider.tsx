@@ -1,24 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FAQS } from "@/lib/faq";
-import { content } from "@/lib/content";
+import { content, type Lang } from "@/lib/content";
 
-/**
- * Home FAQ teaser — presented as a slider of short Q&A cards with smooth
- * animated transitions, based on a proven teaser pattern but styled with
- * GEODRILL's teal/navy palette. Scrolls 3 cards at a time and links to the
- * full FAQ page (/faq).
- */
-export function FaqSlider() {
-  const params = useParams<{ locale?: string }>();
-  const locale = params?.locale === "ar" ? "ar" : "en";
+export function FaqSlider({ locale }: { locale: Lang }) {
   const isArabic = locale === "ar";
   const items = FAQS[locale];
-  const copy = content[locale].faq;
 
   const [start, setStart] = useState(0);
   const visible = items.slice(start, start + 3);
@@ -69,8 +59,18 @@ export function FaqSlider() {
           aria-label={isArabic ? "التالي" : "Previous"}
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-sm transition-all hover:bg-teal hover:text-navy disabled:cursor-not-allowed disabled:opacity-30 sm:h-10 sm:w-10"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <path d={arrowPath(false)} strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 24 24"
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+          >
+            <path
+              d={arrowPath(false)}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
 
@@ -84,15 +84,27 @@ export function FaqSlider() {
               className="rounded-2xl border border-border bg-card p-5 text-center shadow-sm"
             >
               <h3 className="text-sm font-bold text-foreground">{item.q}</h3>
-              <p className="mt-2 text-xs leading-6 text-muted-foreground">{item.a}</p>
+              <p className="mt-2 text-xs leading-6 text-muted-foreground">
+                {item.a}
+              </p>
               <Link
                 href={`/${locale}/faq`}
                 className="mt-3 inline-flex items-center gap-1 rounded-full bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal transition-colors hover:bg-teal/20"
               >
                 {isArabic ? "اعرف المزيد" : "Learn more"}
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-3.5 w-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path
-                    d={isArabic ? "M19 12H5M12 19l-7-7 7-7" : "M5 12h14M12 5l7 7-7 7"}
+                    d={
+                      isArabic
+                        ? "M19 12H5M12 19l-7-7 7-7"
+                        : "M5 12h14M12 5l7 7-7 7"
+                    }
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -109,8 +121,18 @@ export function FaqSlider() {
           aria-label={isArabic ? "السابق" : "Next"}
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal text-navy shadow-sm transition-all hover:bg-teal/80 disabled:cursor-not-allowed disabled:opacity-30 sm:h-10 sm:w-10"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <path d={arrowPath(true)} strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 24 24"
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+          >
+            <path
+              d={arrowPath(true)}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       </div>
