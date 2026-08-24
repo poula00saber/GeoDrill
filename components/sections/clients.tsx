@@ -20,7 +20,10 @@ export function Clients() {
   const rowB = [...CLIENT_LOGOS.slice(half), ...CLIENT_LOGOS.slice(half)];
 
   return (
-    <section id={SECTION_IDS.clients} className="bg-muted py-20 md:py-28">
+    <section
+      id={SECTION_IDS.clients}
+      className="bg-muted py-20 md:py-28 transition-colors duration-300"
+    >
       <div className="mx-auto mb-14 max-w-7xl px-6">
         <SectionHeading
           kicker={c.kicker}
@@ -53,6 +56,7 @@ export function Clients() {
     </section>
   );
 }
+
 function LogoRow({
   logos,
   reverse,
@@ -76,14 +80,25 @@ function LogoRow({
       >
         {logos.map((logo, i) => (
           <li key={`${logo.src}-${i}`} className="shrink-0">
-            <div className="group/logo relative h-28 w-[210px] overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/15 sm:h-32 sm:w-[230px]">
-              <Image
-                src={logo.src}
-                alt={logo.name}
-                fill
-                sizes="(max-width: 640px) 210px, 230px"
-                className=" grayscale transition-all duration-300 group-hover/logo:grayscale-0"
-              />
+            {/* 
+              Light Mode: Clean white card, grayscale logo -> original color on hover
+              Dark Mode: Navy glass card, solid white logo (brightness-0 invert) -> original color on hover
+            */}
+            <div className="group/logo relative flex h-28 w-[210px] items-center justify-center rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/20 dark:border-white/10 dark:bg-navy/80 dark:hover:bg-white sm:h-32 sm:w-[230px]">
+              <span className="relative block h-14 w-[150px] sm:h-16 sm:w-[170px]">
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  fill
+                  sizes="200px"
+                  className=" transition-all duration-300 
+                             /* Light mode styles */
+                             grayscale opacity-80 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 
+                             /* Dark mode overrides */
+                             dark:brightness-0 dark:invert dark:opacity-90 
+                             dark:group-hover/logo:brightness-100 dark:group-hover/logo:invert-0 dark:group-hover/logo:opacity-100"
+                />
+              </span>
             </div>
           </li>
         ))}
