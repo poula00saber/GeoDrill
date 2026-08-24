@@ -178,7 +178,7 @@ export const content: Record<Lang, Dict> = {
     about: {
       kicker: "Who We Are",
       title: "Building trust across the Kingdom",
-      body: "Since its establishment, GEODRILL has been committed to delivering integrated engineering and construction solutions that meet the highest standards of quality and innovation. We specialize in general contracting, infrastructure, concrete works, finishing, and steel structures — supported by experienced professionals and modern execution methodologies. Through excellence, safety, and timely delivery, we strive to create lasting value for our clients while contributing to the goals of Saudi Vision 2030.",
+      body: "Since its establishment, GEODRILL has been committed to delivering integrated engineering and construction solutions that meet the highest standards of quality and innovation. We specialize in general contracting, infrastructure, concrete works, finishing, and steel structures, supported by experienced professionals and modern execution methodologies. Through excellence, safety, and timely delivery, we strive to create lasting value for our clients while contributing to the goals of Saudi Vision 2030.",
       stats: [
         // Verified: profile lists exactly 7 sectors (Industrial, Commercial,
         // Education, Healthcare, Residential, Hospitality, Government).
@@ -199,9 +199,9 @@ export const content: Record<Lang, Dict> = {
     },
     why: {
       kicker: "Why GEODRILL",
-      title: "We build more than projects — we build trust",
+      title: "We build more than projects, we build trust",
       intro:
-        "At GEODRILL, we don't just build projects — we build trust. Backed by experienced professionals, proven methodologies, and an uncompromising commitment to quality.",
+        "At GEODRILL, we don't just build projects, we build trust. Backed by experienced professionals, proven methodologies, and an uncompromising commitment to quality.",
       features: [
         {
           key: "experience",
@@ -275,7 +275,7 @@ export const content: Record<Lang, Dict> = {
     services: {
       kicker: "Our Services",
       title: "End-to-end construction capabilities",
-      sub: "A complete delivery chain — from the first cut of soil to the final finish.",
+      sub: "A complete delivery chain, from the first cut of soil to the final finish.",
       items: [
         {
           num: "01",
@@ -437,7 +437,7 @@ export const content: Record<Lang, Dict> = {
         message: "Your Message",
         send: "Send Message",
         sending: "Sending\u2026",
-        sent: "Thank you — we will be in touch shortly.",
+        sent: "Thank you, we will be in touch shortly.",
       },
       infoTitle: "Contact Details",
       address:

@@ -21,7 +21,7 @@ const cairo = Cairo({
 export const metadata: Metadata = {
   title: 'GEODRILL Construction Experts | Strength in Execution',
   description:
-    'GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia — general contracting, infrastructure, concrete, steel, MEP, and finishing.',
+    'GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia, general contracting, infrastructure, concrete, steel, MEP, and finishing.',
   generator: 'v0.app',
   icons: {
     icon: [
