@@ -1,23 +1,88 @@
-'use client'
+"use client";
 
-import { useState, type FormEvent } from 'react'
-import { useLanguage } from '@/components/language-provider'
-import { Reveal } from '@/components/reveal'
-import { SectionHeading } from '@/components/section-heading'
-import { SECTION_IDS } from '@/lib/content'
+import { useState, type FormEvent } from "react";
+import { useLanguage } from "@/components/language-provider";
+import { Reveal } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { SECTION_IDS } from "@/lib/content";
+import { submitContactForm } from "@/lib/submit-contact";
+import {
+  validateContactInput,
+  type ContactFormInput,
+} from "@/types/contact";
+
+type Status = "idle" | "sending" | "success" | "error";
+
+const EMPTY_FORM: ContactFormInput = {
+  fullName: "",
+  entityType: "individual",
+  companyName: "",
+  email: "",
+  phone: "",
+  projectDescription: "",
+};
 
 export function Contact() {
-  const { t } = useLanguage()
-  const c = t.contact
-  const [sent, setSent] = useState(false)
+  const { t, lang } = useLanguage();
+  const c = t.contact;
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSent(true)
+  const [status, setStatus] = useState<Status>("idle");
+  const [message, setMessage] = useState("");
+  const [form, setForm] = useState<ContactFormInput>(EMPTY_FORM);
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<keyof ContactFormInput, string>>
+  >({});
+
+  const inputClass = (hasError?: string) =>
+    `w-full rounded-xl border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:ring-2 ${
+      hasError
+        ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+        : "border-border focus:border-teal focus:ring-teal/20"
+    }`;
+
+  const segClass = (active: boolean) =>
+    `rounded-xl border px-3 py-2.5 text-sm font-medium transition-colors ${
+      active
+        ? "border-teal bg-teal text-navy"
+        : "border-border bg-background text-muted-foreground hover:border-teal/40"
+    }`;
+
+  const setField = (key: keyof ContactFormInput, value: string) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setMessage("");
+    setFieldErrors({});
+
+    const validation = validateContactInput(form);
+    if (!validation.ok) {
+      setFieldErrors(validation.errors);
+      setStatus("error");
+      setMessage(
+        lang !== "ar"
+          ? "Please review the highlighted fields."
+          : "يرجى مراجعة الحقول المحددة.",
+      );
+      return;
+    }
+
+    setStatus("sending");
+    // Resolve the effective company name: individuals default to "Individual".
+    const payload: ContactFormInput =
+      form.entityType === "company"
+        ? form
+        : { ...form, companyName: "Individual" };
+    const result = await submitContactForm(payload);
+    if (result.ok) {
+      setStatus("success");
+      setMessage(c.form.sent);
+      setForm(EMPTY_FORM);
+    } else {
+      setStatus("error");
+      setMessage(result.message);
+    }
   }
-
-  const inputClass =
-    'w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-teal focus:ring-2 focus:ring-teal/20'
 
   return (
     <section id={SECTION_IDS.contact} className="bg-muted py-20 md:py-28">
@@ -35,7 +100,7 @@ export function Contact() {
           </div>
 
           <Reveal delay={120}>
-            {sent ? (
+            {status === "success" ? (
               <div className="flex h-full min-h-64 flex-col items-center justify-center gap-4 rounded-2xl border border-teal/30 bg-card p-10 text-center">
                 <span className="flex h-14 w-14 items-center justify-center rounded-full bg-teal/15 text-teal">
                   <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -52,31 +117,54 @@ export function Contact() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">{c.form.name}</span>
-                    <input required className={inputClass} type="text" name="name" />
+                    <input type="text" value={form.fullName} onChange={(e) => setField("fullName", e.target.value)} className={inputClass(fieldErrors.fullName)} />
+                    {fieldErrors.fullName && <span className="text-xs text-red-600">{fieldErrors.fullName}</span>}
                   </label>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-sm font-medium text-foreground">{c.form.entityLabel}</span>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button type="button" onClick={() => setField("entityType", "individual")} className={segClass(form.entityType !== "company")}>
+                        {c.form.entityIndividual}
+                      </button>
+                      <button type="button" onClick={() => setField("entityType", "company")} className={segClass(form.entityType === "company")}>
+                        {c.form.entityCompany}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {form.entityType === "company" && (
+                  <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium text-foreground">{c.form.companyName}</span>
+                    <input type="text" value={form.companyName} onChange={(e) => setField("companyName", e.target.value)} className={inputClass(fieldErrors.companyName)} />
+                    {fieldErrors.companyName && <span className="text-xs text-red-600">{fieldErrors.companyName}</span>}
+                  </label>
+                )}
+                <div className="grid gap-4 sm:grid-cols-2">
                   <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">{c.form.email}</span>
-                    <input required className={inputClass} type="email" name="email" />
+                    <input type="email" value={form.email} onChange={(e) => setField("email", e.target.value)} className={inputClass(fieldErrors.email)} />
+                    {fieldErrors.email && <span className="text-xs text-red-600">{fieldErrors.email}</span>}
                   </label>
                   <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">{c.form.phone}</span>
-                    <input className={inputClass} type="tel" name="phone" />
-                  </label>
-                  <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium text-foreground">{c.form.subject}</span>
-                    <input className={inputClass} type="text" name="subject" />
+                    <input type="tel" value={form.phone} onChange={(e) => setField("phone", e.target.value)} className={inputClass(fieldErrors.phone)} />
+                    {fieldErrors.phone && <span className="text-xs text-red-600">{fieldErrors.phone}</span>}
                   </label>
                 </div>
                 <label className="flex flex-col gap-2">
-                  <span className="text-sm font-medium text-foreground">{c.form.message}</span>
-                  <textarea required rows={4} className={inputClass} name="message" />
+                  <span className="text-sm font-medium text-foreground">{c.form.projectDescription}</span>
+                  <textarea rows={4} value={form.projectDescription ?? ""} onChange={(e) => setField("projectDescription", e.target.value)} className={inputClass()} />
                 </label>
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center rounded-xl bg-navy px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal hover:text-white"
+                  disabled={status === "sending"}
+                  className="mt-2 inline-flex items-center justify-center rounded-xl bg-navy px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal hover:text-white disabled:opacity-60"
                 >
-                  {c.form.send}
+                  {status === "sending" ? c.form.sending : c.form.send}
                 </button>
+                {status === "error" && (
+                  <p className="flex items-center gap-2 text-sm text-red-600">{message}</p>
+                )}
               </form>
             )}
           </Reveal>

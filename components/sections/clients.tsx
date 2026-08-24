@@ -53,7 +53,6 @@ export function Clients() {
     </section>
   );
 }
-
 function LogoRow({
   logos,
   reverse,
@@ -77,16 +76,14 @@ function LogoRow({
       >
         {logos.map((logo, i) => (
           <li key={`${logo.src}-${i}`} className="shrink-0">
-            <div className="group/logo relative flex h-28 w-[210px] items-center justify-center rounded-2xl border border-border bg-white px-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/15 sm:h-32 sm:w-[230px]">
-              <span className="relative block h-14 w-[150px] sm:h-16 sm:w-[170px]">
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  fill
-                  sizes="200px"
-                  className="object-contain grayscale transition-all duration-300 group-hover/logo:grayscale-0"
-                />
-              </span>
+            <div className="group/logo relative h-28 w-[210px] overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/15 sm:h-32 sm:w-[230px]">
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                fill
+                sizes="(max-width: 640px) 210px, 230px"
+                className="object-cover grayscale transition-all duration-300 group-hover/logo:grayscale-0"
+              />
             </div>
           </li>
         ))}

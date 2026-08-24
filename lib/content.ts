@@ -84,11 +84,17 @@ export type Dict = {
     sub: string;
     form: {
       name: string;
+      entityLabel: string;
+      entityIndividual: string;
+      entityCompany: string;
+      companyName: string;
       email: string;
       phone: string;
+      projectDescription: string;
       subject: string;
       message: string;
       send: string;
+      sending: string;
       sent: string;
     };
     infoTitle: string;
@@ -420,11 +426,17 @@ export const content: Record<Lang, Dict> = {
       sub: "Tell us about your project and our team will get back to you promptly.",
       form: {
         name: "Full Name",
+        entityLabel: "I am",
+        entityIndividual: "An individual",
+        entityCompany: "A company",
+        companyName: "Company Name",
         email: "Email Address",
         phone: "Phone Number",
+        projectDescription: "Project Description",
         subject: "Subject",
         message: "Your Message",
         send: "Send Message",
+        sending: "Sending\u2026",
         sent: "Thank you — we will be in touch shortly.",
       },
       infoTitle: "Contact Details",
@@ -742,11 +754,17 @@ export const content: Record<Lang, Dict> = {
       sub: "أخبرنا عن مشروعك وسيتواصل معك فريقنا في أقرب وقت.",
       form: {
         name: "الاسم الكامل",
+        entityLabel: "أنا",
+        entityIndividual: "فرد",
+        entityCompany: "شركة",
+        companyName: "اسم الشركة",
         email: "البريد الإلكتروني",
         phone: "رقم الهاتف",
+        projectDescription: "تفاصيل المشروع",
         subject: "الموضوع",
         message: "رسالتك",
         send: "إرسال الرسالة",
+        sending: "جارٍ الإرسال\u2026",
         sent: "شكرًا لك — سنتواصل معك قريبًا.",
       },
       infoTitle: "بيانات التواصل",

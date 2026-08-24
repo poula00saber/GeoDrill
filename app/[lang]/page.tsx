@@ -37,11 +37,11 @@ export default async function Page({
         <Process />
         <Projects />
         <Clients />
-        <Blog locale={locale} />
         <FaqSlider />
         <Certifications />
-        <Location />
         <Contact />
+        <Blog locale={locale} />
+        <Location />
         <Footer />
       </main>
 
