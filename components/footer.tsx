@@ -4,7 +4,7 @@ import { useLanguage } from '@/components/language-provider'
 import { Logo } from '@/components/logo'
 
 export function Footer() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const f = t.footer
   const year = new Date().getFullYear()
 
@@ -42,16 +42,24 @@ export function Footer() {
         <div className="flex flex-col gap-4">
           <h3 className="text-sm font-semibold uppercase tracking-wider text-teal">{f.quickLinks}</h3>
           <ul className="flex flex-col gap-2.5">
-            {t.nav.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  className="text-sm text-white/60 transition-colors hover:text-white"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {t.nav.map((item) => {
+              const pageHref =
+                item.id === "blog"
+                  ? `/${lang ?? "en"}/blog`
+                  : item.id === "faq"
+                    ? `/${lang ?? "en"}/faq`
+                    : `#${item.id}`;
+              return (
+                <li key={item.id}>
+                  <a
+                    href={pageHref}
+                    className="text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 

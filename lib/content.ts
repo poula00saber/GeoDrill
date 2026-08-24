@@ -161,6 +161,8 @@ export const content: Record<Lang, Dict> = {
       { id: "services", label: "Services" },
       { id: "projects", label: "Projects" },
       { id: "clients", label: "Clients" },
+      { id: "blog", label: "Blog" },
+      { id: "faq", label: "FAQ" },
       { id: "contact", label: "Contact" },
     ],
     cta: {
@@ -505,6 +507,8 @@ export const content: Record<Lang, Dict> = {
       { id: "services", label: "خدماتنا" },
       { id: "projects", label: "مشاريعنا" },
       { id: "clients", label: "عملاؤنا" },
+      { id: "blog", label: "المدونة" },
+      { id: "faq", label: "الأسئلة الشائعة" },
       { id: "contact", label: "تواصل معنا" },
     ],
     cta: {

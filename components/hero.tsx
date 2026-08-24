@@ -8,21 +8,28 @@ import { useLanguage } from "@/components/language-provider";
 
 const SLIDES = [
   {
-    src: "/images/hero-facade.png",
-    alt: "Finished building facade at golden hour",
-  },
-  { src: "/images/skyline.png", alt: "Construction project skyline at dusk" },
-  {
-    src: "/images/service-groundworks.png",
-    alt: "Heavy ground works and excavation on site",
+    src: "/images/final/projects/01_groundworks/concrete_column_reinforcement.jpg",
+    alt: "Concrete column reinforcement on site",
   },
   {
-    src: "/images/service-concrete.png",
-    alt: "Concrete placing and formwork piling",
+    src: "/images/final/projects/02_structures_and_steel/steel_interior_open_frame2.jpg",
+    alt: "Structural steel interior frame",
   },
   {
-    src: "/images/service-excavation.png",
-    alt: "Deep excavation and drilling machinery",
+    src: "/images/final/projects/03_mep/mep_ceiling_ductwork_red_pipes.jpg",
+    alt: "Ceiling ductwork and MEP pipes",
+  },
+  {
+    src: "/images/final/projects/04_finishing/finishing_staircase_wood_floor.jpg",
+    alt: "Finished timber staircase",
+  },
+  {
+    src: "/images/final/projects/05_waterproofing_and_insulation/insulation_drainage_cells.jpg",
+    alt: "Waterproofing and insulation drainage cells",
+  },
+  {
+    src: "/images/final/projects/06_industrial/steel_warehouse_exterior_pipes.jpg",
+    alt: "Industrial steel warehouse and piping",
   },
 ];
 

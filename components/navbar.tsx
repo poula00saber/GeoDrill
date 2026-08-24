@@ -30,8 +30,13 @@ export function Navbar() {
   openRef.current = open;
 
   const isHomePage = pathname.split("/").filter(Boolean).length <= 1;
+  const PAGE_NAV: Record<string, string> = {
+    blog: `/${lang ?? "en"}/blog`,
+    faq: `/${lang ?? "en"}/faq`,
+  };
   const navHref = (id: string) =>
-    isHomePage ? `#${id}` : `/${lang ?? "en"}#${id}`;
+    PAGE_NAV[id] ??
+    (isHomePage ? `#${id}` : `/${lang ?? "en"}#${id}`);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
