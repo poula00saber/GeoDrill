@@ -6,6 +6,8 @@ export const SECTION_IDS = {
   services: 'services',
   projects: 'projects',
   clients: 'clients',
+  blog: 'blog',
+  faq: 'faq',
   contact: 'contact',
 } as const
 
@@ -47,6 +49,8 @@ export type Dict = {
   process: { kicker: string; title: string; sub: string; steps: Step[] }
   projects: { kicker: string; title: string; sub: string }
   clients: { kicker: string; title: string; sub: string; list: string[] }
+  blog: { kicker: string; title: string; sub: string; viewAll: string; empty: string }
+  faq: { kicker: string; title: string; sub: string; viewAll: string; sideTitle: string; sideBody: string; sideCta: string }
   certs: {
     kicker: string
     title: string
@@ -363,6 +367,22 @@ export const content: Record<Lang, Dict> = {
       sub: "We partner with government bodies and premier private enterprises across the Kingdom.",
       list: clients,
     },
+    blog: {
+      kicker: "Insights & Updates",
+      title: "Ideas from the field",
+      sub: "Practical perspectives on construction, engineering, and delivering work that lasts.",
+      viewAll: "View all insights",
+      empty: "New insights are coming soon.",
+    },
+    faq: {
+      kicker: "Frequently Asked Questions",
+      title: "Straight answers, clear next steps",
+      sub: "A few answers to the questions we hear most often before a project begins.",
+      viewAll: "View all questions",
+      sideTitle: "Can't find your answer?",
+      sideBody: "Our team is ready to help you find the answer you need.",
+      sideCta: "Get in touch",
+    },
     certs: {
       kicker: "Certifications & Official Docs",
       title: "Certified for excellence and compliance",
@@ -668,6 +688,22 @@ export const content: Record<Lang, Dict> = {
       title: "موضع ثقة كبرى المؤسسات",
       sub: "نتشارك مع الجهات الحكومية وكبرى المؤسسات الخاصة في جميع أنحاء المملكة.",
       list: clients,
+    },
+    blog: {
+      kicker: "الرؤى والتحديثات",
+      title: "أفكار من الميدان",
+      sub: "رؤى عملية حول الإنشاء والهندسة وتسليم أعمال تدوم.",
+      viewAll: "عرض جميع المقالات",
+      empty: "ترقبوا رؤى جديدة قريبًا.",
+    },
+    faq: {
+      kicker: "الأسئلة الشائعة",
+      title: "إجابات واضحة وخطوات تالية محددة",
+      sub: "إجابات عن أكثر الأسئلة التي نسمعها قبل بدء المشروع.",
+      viewAll: "عرض جميع الأسئلة",
+      sideTitle: "لم تجد إجابتك؟",
+      sideBody: "فريقنا جاهز لمساعدتك في إيجاد الإجابة التي تحتاجها.",
+      sideCta: "تواصل معنا",
     },
     certs: {
       kicker: "الشهادات والمستندات الرسمية",

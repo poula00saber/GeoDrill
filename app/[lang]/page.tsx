@@ -8,6 +8,8 @@ import { Services } from "@/components/sections/services";
 import { Process } from "@/components/sections/process";
 import { Projects } from "@/components/sections/projects";
 import { Clients } from "@/components/sections/clients";
+import { Blog } from "@/components/sections/blog";
+import { FaqSlider } from "@/components/sections/faq-slider";
 import { Certifications } from "@/components/sections/certifications";
 import { Location } from "@/components/sections/location";
 import { Contact } from "@/components/sections/contact";
@@ -35,6 +37,8 @@ export default async function Page({
         <Process />
         <Projects />
         <Clients />
+        <Blog locale={locale} />
+        <FaqSlider />
         <Certifications />
         <Location />
         <Contact />
