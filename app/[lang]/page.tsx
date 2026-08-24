@@ -26,7 +26,7 @@ export default async function Page({
 
   return (
     <>
-        <Navbar />
+      <Navbar />
       <main key={locale} className="min-h-svh lang-enter">
         <Hero />
         <About />

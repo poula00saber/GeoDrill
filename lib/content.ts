@@ -1,129 +1,149 @@
-export type Lang = 'en' | 'ar'
+export type Lang = "en" | "ar";
 
 export const SECTION_IDS = {
-  home: 'home',
-  about: 'about',
-  services: 'services',
-  projects: 'projects',
-  clients: 'clients',
-  blog: 'blog',
-  faq: 'faq',
-  contact: 'contact',
-} as const
+  home: "home",
+  about: "about",
+  services: "services",
+  projects: "projects",
+  clients: "clients",
+  blog: "blog",
+  faq: "faq",
+  contact: "contact",
+} as const;
 
-type NavItem = { id: string; label: string }
+type NavItem = { id: string; label: string };
 
-type Feature = { key: string; title: string; text: string }
-type Sector = { key: string; name: string; image: string }
-type Service = { num: string; key: string; title: string; text: string; image: string }
-type Step = { num: string; title: string; text: string }
-type Stat = { value: number; suffix: string; label: string }
+type Feature = { key: string; title: string; text: string };
+type Sector = { key: string; name: string; image: string };
+type Service = {
+  num: string;
+  key: string;
+  title: string;
+  text: string;
+  image: string;
+};
+type Step = { num: string; title: string; text: string };
+type Stat = { value: number; suffix: string; label: string };
 
 export type Dict = {
-  dir: 'ltr' | 'rtl'
-  langLabel: string
-  nav: NavItem[]
-  cta: { quote: string; services: string; projects: string; contact: string }
+  dir: "ltr" | "rtl";
+  langLabel: string;
+  nav: NavItem[];
+  cta: { quote: string; services: string; projects: string; contact: string };
   hero: {
-    tag: string
-    headline: string
-    sub: string
-    badges: string[]
-  }
+    tag: string;
+    headline: string;
+    sub: string;
+    badges: string[];
+  };
   about: {
-    kicker: string
-    title: string
-    body: string
-    stats: Stat[]
-  }
+    kicker: string;
+    title: string;
+    body: string;
+    stats: Stat[];
+  };
   visionMission: {
-    kicker: string
-    visionTitle: string
-    vision: string
-    missionTitle: string
-    mission: string
-  }
-  why: { kicker: string; title: string; intro: string; features: Feature[] }
-  sectors: { kicker: string; title: string; sub: string; items: Sector[] }
-  services: { kicker: string; title: string; sub: string; items: Service[] }
-  process: { kicker: string; title: string; sub: string; steps: Step[] }
-  projects: { kicker: string; title: string; sub: string }
-  clients: { kicker: string; title: string; sub: string; list: string[] }
-  blog: { kicker: string; title: string; sub: string; viewAll: string; empty: string }
-  faq: { kicker: string; title: string; sub: string; viewAll: string; sideTitle: string; sideBody: string; sideCta: string }
+    kicker: string;
+    visionTitle: string;
+    vision: string;
+    missionTitle: string;
+    mission: string;
+  };
+  why: { kicker: string; title: string; intro: string; features: Feature[] };
+  sectors: { kicker: string; title: string; sub: string; items: Sector[] };
+  services: { kicker: string; title: string; sub: string; items: Service[] };
+  process: { kicker: string; title: string; sub: string; steps: Step[] };
+  projects: { kicker: string; title: string; sub: string };
+  clients: { kicker: string; title: string; sub: string; list: string[] };
+  blog: {
+    kicker: string;
+    title: string;
+    sub: string;
+    viewAll: string;
+    empty: string;
+  };
+  faq: {
+    kicker: string;
+    title: string;
+    sub: string;
+    viewAll: string;
+    sideTitle: string;
+    sideBody: string;
+    sideCta: string;
+  };
   certs: {
-    kicker: string
-    title: string
-    line: string
-    items: { code: string; name: string }[]
-    extra: string[]
-  }
+    kicker: string;
+    title: string;
+    line: string;
+    items: { code: string; name: string }[];
+    extra: string[];
+  };
   contact: {
-    kicker: string
-    title: string
-    sub: string
+    kicker: string;
+    title: string;
+    sub: string;
     form: {
-      name: string
-      email: string
-      phone: string
-      subject: string
-      message: string
-      send: string
-      sent: string
-    }
-    infoTitle: string
-    address: string
-    phoneLabel: string
-    emailLabel: string
-    whatsapp: string
-  }
+      name: string;
+      email: string;
+      phone: string;
+      subject: string;
+      message: string;
+      send: string;
+      sent: string;
+    };
+    infoTitle: string;
+    address: string;
+    phoneLabel: string;
+    emailLabel: string;
+    whatsapp: string;
+  };
   footer: {
-    tagline: string
-    quickLinks: string
-    servicesTitle: string
-    sectorsTitle: string
-    contactTitle: string
-    rights: string
-    group: string
-    home: string
-    aboutPage: string
-    servicesPage: string
-    projectsPage: string
-    contactPage: string
-    followLabel: string
-    locationsTitle: string
+    tagline: string;
+    quickLinks: string;
+    servicesTitle: string;
+    sectorsTitle: string;
+    contactTitle: string;
+    rights: string;
+    group: string;
+    home: string;
+    aboutPage: string;
+    servicesPage: string;
+    projectsPage: string;
+    contactPage: string;
+    followLabel: string;
+    locationsTitle: string;
     social: {
-      instagram: string
-      x: string
-      linkedin: string
-      facebook: string
-    }
-  }
+      instagram: string;
+      x: string;
+      linkedin: string;
+      facebook: string;
+    };
+  };
   page: {
-    about: { kicker: string; title: string; sub: string; image: string }
-    services: { kicker: string; title: string; sub: string; image: string }
-    projects: { kicker: string; title: string; sub: string; image: string }
-    contact: { kicker: string; title: string; sub: string; image: string }
-  }
-}
+    about: { kicker: string; title: string; sub: string; image: string };
+    services: { kicker: string; title: string; sub: string; image: string };
+    projects: { kicker: string; title: string; sub: string; image: string };
+    contact: { kicker: string; title: string; sub: string; image: string };
+  };
+};
 
 const clients = [
-  'Saudi Binladin Group',
-  'Nesma & Partners',
-  'Ministry of Housing',
-  'Ministry of Finance',
-  'Ministry of Env. Water & Agriculture',
-  'SAPTCO',
-  'Alfanar',
-  'Dar Al-Riyadh',
-  'Dar Al-Handasah',
-  'Bank Albilad',
-  'Almarai',
-  'Saudi Electricity Company',
-  'King Salman Park',
-  'Green Riyadh',
-  'Sports Boulevard',
-]
+  "Saudi Binladin Group",
+  "Nesma & Partners",
+  "Ministry of Housing",
+  "Ministry of Finance",
+  "Ministry of Env. Water & Agriculture",
+  "SAPTCO",
+  "Alfanar",
+  "Dar Al-Riyadh",
+  "Dar Al-Handasah",
+  "Bank Albilad",
+  "Almarai",
+  "Saudi Electricity Company",
+  "King Salman Park",
+  "Green Riyadh",
+  "Sports Boulevard",
+];
 
 export const content: Record<Lang, Dict> = {
   en: {

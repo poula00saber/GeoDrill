@@ -43,10 +43,20 @@ function AccordionItem({
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.25 }}
           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
-            isOpen ? "bg-teal text-navy" : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
+            isOpen
+              ? "bg-teal text-navy"
+              : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
           }`}
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            viewBox="0 0 24 24"
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
@@ -111,8 +121,12 @@ export function Faq() {
             className="flex flex-col justify-between rounded-3xl border border-border bg-card p-7 shadow-sm dark:bg-navy/60"
           >
             <div>
-              <h2 className="text-lg font-bold text-foreground">{copy.sideTitle}</h2>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy.sideBody}</p>
+              <h2 className="text-lg font-bold text-foreground">
+                {copy.sideTitle}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {copy.sideBody}
+              </p>
               <Link
                 href={`/${locale}#contact`}
                 className="mt-5 inline-flex items-center gap-2 rounded-xl bg-teal px-5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-all hover:bg-teal/80 active:scale-95"
@@ -123,9 +137,13 @@ export function Faq() {
 
             {/* Branded panel */}
             <div className="relative mt-8 flex h-40 w-full flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-navy to-teal/40 text-center shadow-inner">
-              <span className="text-4xl font-extrabold tracking-tight text-white">GEODRILL</span>
+              <span className="text-4xl font-extrabold tracking-tight text-white">
+                GEODRILL
+              </span>
               <span className="mt-1 text-xs text-white/70">
-                {isArabic ? "بناء الثقة عبر المملكة" : "Building trust across the Kingdom"}
+                {isArabic
+                  ? "بناء الثقة عبر المملكة"
+                  : "Building trust across the Kingdom"}
               </span>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent" />
             </div>

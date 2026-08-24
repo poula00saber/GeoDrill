@@ -10,9 +10,16 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
   const locale: Lang = (await params).lang === "ar" ? "ar" : "en";
-  return { title: `${content[locale].faq.title} | GEODRILL`, description: content[locale].faq.sub };
+  return {
+    title: `${content[locale].faq.title} | GEODRILL`,
+    description: content[locale].faq.sub,
+  };
 }
 
 export default function FaqPage() {
