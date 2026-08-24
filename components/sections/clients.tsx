@@ -82,7 +82,7 @@ function LogoRow({
                 alt={logo.name}
                 fill
                 sizes="(max-width: 640px) 210px, 230px"
-                className="object-cover grayscale transition-all duration-300 group-hover/logo:grayscale-0"
+                className=" grayscale transition-all duration-300 group-hover/logo:grayscale-0"
               />
             </div>
           </li>
