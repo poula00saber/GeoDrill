@@ -444,10 +444,9 @@ export const content: Record<Lang, Dict> = {
       infoTitle: "Contact Details",
       address:
         "Riyadh, Al Fayha District, Prince Saad Ibn Abdulrahman Branch Road",
-      // TODO: replace with verified real phone/email from client
-      phoneLabel: "+966 5X XXX XXXX",
-      emailLabel: "info@geodrill.sa",
-      whatsapp: "https://wa.me/966500000000",
+      phoneLabel: "+966 59 694 5051",
+      emailLabel: "construction@geodrillksa.com",
+      whatsapp: "https://wa.me/966596945051",
     },
     footer: {
       tagline: "Strength in Execution. Precision in Delivery.",
@@ -465,8 +464,8 @@ export const content: Record<Lang, Dict> = {
       followLabel: "Follow Us",
       locationsTitle: "Our Location",
       social: {
-        instagram: "https://www.instagram.com/geodrillksa",
-        x: "https://x.com/geodrillksa",
+        instagram: "https://www.instagram.com/geodrill.contracting?utm_source=qr",
+        x: "https://x.com/geodrillconst?s=11",
         linkedin: "https://www.linkedin.com/company/geodrillksa/home/",
         facebook: "https://www.facebook.com/geodrillksa",
       },
@@ -773,10 +772,9 @@ export const content: Record<Lang, Dict> = {
       },
       infoTitle: "بيانات التواصل",
       address: "الرياض، ",
-      // TODO: استبدال رقم الهاتف والبريد ببيانات تواصل حقيقية موثقة من العميل
-      phoneLabel: "+966 5X XXX XXXX",
-      emailLabel: "info@geodrill.sa",
-      whatsapp: "https://wa.me/966500000000",
+      phoneLabel: "+966 59 694 5051",
+      emailLabel: "construction@geodrillksa.com",
+      whatsapp: "https://wa.me/966596945051",
     },
     footer: {
       tagline: "قوة في التنفيذ. دقة في الإنجاز.",
@@ -794,8 +792,8 @@ export const content: Record<Lang, Dict> = {
       followLabel: "تابعنا",
       locationsTitle: "موقعنا",
       social: {
-        instagram: "https://www.instagram.com/geodrillksa",
-        x: "https://x.com/geodrillksa",
+        instagram: "https://www.instagram.com/geodrill.contracting?utm_source=qr",
+        x: "https://x.com/geodrillconst?s=11",
         linkedin: "https://www.linkedin.com/company/geodrillksa/home/",
         facebook: "https://www.facebook.com/geodrillksa",
       },
