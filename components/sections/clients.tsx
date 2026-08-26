@@ -65,7 +65,7 @@ function LogoRow({
   reverse?: boolean;
 }) {
   return (
-    <div className="relative overflow-hidden" dir="ltr">
+    <div className="relative overflow-hidden py-3" dir="ltr">
       <div
         className="pointer-events-none absolute inset-y-0 start-0 z-10 w-28 bg-gradient-to-r from-muted to-transparent"
         aria-hidden
@@ -74,7 +74,6 @@ function LogoRow({
         className="pointer-events-none absolute inset-y-0 end-0 z-10 w-28 bg-gradient-to-l from-muted to-transparent"
         aria-hidden
       />
-
       <ul
         className={`${reverse ? "marquee-b" : "marquee-a"} flex w-max shrink-0 items-center gap-5`}
       >
