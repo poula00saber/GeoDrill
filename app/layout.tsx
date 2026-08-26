@@ -1,15 +1,15 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Cairo } from 'next/font/google'
+import { IBM_Plex_Sans_Arabic } from 'next/font/google'
 import { LanguageProvider } from '@/components/language-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import ThemeFavicon from '@/components/theme-favicon'
 import './globals.css'
 
-const cairo = Cairo({
+const ibmPlex = IBM_Plex_Sans_Arabic({
   subsets: ['arabic', 'latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-cairo',
+  variable: '--font-ibm-plex',
   display: 'swap',
 })
 
@@ -45,7 +45,7 @@ export default function RootLayout({
       lang="en"
       dir="ltr"
       suppressHydrationWarning
-      className={`${cairo.variable} bg-background`}
+      className={`${ibmPlex.variable} bg-background`}
     >
       <body className="font-sans antialiased">
         <ThemeProvider
