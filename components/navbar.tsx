@@ -29,7 +29,9 @@ export function Navbar() {
   const openRef = useRef(open);
   openRef.current = open;
 
-  const isHomePage = pathname.split("/").filter(Boolean).length <= 1;
+  const isContractingHome = /^\/contracting\/(en|ar)\/?$/.test(pathname);
+  const isHomePage =
+    isContractingHome || pathname.split("/").filter(Boolean).length <= 1;
   const PAGE_NAV: Record<string, string> = {
     blog: `/${lang ?? "en"}/blog`,
     faq: `/${lang ?? "en"}/faq`,
@@ -135,7 +137,9 @@ export function Navbar() {
   // Active floating transparent state over dark hero
   const isFloatingHero = isTop && hasHero;
 
-  // Use light logo when floating over dark hero or in dark mode
+  // Use the dark/for-dark logo when floating over the dark hero or in dark mode,
+  // otherwise the normal light logo — the contracting site keeps its coloured
+  // logo.png / logo2.png variants.
   const logoSrc = isFloatingHero || isDark ? "/logo2.png" : "/logo.png";
 
   return (

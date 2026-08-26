@@ -187,7 +187,7 @@ export const content: Record<Lang, Dict> = {
         { value: 7, suffix: "", label: "Sectors Served" },
         // Verified: ISO 9001:2015, ISO 45001:2018, ISO 14001:2015.
         { value: 3, suffix: "", label: "ISO Certifications" },
-        { value: 34, suffix: "+", label: "Completed Milestones" },
+        { value: 24, suffix: "+", label: "Completed Milestones" },
       ],
     },
     visionMission: {
@@ -532,7 +532,7 @@ export const content: Record<Lang, Dict> = {
         { value: 7, suffix: "", label: "قطاعات نخدمها" },
         // مؤكد: آيزو 9001:2015، آيزو 45001:2018، آيزو 14001:2015.
         { value: 3, suffix: "", label: "شهادات آيزو" },
-        { value: 34, suffix: "+", label: "إنجازًا مكتملاً" },
+        { value: 24, suffix: "+", label: "إنجازًا مكتملاً" },
       ],
     },
     visionMission: {

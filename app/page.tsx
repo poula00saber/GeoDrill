@@ -15,6 +15,7 @@ import {
 import { motion, type Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import { Logo as BrandLogo } from "@/components/logo";
 
 const copy = {
   eyebrow: { en: "Welcome to GEODRILL", ar: "أهلاً بكم في جيودريل" },
@@ -99,7 +100,7 @@ const portals = [
       ],
     },
     cta: { en: "Explore Construction", ar: "استكشف التشييد" },
-    href: "/en",
+    href: "/contracting/en",
     external: false,
     accent: "teal",
     Icon: Hammer,
@@ -176,7 +177,7 @@ export default function Page() {
       </div>
 
       <a
-        href="/en"
+        href="/contracting/en"
         aria-label="GEODRILL home"
         className="absolute top-6 start-6 z-20"
       >
@@ -299,6 +300,10 @@ function Portal({
   const subtitle = portal.subtitle[lang];
   const caps = portal.capabilities[lang];
   const cta = portal.cta[lang];
+
+  // Localize the non-external portal link (the contracting division) so it
+  // opens the current language instead of always defaulting to English.
+  const linkHref = portal.external ? portal.href : `/contracting/${lang}`;
 
   const content = (
     <>
@@ -439,7 +444,7 @@ function Portal({
         />
       ) : (
         <Link
-          href={portal.href}
+          href={linkHref}
           aria-label={`Enter ${title} division`}
           className="absolute inset-0 z-20"
         />
@@ -448,29 +453,12 @@ function Portal({
   );
 }
 
-// Fixed: theme wasn't guarded against the pre-hydration undefined state, so a
-// dark-mode visit briefly flashed logo.png (the light logo) before switching
-// to logo2.png. Rendering nothing until mounted removes the flash entirely.
+// On the navigation (portal) page the logo must be a single colour — pure
+// black in light theme and pure white in dark theme. This is applied via a CSS
+// filter (brightness/invert), so no separate asset is required and the
+// result tracks the theme automatically.
 function Logo() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return <span className="block h-10 w-[150px]" aria-hidden />;
-  }
-
-  const isDark = resolvedTheme === "dark";
-  return (
-    <Image
-      src={isDark ? "/logo2.png" : "/logo.png"}
-      alt="GEODRILL"
-      width={150}
-      height={40}
-      priority
-      className="h-10 w-auto object-contain transition-opacity duration-300"
-    />
-  );
+  return <BrandLogo monochrome size="h-10" />;
 }
 
 function ThemeToggle({ className }: { className?: string }) {

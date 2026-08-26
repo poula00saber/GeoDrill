@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
-// The current home page (the General Construction Division site) is served
-// bilingual at /en and /ar. /construction forwards here so visitors who land
-// on the branded path reach the full site immediately.
+// The former home page (the General Construction Contracting Division site) is
+// now served at the branded path /contracting/en. /construction forwards there
+// so visitors who land on the legacy branded path reach the full site.
 export default function Page() {
-  redirect('/en')
+  redirect('/contracting/en')
 }

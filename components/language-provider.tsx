@@ -14,7 +14,13 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function langFromPathname(pathname: string): Lang {
-  return pathname.split("/")[1] === "ar" ? "ar" : "en";
+  // Locale segment depends on the route shape:
+  //   /[lang]            -> segments[0]  (e.g. "/ar")
+  //   /contracting/[lang]-> segments[1]  (e.g. "/contracting/ar")
+  const segments = pathname.split("/").filter(Boolean);
+  const localeSegment =
+    segments[0] === "contracting" ? segments[1] : segments[0];
+  return localeSegment === "ar" ? "ar" : "en";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -33,16 +39,24 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const toggle = () => {
     const target: Lang = lang === "en" ? "ar" : "en";
-    const segments = pathname.split("/");
+    const segments = pathname.split("/").filter(Boolean);
 
-    // Check if the first segment after root is a valid locale
-    if (segments[1] === "en" || segments[1] === "ar") {
+    // Contracting path: /contracting/en <-> /contracting/ar
+    if (segments[0] === "contracting") {
       segments[1] = target;
-      router.push(segments.join("/"));
-    } else {
-      // Fallback for root path or un-prefixed routes
-      router.push(`/${target}`);
+      router.push(`/${segments.join("/")}`);
+      return;
     }
+
+    // Check if the first segment is a valid locale
+    if (segments[0] === "en" || segments[0] === "ar") {
+      segments[0] = target;
+      router.push(`/${segments.join("/")}`);
+      return;
+    }
+
+    // Fallback for root path or un-prefixed routes
+    router.push(`/${target}`);
   };
 
   const value: LanguageContextValue = {
