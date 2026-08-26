@@ -1,19 +1,14 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cairo } from 'next/font/google'
+import { Cairo } from 'next/font/google'
 import { LanguageProvider } from '@/components/language-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import ThemeFavicon from '@/components/theme-favicon'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-cairo',
   display: 'swap',
 })
@@ -50,7 +45,7 @@ export default function RootLayout({
       lang="en"
       dir="ltr"
       suppressHydrationWarning
-      className={`${inter.variable} ${cairo.variable} bg-background`}
+      className={`${cairo.variable} bg-background`}
     >
       <body className="font-sans antialiased">
         <ThemeProvider

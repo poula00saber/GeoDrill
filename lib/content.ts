@@ -443,7 +443,7 @@ export const content: Record<Lang, Dict> = {
       },
       infoTitle: "Contact Details",
       address:
-        "Riyadh, Al Fayha District, Prince Saad Ibn Abdulrahman Branch Road",
+        "Prince Saad Ibn Abdulrahman Al Awal Road, Al Rawabi District, Riyadh 14253, Saudi Arabia",
       phoneLabel: "+966 59 694 5051",
       emailLabel: "construction@geodrillksa.com",
       whatsapp: "https://wa.me/966596945051",
@@ -464,7 +464,8 @@ export const content: Record<Lang, Dict> = {
       followLabel: "Follow Us",
       locationsTitle: "Our Location",
       social: {
-        instagram: "https://www.instagram.com/geodrill.contracting?utm_source=qr",
+        instagram:
+          "https://www.instagram.com/geodrill.contracting?utm_source=qr",
         x: "https://x.com/geodrillconst?s=11",
         linkedin: "https://www.linkedin.com/company/geodrillksa/home/",
         facebook: "https://www.facebook.com/geodrillksa",
@@ -771,7 +772,8 @@ export const content: Record<Lang, Dict> = {
         sent: "شكرًا لك — سنتواصل معك قريبًا.",
       },
       infoTitle: "بيانات التواصل",
-      address: "الرياض، ",
+      address:
+        "طريق الأمير سعد بن عبدالرحمن الأول، حي الروابي، الرياض 14253، المملكة العربية السعودية ",
       phoneLabel: "+966 59 694 5051",
       emailLabel: "construction@geodrillksa.com",
       whatsapp: "https://wa.me/966596945051",
@@ -792,7 +794,8 @@ export const content: Record<Lang, Dict> = {
       followLabel: "تابعنا",
       locationsTitle: "موقعنا",
       social: {
-        instagram: "https://www.instagram.com/geodrill.contracting?utm_source=qr",
+        instagram:
+          "https://www.instagram.com/geodrill.contracting?utm_source=qr",
         x: "https://x.com/geodrillconst?s=11",
         linkedin: "https://www.linkedin.com/company/geodrillksa/home/",
         facebook: "https://www.facebook.com/geodrillksa",
