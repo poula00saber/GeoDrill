@@ -32,6 +32,10 @@ export const FAQS: Record<Lang, FaqItem[]> = {
       q: "How do I track progress during my project?",
       a: "You receive clear updates at each stage so you stay informed from excavation through finishing and handover.",
     },
+    {
+      q: "Does GEODRILL work with subcontractors or partners?",
+      a: "Yes. We partner with specialized firms across urbanism, facility management, and engineering consulting to strengthen delivery on every project.",
+    },
   ],
   ar: [
     {
@@ -61,6 +65,10 @@ export const FAQS: Record<Lang, FaqItem[]> = {
     {
       q: "كيف أتابع سير العمل خلال المشروع؟",
       a: "تصلنا تحديثات واضحة في كل مرحلة لتبقى على اطلاع من البداية حتى التشطيب والتسليم.",
+    },
+    {
+      q: "هل تعمل جيو دريل مع مقاولين من الباطن أو شركاء؟",
+      a: "نعم، نتشارك مع شركات متخصصة في التخطيط العمراني وإدارة المرافق والاستشارات الهندسية لتعزيز التنفيذ في كل مشروع.",
     },
   ],
 };

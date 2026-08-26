@@ -108,6 +108,11 @@ const PROJECTS: Record<Category, ProjectEntry> = {
       P("02_structures_and_steel", "steel_warehouse_exterior_red.jpg"),
       P("02_structures_and_steel", "steel_warehouse_exterior_tan.jpg"),
       P("02_structures_and_steel", "steel_warehouse_frame_complete.jpg"),
+      P("new_towers_highrise", "highrise_steel_frame_tower_crane.jpg"),
+      P("new_towers_highrise", "multiple_tower_cranes_site.jpg"),
+      P("new_towers_highrise", "residential_tower_facade_progress.jpg"),
+      P("new_steel_variety", "steel_frame_complete_blockwork.jpg"),
+      P("new_steel_variety", "steel_frame_exterior_wall_low.jpg"),
     ],
   },
   mep: {
@@ -129,6 +134,10 @@ const PROJECTS: Record<Category, ProjectEntry> = {
       P("03_mep", "mep_interior_beam_lighting.jpg"),
       P("03_mep", "mep_underfloor_conduit_closeup.jpg"),
       P("03_mep", "mep_underfloor_conduit_slab.jpg"),
+      P("new_mep_variety", "mep_copper_acoustic_ceiling_panels.jpg"),
+      P("new_mep_variety", "mep_pex_plumbing_red_blue.jpg"),
+      P("new_mep_variety", "mep_fire_pump_enclosure_cage.jpg"),
+      P("new_mep_variety", "mep_water_pump_ksb_blue.jpg"),
     ],
   },
   finishing: {
@@ -152,6 +161,11 @@ const PROJECTS: Record<Category, ProjectEntry> = {
       P("04_finishing", "finishing_staircase_glass_rail.jpg"),
       P("04_finishing", "finishing_staircase_wood_floor.jpg"),
       P("04_finishing", "finishing_window_black_frame.jpg"),
+      P("new_finishing_villa", "villa_hallway_marble_medallion.jpg"),
+      P("new_finishing_residential", "finishing_kitchen_white_modern.jpg"),
+      P("new_finishing_named_projects", "gso_building_night_facade.jpg"),
+      P("new_finishing_named_projects", "hamc_lounge_reception_render.jpg"),
+      P("new_finishing_commercial", "finishing_lobby_stairs_marble.jpg"),
     ],
   },
   insulation: {
@@ -202,6 +216,8 @@ const PROJECTS: Record<Category, ProjectEntry> = {
       P("06_industrial", "sector_industrial.jpg"),
       P("06_industrial", "steel_frame_industrial_tanks.jpg"),
       P("06_industrial", "steel_warehouse_exterior_pipes.jpg"),
+      P("new_misc_industrial", "steel_frame_silo_tank_structure.jpg"),
+      P("new_towers_highrise", "tower_crane_skyline_view.jpg"),
     ],
   },
 };
