@@ -70,7 +70,6 @@ const portals = [
     },
     cta: { en: "Explore Geotechnical", ar: "استكشف الجيوتقنية" },
     href: "/geotech",
-    external: false,
     accent: "yellow",
     Icon: Compass,
     img: "/images/sector-industrial.png",
@@ -101,7 +100,6 @@ const portals = [
     },
     cta: { en: "Explore Construction", ar: "استكشف التشييد" },
     href: "/contracting/en",
-    external: false,
     accent: "teal",
     Icon: Hammer,
     img: "/images/service-concrete.png",
@@ -302,7 +300,7 @@ function Portal({
   const cta = portal.cta[lang];
 
   const linkHref =
-    portal.id === "construction" ? `/contracting/${lang}` : portal.href;
+    portal.id === "construction" ? `/contracting/${lang}` : "/geotech";
 
   const content = (
     <>
@@ -433,21 +431,11 @@ function Portal({
         aria-hidden
       />
 
-      {portal.external ? (
-        <a
-          href={portal.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Go to ${title} division`}
-          className="absolute inset-0 z-20"
-        />
-      ) : (
-        <Link
-          href={linkHref}
-          aria-label={`Enter ${title} division`}
-          className="absolute inset-0 z-20"
-        />
-      )}
+      <Link
+        href={linkHref}
+        aria-label={`Enter ${title} division`}
+        className="absolute inset-0 z-20"
+      />
     </motion.div>
   );
 }
