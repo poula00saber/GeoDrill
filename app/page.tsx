@@ -69,8 +69,8 @@ const portals = [
       ],
     },
     cta: { en: "Explore Geotechnical", ar: "استكشف الجيوتقنية" },
-    href: "https://geodrillksa.com",
-    external: true,
+    href: "/geotech",
+    external: false,
     accent: "yellow",
     Icon: Compass,
     img: "/images/sector-industrial.png",
@@ -301,9 +301,8 @@ function Portal({
   const caps = portal.capabilities[lang];
   const cta = portal.cta[lang];
 
-  // Localize the non-external portal link (the contracting division) so it
-  // opens the current language instead of always defaulting to English.
-  const linkHref = portal.external ? portal.href : `/contracting/${lang}`;
+  const linkHref =
+    portal.id === "construction" ? `/contracting/${lang}` : portal.href;
 
   const content = (
     <>

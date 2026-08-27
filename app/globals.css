@@ -121,6 +121,26 @@
   --teal-dark: oklch(0.62 0.1 198);
 }
 
+.geotech-theme {
+  --primary: oklch(0.78 0.17 85);
+  --primary-foreground: oklch(0.18 0.02 240);
+  --accent: oklch(0.94 0.08 85);
+  --accent-foreground: oklch(0.18 0.02 240);
+  --ring: oklch(0.78 0.17 85);
+  --teal: oklch(0.78 0.17 85);
+  --teal-dark: oklch(0.66 0.15 80);
+}
+
+.dark .geotech-theme {
+  --primary: oklch(0.82 0.18 88);
+  --primary-foreground: oklch(0.15 0.018 245);
+  --accent: oklch(0.3 0.08 85);
+  --accent-foreground: oklch(0.97 0.004 90);
+  --ring: oklch(0.82 0.18 88);
+  --teal: oklch(0.82 0.18 88);
+  --teal-dark: oklch(0.7 0.16 82);
+}
+
 /*
   Favicon scheme probe — used by components/theme-favicon.tsx to swap the tab icon
   for the BROWSER/OS color scheme (`prefers-color-scheme`), independent of the

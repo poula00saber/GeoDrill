@@ -1,0 +1,436 @@
+{
+  "meta": {
+    "title": "GEODRILL KSA — Geotechnical & Geoscience Experts",
+    "description": "Advanced geotechnical, geophysical and engineering investigation services delivering reliable subsurface intelligence for safer, smarter and more efficient project decisions in Saudi Arabia.",
+    "keywords": "Geotechnical Engineering Saudi Arabia, Geotechnical Investigation Saudi Arabia, Geophysical Survey Saudi Arabia, GPR Survey Saudi Arabia, MASW Saudi Arabia, Soil Investigation Saudi Arabia, Geological Survey Saudi Arabia, Rock Slope Stability Saudi Arabia, Topographical Survey Saudi Arabia, Hydrogeological Studies Saudi Arabia, Ground Investigation Riyadh"
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "technology": "Technology",
+    "projects": "Projects",
+    "qhse": "QHSE",
+    "contact": "Contact",
+    "startProject": "Start a Project",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "hero": {
+    "eyebrow": "GEODRILL KSA — GEOTECHNICAL & GEOSCIENCE EXPERTS",
+    "title": "Know the Ground.",
+    "titleAccent": "Build with Confidence.",
+    "description": "Advanced geotechnical, geophysical and engineering investigation services delivering reliable subsurface intelligence for safer, smarter and more efficient project decisions.",
+    "ctaPrimary": "Explore Our Services",
+    "ctaSecondary": "Start a Project",
+    "hud": {
+      "title": "GEODRILL / FIELD ANALYSIS",
+      "investigation": "INVESTIGATION",
+      "investigationValue": "SUBSURFACE",
+      "dataStatus": "DATA STATUS",
+      "dataStatusValue": "ANALYZING",
+      "siteType": "SITE TYPE",
+      "siteTypeValue": "ENGINEERING",
+      "region": "REGION",
+      "regionValue": "KSA"
+    },
+    "scroll": "Scroll to explore"
+  },
+  "trust": {
+    "years": "Years of Team Experience",
+    "services": "Core Service Areas",
+    "ksa": "Project Experience",
+    "cert": "Quality Management"
+  },
+  "intro": {
+    "title": "Every Structure Begins Below the Surface.",
+    "p1": "Before a foundation is designed, a road is aligned, a structure is built or an infrastructure project takes shape, the ground needs to be understood.",
+    "p2": "GEODRILL brings together geotechnical investigation, geophysical surveying, laboratory testing, geological assessment and engineering analysis to transform subsurface information into practical engineering insight.",
+    "p3": "Our approach helps clients understand site conditions, identify potential ground-related risks and make better-informed project decisions."
+  },
+  "approach": {
+    "title": "From Ground Data to Engineering Decisions.",
+    "stages": {
+      "investigate": {
+        "label": "01 — INVESTIGATE",
+        "title": "Investigate",
+        "description": "Study the site through field investigation, drilling, sampling, surveying and geophysical techniques."
+      },
+      "analyze": {
+        "label": "02 — ANALYZE",
+        "title": "Analyze",
+        "description": "Process, test and interpret field and laboratory data to develop a clearer understanding of subsurface conditions."
+      },
+      "advise": {
+        "label": "03 — ADVISE",
+        "title": "Advise",
+        "description": "Translate technical findings into practical recommendations that support safer design, construction and project planning."
+      }
+    }
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Fourteen specialized service areas covering the full spectrum of ground investigation, testing and engineering.",
+    "explore": "Explore service",
+    "categories": {
+      "ground": "Ground Investigation",
+      "testing": "Testing & Survey",
+      "engineering": "Ground Engineering",
+      "studies": "Engineering & Specialized Studies"
+    },
+    "items": {
+      "geotechnical-investigation": {
+        "name": "Geotechnical Investigation",
+        "description": "Comprehensive subsurface investigation through drilling, sampling and in-situ testing to develop site-specific ground models."
+      },
+      "geophysical-survey": {
+        "name": "Geophysical Survey",
+        "description": "Non-invasive subsurface investigation using advanced geophysical methods to detect anomalies and map subsurface conditions."
+      },
+      "geological-survey": {
+        "name": "Geological Survey & Rock Slope Stability",
+        "description": "Geological mapping and rock slope stability assessment for infrastructure, mining and environmental projects."
+      },
+      "hydrogeological-studies": {
+        "name": "Hydrogeological Studies",
+        "description": "Characterization of groundwater conditions and subsurface water behaviour for engineering and environmental projects."
+      },
+      "material-testing": {
+        "name": "Material, Concrete & Asphalt Testing",
+        "description": "Laboratory and field testing of construction materials including soil, concrete and asphalt to verify quality and compliance."
+      },
+      "quality-control": {
+        "name": "On-Site Quality Control",
+        "description": "Field quality control services ensuring materials and workmanship meet project specifications and standards."
+      },
+      "topographical-survey": {
+        "name": "Topographical Survey",
+        "description": "Precise topographic mapping using total station and GNSS equipment to support design and construction planning."
+      },
+      "environmental-survey": {
+        "name": "Environmental Survey Services",
+        "description": "Environmental site assessments and surveys to support sustainable project planning and compliance."
+      },
+      "cavity-probing": {
+        "name": "Cavity Probing",
+        "description": "Detection and investigation of subsurface cavities and voids that may affect project integrity."
+      },
+      "grouting": {
+        "name": "Grouting",
+        "description": "Ground improvement through grouting techniques designed around site-specific conditions."
+      },
+      "micropiling": {
+        "name": "Micropiling",
+        "description": "Installation of micropiles for foundation support in challenging ground conditions."
+      },
+      "anchoring-shoring": {
+        "name": "Anchoring & Shoring",
+        "description": "Design and execution of anchoring and shoring systems for excavation support and slope stabilization."
+      },
+      "dewatering": {
+        "name": "Dewatering",
+        "description": "Design and execution of dewatering systems to manage groundwater during construction."
+      },
+      "soil-improvement": {
+        "name": "Soil Improvement & Concrete Repair",
+        "description": "Ground improvement and concrete repair solutions for challenging ground and structural conditions."
+      },
+      "hydrology": {
+        "name": "Hydrology Studies",
+        "description": "Evaluation of surface-water behaviour, runoff, drainage conditions and flood-related risks."
+      },
+      "structural-assessment": {
+        "name": "Structural Assessment",
+        "description": "Structural assessment of existing buildings and infrastructure combining inspection, testing and engineering evaluation."
+      },
+      "mining-exploration": {
+        "name": "Mining Exploration",
+        "description": "Geological exploration services supporting mineral discovery and resource assessment."
+      }
+    }
+  },
+  "geotechnical": {
+    "title": "Know the Ground Before You Design.",
+    "description": "GEODRILL combines field investigation, sampling, in-situ testing, laboratory analysis and engineering interpretation to develop reliable, site-specific ground information.",
+    "workflow": {
+      "drill": "Drill",
+      "sample": "Sample",
+      "test": "Test",
+      "analyze": "Analyze",
+      "report": "Report"
+    },
+    "methods": {
+      "boreholes": "Boreholes",
+      "soilSampling": "Soil Sampling",
+      "spt": "SPT",
+      "cpt": "CPT",
+      "pressuremeter": "Pressuremeter Testing",
+      "permeability": "Permeability Testing",
+      "plateLoad": "Plate Load Testing",
+      "dcp": "DCP / DPSH",
+      "cbr": "CBR",
+      "piezometers": "Piezometers",
+      "testPits": "Test Pits"
+    }
+  },
+  "crossSection": {
+    "label": "Conceptual Geological Visualization",
+    "disclaimer": "Conceptual visualization — not project data",
+    "layers": {
+      "surface": "Surface",
+      "alluvial": "Alluvial Soil",
+      "sand": "Sand",
+      "clay": "Clay",
+      "weathered": "Weathered Rock",
+      "fractured": "Fractured Rock",
+      "bedrock": "Bedrock"
+    },
+    "relevance": {
+      "surface": "Ground level — investigation starts here",
+      "alluvial": "Soft deposits requiring careful foundation design",
+      "sand": "Granular soil — evaluated for bearing and settlement",
+      "clay": "Cohesive soil — assessed for compressibility and strength",
+      "weathered": "Transitional zone — variable engineering properties",
+      "fractured": "Rock mass quality assessed for discontinuities",
+      "bedrock": "Competent rock — primary bearing layer for deep foundations"
+    }
+  },
+  "geophysical": {
+    "title": "See Beyond What the Surface Reveals.",
+    "description": "Some of the most important information about a site cannot be seen from the surface. GEODRILL applies a range of geophysical techniques to investigate subsurface conditions, detect anomalies and support engineering, infrastructure, environmental and exploration projects.",
+    "disclaimer": "Interactive conceptual visualization — not project data",
+    "methods": {
+      "masw": {
+        "name": "MASW",
+        "full": "Multi-channel Analysis of Surface Waves",
+        "use": "Subsurface shear-wave velocity and stiffness characterization."
+      },
+      "gpr": {
+        "name": "GPR",
+        "full": "Ground Penetrating Radar",
+        "use": "Underground utilities, shallow subsurface investigation, cavities, voids, road and concrete investigation."
+      },
+      "ert": {
+        "name": "ERT",
+        "full": "Electrical Resistivity Tomography",
+        "use": "Geological investigation, groundwater studies, cavities, fractures, environmental investigation, mineral exploration."
+      },
+      "seismic": {
+        "name": "Seismic",
+        "full": "Seismic Refraction / Reflection",
+        "use": "Bedrock profiling, weathered layer assessment, weak-zone investigation, slope studies."
+      },
+      "emi": {
+        "name": "EMI",
+        "full": "Electromagnetic Induction",
+        "use": "Buried utility detection, facility tracing, depth estimation."
+      },
+      "microgravity": {
+        "name": "Microgravity",
+        "full": "Microgravity Survey",
+        "use": "Bedrock mapping, cavities, voids, geological contacts, mineral exploration."
+      },
+      "magnetic": {
+        "name": "Magnetic",
+        "full": "Magnetic Survey",
+        "use": "Buried metallic objects, geological mapping, mineral exploration, fracture detection."
+      },
+      "borehole": {
+        "name": "Borehole Logging",
+        "full": "Optical / Acoustic Televiewer",
+        "use": "Fracture detection, bedding interpretation, lithological interpretation, borehole structural information."
+      }
+    }
+  },
+  "geology": {
+    "title": "Understand the Terrain. Manage the Risk.",
+    "description": "GEODRILL provides geological survey and rock slope stability services for infrastructure, mining and environmental projects. Our approach combines geological mapping, field investigation, remote sensing and engineering analysis to develop a clearer understanding of terrain and potential instability mechanisms."
+  },
+  "hydrology": {
+    "title": "Understand Water Beneath and Across the Site.",
+    "hydrologyTitle": "Hydrology",
+    "hydrology": "Hydrological studies help evaluate surface-water behaviour, runoff, drainage conditions and flood-related risks.",
+    "hydrogeologyTitle": "Hydrogeology",
+    "hydrogeology": "Hydrogeological investigations help characterize groundwater conditions and subsurface water behaviour.",
+    "flow": {
+      "rain": "Rain",
+      "watershed": "Watershed",
+      "runoff": "Runoff",
+      "groundwater": "Groundwater",
+      "aquifer": "Aquifer"
+    }
+  },
+  "survey": {
+    "title": "Turn the Site Into Reliable Data.",
+    "topographical": {
+      "title": "Topographical Survey",
+      "description": "Professional survey engineers using total station and GNSS equipment to capture precise terrain data."
+    },
+    "material": {
+      "title": "Material Testing",
+      "description": "Laboratory testing of soil, concrete and asphalt to verify quality, strength and compliance."
+    },
+    "quality": {
+      "title": "Quality Control",
+      "description": "Field inspection ensuring materials and workmanship meet project specifications."
+    }
+  },
+  "groundEngineering": {
+    "title": "When Ground Conditions Demand More.",
+    "description": "When investigation identifies challenging ground or structural conditions, specialized engineering measures may be required. GEODRILL's service portfolio includes ground improvement and engineering solutions designed around site-specific requirements.",
+    "items": {
+      "cavity": "Cavity Probing",
+      "grouting": "Grouting",
+      "micropiling": "Micropiling",
+      "anchoring": "Anchoring & Shoring",
+      "dewatering": "Dewatering",
+      "soilImprovement": "Soil Improvement",
+      "concreteRepair": "Concrete Repair"
+    }
+  },
+  "structural": {
+    "title": "Assess Existing Structures. Plan the Next Step.",
+    "description": "GEODRILL provides structural assessment services for existing buildings and infrastructure, combining inspection, testing and engineering evaluation to help clients understand structural condition and plan appropriate action."
+  },
+  "mining": {
+    "title": "From Geological Clues to Exploration Insight.",
+    "process": {
+      "map": "Map",
+      "survey": "Survey",
+      "sample": "Sample",
+      "interpret": "Interpret"
+    }
+  },
+  "about": {
+    "title": "Engineering Insight Built on Experience.",
+    "p1": "GEODRILL is a specialized geoscience company providing professional geotechnical, geophysical and related engineering investigation services for construction, infrastructure, private and government sectors.",
+    "p2": "Our multidisciplinary approach combines field investigation, testing, technical analysis and engineering interpretation to provide practical insight into ground and site conditions.",
+    "p3": "Our team brings more than 17 years of experience across projects in Saudi Arabia."
+  },
+  "vision": {
+    "title": "Supporting Better Development Through Better Ground Intelligence.",
+    "description": "To contribute to innovative and sustainable development through professional geotechnical, geophysical and environmental services."
+  },
+  "mission": {
+    "title": "Technology. Quality. Responsibility.",
+    "description": "To deliver reliable, technology-driven engineering and geoscience services that support safe, efficient and sustainable project outcomes."
+  },
+  "apart": {
+    "title": "What Sets GEODRILL Apart",
+    "pillars": {
+      "expertise": {
+        "title": "Expertise",
+        "description": "Experienced engineering and geoscience professionals."
+      },
+      "technology": {
+        "title": "Technology",
+        "description": "Modern investigation and geophysical techniques."
+      },
+      "reliableData": {
+        "title": "Reliable Data",
+        "description": "Structured field investigation and technical interpretation."
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "Quality-focused processes and ISO 9001:2015."
+      },
+      "safety": {
+        "title": "Safety",
+        "description": "A strong commitment to safe field and engineering practices."
+      },
+      "clientFocus": {
+        "title": "Client Focus",
+        "description": "Solutions shaped around project requirements."
+      }
+    }
+  },
+  "qhse": {
+    "title": "Quality Is How We Work.",
+    "quality": {
+      "title": "Quality",
+      "cert": "BS EN ISO 9001:2015",
+      "description": "Structured quality processes and continual improvement."
+    },
+    "health": {
+      "title": "Health & Safety",
+      "description": "Protecting people and project environments through responsible working practices."
+    },
+    "environment": {
+      "title": "Environment",
+      "description": "Recognizing environmental responsibility as an essential part of sustainable project delivery."
+    }
+  },
+  "organizations": {
+    "title": "Experience Across Leading Organizations.",
+    "subtitle": "Organizations represented below reflect the professional experience of GEODRILL team members across their careers."
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "A showcase of GEODRILL's geotechnical and geoscience capabilities across project types.",
+    "filters": {
+      "all": "All",
+      "geotechnical": "Geotechnical",
+      "geophysical": "Geophysical",
+      "survey": "Survey",
+      "testing": "Testing",
+      "environmental": "Environmental",
+      "infrastructure": "Infrastructure",
+      "mining": "Mining"
+    },
+    "placeholder": "Official project case study coming soon.",
+    "label": "Project Showcase"
+  },
+  "contact": {
+    "title": "Let's Understand Your Project.",
+    "subtitle": "Tell us what you are planning, investigating or building. Our team can help identify the appropriate investigation and engineering approach.",
+    "info": {
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "form": {
+      "fullName": "Full Name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "projectType": "Project Type",
+      "requiredService": "Required Service",
+      "projectLocation": "Project Location",
+      "projectDescription": "Project Description",
+      "uploadDocuments": "Upload Documents",
+      "submit": "Request a Consultation",
+      "submitting": "Sending...",
+      "success": "Your consultation request has been received. Our team will be in touch shortly.",
+      "error": "Something went wrong. Please try again or contact us directly."
+    },
+    "validation": {
+      "nameRequired": "Please enter your full name",
+      "emailRequired": "Please enter your email",
+      "emailInvalid": "Please enter a valid email address",
+      "descriptionRequired": "Please describe your project"
+    }
+  },
+  "footer": {
+    "tagline": "Geotechnical intelligence for better engineering decisions.",
+    "navigation": "Navigation",
+    "servicesTitle": "Services",
+    "contactTitle": "Contact",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "viewProject": "View Project",
+    "explore": "Explore",
+    "backToTop": "Back to top",
+    "language": "Language",
+    "english": "English",
+    "arabic": "العربية"
+  }
+}
