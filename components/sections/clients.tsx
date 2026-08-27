@@ -78,7 +78,10 @@ function LogoRow({
         className={`${reverse ? "marquee-b" : "marquee-a"} flex w-max shrink-0 items-center gap-5`}
       >
         {logos.map((logo, i) => (
-          <li key={`${logo.src}-${i}`} className="group/logo relative shrink-0 before:pointer-events-none before:absolute before:-inset-3 before:-z-10 before:rounded-[inherit] before:bg-teal/0 before:blur-xl before:transition-colors before:duration-300 hover:before:bg-teal/15">
+          <li
+            key={`${logo.src}-${i}`}
+            className="group/logo relative shrink-0 before:pointer-events-none before:absolute before:-inset-3 before:-z-10 before:rounded-[inherit] before:bg-teal/0 before:blur-xl before:transition-colors before:duration-300 hover:before:bg-teal/15"
+          >
             <div className="relative z-10 flex h-28 w-[210px] items-center justify-center rounded-2xl border border-border/80 bg-gradient-to-br from-card via-background to-muted/80 p-6 shadow-sm backdrop-blur-md transition-all duration-500 ease-out group-hover/logo:-translate-y-1.5 group-hover/logo:scale-[1.015] group-hover/logo:border-teal/70 group-hover/logo:shadow-xl group-hover/logo:shadow-teal/25 dark:border-white/10 dark:from-white/[0.1] dark:via-navy/80 dark:to-white/[0.04] sm:h-32 sm:w-[230px]">
               <span className="relative block h-16 w-[180px] rounded-xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-1.5 shadow-inner transition-transform duration-500 ease-out group-hover/logo:scale-105 dark:border-white/20 dark:from-white/95 dark:to-slate-200 sm:h-20 sm:w-[205px]">
                 <Image

@@ -258,24 +258,35 @@ export function ClientsGallery() {
                       <motion.span
                         aria-hidden
                         initial={{ opacity: 0, scale: 0.7 }}
-                        animate={{ opacity: [0.15, 0.35, 0.15], scale: [0.9, 1.08, 0.9] }}
-                        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+                        animate={{
+                          opacity: [0.15, 0.35, 0.15],
+                          scale: [0.9, 1.08, 0.9],
+                        }}
+                        transition={{
+                          duration: 2.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
                         className="absolute inset-2 rounded-[2rem] bg-teal/25 blur-2xl"
                       />
                       <motion.span
                         aria-hidden
                         initial={{ opacity: 0, rotate: -15, scale: 0.8 }}
                         animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                        transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{
+                          duration: 0.7,
+                          delay: 0.2,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
                         className="absolute inset-0 rounded-[2rem] border border-teal/50"
                       />
                       <div className="relative z-10 flex size-40 items-center justify-center rounded-3xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-3 shadow-2xl shadow-teal/15 dark:border-white/20 dark:from-white/95 dark:to-slate-200 sm:size-48">
-                      <Image
-                        src={activeLogo.src}
-                        alt={activeLogo.name}
-                        fill
-                        className="object-contain p-5 sm:p-6"
-                      />
+                        <Image
+                          src={activeLogo.src}
+                          alt={activeLogo.name}
+                          fill
+                          className="object-contain p-5 sm:p-6"
+                        />
                       </div>
                     </motion.div>
 
