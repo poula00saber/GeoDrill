@@ -30,30 +30,30 @@ export function GeotechSite() {
     <ThemeProvider>
       <LanguageProvider>
         <div className="geotech-theme">
-        <Navigation />
-        <main>
-          <Hero />
-          <TrustBar />
-          <Introduction />
-          <Approach />
-          <ServiceExplorer />
-          <GeotechnicalInvestigation />
-          <GeologicalCrossSection />
-          <GeophysicalTechnology />
-          <GeologySlope />
-          <HydrologySection />
-          <SurveyTesting />
-          <GroundEngineering />
-          <StructuralAssessment />
-          <MiningExploration />
-          <AboutSection />
-          <WhatSetsApart />
-          <QhseSection />
-          <Organizations />
-          <Projects />
-          <ContactSection />
-        </main>
-        <Footer />
+          <Navigation />
+          <main>
+            <Hero />
+            <TrustBar />
+            <Introduction />
+            <Approach />
+            <ServiceExplorer />
+            <GeotechnicalInvestigation />
+            <GeologicalCrossSection />
+            <GeophysicalTechnology />
+            <GeologySlope />
+            <HydrologySection />
+            <SurveyTesting />
+            <GroundEngineering />
+            <StructuralAssessment />
+            <MiningExploration />
+            <AboutSection />
+            <WhatSetsApart />
+            <QhseSection />
+            <Organizations />
+            <Projects />
+            <ContactSection />
+          </main>
+          <Footer />
         </div>
       </LanguageProvider>
     </ThemeProvider>

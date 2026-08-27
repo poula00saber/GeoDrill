@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 /* Class-based dark mode (toggled by next-themes on the <html> element) */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -162,9 +162,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'liga' 1, 'calt' 1;
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1;
   }
-  [dir='rtl'] {
+  [dir="rtl"] {
     font-family: var(--font-arabic);
   }
 
@@ -202,7 +204,8 @@
   .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
@@ -213,10 +216,7 @@
 
   /* Dot-grid brand pattern */
   .dot-grid {
-    background-image: radial-gradient(
-      currentColor 1.2px,
-      transparent 1.2px
-    );
+    background-image: radial-gradient(currentColor 1.2px, transparent 1.2px);
     background-size: 18px 18px;
   }
 
@@ -234,7 +234,7 @@
       transform: translateX(-50%);
     }
   }
-  [dir='rtl'] .marquee-track {
+  [dir="rtl"] .marquee-track {
     animation-name: marquee-rtl;
   }
   @keyframes marquee-rtl {
@@ -371,7 +371,7 @@
     opacity: 0.6;
   }
   .scroll-mouse::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 7px;
     left: 50%;
