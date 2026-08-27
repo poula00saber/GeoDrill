@@ -88,7 +88,7 @@ export function FaqSlider({ locale }: { locale: Lang }) {
                 {item.a}
               </p>
               <Link
-                href={`/${locale}/faq`}
+                href={`/contracting/${locale}/faq`}
                 className="mt-3 inline-flex items-center gap-1 rounded-full bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal transition-colors hover:bg-teal/20"
               >
                 {isArabic ? "اعرف المزيد" : "Learn more"}
@@ -139,7 +139,7 @@ export function FaqSlider({ locale }: { locale: Lang }) {
 
       <div className="relative mt-10 text-center">
         <Link
-          href={`/${locale}/faq`}
+          href={`/contracting/${locale}/faq`}
           className="inline-flex items-center gap-2 rounded-xl border border-teal/30 bg-teal/10 px-6 py-3 text-sm font-semibold text-teal shadow-sm transition-all hover:border-teal/50 hover:bg-teal/20 active:scale-95"
         >
           {isArabic ? "عرض جميع الأسئلة" : "Read all questions"}

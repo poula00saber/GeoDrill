@@ -75,7 +75,7 @@ export function ClientsGallery() {
     <div className="mx-auto max-w-7xl px-6">
       {/* Back Link */}
       <Link
-        href={`/${lang ?? "en"}#clients`}
+        href={`/contracting/${lang ?? "en"}#clients`}
         className="group inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-teal"
       >
         <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />

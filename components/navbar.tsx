@@ -24,7 +24,6 @@ export function Navbar() {
 
   const heroHeightRef = useRef(NO_HERO_THRESHOLD);
   const prevScrollY = useRef(0);
-  const dirRef = useRef<"up" | "down">("down");
   const rafId = useRef<number | null>(null);
   const openRef = useRef(open);
   openRef.current = open;
@@ -33,12 +32,12 @@ export function Navbar() {
   const isHomePage =
     isContractingHome || pathname.split("/").filter(Boolean).length <= 1;
   const PAGE_NAV: Record<string, string> = {
-    blog: `/${lang ?? "en"}/blog`,
-    faq: `/${lang ?? "en"}/faq`,
+    blog: `/contracting/${lang ?? "en"}/blog`,
+    faq: `/contracting/${lang ?? "en"}/faq`,
   };
   const navHref = (id: string) =>
     PAGE_NAV[id] ??
-    (isHomePage ? `#${id}` : `/${lang ?? "en"}#${id}`);
+    (isHomePage ? `#${id}` : `/contracting/${lang ?? "en"}#${id}`);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -91,23 +90,15 @@ export function Navbar() {
       if (rafId.current !== null) return;
       rafId.current = requestAnimationFrame(() => {
         const y = window.scrollY;
-        const delta = y - prevScrollY.current;
-
-        if (Math.abs(delta) > 1) {
-          dirRef.current = delta > 0 ? "down" : "up";
-        }
+        const previousY = prevScrollY.current;
         prevScrollY.current = y;
 
-        // 1. When near the very top of the page (under 50px)
+        // Always show near the top, reveal on upward movement, hide on downward movement.
         if (y < 50) {
           setScrollState("top");
-        }
-        // 2. When scrolling UP anywhere else on the page
-        else if (dirRef.current === "up" || openRef.current) {
+        } else if (y < previousY || openRef.current) {
           setScrollState("compact");
-        }
-        // 3. When scrolling DOWN past the top area
-        else {
+        } else if (y > previousY) {
           setScrollState("hidden");
         }
 
@@ -157,9 +148,11 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
         <a
-          href={isHomePage ? "#home" : `/${lang}`}
+          href={isHomePage ? "#home" : `/contracting/${lang}`}
           aria-label="GEODRILL home"
-          onClick={(e) => handleNavClick(e, isHomePage ? "#home" : `/${lang}`)}
+          onClick={(e) =>
+            handleNavClick(e, isHomePage ? "#home" : `/contracting/${lang}`)
+          }
           className="shrink-0"
         >
           <Logo src={logoSrc} size="h-8 md:h-9" />

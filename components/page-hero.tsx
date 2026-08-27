@@ -47,7 +47,10 @@ export function PageHero({
           aria-label="Breadcrumb"
           className="animate-in fade-in slide-in-from-top-4 fill-mode-both flex items-center gap-1.5 text-xs font-medium text-white/60 duration-700"
         >
-          <Link href={`/${lang}`} className="transition-colors hover:text-teal">
+          <Link
+            href={`/contracting/${lang}`}
+            className="transition-colors hover:text-teal"
+          >
             {lang === "ar" ? "الرئيسية" : "Home"}
           </Link>
           <ChevronRight className="size-3 rtl:rotate-180" />

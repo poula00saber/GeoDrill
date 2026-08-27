@@ -19,9 +19,34 @@ export function proxy(request: NextRequest) {
     );
   }
 
+  const legacySectorMatch = pathname.match(/^\/(en|ar)\/sectors\/(.+)$/);
+  if (legacySectorMatch) {
+    return NextResponse.redirect(
+      new URL(
+        `/contracting/${legacySectorMatch[1]}/sectors/${legacySectorMatch[2]}`,
+        request.url,
+      ),
+    );
+  }
+
+  const legacyClientsMatch = pathname.match(/^\/(en|ar)\/clients\/?$/);
+  if (legacyClientsMatch) {
+    return NextResponse.redirect(
+      new URL(`/contracting/${legacyClientsMatch[1]}/clients`, request.url),
+    );
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/en", "/ar", "/construction"],
+  matcher: [
+    "/en",
+    "/ar",
+    "/construction",
+    "/en/sectors/:path*",
+    "/ar/sectors/:path*",
+    "/en/clients",
+    "/ar/clients",
+  ],
 };

@@ -46,7 +46,7 @@ export function Clients() {
             : `${CLIENT_LOGOS.length}+ organizations trust GeoDrill across the Kingdom`}
         </p>
         <Link
-          href={`/${lang ?? "en"}/clients`}
+          href={`/contracting/${lang ?? "en"}/clients`}
           className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-teal transition-all duration-300 hover:bg-teal hover:text-navy hover:shadow-lg hover:shadow-teal/20"
         >
           {viewAllLabel}

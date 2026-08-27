@@ -36,7 +36,7 @@ export async function Blog({ locale }: { locale: Lang }) {
         )}
         <div className="mt-10 text-center">
           <Link
-            href={`/${locale}/blog`}
+            href={`/contracting/${locale}/blog`}
             className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal px-5 py-3 text-sm font-bold text-teal transition hover:bg-teal hover:text-navy"
           >
             {copy.viewAll}
@@ -57,7 +57,7 @@ export function BlogCard({ post, locale }: { post: BlogPost; locale: Lang }) {
 
   return (
     <Link
-      href={`/${locale}/blog/${post.slug?.current}`}
+      href={`/contracting/${locale}/blog/${post.slug?.current}`}
       className="group relative block h-80 overflow-hidden rounded-2xl bg-navy"
     >
       {image ? (

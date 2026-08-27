@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Award, Target, Sparkles } from "lucide-react";
-import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import { PageHero } from "@/components/page-hero";
 import { SectorGallery } from "@/components/pages/sector-gallery";
 import { SectorNav } from "@/components/pages/sector-nav";
@@ -60,7 +60,6 @@ export default async function SectorPage({ params }: Props) {
   return (
     <main className="min-h-svh bg-background text-foreground transition-colors duration-300">
       <Navbar />
-
       <PageHero
         image={sector.image}
         kicker={`${locale === "ar" ? "القطاع" : "Sector"} · ${sector.name[locale]}`}
