@@ -149,14 +149,14 @@ export function ClientsGallery() {
                 transition={{ duration: 0.2 }}
                 key={logo.slug}
                 onClick={() => setActiveLogo(logo)}
-                className="group/card flex cursor-pointer flex-col"
+                className="group/card relative flex cursor-pointer flex-col before:pointer-events-none before:absolute before:inset-2 before:-z-10 before:rounded-3xl before:bg-teal/0 before:blur-xl before:transition-colors before:duration-300 hover:before:bg-teal/15"
               >
                 <div
                   className={cn(
-                    "relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm",
+                    "relative z-10 flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-border/80 bg-gradient-to-br from-card via-background to-muted/80 p-6 shadow-sm backdrop-blur-md",
                     "transition-all duration-300 ease-out",
-                    "hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/20",
-                    "dark:border-white/10 dark:bg-navy/80 dark:hover:bg-white",
+                    "group-hover/card:-translate-y-1.5 group-hover/card:scale-[1.015] group-hover/card:border-teal/70 group-hover/card:shadow-xl group-hover/card:shadow-teal/25",
+                    "dark:border-white/10 dark:from-white/[0.1] dark:via-navy/80 dark:to-white/[0.04]",
                   )}
                 >
                   {/* Top-Right Expand Icon Badge */}
@@ -168,16 +168,13 @@ export function ClientsGallery() {
                   <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-teal/[0.08] to-transparent transition-transform duration-700 ease-out group-hover/card:translate-x-full" />
 
                   {/* Logo Image */}
-                  <span className="relative block h-full w-full">
+                  <span className="relative z-10 block h-full w-full rounded-xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-4 shadow-inner transition-transform duration-500 ease-out group-hover/card:scale-[1.035] dark:border-white/20 dark:from-white/95 dark:to-slate-200">
                     <Image
                       src={logo.src}
                       alt={logo.name}
                       fill
                       sizes="(max-width: 640px) 45vw, (max-width: 1024px) 22vw, 18vw"
-                      className="object-contain p-2 transition-all duration-300
-                                 grayscale opacity-80 group-hover/card:grayscale-0 group-hover/card:opacity-100
-                                 dark:brightness-0 dark:invert dark:opacity-90 
-                                 dark:group-hover/card:brightness-100 dark:group-hover/card:invert-0 dark:group-hover/card:opacity-100"
+                      className="object-contain p-2"
                     />
                   </span>
 
@@ -245,15 +242,42 @@ export function ClientsGallery() {
                   </button>
 
                   <div className="flex flex-col items-center text-center">
-                    {/* Logo */}
-                    <div className="relative flex size-32 items-center justify-center rounded-2xl border border-border bg-white p-4 dark:border-white/10">
+                    {/* Logo showcase */}
+                    <motion.div
+                      key={activeLogo.slug}
+                      initial={{ opacity: 0, scale: 0.55, rotate: -8 }}
+                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 180,
+                        damping: 14,
+                        delay: 0.08,
+                      }}
+                      className="relative flex size-48 items-center justify-center sm:size-56"
+                    >
+                      <motion.span
+                        aria-hidden
+                        initial={{ opacity: 0, scale: 0.7 }}
+                        animate={{ opacity: [0.15, 0.35, 0.15], scale: [0.9, 1.08, 0.9] }}
+                        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute inset-2 rounded-[2rem] bg-teal/25 blur-2xl"
+                      />
+                      <motion.span
+                        aria-hidden
+                        initial={{ opacity: 0, rotate: -15, scale: 0.8 }}
+                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                        transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute inset-0 rounded-[2rem] border border-teal/50"
+                      />
+                      <div className="relative z-10 flex size-40 items-center justify-center rounded-3xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-3 shadow-2xl shadow-teal/15 dark:border-white/20 dark:from-white/95 dark:to-slate-200 sm:size-48">
                       <Image
                         src={activeLogo.src}
                         alt={activeLogo.name}
                         fill
-                        className="object-contain p-4"
+                        className="object-contain p-5 sm:p-6"
                       />
-                    </div>
+                      </div>
+                    </motion.div>
 
                     {/* Company Name */}
                     <h3 className="mt-6 text-xl font-bold text-foreground">

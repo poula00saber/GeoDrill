@@ -78,24 +78,15 @@ function LogoRow({
         className={`${reverse ? "marquee-b" : "marquee-a"} flex w-max shrink-0 items-center gap-5`}
       >
         {logos.map((logo, i) => (
-          <li key={`${logo.src}-${i}`} className="shrink-0">
-            {/* 
-              Light Mode: Clean white card, grayscale logo -> original color on hover
-              Dark Mode: Navy glass card, solid white logo (brightness-0 invert) -> original color on hover
-            */}
-            <div className="group/logo relative flex h-28 w-[210px] items-center justify-center rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/50 hover:shadow-xl hover:shadow-teal/20 dark:border-white/10 dark:bg-navy/80 dark:hover:bg-white sm:h-32 sm:w-[230px]">
-              <span className="relative block h-14 w-[150px] sm:h-16 sm:w-[170px]">
+          <li key={`${logo.src}-${i}`} className="group/logo relative shrink-0 before:pointer-events-none before:absolute before:-inset-3 before:-z-10 before:rounded-[inherit] before:bg-teal/0 before:blur-xl before:transition-colors before:duration-300 hover:before:bg-teal/15">
+            <div className="relative z-10 flex h-28 w-[210px] items-center justify-center rounded-2xl border border-border/80 bg-gradient-to-br from-card via-background to-muted/80 p-6 shadow-sm backdrop-blur-md transition-all duration-500 ease-out group-hover/logo:-translate-y-1.5 group-hover/logo:scale-[1.015] group-hover/logo:border-teal/70 group-hover/logo:shadow-xl group-hover/logo:shadow-teal/25 dark:border-white/10 dark:from-white/[0.1] dark:via-navy/80 dark:to-white/[0.04] sm:h-32 sm:w-[230px]">
+              <span className="relative block h-16 w-[180px] rounded-xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-1.5 shadow-inner transition-transform duration-500 ease-out group-hover/logo:scale-105 dark:border-white/20 dark:from-white/95 dark:to-slate-200 sm:h-20 sm:w-[205px]">
                 <Image
                   src={logo.src}
                   alt={logo.name}
                   fill
                   sizes="200px"
-                  className=" transition-all duration-300 
-                             /* Light mode styles */
-                             grayscale opacity-80 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 
-                             /* Dark mode overrides */
-                             dark:brightness-0 dark:invert dark:opacity-90 
-                             dark:group-hover/logo:brightness-100 dark:group-hover/logo:invert-0 dark:group-hover/logo:opacity-100"
+                  className="object-contain"
                 />
               </span>
             </div>
