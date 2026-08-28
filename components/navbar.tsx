@@ -131,7 +131,8 @@ export function Navbar() {
   // Use the dark/for-dark logo when floating over the dark hero or in dark mode,
   // otherwise the normal light logo — the contracting site keeps its coloured
   // logo.png / logo2.png variants.
-  const logoSrc = isFloatingHero || isDark ? "/logo2.png" : "/logo.png";
+  const logoSrc =
+    isFloatingHero || resolvedTheme !== "light" ? "/logo2.png" : "/logo.png";
 
   return (
     <motion.header

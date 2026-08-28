@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import { cn } from '@/lib/utils'
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 /**
  * GeoDrill brand logo.
@@ -17,24 +17,24 @@ import { cn } from '@/lib/utils'
  */
 export function Logo({
   className,
-  size = 'h-10',
+  size = "h-10",
   src,
   onDark = false,
   monochrome = false,
 }: {
-  className?: string
+  className?: string;
   /** Height utility applied to the logo image (e.g. 'h-9', 'h-10', 'h-12'). */
-  size?: string
+  size?: string;
   /** Explicit logo asset. When omitted, onDark selects /logo2.png else /logo.png. */
-  src?: string
+  src?: string;
   /** true → use the dark/for-dark logo (logo2.png). */
-  onDark?: boolean
+  onDark?: boolean;
   /** true → force a single colour: pure black on light, pure white on dark. */
-  monochrome?: boolean
+  monochrome?: boolean;
 }) {
-  const resolved = src ?? (onDark ? '/logo2.png' : '/logo.png')
+  const resolved = src ?? (onDark ? "/logo2.png" : "/logo.png");
   return (
-    <span className={cn('inline-flex items-center', className)}>
+    <span className={cn("inline-flex items-center", className)}>
       <Image
         src={resolved}
         alt="GEODRILL — Construction Experts"
@@ -43,12 +43,11 @@ export function Logo({
         priority
         className={cn(
           size,
-          'w-auto object-contain',
+          "w-auto object-contain",
           // Pure black in light theme, pure white in dark theme.
-          monochrome && 'brightness-0 dark:brightness-0 dark:invert',
+          monochrome && "brightness-0 dark:brightness-0 dark:invert",
         )}
       />
     </span>
-  )
+  );
 }
-
