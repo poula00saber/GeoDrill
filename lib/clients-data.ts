@@ -7,6 +7,7 @@ export type ClientCategory =
 export type ClientLogo = {
   src: string;
   name: string;
+  nameAr: string;
   slug: string;
   category: ClientCategory;
 };
@@ -229,6 +230,81 @@ const LOGO_FILES = [
   "zidcon.png",
 ];
 
+const CLIENT_NAMES_AR: Record<string, string> = {
+  abdulkareem_alsudais_sons: "أبناء عبدالكريم السديس",
+  abisco: "أبيسكو",
+  al_akaria: "العقارية",
+  alfanar: "الفنار",
+  "algafary-sanitary-ware": "الغفاري للأدوات الصحية",
+  alinma: "مصرف الإنماء",
+  almarai: "المراعي",
+  almunajem: "المُنجم للأغذية",
+  aplus: "إيه بلس",
+  "atad-middle-east": "أتاد الشرق الأوسط",
+  atkins: "أتكينز",
+  "av-consulting": "إيه في للاستشارات",
+  "awfa-investment": "أوفى للاستثمار",
+  "bank-albilad": "بنك البلاد",
+  binyah: "بنية",
+  china: "شركة الصين العامة للإنشاءات",
+  "dam-almashru": "دام المشروع",
+  "dar el omran": "دار العمران",
+  "dar-al-handasah": "دار الهندسة",
+  "dar-al-riyadh": "دار الرياض",
+  diriyah: " الدرعية",
+  "diyah-company": "شركة دية",
+  "dr suliman": "مجموعة الدكتور سليمان الحبيب",
+  "euro-group": "مجموعة يورو",
+  exentec: "إكسنتك",
+  fad: "فاد",
+  "fao real estate": "فاو العقارية",
+  gaca: "الهيئة العامة للطيران المدني",
+  "green-riyadh": "الرياض الخضراء",
+  italconsult: "إي تي كونسلت",
+  jasara: "جسارة لإدارة البرامج",
+  "khatib-alami": "خطيب وعلمي",
+  "king-salman-park": "مؤسسة حديقة الملك سلمان",
+  lagate: "لاقيت",
+  lime: "لايم العقارية",
+  marami: "مرامي",
+  masah: "شركة مسح",
+  mgc: "إم جي سي",
+  "ministry of interior": "وزارة الداخلية السعودية",
+  "ministry-environment-water-agriculture": "وزارة البيئة والمياه والزراعة",
+  "ministry-finance": "وزارة المالية",
+  "ministry-housing": "وزارة الإسكان",
+  "ministry-municipal-rural-affairs": "وزارة الشؤون البلدية والقروية",
+  mobtakeron: "مبتكرون",
+  modon: "الهيئة السعودية للمدن الصناعية ومناطق التقنية",
+  "national-water-company": "شركة المياه الوطنية",
+  "nesma-partners": "نسما وشركاؤها",
+  nupco: "نوبكو",
+  "omq realstate": "أم كيو العقارية",
+  "omrania-egis": "عمرانية إيجيز",
+  othaim: "العثيم",
+  qiddiya: "شركة القدية للاستثمار",
+  rafen: "رافن",
+  rakhaa: "رخاء",
+  "riyad airports": "شركة مطارات الرياض",
+  saptco: "سابتكو",
+  "saudi-architects": "المهندسون السعوديون",
+  "saudi-binladin-group": "مجموعة بن لادن السعودية",
+  "saudi-electricity": "الشركة السعودية للكهرباء",
+  sela: "صلة",
+  sets: "سيتس",
+  seven: "سفن",
+  "snc lavalin": "إس إن سي لافالين",
+  "soudah development": "شركة السودة للتطوير",
+  "sports-boulevard": "الرياضة للجميع بوليفارد",
+  "suidi tashyeed": "سعودي تشييد",
+  "suido-kiko": "سويدو كيكو الشرق الأوسط",
+  summertown: "سامرتاون",
+  "taj dhabi": "تاج ظبي",
+  "thomas bell": "توماس بيل رايت للاستشارات",
+  zawaya: "زوايا",
+  zidcon: "زيدكون للمقاولات",
+};
+
 export const CLIENT_LOGOS: ClientLogo[] = LOGO_FILES.map((f) => {
   const slug = f.replace(/\.png$/, "");
   const meta = CLIENT_METADATA[slug];
@@ -239,6 +315,7 @@ export const CLIENT_LOGOS: ClientLogo[] = LOGO_FILES.map((f) => {
     name:
       meta?.name ??
       slug.replace(/[-_]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+    nameAr: CLIENT_NAMES_AR[slug] ?? meta?.name ?? slug,
     category: meta?.category ?? "infrastructure",
   };
 });

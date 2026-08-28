@@ -62,7 +62,7 @@ export function ClientsGallery() {
   // Combined Search & Dynamic Category Filtering Logic
   const filtered = useMemo(() => {
     return CLIENT_LOGOS.filter((logo) => {
-      const matchesSearch = logo.name
+      const matchesSearch = `${logo.name} ${logo.nameAr}`
         .toLowerCase()
         .includes(query.trim().toLowerCase());
       const matchesCategory =
@@ -139,6 +139,7 @@ export function ClientsGallery() {
         <AnimatePresence>
           {filtered.map((logo) => {
             const catObj = CATEGORIES.find((c) => c.id === logo.category);
+            const displayName = isAr ? logo.nameAr : logo.name;
 
             return (
               <motion.div
@@ -171,7 +172,7 @@ export function ClientsGallery() {
                   <span className="relative z-10 block h-full w-full rounded-xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-4 shadow-inner transition-transform duration-500 ease-out group-hover/card:scale-[1.035] dark:border-white/20 dark:from-white/95 dark:to-slate-200">
                     <Image
                       src={logo.src}
-                      alt={logo.name}
+                      alt={displayName}
                       fill
                       sizes="(max-width: 640px) 45vw, (max-width: 1024px) 22vw, 18vw"
                       className="object-contain p-2"
@@ -188,7 +189,7 @@ export function ClientsGallery() {
 
                 {/* Company Name Under Card */}
                 <span className="mt-3 line-clamp-1 text-center text-xs font-semibold text-muted-foreground transition-colors duration-300 group-hover/card:text-foreground">
-                  {logo.name}
+                  {displayName}
                 </span>
               </motion.div>
             );
@@ -283,7 +284,7 @@ export function ClientsGallery() {
                       <div className="relative z-10 flex size-40 items-center justify-center rounded-3xl border border-black/5 bg-gradient-to-br from-white to-slate-100 p-3 shadow-2xl shadow-teal/15 dark:border-white/20 dark:from-white/95 dark:to-slate-200 sm:size-48">
                         <Image
                           src={activeLogo.src}
-                          alt={activeLogo.name}
+                          alt={isAr ? activeLogo.nameAr : activeLogo.name}
                           fill
                           className="object-contain p-5 sm:p-6"
                         />
@@ -292,7 +293,7 @@ export function ClientsGallery() {
 
                     {/* Company Name */}
                     <h3 className="mt-6 text-xl font-bold text-foreground">
-                      {activeLogo.name}
+                      {isAr ? activeLogo.nameAr : activeLogo.name}
                     </h3>
 
                     {/* Status */}
