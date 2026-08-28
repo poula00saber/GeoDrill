@@ -210,7 +210,7 @@ export function ClientsGallery() {
         createPortal(
           <AnimatePresence>
             {activeLogo && (
-              <div className="fixed inset-0 z-[9999] flex h-dvh w-screen items-center justify-center overflow-hidden p-4">
+              <div className="fixed left-0 top-0 z-[9999] flex h-screen w-screen items-center justify-center overflow-hidden p-4 [position:fixed]">
                 {/* Backdrop */}
                 <motion.div
                   initial={{ opacity: 0 }}
