@@ -10,81 +10,85 @@ import { SECTION_IDS } from '@/lib/content'
 import { cn } from '@/lib/utils'
 
 type Localized = { en: string; ar: string }
-
-const services: { num: string; img: string; title: Localized; body: Localized }[] = [
+const services: {
+  num: string;
+  img: string;
+  title: Localized;
+  body: Localized;
+}[] = [
   {
-    num: '01',
-    img: '/images/service-groundworks.png',
-    title: { en: 'Ground Works', ar: 'الأعمال الترابية' },
+    num: "01",
+    img: "/images/service-groundworks.png",
+    title: { en: "Ground Works", ar: "أعمال الحفر والقطع" },
     body: {
-      en: 'Site preparation, leveling, soil compaction, cutting and backfilling executed with precision survey control.',
-      ar: 'تجهيز المواقع والتسوية ودك التربة والقطع والردم بدقة مساحية عالية.',
+      en: "Site preparation, leveling, soil compaction, cutting and backfilling executed with precision survey control.",
+      ar: "تشمل تجهيز الموقع وتسوية ودمك التربة، وأعمال القطع والردم.",
     },
   },
   {
-    num: '02',
-    img: '/images/service-excavation.png',
-    title: { en: 'Excavation Works', ar: 'أعمال الحفر' },
+    num: "02",
+    img: "/images/final/projects/new_landscaping/landscape_pool_palm_walkway GROK.jpg",
+    title: { en: "LandScape Works", ar: "أعمال اللاندسكيب" },
     body: {
-      en: 'Foundation and trench excavation, shoring and site preparation to the highest safety standards.',
-      ar: 'حفر الأساسات والخنادق وأعمال السند وتجهيز الموقع وفق أعلى معايير السلامة.',
+      en: "Integrated landscaping solutions — site coordination and development, including execution of green and outdoor spaces.",
+      ar: "نقدم حلولاً متكاملة للأعمال، تنسيق وتطوير المواقع، تشمل تنفيذ المساحات الخضراء.",
     },
   },
   {
-    num: '03',
-    img: '/images/service-infrastructure.png',
-    title: { en: 'Infrastructure Works', ar: 'أعمال البنية التحتية' },
+    num: "03",
+    img: "/images/service-infrastructure.png",
+    title: { en: "Infrastructure Works", ar: "البنية التحتية" },
     body: {
-      en: 'Roads, water networks, sanitary drainage, electrical, telecom and utility networks.',
-      ar: 'الطرق وشبكات المياه والصرف الصحي والكهرباء والاتصالات وشبكات الخدمات.',
+      en: "Roads, water networks, sanitary drainage, electrical, telecom and utility networks.",
+      ar: "تنفيذ شبكات الطرق، المياه، الصرف الصحي، والكهرباء والاتصالات والمرافق.",
     },
   },
   {
-    num: '04',
-    img: '/images/service-concrete.png',
-    title: { en: 'Concrete Works', ar: 'الأعمال الخرسانية' },
+    num: "04",
+    img: "/images/service-concrete.png",
+    title: { en: "Concrete Works", ar: "أعمال الخرسانة" },
     body: {
-      en: 'All reinforced concrete types: foundations, footings, columns and slabs with certified mixes.',
-      ar: 'جميع أنواع الخرسانة المسلحة: الأساسات والقواعد والأعمدة والبلاطات بخلطات معتمدة.',
+      en: "All reinforced concrete types: foundations, footings, columns and slabs with certified mixes.",
+      ar: "تنفيذ جميع أنواع الخرسانة المسلحة من الأساسات والقواعد والأعمدة والأسقف.",
     },
   },
   {
-    num: '05',
-    img: '/images/service-steel.png',
-    title: { en: 'Steel Structures', ar: 'المنشآت المعدنية' },
+    num: "05",
+    img: "/images/service-steel.png",
+    title: { en: "Steel Structures", ar: "الهياكل المعدنية" },
     body: {
-      en: 'Design, fabrication and erection of steel frameworks for commercial and industrial facilities.',
-      ar: 'تصميم وتصنيع وتركيب الهياكل المعدنية للمنشآت التجارية والصناعية.',
+      en: "Design, fabrication and erection of steel frameworks for commercial and industrial facilities.",
+      ar: "تصميم وتنفيذ وتركيب الهياكل المعدنية للمباني والمنشآت التجارية والصناعية.",
     },
   },
   {
-    num: '06',
-    img: '/images/service-mep.png',
-    title: { en: 'MEP Works', ar: 'الأعمال الكهروميكانيكية' },
+    num: "06",
+    img: "/images/service-mep.png",
+    title: { en: "MEP Works", ar: "كهروميكانيكا" },
     body: {
-      en: 'Full mechanical, electrical, plumbing, HVAC and ventilation systems with testing and balancing.',
-      ar: 'أنظمة ميكانيكية وكهربائية وسباكة وتكييف وتهوية متكاملة مع الاختبار والموازنة.',
+      en: "Full mechanical, electrical, plumbing, HVAC and ventilation systems with testing and balancing.",
+      ar: "تنفيذ جميع أعمال الميكانيكا والكهرباء والسباكة وأنظمة التبريد والتكييف والتهوية.",
     },
   },
   {
-    num: '07',
-    img: '/images/service-finishing.png',
-    title: { en: 'Finishing Works', ar: 'أعمال التشطيبات' },
+    num: "07",
+    img: "/images/service-finishing.png",
+    title: { en: "Finishing Works", ar: "أعمال التشطيبات" },
     body: {
-      en: 'Interior and exterior finishing delivered to the highest precision and quality.',
-      ar: 'تشطيبات داخلية وخارجية بأعلى درجات الدقة والجودة.',
+      en: "Interior and exterior finishing delivered to the highest precision and quality.",
+      ar: "أعمال التشطيبات الداخلية والخارجية بأعلى مستويات الدقة والجودة.",
     },
   },
   {
-    num: '08',
-    img: '/images/service-insulation.png',
-    title: { en: 'Insulation Works', ar: 'أعمال العزل' },
+    num: "08",
+    img: "/images/service-insulation.png",
+    title: { en: "Insulation Works", ar: "أعمال العزل" },
     body: {
-      en: 'Integrated waterproofing and thermal insulation protecting structures from moisture and heat.',
-      ar: 'عزل مائي وحراري متكامل يحمي المنشآت من الرطوبة والحرارة.',
+      en: "Integrated waterproofing and thermal insulation protecting structures from moisture and heat.",
+      ar: "نقدم حلول عزل متكاملة لحماية المباني والمنشآت من تأثيرات المياه والرطوبة والحرارة.",
     },
   },
-]
+];
 
 export function Services() {
   const { t, lang } = useLanguage()
