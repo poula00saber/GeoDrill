@@ -238,19 +238,34 @@ export function Projects() {
   const [activeTab, setActiveTab] = useState<Category>("groundworks");
   const [focused, setFocused] = useState(0);
   const thumbContainerRef = useRef<HTMLDivElement>(null);
+  // Tracks the direction of the last photo step so the hero can slide into
+  // view following the site's reading direction (next/prev respected per
+  // language: English slides right-to-left, Arabic slides left-to-right).
+  const navDirRef = useRef<1 | -1>(1);
 
   const displayed: Category = activeTab;
   const entry = PROJECTS[displayed];
   const heroIdx = Math.min(focused, entry.thumbnails.length - 1);
   const heroSrc = entry.thumbnails[heroIdx];
 
+  const isAr = lang === "ar";
+  // Slide offset direction per language. For "next":
+  //  - EN (LTR): photo enters from the right and moves left (rtl motion)
+  //  - AR (RTL): photo enters from the left and moves right (ltr motion)
+  // For "prev" the directions are reversed.
+  const enterX =
+    navDirRef.current === 1 ? (isAr ? -60 : 60) : isAr ? 60 : -60;
+  const exitX = -enterX;
+
   const selectCategory = (tab: Category) => {
     setActiveTab(tab);
     setFocused(0);
+    navDirRef.current = 1;
   };
 
   // Step strictly inside current category's thumbnails array
   const stepPhoto = (dir: 1 | -1) => {
+    navDirRef.current = dir;
     const total = entry.thumbnails.length;
     setFocused((prev) => (prev + dir + total) % total);
   };
@@ -331,9 +346,9 @@ export function Projects() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={heroSrc}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0, x: enterX }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: exitX }}
                   transition={FADE}
                   className="absolute inset-0 flex items-center justify-center p-4"
                 >

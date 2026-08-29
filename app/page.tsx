@@ -69,7 +69,7 @@ const portals = [
       ],
     },
     cta: { en: "Explore Geotechnical", ar: "استكشف الجيوتقنية" },
-    href: "https://geodrillksa.com",
+    href: "https://old.geodrillksa.com",
     external: true,
     accent: "yellow",
     Icon: Compass,
