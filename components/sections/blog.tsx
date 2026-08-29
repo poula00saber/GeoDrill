@@ -37,10 +37,10 @@ export async function Blog({ locale }: { locale: Lang }) {
         <div className="mt-10 text-center">
           <Link
             href={`/contracting/${locale}/blog`}
-            className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal px-5 py-3 text-sm font-bold text-teal transition hover:bg-teal hover:text-navy"
+            className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-teal transition-all duration-300 hover:bg-teal hover:text-navy hover:shadow-lg hover:shadow-teal/20"
           >
             {copy.viewAll}
-            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
           </Link>
         </div>
       </div>

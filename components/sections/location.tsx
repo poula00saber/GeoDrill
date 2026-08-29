@@ -20,6 +20,9 @@ export function Location() {
     {
       label: isAr ? "العنوان" : "Address",
       value: c.address,
+      href: mapsExternalUrl,
+      target: "_blank",
+      rel: "noopener noreferrer",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -39,6 +42,9 @@ export function Location() {
       label: isAr ? "الهاتف" : "Phone",
       value: c.phoneLabel,
       dir: "ltr",
+      href: c.whatsapp,
+      target: "_blank",
+      rel: "noopener noreferrer",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -57,6 +63,7 @@ export function Location() {
       label: isAr ? "البريد الإلكتروني" : "Email",
       value: c.emailLabel,
       dir: "ltr",
+      href: `mailto:${c.emailLabel}`,
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -96,20 +103,23 @@ export function Location() {
         <Reveal className="mt-12" delay={120}>
           <div className="grid gap-6 lg:grid-cols-3">
             {rows.map((row) => (
-              <div
+              <a
                 key={row.label}
-                className="flex items-start gap-4 rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg hover:shadow-navy/5"
+                href={row.href}
+                target={row.target}
+                rel={row.rel}
+                className="group relative flex items-start gap-4 rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-teal hover:bg-teal hover:text-navy hover:shadow-xl hover:shadow-teal/20"
               >
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent text-teal-dark [&_svg]:size-6">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent text-teal-dark transition-colors duration-300 group-hover:bg-navy group-hover:text-teal [&_svg]:size-6">
                   {row.icon}
                 </span>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">
+                  <p className="text-sm font-semibold text-foreground transition-colors duration-300 group-hover:text-navy">
                     {row.label}
                   </p>
                   <p
                     className={cn(
-                      "mt-1 text-sm leading-relaxed text-muted-foreground",
+                      "mt-1 text-sm leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-navy/80",
                       row.dir,
                     )}
                     dir={row.dir}
@@ -117,7 +127,7 @@ export function Location() {
                     {row.value}
                   </p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </Reveal>
@@ -142,7 +152,7 @@ export function Location() {
               href={mapsExternalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-teal px-6 py-3.5 text-sm font-semibold text-navy shadow-lg shadow-teal/25 transition-all hover:brightness-105"
+              className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-teal transition-all duration-300 hover:bg-teal hover:text-navy hover:shadow-lg hover:shadow-teal/20"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -151,7 +161,7 @@ export function Location() {
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="size-4"
+                className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5"
                 aria-hidden
               >
                 <path d="M12 21s-7-4.35-7-11a7 7 0 0 1 14 0c0 6.65-7 11-7 11Z" />

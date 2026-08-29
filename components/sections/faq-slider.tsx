@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { FAQS } from "@/lib/faq";
 import { content, type Lang } from "@/lib/content";
@@ -140,9 +141,10 @@ export function FaqSlider({ locale }: { locale: Lang }) {
       <div className="relative mt-10 text-center">
         <Link
           href={`/contracting/${locale}/faq`}
-          className="inline-flex items-center gap-2 rounded-xl border border-teal/30 bg-teal/10 px-6 py-3 text-sm font-semibold text-teal shadow-sm transition-all hover:border-teal/50 hover:bg-teal/20 active:scale-95"
+          className="group inline-flex items-center gap-2 rounded-lg border-2 border-teal bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wide text-teal transition-all duration-300 hover:bg-teal hover:text-navy hover:shadow-lg hover:shadow-teal/20"
         >
           {isArabic ? "عرض جميع الأسئلة" : "Read all questions"}
+          <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" />
         </Link>
       </div>
     </section>
