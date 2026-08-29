@@ -13,6 +13,19 @@ import {
 
 type Status = "idle" | "sending" | "success" | "error";
 
+// Allowed attachment types: photos, PDF, and Word documents.
+const ACCEPTED_MIME = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+]);
+const ACCEPT_HINT = ".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx";
+const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
+
 const EMPTY_FORM: ContactFormInput = {
   fullName: "",
   entityType: "individual",
@@ -20,6 +33,7 @@ const EMPTY_FORM: ContactFormInput = {
   email: "",
   phone: "",
   projectDescription: "",
+  attachment: null,
 };
 
 export function Contact() {
@@ -29,6 +43,8 @@ export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [form, setForm] = useState<ContactFormInput>(EMPTY_FORM);
+  const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<keyof ContactFormInput, string>>
   >({});
@@ -50,13 +66,40 @@ export function Contact() {
   const setField = (key: keyof ContactFormInput, value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
+  const handleFileChange = (file: File | null) => {
+    setFileError("");
+    if (!file) {
+      setAttachmentFile(null);
+      return;
+    }
+    if (!ACCEPTED_MIME.has(file.type)) {
+      setFileError(
+        lang !== "ar"
+          ? "Unsupported file type. Please upload a photo, PDF, or Word document."
+          : "نوع الملف غير مدعوم. يرجى رفع صورة أو ملف PDF أو Word.",
+      );
+      setAttachmentFile(null);
+      return;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      setFileError(
+        lang !== "ar"
+          ? "File is too large. Maximum size is 10 MB."
+          : "الملف كبير جدًا. الحد الأقصى هو 10 ميجابايت.",
+      );
+      setAttachmentFile(null);
+      return;
+    }
+    setAttachmentFile(file);
+  };
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setMessage("");
     setFieldErrors({});
 
     const validation = validateContactInput(form);
-    if (!validation.ok) {
+    if (!validation.ok || fileError) {
       setFieldErrors(validation.errors);
       setStatus("error");
       setMessage(
@@ -72,12 +115,13 @@ export function Contact() {
     const payload: ContactFormInput =
       form.entityType === "company"
         ? form
-        : { ...form, companyName: "Individual" };
-    const result = await submitContactForm(payload);
+        : { ...form, companyName: "Individual", attachment: null };
+    const result = await submitContactForm(payload, attachmentFile);
     if (result.ok) {
       setStatus("success");
       setMessage(c.form.sent);
       setForm(EMPTY_FORM);
+      setAttachmentFile(null);
     } else {
       setStatus("error");
       setMessage(result.message);
@@ -155,6 +199,56 @@ export function Contact() {
                   <span className="text-sm font-medium text-foreground">{c.form.projectDescription}</span>
                   <textarea rows={4} value={form.projectDescription ?? ""} onChange={(e) => setField("projectDescription", e.target.value)} className={inputClass()} />
                 </label>
+
+                {/* Optional file attachment (photo / PDF / Word) */}
+                <div className="flex flex-col gap-2">
+                  <span className="text-sm font-medium text-foreground">{c.form.attachment}</span>
+                  <label
+                    className={
+                      fileError
+                        ? "inline-flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-red-400 bg-background px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-teal/60 hover:bg-teal/5"
+                        : "inline-flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-border bg-background px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-teal/60 hover:bg-teal/5"
+                    }
+                  >
+                    <span className="flex min-w-0 items-center gap-2">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="size-4 shrink-0 text-teal" aria-hidden>
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5Z" />
+                        <path d="M14 2v6h6M12 18v-6m-3 2 3-3 3 3" />
+                      </svg>
+                      <span className="truncate">
+                        {attachmentFile
+                          ? attachmentFile.name
+                          : lang !== "ar"
+                            ? "Choose a file"
+                            : "اختر ملفًا"}
+                      </span>
+                    </span>
+                    {attachmentFile && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleFileChange(null);
+                        }}
+                        className="shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-500/10"
+                        aria-label={lang !== "ar" ? "Remove file" : "إزالة الملف"}
+                      >
+                        {lang !== "ar" ? "Remove" : "إزالة"}
+                      </button>
+                    )}
+                    <input
+                      type="file"
+                      accept={ACCEPT_HINT}
+                      onChange={(e) => handleFileChange(e.target.files?.[0] ?? null)}
+                      className="sr-only"
+                    />
+                  </label>
+                  {fileError ? (
+                    <span className="text-xs text-red-600">{fileError}</span>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">{c.form.attachmentHint}</span>
+                  )}
+                </div>
                 <button
                   type="submit"
                   disabled={status === "sending"}

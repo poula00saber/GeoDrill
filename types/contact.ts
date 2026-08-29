@@ -14,6 +14,17 @@ export interface ContactFormInput {
   phone: string;
   /** The customer's project description / idea. Optional. */
   projectDescription?: string;
+  /**
+   * Optional file attachment (photo / PDF / Word).
+   * Send through the API as multipart/form-data; the server decodes it.
+   */
+  attachment?: {
+    name: string;
+    type: string;
+    size: number;
+    /** base64-encoded file content (server-side only). */
+    data: string;
+  } | null;
 }
 
 /** Standard result shape returned by the API and the client helper. */

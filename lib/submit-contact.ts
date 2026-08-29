@@ -4,16 +4,30 @@ import type { ContactFormInput, ContactFormResult } from "@/types/contact";
 
 /**
  * Reusable client-side helper that POSTs the contact form to our API route.
+ * Uses multipart/form-data so an optional file attachment can be sent along.
  * Centralises fetch + error handling so components stay clean and consistent.
  */
 export async function submitContactForm(
   data: ContactFormInput,
+  file?: File | null,
 ): Promise<ContactFormResult> {
   try {
+    const formData = new FormData();
+    formData.set("fullName", data.fullName);
+    formData.set("entityType", data.entityType ?? "individual");
+    formData.set("companyName", data.companyName ?? "");
+    formData.set("email", data.email);
+    formData.set("phone", data.phone);
+    formData.set("projectDescription", data.projectDescription ?? "");
+    if (file) {
+      formData.set("attachment", file, file.name);
+    }
+
     const response = await fetch("/api/contact", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      // Do NOT set Content-Type manually — the browser adds the multipart
+      // boundary automatically when sending FormData.
+      body: formData,
     });
 
     const body = (await response.json().catch(() => null)) as

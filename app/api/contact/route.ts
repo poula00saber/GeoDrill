@@ -46,7 +46,10 @@ function customerEmailHtml(data: ContactFormInput): string {
 </body></html>`;
 }
 
-function internalEmailHtml(data: ContactFormInput): string {
+function internalEmailHtml(
+  data: ContactFormInput,
+  attachmentName?: string,
+): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:8px 12px;font-weight:600;color:#0d2b34;border-top:1px solid #e5e7eb">${label}</td><td style="padding:8px 12px;color:#374151;border-top:1px solid #e5e7eb">${escapeHtml(value)}</td></tr>`;
 
@@ -61,22 +64,48 @@ function internalEmailHtml(data: ContactFormInput): string {
       ${row("Email", data.email + "")}
       ${row("Phone", data.phone + "")}
       ${row("Project Description", data.projectDescription + "")}
+      ${attachmentName ? row("Attachment", attachmentName) : ""}
     </table></td></tr>
     <tr><td style="padding:12px 16px;color:#6b7280;font-size:13px">Sent via the GEODRILL website contact form.</td></tr>
   </table></body></html>`;
 }
 
 export async function POST(request: Request) {
+  // Allowed file types + size (must mirror the client-side rules).
+  const ACCEPTED_MIME = new Set([
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ]);
+  const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
+
   let payload: ContactFormInput;
+  let attachmentFile: File | null = null;
   try {
-    const parsed: unknown = await request.json();
-    if (!isContactFormInput(parsed)) {
+    const form = await request.formData();
+
+    payload = {
+      fullName: String(form.get("fullName") ?? ""),
+      entityType: (form.get("entityType") as ContactFormInput["entityType"]) ?? "individual",
+      companyName: String(form.get("companyName") ?? ""),
+      email: String(form.get("email") ?? ""),
+      phone: String(form.get("phone") ?? ""),
+      projectDescription: String(form.get("projectDescription") ?? ""),
+    };
+
+    const maybeFile = form.get("attachment");
+    attachmentFile = maybeFile instanceof File ? maybeFile : null;
+
+    if (!isContactFormInput(payload)) {
       return NextResponse.json(
         { ok: false, message: "Invalid form data." },
         { status: 400 },
       );
     }
-    payload = parsed;
   } catch {
     return NextResponse.json(
       { ok: false, message: "Invalid request body." },
@@ -96,6 +125,31 @@ export async function POST(request: Request) {
     );
   }
 
+  // Validate + read the optional attachment (photo / PDF / Word).
+  let attachment: ContactFormInput["attachment"] = null;
+  if (attachmentFile) {
+    if (!ACCEPTED_MIME.has(attachmentFile.type)) {
+      return NextResponse.json(
+        { ok: false, message: "Unsupported file type. Please upload a photo, PDF, or Word document." },
+        { status: 400 },
+      );
+    }
+    if (attachmentFile.size > MAX_FILE_BYTES) {
+      return NextResponse.json(
+        { ok: false, message: "File is too large. Maximum size is 10 MB." },
+        { status: 400 },
+      );
+    }
+    const buffer = Buffer.from(await attachmentFile.arrayBuffer());
+    attachment = {
+      name: attachmentFile.name,
+      type: attachmentFile.type,
+      size: attachmentFile.size,
+      data: buffer.toString("base64"),
+    };
+  }
+  payload.attachment = attachment;
+
   if (!resend) {
     return NextResponse.json(
       {
@@ -108,7 +162,7 @@ export async function POST(request: Request) {
   }
 
   const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
-  const toEmail = process.env.GEO_DRILL_TO_EMAIL || "";
+  const toEmail = process.env.GEODRILL_TO_EMAIL || "";
   const sheetUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL || "";
 
   let customerSent = false;
@@ -140,7 +194,18 @@ export async function POST(request: Request) {
         from: fromEmail,
         to: [toEmail],
         subject: `New inquiry from ${payload.fullName || "a visitor"}`,
-        html: internalEmailHtml(payload),
+        html: internalEmailHtml(payload, payload.attachment?.name),
+        ...(payload.attachment
+          ? {
+              attachments: [
+                {
+                  filename: payload.attachment.name,
+                  content: payload.attachment.data, // base64-encoded content
+                  contentType: payload.attachment.type,
+                },
+              ],
+            }
+          : {}),
       });
       if (r.error) throw r.error;
     } catch (err) {

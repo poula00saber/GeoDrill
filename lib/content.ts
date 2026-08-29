@@ -96,6 +96,8 @@ export type Dict = {
       send: string;
       sending: string;
       sent: string;
+      attachment: string;
+      attachmentHint: string;
     };
     infoTitle: string;
     address: string;
@@ -440,12 +442,14 @@ export const content: Record<Lang, Dict> = {
         send: "Send Message",
         sending: "Sending\u2026",
         sent: "Thank you, we will be in touch shortly.",
+        attachment: "Attach a file (optional)",
+        attachmentHint: "Photo, PDF, or Word — max 10 MB.",
       },
       infoTitle: "Contact Details",
       address:
         "Prince Saad Ibn Abdulrahman Al Awal Road, Al Rawabi District, Riyadh 14253, Saudi Arabia",
       phoneLabel: "+966 59 694 5051",
-      emailLabel: "construction@geodrillksa.com",
+      emailLabel: "contracting@geodrillksa.com",
       whatsapp: "https://wa.me/966596945051",
     },
     footer: {
@@ -770,12 +774,14 @@ export const content: Record<Lang, Dict> = {
         send: "إرسال الرسالة",
         sending: "جارٍ الإرسال\u2026",
         sent: "شكرًا لك — سنتواصل معك قريبًا.",
+        attachment: "إرفاق ملف (اختياري)",
+        attachmentHint: "صورة أو PDF أو Word — بحد أقصى 10 ميجابايت.",
       },
       infoTitle: "بيانات التواصل",
       address:
         "طريق الأمير سعد بن عبدالرحمن الأول، حي الروابي، الرياض 14253، المملكة العربية السعودية ",
       phoneLabel: "+966 59 694 5051",
-      emailLabel: "construction@geodrillksa.com",
+      emailLabel: "contracting@geodrillksa.com",
       whatsapp: "https://wa.me/966596945051",
     },
     footer: {
