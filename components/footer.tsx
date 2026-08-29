@@ -105,7 +105,13 @@ export function Footer() {
           <ul className="flex flex-col gap-2.5">
             {t.services.items.slice(0, 6).map((s) => (
               <li key={s.key} className="text-sm text-white/60">
-                {s.title}
+                <a
+                  href={`${homeHref}#services`}
+                  onClick={(e) => handleNavClick(e, `${homeHref}#services`)}
+                  className="transition-colors hover:text-white"
+                >
+                  {s.title}
+                </a>
               </li>
             ))}
           </ul>
