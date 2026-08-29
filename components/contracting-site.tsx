@@ -14,7 +14,6 @@ import { Certifications } from "@/components/sections/certifications";
 import { Location } from "@/components/sections/location";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
 
 /**
  * The General Contracting Division home page. Shared by the legacy `/[lang]`
@@ -42,9 +41,6 @@ export function ContractingSite({ locale }: { locale: "en" | "ar" }) {
         <Location />
         <Footer />
       </main>
-
-      {/* Rendered outside main to prevent CSS transform trap */}
-      <WhatsAppButton />
     </>
   );
 }

@@ -132,7 +132,9 @@ export function Navbar() {
   // otherwise the normal light logo — the contracting site keeps its coloured
   // logo.png / logo2.png variants.
   const logoSrc =
-    isFloatingHero || resolvedTheme !== "light" ? "/logo2.png" : "/logo.png";
+    isFloatingHero || (mounted && resolvedTheme === "dark")
+      ? "/logo2.png"
+      : "/logo.png";
 
   return (
     <motion.header

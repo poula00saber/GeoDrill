@@ -8,6 +8,41 @@ export function Footer() {
   const f = t.footer;
   const year = new Date().getFullYear();
 
+  // Real internal pages that have their own route under /contracting/[lang].
+  // Everything else maps to a section anchor on the contracting homepage
+  // (/contracting/[lang]#section), so links keep working on internal pages
+  // like blog / faq / clients where those sections don't exist locally.
+  const PAGE_NAV: Record<string, string> = {
+    blog: `/contracting/${lang ?? "en"}/blog`,
+    faq: `/contracting/${lang ?? "en"}/faq`,
+  };
+  const homeHref = `/contracting/${lang ?? "en"}`;
+
+  const navHref = (id: string) =>
+    PAGE_NAV[id] ?? (id === "home" ? homeHref : `${homeHref}#${id}`);
+
+  // Smooth-scroll to the target section when the hash belongs to the current
+  // page, otherwise navigate to the homepage section (mirrors navbar behavior).
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    const hashIndex = href.indexOf("#");
+    if (hashIndex === -1) return;
+    const base = href.substring(0, hashIndex);
+    const targetId = href.substring(hashIndex + 1);
+    if (base && base !== window.location.pathname) {
+      window.location.href = href;
+      return;
+    }
+    e.preventDefault();
+    const target = document.getElementById(targetId);
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   const socials = [
     {
       label: "Instagram",
@@ -47,16 +82,12 @@ export function Footer() {
           </h3>
           <ul className="flex flex-col gap-2.5">
             {t.nav.map((item) => {
-              const pageHref =
-                item.id === "blog"
-                  ? `/contracting/${lang ?? "en"}/blog`
-                  : item.id === "faq"
-                    ? `/contracting/${lang ?? "en"}/faq`
-                    : `#${item.id}`;
+              const pageHref = navHref(item.id);
               return (
                 <li key={item.id}>
                   <a
                     href={pageHref}
+                    onClick={(e) => handleNavClick(e, pageHref)}
                     className="text-sm text-white/60 transition-colors hover:text-white"
                   >
                     {item.label}
