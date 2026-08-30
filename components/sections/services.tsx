@@ -19,18 +19,18 @@ const services: {
   {
     num: "01",
     img: "/images/service-groundworks.png",
-    title: { en: "Ground Works", ar: "أعمال الحفر والقطع" },
+    title: { en: "Groundworks", ar: "أعمال الحفر والقطع" },
     body: {
-      en: "Site preparation, leveling, soil compaction, cutting and backfilling executed with precision survey control.",
+      en: "Site preparation, leveling, soil compaction, cutting and backfilling.",
       ar: "تشمل تجهيز الموقع وتسوية ودمك التربة، وأعمال القطع والردم.",
     },
   },
   {
     num: "02",
     img: "/images/final/projects/new_landscaping/landscape_pool_palm_walkway GROK.jpg",
-    title: { en: "LandScape Works", ar: "أعمال اللاندسكيب" },
+    title: { en: "Landscape Works", ar: "أعمال اللاندسكيب" },
     body: {
-      en: "Integrated landscaping solutions — site coordination and development, including execution of green and outdoor spaces.",
+      en: "Site coordination and development, including execution of green and outdoor spaces.",
       ar: "نقدم حلولاً متكاملة للأعمال، تنسيق وتطوير المواقع، تشمل تنفيذ المساحات الخضراء.",
     },
   },
@@ -39,7 +39,7 @@ const services: {
     img: "/images/service-infrastructure.png",
     title: { en: "Infrastructure Works", ar: "البنية التحتية" },
     body: {
-      en: "Roads, water networks, sanitary drainage, electrical, telecom and utility networks.",
+      en: "Building essential networks: roads, water supply, sewage, electrical power, and telecommunications.",
       ar: "تنفيذ شبكات الطرق، المياه، الصرف الصحي، والكهرباء والاتصالات والمرافق.",
     },
   },
@@ -48,7 +48,7 @@ const services: {
     img: "/images/service-concrete.png",
     title: { en: "Concrete Works", ar: "أعمال الخرسانة" },
     body: {
-      en: "All reinforced concrete types: foundations, footings, columns and slabs with certified mixes.",
+      en: "Reinforced concrete works including foundations, footings, columns and slabs.",
       ar: "تنفيذ جميع أنواع الخرسانة المسلحة من الأساسات والقواعد والأعمدة والأسقف.",
     },
   },
@@ -57,7 +57,7 @@ const services: {
     img: "/images/service-steel.png",
     title: { en: "Steel Structures", ar: "الهياكل المعدنية" },
     body: {
-      en: "Design, fabrication and erection of steel frameworks for commercial and industrial facilities.",
+      en: "Design, fabrication and erection of steel structures for commercial and industrial facilities.",
       ar: "تصميم وتنفيذ وتركيب الهياكل المعدنية للمباني والمنشآت التجارية والصناعية.",
     },
   },
@@ -66,7 +66,7 @@ const services: {
     img: "/images/service-mep.png",
     title: { en: "MEP Works", ar: "كهروميكانيكا" },
     body: {
-      en: "Full mechanical, electrical, plumbing, HVAC and ventilation systems with testing and balancing.",
+      en: "Complete installation and integration of mechanical, electrical, plumbing, and climate control systems.",
       ar: "تنفيذ جميع أعمال الميكانيكا والكهرباء والسباكة وأنظمة التبريد والتكييف والتهوية.",
     },
   },
@@ -75,7 +75,7 @@ const services: {
     img: "/images/service-finishing.png",
     title: { en: "Finishing Works", ar: "أعمال التشطيبات" },
     body: {
-      en: "Interior and exterior finishing delivered to the highest precision and quality.",
+      en: "High-precision interior and exterior finishing solutions delivered to the highest standards.",
       ar: "أعمال التشطيبات الداخلية والخارجية بأعلى مستويات الدقة والجودة.",
     },
   },

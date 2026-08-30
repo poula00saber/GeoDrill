@@ -215,7 +215,7 @@ export const content: Record<Lang, Dict> = {
         {
           key: "quality",
           title: "Quality",
-          text: "Uncompromising standards at every stage.",
+          text: "Built to the highest standard.",
         },
         {
           key: "innovative",
@@ -225,19 +225,19 @@ export const content: Record<Lang, Dict> = {
         {
           key: "safety",
           title: "Safety",
-          text: "Safety-first culture on every site.",
+          text: "Safety-first on every site.",
         },
         {
           key: "ontime",
           title: "On-Time",
-          text: "Reliable delivery, every deadline.",
+          text: "Reliable delivery, zero delay.",
         },
       ],
     },
     sectors: {
       kicker: "Sectors We Serve",
-      title: "Expertise across seven key sectors",
-      sub: "From heavy industry to hospitality, we deliver tailored construction solutions.",
+      title: "Construction Expertise Across Diverse Sectors.",
+      sub: "Delivering reliable construction solutions across diverse sectors, tailored to the unique requirements of every project.",
       items: [
         {
           key: "industrial",
@@ -278,8 +278,8 @@ export const content: Record<Lang, Dict> = {
     },
     services: {
       kicker: "Our Services",
-      title: "End-to-end construction capabilities",
-      sub: "A complete delivery chain, from the first cut of soil to the final finish.",
+      title: "Integrated Construction Capabilities",
+      sub: "From ground preparation to project completion, our full-scope capabilities ensure seamless execution at every stage of development..",
       items: [
         {
           num: "01",
@@ -341,8 +341,8 @@ export const content: Record<Lang, Dict> = {
     },
     process: {
       kicker: "Construction Process",
-      title: "A disciplined path from concept to handover",
-      sub: "Eight structured stages that keep every project on scope, on budget, and on time.",
+      title: "An integrated journey from initial idea to final handover",
+      sub: "Eight structured stages that keep every project on scope, budget, and on time.",
       steps: [
         {
           num: "01",
@@ -357,7 +357,7 @@ export const content: Record<Lang, Dict> = {
         {
           num: "03",
           title: "Planning & Engineering",
-          text: "Detailed design and method statements.",
+          text: "Detailed design, engineering studies, and execution methodology.",
         },
         {
           num: "04",
@@ -372,7 +372,7 @@ export const content: Record<Lang, Dict> = {
         {
           num: "06",
           title: "Quality Control",
-          text: "Continuous inspection and assurance.",
+          text: "Continuous site inspections and compliance assurance.",
         },
         {
           num: "07",
@@ -382,14 +382,14 @@ export const content: Record<Lang, Dict> = {
         {
           num: "08",
           title: "Project Handover",
-          text: "Documented, clean, and on time.",
+          text: "Documented, on-time project completion and final handover.",
         },
       ],
     },
     projects: {
       kicker: "Our Work",
-      title: "A look at what we build",
-      sub: "A look at the disciplines behind every GeoDrill build.",
+      title: "Architectural & Structural Excellence in Action",
+      sub: "A closer look at the engineering disciplines and execution standards behind every GEODRILL project.",
     },
     clients: {
       kicker: "Our Clients",
@@ -414,9 +414,9 @@ export const content: Record<Lang, Dict> = {
       sideCta: "Get in touch",
     },
     certs: {
-      kicker: "Certifications & Official Docs",
-      title: "Certified for excellence and compliance",
-      line: "Certified for the provision of geotechnical investigation, structural assessment, shoring, piling design, and soil improvement services.",
+      kicker: "Certifications & Compliance",
+      title: "Trusted Standards of Excellence & Quality",
+      line: "Internationally and locally accredited to ensure the highest standards of quality, occupational health & safety, and environmental compliance across all our projects.",
       items: [
         { code: "ISO 9001:2015", name: "Quality Management" },
         { code: "ISO 45001:2018", name: "Occupational Health & Safety" },
@@ -525,7 +525,7 @@ export const content: Record<Lang, Dict> = {
       tag: "جيو دريل خبراء الإنشاء",
       headline: "قوة في التنفيذ. دقة في الإنجاز.",
       // In your translation file:
-      sub: "تقدم جيو دريل خبراء الإنشاء حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية، بدءاً من أعمال التربة والحفر وحتى التأسيس والتسطيح، وفق أعلى معايير الجودة والسلامة والابتكار لتلبية وتجاوز تطلعات العملاء.",
+      sub: "تقدم جيو دريل خبراء الإنشاء حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية، بدءاً من أعمال التربة والحفر وحتى اللمسات النهائية، وفق أعلى معايير الجودة والسلامة والابتكار لتلبية وتجاوز تطلعات العملاء.",
       badges: ["آيزو 9001", "آيزو 45001", "آيزو 14001"],
     },
     about: {
@@ -563,7 +563,7 @@ export const content: Record<Lang, Dict> = {
         {
           key: "quality",
           title: "الجودة",
-          text: "معايير لا تقبل المساومة في كل مرحلة.",
+          text: "مُصمّم وفق أعلى المعايير.",
         },
         {
           key: "innovative",
@@ -575,13 +575,17 @@ export const content: Record<Lang, Dict> = {
           title: "السلامة",
           text: "ثقافة السلامة أولاً في كل موقع.",
         },
-        { key: "ontime", title: "الالتزام", text: "تسليم موثوق في كل موعد." },
+        {
+          key: "ontime",
+          title: "الدقة في المواعيد",
+          text: "تسليمٌ مضمون، بدون أي تأخير..",
+        },
       ],
     },
     sectors: {
       kicker: "القطاعات التي نخدمها",
-      title: "خبرة في سبعة قطاعات رئيسية",
-      sub: "من الصناعات الثقيلة إلى الضيافة، نقدم حلولاً إنشائية مصممة خصيصًا.",
+      title: "خبرات إنشائية متخصصة لمختلف القطاعات",
+      sub: "نقدم حلولًا إنشائية موثوقة لمختلف القطاعات، بما يتناسب مع متطلبات كل مشروع واحتياجاته.",
       items: [
         {
           key: "industrial",
@@ -622,8 +626,8 @@ export const content: Record<Lang, Dict> = {
     },
     services: {
       kicker: "خدماتنا",
-      title: "قدرات إنشائية متكاملة من البداية للنهاية",
-      sub: "سلسلة تنفيذ متكاملة — من أول جرفة تربة حتى التشطيب النهائي.",
+      title: "قدراتٌ إنشائية متكاملة",
+      sub: "من تهيئة الموقع وحتى الإنجاز النهائي للمشروع، تضمن قدراتنا متكاملة النطاق تنفيذًا سلسًا في كل مرحلة من مراحل التطوير.",
       items: [
         {
           num: "01",
@@ -685,7 +689,7 @@ export const content: Record<Lang, Dict> = {
     },
     process: {
       kicker: "منهجية التنفيذ",
-      title: "مسار منضبط من الفكرة حتى التسليم",
+      title: "رحلة متكاملة من بداية الفكرة حتى التسليم. ",
       sub: "ثماني مراحل منظمة تحافظ على كل مشروع ضمن النطاق والميزانية والوقت المحدد.",
       steps: [
         {
@@ -697,15 +701,19 @@ export const content: Record<Lang, Dict> = {
         {
           num: "03",
           title: "التخطيط والهندسة",
-          text: "تصميم تفصيلي ومنهجيات تنفيذ.",
+          text: "إعداد التصاميم التفصيلية ومنهجيات التنفيذ.",
         },
         {
           num: "04",
           title: "العرض والاعتماد",
-          text: "نطاق وتكلفة وجدول شفاف.",
+          text: "شفافية مطلقة في التكاليف، الجدول الزمني، ونطاق العمل.",
         },
         { num: "05", title: "التنفيذ", text: "تنفيذ دقيق وآمن ومنسق." },
-        { num: "06", title: "ضبط الجودة", text: "تفتيش وتأكيد مستمر." },
+        {
+          num: "06",
+          title: "ضبط الجودة",
+          text: "رقابة مستمرة وتأكيد لمطابقة أحدث معايير الجودة.",
+        },
         {
           num: "07",
           title: "الاختبار والتشغيل",
@@ -714,14 +722,14 @@ export const content: Record<Lang, Dict> = {
         {
           num: "08",
           title: "تسليم المشروع",
-          text: "موثق ونظيف وفي الوقت المحدد.",
+          text: "تسليم مكتمل وموثّق وفق الجدول الزمني المحدد.",
         },
       ],
     },
     projects: {
       kicker: "أعمالنا",
-      title: "نظرة على ما نبنيه",
-      sub: "نظرة على التخصصات التي تقف خلف كل بناء تقدمه جيو دريل.",
+      title: "التميز المعماري والإنشائي في الميدان",
+      sub: "نظرة عن قرب على التخصصات الهندسية ومعايير التنفيذ التي تقف خلف كل مشروع تنفذه جيو دريل.",
     },
     clients: {
       kicker: "عملاؤنا",
@@ -746,9 +754,9 @@ export const content: Record<Lang, Dict> = {
       sideCta: "تواصل معنا",
     },
     certs: {
-      kicker: "الشهادات والمستندات الرسمية",
-      title: "معتمدون للتميز والامتثال",
-      line: "معتمدون لتقديم خدمات الفحص الجيوتقني والتقييم الإنشائي وتصميم أعمال التدعيم والخوازيق وتحسين التربة.",
+      kicker: "الشهادات والاعتمادات الرسمية",
+      title: "معايير موثوقة للتميز والجودة",
+      line: "حاصلون على اعتمادات دولية ومحلية لضمان أعلى معايير الجودة، الصحة والسلامة المهنية، والامتثال البيئي في جميع مشاريعنا.",
       items: [
         { code: "آيزو 9001:2015", name: "إدارة الجودة" },
         { code: "آيزو 45001:2018", name: "الصحة والسلامة المهنية" },
