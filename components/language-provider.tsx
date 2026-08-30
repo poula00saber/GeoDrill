@@ -41,22 +41,27 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const target: Lang = lang === "en" ? "ar" : "en";
     const segments = pathname.split("/").filter(Boolean);
 
+    // Use replace() instead of push() so language switches update the URL
+    // WITHOUT adding a new browser history entry. This means toggling
+    // languages many times still lets the user go "back" to the previous
+    // page with a single click — no accumulation of history entries.
+
     // Contracting path: /contracting/en <-> /contracting/ar
     if (segments[0] === "contracting") {
       segments[1] = target;
-      router.push(`/${segments.join("/")}`);
+      router.replace(`/${segments.join("/")}`);
       return;
     }
 
     // Check if the first segment is a valid locale
     if (segments[0] === "en" || segments[0] === "ar") {
       segments[0] = target;
-      router.push(`/${segments.join("/")}`);
+      router.replace(`/${segments.join("/")}`);
       return;
     }
 
     // Fallback for root path or un-prefixed routes
-    router.push(`/${target}`);
+    router.replace(`/${target}`);
   };
 
   const value: LanguageContextValue = {
