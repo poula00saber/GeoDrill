@@ -169,7 +169,7 @@ export default function Page() {
           <Logo />
         </div>
 
-        <div className="flex items-center gap-2 rounded-full bg-white/30 backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 border border-white/20">
+        <div className="flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 border border-white/20 shadow-lg shadow-black/10">
           <LanguageToggle
             lang={lang}
             onToggle={() => setLang((l) => (l === "en" ? "ar" : "en"))}
@@ -214,7 +214,10 @@ export default function Page() {
 
         {/* Portal Cards Section */}
         <div className="relative z-10 w-full max-w-4xl mb-4">
-          <div dir="ltr" className="grid gap-3 sm:gap-4 md:gap-5 sm:grid-cols-2">
+          <div
+            dir="ltr"
+            className="grid gap-3 sm:gap-4 md:gap-5 sm:grid-cols-2"
+          >
             {portals.map((portal, i) => (
               <PortalCard
                 key={portal.id}
