@@ -4,109 +4,105 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Compass,
-  Hammer,
   ArrowRight,
   Moon,
   Sun,
-  Hexagon,
   Globe,
+  Link2,
+  Users,
+  Cog,
+  TrendingUp,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { Logo as BrandLogo } from "@/components/logo";
 
+// Single background asset — matches the reference design exactly. There is
+// no separate "dark" background image anymore: the previous dark-mode file
+// (`portal bg dark.png`) was a different, unrelated piece of art (dark
+// abstract glow lines instead of the rig/crane wave design), not a dark
+// variant of the same design — swapping files there was the actual bug, not
+// a sizing issue. Dark mode now dims + scrims this same image instead.
+const PORTAL_BG = "/images/portal bg.png";
+
 const copy = {
   eyebrow: { en: "Welcome to GEODRILL", ar: "أهلاً بكم في جيودريل" },
   headline: {
-    en: [
-      { text: "Built on ", tone: "plain" },
-      { text: "Expertise.", tone: "yellow" },
-      { text: "Driven by ", tone: "plain", br: true },
-      { text: "Precision.", tone: "teal" },
-    ],
-    ar: [
-      { text: "مبنيّ على ", tone: "plain" },
-      { text: "الخبرة.", tone: "yellow" },
-      { text: "مدفوع بـ", tone: "plain", br: true },
-      { text: "الدقة.", tone: "teal" },
-    ],
+    en: {
+      part1: "Diverse ",
+      highlight1: "Expertise.",
+      part2: " Under one ",
+      highlight2: "Roof.",
+    },
+    ar: {
+      part1: "خبرات ",
+      highlight1: "متنوعة",
+      part2: " تحت سقف ",
+      highlight2: "واحد",
+    },
   },
-  sub: {
-    en: "Choose your path to explore our core services",
-    ar: "اختر مسارك لاستكشاف خدماتنا الأساسية",
+  subheading: {
+    en: "We turn every idea into the start of a success story, offering integrated solutions that meet the needs of individuals and companies.",
+    ar: "نجعل كل فكرة بداية قصة نجاح، ونقدم حلولاً متكاملة تلبي احتياجات الأفراد والشركات",
   },
-  footer: {
-    en: "Power in Execution · Precision in Completion",
-    ar: "قوة في التنفيذ · دقة في الإنجاز",
+  tagline: {
+    en: "GEOTECHNICAL EXPERTISE × CONSTRUCTION EXCELLENCE",
+    ar: "GEOTECHNICAL EXPERTISE × CONSTRUCTION EXCELLENCE",
   },
 } as const;
 
+// Placeholder imagery only — swap `img` for the real assets once they're
+// ready. Reused from elsewhere in the project so something renders now
+// instead of a flat color block.
 const portals = [
   {
     id: "geotechnical",
-    title: {
-      en: "Geotechnical Services & Engineering Laboratories",
-      ar: "خدمات الجيوتقنية ومختبرات الهندسة",
+    label: { en: "GEODRILL", ar: "جيودريل" },
+    title: { en: "GEOTECH", ar: "الخدمات الجيوتقنية والمختبرات الهندسية" },
+    description: {
+      en: "Advanced geotechnical services and engineering laboratories for a safer foundation.",
+      ar: "خدمات جيوتقنية متقدمة ومختبرات هندسية لأساس أكثر أماناً.",
     },
-    subtitle: {
-      en: "Soil investigation, structural assessment, shoring, piling & geotechnical engineering.",
-      ar: "استكشاف التربة والتقييم الإنشائي وحواجز الحفر وأعمال الأعمدة وهندسة جيولوجية.",
-    },
-    capabilities: {
-      en: [
-        "Site investigation & soil profiling",
-        "Foundation design & piling",
-        "Shoring & retaining walls",
-        "Geotechnical analysis & reporting",
-      ],
-      ar: [
-        "استكشاف الموقع وتحليل التربة",
-        "تصميم الأساسات ودك الخيم",
-        "حواجز الحفر والجدران المحجزة",
-        "تحليل جيولوجي وتقارير",
-      ],
-    },
-    cta: { en: "Explore Geotechnical", ar: "استكشف الجيوتقنية" },
+    cta: { en: "Visit Geotechnical Site", ar: "زيارة موقع الجيوتقنية" },
     href: "https://old.geodrillksa.com",
     external: true,
     accent: "yellow",
-    Icon: Compass,
-    img: "/images/sector-industrial.png",
+    img: "/images/geotech-portal-placeholder.png",
   },
   {
-    id: "construction",
-    title: {
-      en: "General Contracting & Engineering",
-      ar: "التعاقد العام والهندسة",
+    id: "contracting",
+    label: { en: "GEODRILL", ar: "جيودريل" },
+    title: { en: "CONTRACT", ar: "المقاولات العامة" },
+    description: {
+      en: "General contracting and construction solutions that build lasting value.",
+      ar: "حلول التعاقد العام والبناء التي تخلق قيمة دائمة.",
     },
-    subtitle: {
-      en: "General contracting, infrastructure, concrete, steel structures, MEP & finishing.",
-      ar: "التعاقد العام والبنية التحتية والخرسانة والهياكل المعدنية والميكانيكية والتشطيبات.",
-    },
-    capabilities: {
-      en: [
-        "General contracting",
-        "Infrastructure & utilities",
-        "Concrete & steel structures",
-        "MEP & finishing works",
-      ],
-      ar: [
-        "التعاقد العام",
-        "البنية التحتية والمرافق",
-        "الخرسانة والهياكل المعدنية",
-        "الأعمال الميكانيكية والتشطيبات",
-      ],
-    },
-    cta: { en: "Explore Construction", ar: "استكشف التشييد" },
+    cta: { en: "Visit Contracting Site", ar: "زيارة موقع المقاولات" },
     href: "/contracting/en",
     external: false,
     accent: "teal",
-    Icon: Hammer,
-    img: "/images/service-concrete.png",
+    img: "/images/contracting-portal-placeholder.png",
   },
 ] as const;
+
+const features = [
+  {
+    icon: Users,
+    label: { en: "Trusted Partner", ar: "شريك موثوق" },
+    description: { en: "IN SAUDI ARABIA", ar: "في المملكة العربية السعودية" },
+  },
+  {
+    icon: Cog,
+    label: { en: "Integrated Solutions", ar: "حلول متكاملة" },
+    description: { en: "FROM GROUND TO STRUCTURE", ar: "من الأساس إلى البناء" },
+  },
+  {
+    icon: TrendingUp,
+    label: { en: "Sustainable Impact", ar: "تأثير مستدام" },
+    description: { en: "FOR A STRONGER TOMORROW", ar: "لغد أقوى" },
+  },
+];
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -116,7 +112,7 @@ const cardVariants: Variants = {
     transition: {
       duration: 0.55,
       ease: [0.22, 1, 0.36, 1],
-      delay: i * 0.1 + 0.35,
+      delay: i * 0.15 + 0.35,
     },
   }),
 };
@@ -132,159 +128,169 @@ const headVariants: Variants = {
 
 export default function Page() {
   const [lang, setLang] = useState<"en" | "ar">("en");
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const l = navigator.language || "en";
     setLang(l.startsWith("ar") ? "ar" : "en");
+    setMounted(true);
   }, []);
 
   const headline = copy.headline[lang];
+  const isDark = mounted && resolvedTheme === "dark";
+  // Use the dedicated dark background asset in dark mode (no scrim overlay).
+  const bgImage = isDark ? "/images/portal bg dark.png" : PORTAL_BG;
 
   return (
     <main
       key={lang}
       dir={lang === "ar" ? "rtl" : "ltr"}
-      className="lang-enter relative flex min-h-screen w-full flex-col items-center justify-center gap-10 overflow-hidden bg-background px-5 py-16 text-foreground dark:bg-navy dark:text-white"
+      className="relative isolate flex min-h-screen w-full flex-col bg-background text-foreground"
     >
-      {/* Brand-colored gradient wash — yellow (geotechnical) vs teal (construction),
-         echoing the actual left/right split of the page, not decoration for its own sake */}
-      <div
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-        aria-hidden
-      >
-        <div className="absolute -top-32 start-[-10%] size-[42rem] rounded-full bg-yellow-400/25 blur-[110px] dark:bg-yellow-400/[0.12]" />
-        <div className="absolute -top-32 end-[-10%] size-[42rem] rounded-full bg-teal-400/25 blur-[110px] dark:bg-teal-400/[0.14]" />
-        <div className="absolute bottom-[-20%] start-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-navy/[0.05] blur-[100px] dark:bg-white/[0.04]" />
-      </div>
-
-      {/* Dot grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "radial-gradient(currentColor 1px, transparent 1px), radial-gradient(currentColor 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-        aria-hidden
-      />
-
-      <div className="absolute top-6 end-6 z-20 flex items-center gap-2">
-        <LanguageToggle
-          lang={lang}
-          onToggle={() => setLang((l) => (l === "en" ? "ar" : "en"))}
+      {/* Background Image — rated as layout-fill; using min-h-screen instead of
+         h-screen + overflow-hidden means the letterbox/content never gets
+         clipped, and dark mode swaps in its dedicated dark asset. */}
+      <div className="absolute inset-0 -z-10 bg-background">
+        <Image
+          src={bgImage}
+          alt="Portal background"
+          fill
+          sizes="100vw"
+          priority
+          quality={90}
+          className="object-cover object-center"
         />
-        <ThemeToggle />
       </div>
 
-      <a
-        href="/contracting/en"
-        aria-label="GEODRILL home"
-        className="absolute top-6 start-6 z-20"
-      >
-        <Logo />
-      </a>
-
-      {/* Hero heading */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={headVariants}
-        className="relative z-10 mx-auto max-w-2xl text-center"
-      >
-        <div className="mb-4 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-foreground/50 dark:text-white/50">
-          <span className="h-px w-8 bg-gradient-to-r from-transparent to-yellow-500/60 dark:to-yellow-400/60" />
-          {copy.eyebrow[lang]}
-          <span className="h-px w-8 bg-gradient-to-l from-transparent to-teal-500/60 dark:to-teal-400/60" />
+      {/* Header - Fixed Top Navigation (unchanged) */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+        <div className="pointer-events-none">
+          <Logo />
         </div>
 
-        <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-          {headline.map((chunk, i) => (
-            <span key={i}>
-              <span
-                className={cn(
-                  chunk.tone === "yellow" &&
-                    "text-yellow-600 dark:text-yellow-400",
-                  chunk.tone === "teal" && "text-teal-600 dark:text-teal-400",
-                )}
-              >
-                {chunk.text}
-              </span>
-            </span>
-          ))}
-        </h1>
-
-        <p className="mt-4 text-sm text-foreground/60 dark:text-white/60 sm:text-base">
-          {copy.sub[lang]}
-        </p>
-      </motion.div>
-
-      {/* Portal cards + connecting divider */}
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-4 sm:grid-cols-2 sm:gap-6 md:gap-8">
-        {portals.map((p, i) => (
-          <Portal
-            key={p.id}
-            portal={p}
-            delay={i}
-            variants={cardVariants}
+        <div className="flex items-center gap-2 rounded-full bg-white/30 backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 border border-white/20">
+          <LanguageToggle
             lang={lang}
+            onToggle={() => setLang((l) => (l === "en" ? "ar" : "en"))}
           />
-        ))}
+          <div className="w-px h-6 bg-white/20" />
+          <ThemeToggle />
+        </div>
+      </header>
 
-        {/* Center connector — visual "fork in the road", sm+ only */}
+      {/* Main Content */}
+      <div className="flex flex-1 flex-col items-center justify-center px-4 sm:px-5 py-2 sm:py-3 pt-7 sm:pt-8">
         <motion.div
-          initial={{ opacity: 0, scale: 0.6 }}
+          initial="hidden"
+          animate="visible"
+          variants={headVariants}
+          className="relative z-10 mx-auto max-w-4xl text-center mb-4 sm:mb-5"
+        >
+          <p className="mb-3 sm:mb-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] text-foreground/70 dark:text-white/70">
+            {copy.eyebrow[lang]}
+          </p>
+
+          <h1 className="text-balance text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight sm:leading-tight dark:text-white">
+            {headline.part1}
+            <span className="text-yellow-500 dark:text-yellow-400">
+              {headline.highlight1}
+            </span>
+            {lang === "en" && <br />}
+            {headline.part2}
+            <span className="text-teal-500 dark:text-teal-400">
+              {headline.highlight2}
+            </span>
+          </h1>
+
+          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-balance text-sm sm:text-base lg:text-lg font-semibold text-foreground/80 dark:text-white/80">
+            {copy.subheading[lang]}
+          </p>
+
+          <p className="mt-2 sm:mt-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] text-foreground/60 dark:text-white/60">
+            {copy.tagline[lang]}
+          </p>
+        </motion.div>
+
+        {/* Portal Cards Section */}
+        <div className="relative z-10 w-full max-w-4xl mb-4">
+          <div dir="ltr" className="grid gap-3 sm:gap-4 md:gap-5 sm:grid-cols-2">
+            {portals.map((portal, i) => (
+              <PortalCard
+                key={portal.id}
+                portal={portal}
+                delay={i}
+                variants={cardVariants}
+                lang={lang}
+              />
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              transition: { duration: 0.5, delay: 0.65 },
+            }}
+            className="pointer-events-none absolute hidden sm:flex left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+          >
+            <div className="flex size-14 items-center justify-center rounded-full border-2 border-white/30 bg-white/20 backdrop-blur-sm shadow-lg">
+              <Link2 className="size-6 text-white/80" strokeWidth={1.5} />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Trust strip — each label gets a teal→yellow gradient pill on hover
+           (using the two brand colors), and nothing gets clipped on the page. */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
           animate={{
             opacity: 1,
-            scale: 1,
-            transition: { duration: 0.5, delay: 0.65 },
+            y: 0,
+            transition: { duration: 0.6, delay: 0.75 },
           }}
-          className="pointer-events-none absolute start-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:flex"
+          className="relative z-10 flex w-full max-w-4xl flex-wrap items-center justify-center gap-x-8 gap-y-4"
         >
-          <span className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-lg dark:border-white/15 dark:bg-navy">
-            <span className="relative flex size-3.5 items-center justify-center">
-              <span className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-400 to-teal-400 opacity-70 blur-[3px]" />
-              <Hexagon
-                className="relative size-3.5 text-foreground/70 dark:text-white/70"
-                strokeWidth={2}
-              />
-            </span>
-          </span>
+          {features.map((feature, i) => {
+            const IconComponent = feature.icon;
+            return (
+              <div key={i} className="group relative rounded-xl p-[1.5px]">
+                {/* Teal→yellow gradient ring — only the ~1.5px outer frame
+                   (border) shows through the padding; the inner frosted box
+                   covers the rest. */}
+                <span
+                  aria-hidden
+                  className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #10b5b8 0%, #eab308 100%)",
+                  }}
+                />
+                <div className="relative z-10 flex items-center gap-2.5 rounded-[10px] bg-background/70 px-3 py-1.5 backdrop-blur-sm transition-colors duration-300">
+                  <IconComponent
+                    className="size-5 shrink-0 text-foreground/80 dark:text-white/70"
+                    strokeWidth={1.75}
+                  />
+                  <div className="text-start">
+                    <div className="text-sm font-bold text-foreground dark:text-white">
+                      {feature.label[lang]}
+                    </div>
+                    <div className="text-[10px] uppercase tracking-wide text-foreground/55 dark:text-white/60">
+                      {feature.description[lang]}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </motion.div>
       </div>
-
-      {/* Footer tagline */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.7, delay: 0.8 } }}
-        className="relative z-10 flex flex-col items-center gap-2 text-center"
-      >
-        <span className="mb-1 h-px w-16 bg-gradient-to-r from-yellow-400/50 via-border to-teal-400/50 dark:via-white/15" />
-        <Hexagon
-          className="size-5 text-foreground/30 dark:text-white/30"
-          strokeWidth={1.5}
-        />
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45 dark:text-white/45">
-          {lang === "en" ? (
-            <>
-              Power in{" "}
-              <span className="text-yellow-600 dark:text-yellow-400">
-                Execution
-              </span>{" "}
-              · Precision in{" "}
-              <span className="text-teal-600 dark:text-teal-400">
-                Completion
-              </span>
-            </>
-          ) : (
-            copy.footer.ar
-          )}
-        </p>
-      </motion.div>
     </main>
   );
 }
 
-function Portal({
+function PortalCard({
   portal,
   delay,
   variants,
@@ -297,73 +303,11 @@ function Portal({
 }) {
   const isYellow = portal.accent === "yellow";
   const title = portal.title[lang];
-  const subtitle = portal.subtitle[lang];
-  const caps = portal.capabilities[lang];
+  const description = portal.description[lang];
   const cta = portal.cta[lang];
+  const label = portal.label[lang];
 
-  // Localize the non-external portal link (the contracting division) so it
-  // opens the current language instead of always defaulting to English.
   const linkHref = portal.external ? portal.href : `/contracting/${lang}`;
-
-  const content = (
-    <>
-      <span
-        className={cn(
-          "mb-5 flex size-14 items-center justify-center rounded-xl text-white",
-          isYellow
-            ? "bg-yellow-400/15 ring-2 ring-yellow-300/30"
-            : "bg-teal-400/15 ring-2 ring-teal-300/30",
-        )}
-      >
-        <portal.Icon className="size-6" />
-      </span>
-
-      <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
-        {title}
-      </h2>
-      <span
-        className={cn(
-          "mt-3 block h-0.5 w-10 rounded-full",
-          isYellow ? "bg-yellow-400" : "bg-teal-400",
-        )}
-        aria-hidden
-      />
-      <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/75">
-        {subtitle}
-      </p>
-
-      <ul className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2">
-        {caps.map((c) => (
-          <li
-            key={c}
-            className="flex items-start gap-1.5 text-xs text-white/80"
-          >
-            <span
-              className={cn(
-                "mt-0.5 flex size-3.5 shrink-0 items-center justify-center rounded-full text-[8px]",
-                isYellow ? "bg-yellow-400 text-navy" : "bg-teal-400 text-navy",
-              )}
-            >
-              ✓
-            </span>
-            {c}
-          </li>
-        ))}
-      </ul>
-
-      <div
-        className={cn(
-          "mt-6 flex items-center justify-between rounded-xl px-5 py-3.5 text-sm font-bold uppercase tracking-wide text-navy transition-transform duration-300 group-hover:scale-[1.02]",
-          isYellow
-            ? "bg-gradient-to-r from-yellow-400 to-amber-500"
-            : "bg-gradient-to-r from-teal-400 to-cyan-500 text-white",
-        )}
-      >
-        <span>{cta}</span>
-        <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-      </div>
-    </>
-  );
 
   return (
     <motion.div
@@ -371,94 +315,117 @@ function Portal({
       initial="hidden"
       animate="visible"
       variants={variants}
-      whileHover={{ scale: 1.02 }}
-      className={cn(
-        "group relative flex h-[28rem] w-full flex-col overflow-hidden rounded-[22px] border text-white",
-        "border-white/10 transition-all duration-300",
-        "hover:border-transparent hover:shadow-2xl hover:shadow-black/40",
-        isYellow && "hover:shadow-yellow-500/20",
-        !isYellow && "hover:shadow-teal-500/20",
-      )}
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className="group relative flex h-44 sm:h-52 rounded-3xl overflow-hidden"
     >
-      <div className="absolute inset-0">
+      <Link
+        href={linkHref}
+        target={portal.external ? "_blank" : undefined}
+        rel={portal.external ? "noopener noreferrer" : undefined}
+        className="absolute inset-0 z-30"
+        aria-label={`Visit ${title}`}
+      />
+
+      {/* Card Content — after the text side. In LTR (EN) the text is on the
+         left and the photo on the right; in RTL (AR) they mirror (text right,
+         photo left) automatically via the card's `dir`. */}
+      <div
+        className={cn(
+          "relative z-10 flex flex-1 flex-col justify-between p-3 sm:p-4",
+          "bg-gradient-to-r",
+          isYellow
+            ? "from-yellow-950/95 to-yellow-900/40"
+            : "from-teal-950/95 to-teal-900/40",
+        )}
+      >
+        <div>
+          <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-white/70">
+            {label}
+          </p>
+        </div>
+
+        <div className="space-y-2 sm:space-y-2.5">
+          <div>
+            <h2
+              className={cn(
+                "font-bold leading-snug",
+                lang === "ar"
+                  ? "text-lg sm:text-xl lg:text-2xl"
+                  : "text-xl sm:text-2xl lg:text-3xl",
+                isYellow ? "text-yellow-300" : "text-teal-300",
+              )}
+            >
+              {title}
+            </h2>
+
+            <div
+              className={cn(
+                "mt-1.5 sm:mt-2 h-1 w-10 rounded-full",
+                isYellow ? "bg-yellow-400" : "bg-teal-400",
+              )}
+              aria-hidden
+            />
+
+            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-white/90 line-clamp-2">
+              {description}
+            </p>
+          </div>
+
+          <button
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-sm font-semibold transition-all duration-300",
+              "hover:scale-105 active:scale-95 relative z-30",
+              isYellow
+                ? "bg-yellow-500 hover:bg-yellow-600 text-black"
+                : "bg-teal-500 hover:bg-teal-600 text-white",
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              if (portal.external) {
+                window.open(portal.href, "_blank");
+              }
+            }}
+          >
+            {cta}
+            <ArrowRight className="size-4 rtl:-scale-x-100" />
+          </button>
+        </div>
+      </div>
+
+      {/* Placeholder photo layer — sits after the text side (right in EN, left
+         in AR). Swap portal.img for the real asset later. */}
+      <div className="relative w-2/5 sm:w-[38%] shrink-0">
         <Image
           src={portal.img}
           alt={title}
           fill
-          priority={portal.id === "geotechnical"}
-          sizes="(max-width: 640px) 100vw, 50vw"
-          className="object-cover object-center brightness-75 saturate-90"
+          sizes="(max-width: 640px) 38vw, 20vw"
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/50 to-navy/25" />
+        <div
+          className={cn(
+            "absolute inset-0",
+            isYellow
+              ? "bg-gradient-to-r from-yellow-950/40 to-transparent"
+              : "bg-gradient-to-r from-teal-950/40 to-transparent",
+          )}
+          aria-hidden
+        />
       </div>
 
       <div
         className={cn(
-          "absolute -inset-px opacity-50 blur-2xl",
-          isYellow ? "bg-yellow-400/15" : "bg-teal-400/15",
-        )}
-        aria-hidden
-      />
-
-      <div
-        className="pointer-events-none absolute inset-y-0 start-3 z-10 hidden w-6 opacity-40 sm:grid"
-        style={{
-          gridTemplateColumns: "repeat(2, 3px)",
-          gridAutoRows: "3px",
-          gap: "6px",
-          alignContent: "center",
-          justifyContent: "start",
-        }}
-        aria-hidden
-      >
-        {Array.from({ length: 24 }).map((_, i) => (
-          <span
-            key={i}
-            className={cn(
-              "rounded-full",
-              isYellow ? "bg-yellow-300" : "bg-teal-300",
-            )}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 flex h-full flex-col justify-end p-7">
-        {content}
-      </div>
-
-      <div
-        className={cn(
-          "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-15",
+          "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-20 rounded-3xl",
           isYellow ? "bg-yellow-400" : "bg-teal-400",
         )}
         aria-hidden
       />
-
-      {portal.external ? (
-        <a
-          href={portal.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Go to ${title} division`}
-          className="absolute inset-0 z-20"
-        />
-      ) : (
-        <Link
-          href={linkHref}
-          aria-label={`Enter ${title} division`}
-          className="absolute inset-0 z-20"
-        />
-      )}
     </motion.div>
   );
 }
 
-// On the navigation (portal) page the logo must be a single colour — pure
-// black in light theme and pure white in dark theme. This is applied via a CSS
-// filter (brightness/invert), so no separate asset is required and the
-// result tracks the theme automatically.
 function Logo() {
-  return <BrandLogo monochrome size="h-10" />;
+  return <BrandLogo monochrome size="h-9 sm:h-10" />;
 }
 
 function ThemeToggle({ className }: { className?: string }) {
@@ -471,13 +438,17 @@ function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "inline-flex size-11 items-center justify-center rounded-xl border border-border bg-background/60 text-foreground transition-colors",
-        "hover:bg-muted dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10",
+        "inline-flex size-8 sm:size-9 items-center justify-center rounded-lg transition-colors",
+        "text-white/70 hover:text-white hover:bg-white/20",
         className,
       )}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}
+      {isDark ? (
+        <Sun className="size-4 sm:size-5" />
+      ) : (
+        <Moon className="size-4 sm:size-5" />
+      )}
     </button>
   );
 }
@@ -494,11 +465,11 @@ function LanguageToggle({
     <button
       type="button"
       onClick={onToggle}
-      className="inline-flex h-11 items-center gap-1.5 rounded-xl border border-border bg-background/60 px-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold text-white/80 hover:text-white transition-colors hover:bg-white/10 rounded-lg"
       aria-label={lang === "en" ? "Switch to Arabic" : "Switch to English"}
     >
       <Globe className="size-4" />
-      {label}
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
 }
