@@ -176,7 +176,7 @@ export const content: Record<Lang, Dict> = {
     hero: {
       tag: "GEODRILL Construction Experts",
       headline: "Strength in Execution. Precision in Delivery.",
-      sub: "GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia, from ground works to finishing, built to the highest standards of quality, safety, and innovation.",
+      sub: "GEODRILL Construction delivers integrated construction solutions across Saudi Arabia, from ground works to finishing, built to the highest standards of quality, safety, and innovation.",
       badges: ["ISO 9001", "ISO 45001", "ISO 14001"],
     },
     about: {
@@ -399,18 +399,18 @@ export const content: Record<Lang, Dict> = {
     },
     blog: {
       kicker: "Insights & Updates",
-      title: "Ideas from the field",
-      sub: "Practical perspectives on construction, engineering, and delivering work that lasts.",
+      title: "Ideas From the Field",
+      sub: "We share practical insights and real-world experiences from our projects, along with the latest developments in the construction and engineering industries. Our content aims to expand knowledge and highlight best practices for delivering high-quality projects built to last.",
       viewAll: "View all insights",
       empty: "New insights are coming soon.",
     },
     faq: {
       kicker: "Frequently Asked Questions",
-      title: "Straight answers, clear next steps",
-      sub: "A few answers to the questions we hear most often before a project begins.",
+      title: "Clear Answers to Help You Make Confident Decisions",
+      sub: "Here, we answer some of the most common questions our clients have before and during the start of their projects, helping you better understand the process and project requirements.",
       viewAll: "View all questions",
-      sideTitle: "Can't find your answer?",
-      sideBody: "Our team is ready to help you find the answer you need.",
+      sideTitle: "Couldn't Find the Answer to Your Question?",
+      sideBody: "GEODRILL team is ready to answer your questions and help you understand the right steps for your project.",
       sideCta: "Get in touch",
     },
     certs: {
@@ -525,7 +525,7 @@ export const content: Record<Lang, Dict> = {
       tag: "جيو دريل خبراء الإنشاء",
       headline: "قوة في التنفيذ. دقة في الإنجاز.",
       // In your translation file:
-      sub: "تقدم جيو دريل خبراء الإنشاء حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية، بدءاً من أعمال التربة والحفر وحتى اللمسات النهائية، وفق أعلى معايير الجودة والسلامة والابتكار لتلبية وتجاوز تطلعات العملاء.",
+      sub: "تقدم جيو دريل حلولاً هندسية وإنشائية متكاملة في جميع أنحاء المملكة العربية السعودية، بدءاً من أعمال التربة والحفر وحتى اللمسات النهائية، وفق أعلى معايير الجودة والسلامة والابتكار لتلبية وتجاوز تطلعات العملاء.",
       badges: ["آيزو 9001", "آيزو 45001", "آيزو 14001"],
     },
     about: {
@@ -739,18 +739,18 @@ export const content: Record<Lang, Dict> = {
     },
     blog: {
       kicker: "الرؤى والتحديثات",
-      title: "أفكار من الميدان",
-      sub: "رؤى عملية حول الإنشاء والهندسة وتسليم أعمال تدوم.",
+      title: "من قلب الميدان",
+      sub: "نشارككم رؤى وتجارب عملية من واقع مشاريعنا، إلى جانب أحدث المستجدات في قطاع الإنشاءات والهندسة، لنقدم محتوى يثري المعرفة ويسلط الضوء على أفضل الممارسات في التنفيذ وتسليم مشاريع تدوم.",
       viewAll: "عرض جميع المقالات",
       empty: "ترقبوا رؤى جديدة قريبًا.",
     },
     faq: {
       kicker: "الأسئلة الشائعة",
-      title: "إجابات واضحة وخطوات تالية محددة",
-      sub: "إجابات عن أكثر الأسئلة التي نسمعها قبل بدء المشروع.",
+      title: "إجابات واضحة تساعدك على اتخاذ القرار بثقة",
+      sub: "نجيب هنا عن أبرز الأسئلة والاستفسارات التي يطرحها عملاؤنا قبل وأثناء بدء مشاريعهم، لمساعدتك على فهم خطوات العمل ومتطلبات المشروع بشكل أوضح.",
       viewAll: "عرض جميع الأسئلة",
-      sideTitle: "لم تجد إجابتك؟",
-      sideBody: "فريقنا جاهز لمساعدتك في إيجاد الإجابة التي تحتاجها.",
+      sideTitle: "لم تجد إجابة سؤالك؟",
+      sideBody: "فريق جيو دريل جاهز للإجابة عن استفساراتك ومساعدتك في معرفة الخطوات المناسبة لمشروعك.",
       sideCta: "تواصل معنا",
     },
     certs: {
