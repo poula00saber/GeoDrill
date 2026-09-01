@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Map as MapIcon, FlaskConical, ClipboardCheck } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { siteImages } from '@/geotech/lib/images';
+import { motion } from "framer-motion";
+import { Map as MapIcon, FlaskConical, ClipboardCheck } from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { siteImages } from "@/geotech/lib/images";
 
 export function SurveyTesting() {
   const { dict } = useLanguage();
@@ -47,7 +47,7 @@ export function SurveyTesting() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               className="group relative overflow-hidden rounded-lg border border-border/40 bg-card"
             >
@@ -59,13 +59,18 @@ export function SurveyTesting() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
                 <div className="absolute start-4 top-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border/40 bg-background/60 backdrop-blur-md">
-                    <mod.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                    <mod.icon
+                      className="h-5 w-5 text-primary"
+                      strokeWidth={1.5}
+                    />
                   </div>
                 </div>
               </div>
               <div className="p-5">
                 <h3 className="mb-2 text-lg font-semibold">{mod.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{mod.description}</p>
+                <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {mod.description}
+                </p>
                 <div className="mt-4 h-px w-full bg-border" />
                 <div className="mt-3 flex items-center justify-between">
                   <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">

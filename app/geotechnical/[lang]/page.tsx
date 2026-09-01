@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
-import { GeotechHome } from '@/app/geotechnical/page';
-import { isLocale, locales } from '@/geotech/lib/i18n';
+import { notFound } from "next/navigation";
+import { GeotechHome } from "@/app/geotechnical/page";
+import { isLocale, locales } from "@/geotech/lib/i18n";
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));

@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Map, Search, FlaskConical, Lightbulb } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { siteImages } from '@/geotech/lib/images';
+import { motion } from "framer-motion";
+import { Map, Search, FlaskConical, Lightbulb } from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { siteImages } from "@/geotech/lib/images";
 
 export function MiningExploration() {
   const { dict } = useLanguage();
   if (!dict) return null;
 
   const steps = [
-    { key: 'map', icon: Map },
-    { key: 'survey', icon: Search },
-    { key: 'sample', icon: FlaskConical },
-    { key: 'interpret', icon: Lightbulb },
+    { key: "map", icon: Map },
+    { key: "survey", icon: Search },
+    { key: "sample", icon: FlaskConical },
+    { key: "interpret", icon: Lightbulb },
   ];
 
   return (
@@ -56,7 +56,11 @@ export function MiningExploration() {
                 0{i + 1}
               </span>
               <span className="text-sm font-medium">
-                {dict.mining.process[step.key as keyof typeof dict.mining.process]}
+                {
+                  dict.mining.process[
+                    step.key as keyof typeof dict.mining.process
+                  ]
+                }
               </span>
             </motion.div>
           ))}

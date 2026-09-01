@@ -34,7 +34,9 @@ export default async function GeotechLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}>
+    <div
+      className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}
+    >
       <LanguageProvider>{children}</LanguageProvider>
     </div>
   );

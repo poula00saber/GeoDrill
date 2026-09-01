@@ -1,20 +1,23 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { ArrowRight, ArrowDown, Activity, MapPin } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { Button } from '@/geotech/components/ui/button';
-import { ContourLines } from '@/geotech/components/geological/background';
-import { siteImages } from '@/geotech/lib/images';
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowDown, Activity, MapPin } from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { Button } from "@/geotech/components/ui/button";
+import { ContourLines } from "@/geotech/components/geological/background";
+import { siteImages } from "@/geotech/lib/images";
 
 export function Hero() {
   const { dict, locale } = useLanguage();
   if (!dict) return null;
 
-  const isRtl = locale === 'ar';
+  const isRtl = locale === "ar";
 
   return (
-    <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden bg-background">
+    <section
+      id="hero"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-background"
+    >
       {/* Background image with mask reveal */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -130,10 +133,23 @@ export function Hero() {
               </span>
             </div>
             <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              <HudItem label={dict.hero.hud.investigation} value={dict.hero.hud.investigationValue} />
-              <HudItem label={dict.hero.hud.dataStatus} value={dict.hero.hud.dataStatusValue} pulse />
-              <HudItem label={dict.hero.hud.siteType} value={dict.hero.hud.siteTypeValue} />
-              <HudItem label={dict.hero.hud.region} value={dict.hero.hud.regionValue} />
+              <HudItem
+                label={dict.hero.hud.investigation}
+                value={dict.hero.hud.investigationValue}
+              />
+              <HudItem
+                label={dict.hero.hud.dataStatus}
+                value={dict.hero.hud.dataStatusValue}
+                pulse
+              />
+              <HudItem
+                label={dict.hero.hud.siteType}
+                value={dict.hero.hud.siteTypeValue}
+              />
+              <HudItem
+                label={dict.hero.hud.region}
+                value={dict.hero.hud.regionValue}
+              />
             </div>
           </div>
         </motion.div>
@@ -147,10 +163,12 @@ export function Hero() {
         className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2 text-muted-foreground">
-          <span className="font-mono text-[10px] uppercase tracking-wider">{dict.hero.scroll}</span>
+          <span className="font-mono text-[10px] uppercase tracking-wider">
+            {dict.hero.scroll}
+          </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           >
             <ArrowDown className="h-4 w-4" />
           </motion.div>
@@ -165,10 +183,20 @@ export function Hero() {
   );
 }
 
-function HudItem({ label, value, pulse }: { label: string; value: string; pulse?: boolean }) {
+function HudItem({
+  label,
+  value,
+  pulse,
+}: {
+  label: string;
+  value: string;
+  pulse?: boolean;
+}) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/70">{label}</span>
+      <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/70">
+        {label}
+      </span>
       <span className="flex items-center gap-1.5 font-mono text-xs font-medium text-foreground">
         {pulse && (
           <span className="relative flex h-1.5 w-1.5">

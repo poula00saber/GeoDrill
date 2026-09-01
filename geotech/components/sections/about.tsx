@@ -1,18 +1,21 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Eye, Target } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { ContourLines } from '@/geotech/components/geological/background';
-import { siteImages } from '@/geotech/lib/images';
+import { motion } from "framer-motion";
+import { Eye, Target } from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { ContourLines } from "@/geotech/components/geological/background";
+import { siteImages } from "@/geotech/lib/images";
 
 export function AboutSection() {
   const { dict } = useLanguage();
   if (!dict) return null;
 
   return (
-    <section id="about" className="relative overflow-hidden py-20 sm:py-28 md:py-32">
+    <section
+      id="about"
+      className="relative overflow-hidden py-20 sm:py-28 md:py-32"
+    >
       <ContourLines className="text-primary" opacity={0.03} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -33,7 +36,7 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8 }}
             className="relative"
           >
@@ -60,10 +63,14 @@ export function AboutSection() {
               <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
                 <Eye className="h-5 w-5 text-primary" strokeWidth={1.5} />
               </div>
-              <span className="font-mono text-xs uppercase tracking-wider text-primary">Vision</span>
+              <span className="font-mono text-xs uppercase tracking-wider text-primary">
+                Vision
+              </span>
             </div>
             <h3 className="mb-3 text-lg font-semibold">{dict.vision.title}</h3>
-            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{dict.vision.description}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+              {dict.vision.description}
+            </p>
           </motion.div>
 
           <motion.div
@@ -77,10 +84,14 @@ export function AboutSection() {
               <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
                 <Target className="h-5 w-5 text-primary" strokeWidth={1.5} />
               </div>
-              <span className="font-mono text-xs uppercase tracking-wider text-primary">Mission</span>
+              <span className="font-mono text-xs uppercase tracking-wider text-primary">
+                Mission
+              </span>
             </div>
             <h3 className="mb-3 text-lg font-semibold">{dict.mission.title}</h3>
-            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{dict.mission.description}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+              {dict.mission.description}
+            </p>
           </motion.div>
         </div>
       </div>

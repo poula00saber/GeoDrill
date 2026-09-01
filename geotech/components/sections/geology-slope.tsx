@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Mountain, Compass } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { ContourLines } from '@/geotech/components/geological/background';
-import { siteImages } from '@/geotech/lib/images';
+import { motion } from "framer-motion";
+import { Mountain, Compass } from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { ContourLines } from "@/geotech/components/geological/background";
+import { siteImages } from "@/geotech/lib/images";
 
 export function GeologySlope() {
   const { dict } = useLanguage();
@@ -19,7 +19,7 @@ export function GeologySlope() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8 }}
             className="relative order-2 lg:order-1"
           >
@@ -31,7 +31,11 @@ export function GeologySlope() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <ContourLines className="text-primary" opacity={0.08} />
               {/* Slope arrows */}
-              <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 400 300"
+                preserveAspectRatio="xMidYMid slice"
+              >
                 <motion.path
                   d="M100,80 L100,120"
                   stroke="hsl(var(--primary))"
@@ -55,15 +59,27 @@ export function GeologySlope() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                 />
                 <defs>
-                  <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-                    <polygon points="0 0, 6 3, 0 6" fill="hsl(var(--primary))" />
+                  <marker
+                    id="arrowhead"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <polygon
+                      points="0 0, 6 3, 0 6"
+                      fill="hsl(var(--primary))"
+                    />
                   </marker>
                 </defs>
               </svg>
               <div className="absolute start-4 top-4">
                 <div className="flex items-center gap-2 rounded-md border border-border/40 bg-background/60 p-2 backdrop-blur-md">
                   <Compass className="h-3.5 w-3.5 text-primary" />
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">Slope Assessment</span>
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    Slope Assessment
+                  </span>
                 </div>
               </div>
             </div>
@@ -78,7 +94,12 @@ export function GeologySlope() {
               className="mb-8"
             />
             <div className="flex flex-wrap gap-3">
-              {['Geological Mapping', 'Remote Sensing', 'Slope Stability', 'Rock Mass Rating'].map((tag, i) => (
+              {[
+                "Geological Mapping",
+                "Remote Sensing",
+                "Slope Stability",
+                "Rock Mass Rating",
+              ].map((tag, i) => (
                 <motion.div
                   key={tag}
                   initial={{ opacity: 0, y: 10 }}
