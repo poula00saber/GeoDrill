@@ -1,0 +1,221 @@
+"use client";
+
+import { ArrowUp } from "lucide-react";
+import { useLanguage } from "../providers/language-provider";
+import { ContourLines } from "../geological/background";
+import { siteConfig } from "../../lib/site-config";
+
+export function Footer() {
+  const { dict } = useLanguage();
+  if (!dict) return null;
+
+  const navItems = [
+    { label: dict.nav.about, href: "#about" },
+    { label: dict.nav.services, href: "#services" },
+    { label: dict.nav.technology, href: "#technology" },
+    { label: dict.nav.projects, href: "#projects" },
+    { label: dict.nav.qhse, href: "#qhse" },
+    { label: dict.nav.contact, href: "#contact" },
+  ];
+
+  const socials = [
+    { icon: LinkedinIcon, href: siteConfig.social.linkedin },
+    { icon: InstagramIcon, href: siteConfig.social.instagram },
+    { icon: XIcon, href: siteConfig.social.twitter },
+    { icon: FacebookIcon, href: siteConfig.social.facebook },
+  ];
+
+  return (
+    <footer className="relative overflow-hidden border-t border-border/40 bg-background">
+      <ContourLines className="text-primary" opacity={0.03} />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2.5">
+              <svg viewBox="0 0 40 40" className="h-10 w-10">
+                <rect
+                  x="2"
+                  y="2"
+                  width="36"
+                  height="36"
+                  rx="6"
+                  fill="hsl(var(--primary))"
+                />
+                <path
+                  d="M10 14 L20 8 L30 14 L30 26 L20 32 L10 26 Z"
+                  fill="none"
+                  stroke="hsl(var(--primary-foreground))"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="3"
+                  fill="hsl(var(--primary-foreground))"
+                />
+              </svg>
+              <div className="flex flex-col leading-none">
+                <span className="text-lg font-bold tracking-tight">
+                  GEODRILL
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                  KSA · GEOTECH
+                </span>
+              </div>
+            </div>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
+              {dict.footer.tagline}
+            </p>
+            <div className="mt-6 flex gap-3">
+              {socials.map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-md border border-border/40 bg-surface/50 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
+                >
+                  <social.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              {dict.footer.navigation}
+            </h3>
+            <ul className="space-y-2.5">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <span className="h-px w-0 bg-primary transition-all duration-300 group-hover:w-4" />
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              {dict.footer.contactTitle}
+            </h3>
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
+              <li>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {siteConfig.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={siteConfig.phoneHref}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {siteConfig.phone}
+                </a>
+              </li>
+              <li className="text-pretty">
+                {siteConfig.address.line1}
+                <br />
+                {siteConfig.address.line2}
+                <br />
+                {siteConfig.address.city}, {siteConfig.address.country}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-6 sm:flex-row">
+          <p className="font-mono text-xs text-muted-foreground">
+            © {new Date().getFullYear()} {siteConfig.name}. {dict.footer.rights}
+          </p>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs text-muted-foreground/60">
+              {siteConfig.handle}
+            </span>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-border/40 transition-colors hover:border-primary/40 hover:text-primary"
+              aria-label={dict.common.backToTop}
+            >
+              <ArrowUp className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* Inline brand icons — the installed lucide version dropped the deprecated
+   social brand icons, so we keep the brand look with lightweight SVGs. */
+type IconProps = { className?: string };
+
+function LinkedinIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.5c0-1.79-.03-4.1-2.5-4.1-2.5 0-2.88 1.95-2.88 3.96V23h-4V8z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className={className}
+      aria-hidden
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function XIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z" />
+    </svg>
+  );
+}

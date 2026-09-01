@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   Moon,
@@ -66,7 +67,7 @@ const portals = [
     },
     cta: { en: "Visit Geotechnical Site", ar: "زيارة موقع الجيوتقنية" },
     href: "https://old.geodrillksa.com",
-    external: true,
+    external: false,
     accent: "yellow",
     img: "/images/geotech-portal-placeholder.png",
   },
@@ -309,8 +310,13 @@ function PortalCard({
   const description = portal.description[lang];
   const cta = portal.cta[lang];
   const label = portal.label[lang];
+  const router = useRouter();
 
-  const linkHref = portal.external ? portal.href : `/contracting/${lang}`;
+  const linkHref = portal.external
+    ? portal.href
+    : portal.href.startsWith("/contracting")
+      ? `/contracting/${lang}`
+      : portal.href;
 
   return (
     <motion.div
@@ -386,6 +392,8 @@ function PortalCard({
               e.preventDefault();
               if (portal.external) {
                 window.open(portal.href, "_blank");
+              } else {
+                router.push(linkHref);
               }
             }}
           >

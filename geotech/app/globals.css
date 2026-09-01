@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode — warm white, deep charcoal, GEODRILL yellow */
+    --background: 40 20% 98%;
+    --background-rgb: 252, 250, 246;
+    --foreground: 220 14% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 12%;
+    --primary: 45 100% 51%;
+    --primary-foreground: 220 14% 12%;
+    --secondary: 40 10% 94%;
+    --secondary-foreground: 220 14% 12%;
+    --muted: 40 8% 93%;
+    --muted-foreground: 220 6% 42%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 220 14% 12%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 8% 88%;
+    --input: 220 8% 88%;
+    --ring: 45 100% 51%;
+    --surface: 40 12% 96%;
+    --surface-foreground: 220 14% 12%;
+    --technical: 220 10% 55%;
+    --grid: 220 8% 82%;
+    --chart-1: 45 100% 51%;
+    --chart-2: 200 70% 45%;
+    --chart-3: 160 50% 40%;
+    --chart-4: 25 80% 55%;
+    --chart-5: 280 50% 55%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 16% 6%;
+    --background-rgb: 13, 16, 22;
+    --foreground: 40 20% 96%;
+    --card: 220 14% 9%;
+    --card-foreground: 40 20% 96%;
+    --popover: 220 14% 9%;
+    --popover-foreground: 40 20% 96%;
+    --primary: 45 100% 51%;
+    --primary-foreground: 220 16% 6%;
+    --secondary: 220 12% 14%;
+    --secondary-foreground: 40 20% 96%;
+    --muted: 220 12% 16%;
+    --muted-foreground: 220 6% 62%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 220 16% 6%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 10% 18%;
+    --input: 220 10% 18%;
+    --ring: 45 100% 51%;
+    --surface: 220 14% 11%;
+    --surface-foreground: 40 20% 96%;
+    --technical: 220 8% 58%;
+    --grid: 220 10% 20%;
+    --chart-1: 45 100% 51%;
+    --chart-2: 200 70% 50%;
+    --chart-3: 160 50% 45%;
+    --chart-4: 25 80% 55%;
+    --chart-5: 280 50% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid) / 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid) / 0.4) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .bg-grid-sm {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid) / 0.35) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .bg-contour {
+    background-image: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      hsl(var(--grid) / 0.15) 100%
+    );
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+  .mask-fade-t {
+    -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
+    mask-image: linear-gradient(to top, black 60%, transparent 100%);
+  }
+  .mask-fade-edges {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.6);
+}
+
+/* Selection */
+::selection {
+  background: hsl(var(--primary) / 0.85);
+  color: hsl(var(--primary-foreground));
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Arabic font adjustments */
+[dir="rtl"] {
+  letter-spacing: 0;
+}

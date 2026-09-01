@@ -215,6 +215,20 @@ export function Navbar() {
           </button>
 
           <a
+            href="/g"
+            className={cn(
+              "hidden items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-colors duration-200 sm:inline-flex",
+              isFloatingHero
+                ? "text-white/80 hover:text-white"
+                : "text-foreground/80 hover:text-primary",
+            )}
+            aria-label="Visit Geotech"
+          >
+            Geotech
+            <ArrowUpRight className="size-3 rtl:-scale-x-100" />
+          </a>
+
+          <a
             href={navHref("contact")}
             onClick={(e) => handleNavClick(e, navHref("contact"))}
             className="hidden items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm transition-all hover:brightness-105 hover:shadow-md sm:inline-flex"
@@ -268,6 +282,24 @@ export function Navbar() {
               </a>
             </li>
           ))}
+          <li
+            className={cn(
+              "transition-all duration-300",
+              open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+            )}
+            style={{
+              transitionDelay: open ? `${60 + t.nav.length * 35}ms` : "0ms",
+            }}
+          >
+            <a
+              href="/g"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 hover:bg-muted hover:text-primary"
+            >
+              Geotech
+              <ArrowUpRight className="size-4 rtl:-scale-x-100" />
+            </a>
+          </li>
           <li className="mt-2">
             <a
               href={navHref("contact")}
