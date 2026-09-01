@@ -35,10 +35,12 @@ export default function GeotechLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}
-    >
-      <LanguageProvider>{children}</LanguageProvider>
+    <div className="geotech-theme">
+      <div
+        className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}
+      >
+        <LanguageProvider>{children}</LanguageProvider>
+      </div>
     </div>
   );
 }

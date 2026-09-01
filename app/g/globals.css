@@ -37,8 +37,8 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-:root {
-  color-scheme: light;
+/* Geotech theme — scoped to this route via .geotech-theme class */
+.geotech-theme {
   --radius: 0.875rem;
 
   /* Light theme — GEODRILL yellow/gold theme with warm whites */
@@ -73,9 +73,7 @@
   --teal-dark: oklch(0.66 0.15 80);
 }
 
-.dark {
-  color-scheme: dark;
-
+.geotech-theme.dark {
   /* Dark background / base */
   --background: oklch(0.15 0.018 245);
   --foreground: oklch(0.97 0.004 90);
