@@ -42,7 +42,7 @@ export function AboutSection() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${siteImages.about})` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
             </div>
           </motion.div>
         </div>

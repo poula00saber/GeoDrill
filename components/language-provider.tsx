@@ -19,7 +19,9 @@ function langFromPathname(pathname: string): Lang {
   //   /contracting/[lang]-> segments[1]  (e.g. "/contracting/ar")
   const segments = pathname.split("/").filter(Boolean);
   const localeSegment =
-    segments[0] === "contracting" ? segments[1] : segments[0];
+    segments[0] === "contracting" || segments[0] === "geotechnical"
+      ? segments[1]
+      : segments[0];
   return localeSegment === "ar" ? "ar" : "en";
 }
 

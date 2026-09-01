@@ -56,7 +56,7 @@ export function SurveyTesting() {
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                   style={{ backgroundImage: `url(${mod.image})` }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
                 <div className="absolute start-4 top-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border/40 bg-background/60 backdrop-blur-md">
                     <mod.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { LanguageProvider } from "@/geotech/components/providers/language-provider";
+import "./globals.css";
 
 const geotechSans = Inter({
   subsets: ["latin"],
@@ -28,14 +29,18 @@ export const metadata: Metadata = {
     "Advanced geotechnical, geophysical and engineering investigation services delivering reliable subsurface intelligence for safer, smarter and more efficient project decisions in Saudi Arabia.",
 };
 
-export default async function GeotechLayout({
+export default function GeotechLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}>
-      <LanguageProvider>{children}</LanguageProvider>
+    <div className="geotech-theme min-h-screen" dir="ltr" lang="en">
+      <div
+        className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}
+      >
+        <LanguageProvider>{children}</LanguageProvider>
+      </div>
     </div>
   );
 }

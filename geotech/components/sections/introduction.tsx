@@ -47,7 +47,7 @@ export function Introduction() {
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
                 style={{ backgroundImage: `url(${siteImages.investigation})` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4">
                 <div className="flex items-center gap-2 rounded-md border border-border/40 bg-background/60 p-3 backdrop-blur-md">
                   <div className="h-8 w-1 bg-primary" />

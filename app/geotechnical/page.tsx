@@ -1,3 +1,9 @@
+import { redirect } from 'next/navigation';
+import { PageTransition } from '@/geotech/components/page-transition';
+
+export default function GeotechnicalIndex() {
+  redirect('/geotechnical/en');
+}
 import { Navigation } from '@/geotech/components/navigation';
 import { Hero } from '@/geotech/components/sections/hero';
 import { TrustBar } from '@/geotech/components/sections/trust-bar';
@@ -21,9 +27,9 @@ import { Projects } from '@/geotech/components/sections/projects';
 import { ContactSection } from '@/geotech/components/sections/contact';
 import { Footer } from '@/geotech/components/sections/footer';
 
-export default function GeotechHome() {
+export function GeotechHome() {
   return (
-    <>
+    <PageTransition>
       <Navigation />
       <main>
         <Hero />
@@ -48,6 +54,6 @@ export default function GeotechHome() {
         <ContactSection />
       </main>
       <Footer />
-    </>
+    </PageTransition>
   );
 }

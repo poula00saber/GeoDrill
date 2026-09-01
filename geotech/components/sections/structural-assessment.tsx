@@ -26,7 +26,7 @@ export function StructuralAssessment() {
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
                 style={{ backgroundImage: `url(${siteImages.structural})` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute start-4 top-4">
                 <div className="flex items-center gap-2 rounded-md border border-border/40 bg-background/60 p-2 backdrop-blur-md">
                   <Building2 className="h-3.5 w-3.5 text-primary" />

@@ -26,8 +26,8 @@ export function Hero() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${siteImages.hero})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/10" />
       </motion.div>
 
       {/* Technical grid overlay */}
