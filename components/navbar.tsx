@@ -215,7 +215,7 @@ export function Navbar() {
           </button>
 
           <a
-            href="/g"
+            href="/geotechnical"
             className={cn(
               "hidden items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-colors duration-200 sm:inline-flex",
               isFloatingHero
@@ -292,7 +292,7 @@ export function Navbar() {
             }}
           >
             <a
-              href="/g"
+              href="/geotechnical"
               onClick={() => setOpen(false)}
               className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 hover:bg-muted hover:text-primary"
             >

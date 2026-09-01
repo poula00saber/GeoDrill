@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { LanguageProvider } from "@/geotech/components/providers/language-provider";
-import "./globals.css";
 
 const geotechSans = Inter({
   subsets: ["latin"],
@@ -35,7 +34,7 @@ export default function GeotechLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="geotech-theme">
+    <div className="geotech-theme min-h-screen bg-background text-foreground" dir="ltr" lang="en">
       <div
         className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}
       >

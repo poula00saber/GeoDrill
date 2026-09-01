@@ -76,6 +76,59 @@
   --teal-dark: oklch(0.55 0.1 195);
 }
 
+.geotech-theme {
+  color-scheme: light;
+  --radius: 0.875rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.02 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 240);
+  --primary: oklch(0.78 0.17 85);
+  --primary-foreground: oklch(0.18 0.02 240);
+  --secondary: oklch(0.22 0.02 240);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.96 0.004 84);
+  --muted-foreground: oklch(0.48 0.015 240);
+  --accent: oklch(0.94 0.08 85);
+  --accent-foreground: oklch(0.22 0.02 240);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.92 0.006 84);
+  --input: oklch(0.94 0.006 84);
+  --ring: oklch(0.78 0.17 85);
+  --navy: oklch(0.19 0.02 240);
+  --teal: oklch(0.78 0.17 85);
+  --teal-dark: oklch(0.66 0.15 80);
+  --grid: 45 10% 70%;
+}
+
+.dark .geotech-theme {
+  color-scheme: dark;
+  --background: oklch(0.12 0.015 245);
+  --foreground: oklch(0.95 0.005 85);
+  --card: oklch(0.17 0.02 245);
+  --card-foreground: oklch(0.95 0.005 85);
+  --popover: oklch(0.17 0.02 245);
+  --popover-foreground: oklch(0.95 0.005 85);
+  --primary: oklch(0.85 0.19 88);
+  --primary-foreground: oklch(0.12 0.015 245);
+  --secondary: oklch(0.88 0.005 90);
+  --secondary-foreground: oklch(0.12 0.015 245);
+  --muted: oklch(0.22 0.018 245);
+  --muted-foreground: oklch(0.68 0.01 85);
+  --accent: oklch(0.88 0.12 88);
+  --accent-foreground: oklch(0.12 0.015 245);
+  --destructive: oklch(0.65 0.2 27);
+  --border: oklch(0.25 0.015 245);
+  --input: oklch(0.25 0.015 245);
+  --ring: oklch(0.85 0.19 88);
+  --navy: oklch(0.1 0.015 245);
+  --teal: oklch(0.85 0.19 88);
+  --teal-dark: oklch(0.72 0.17 85);
+  --grid: 220 15% 28%;
+}
+
 /*
   === THEME PALETTE (GLOBAL) ===
   Change any variable below and the ENTIRE website updates automatically.
@@ -190,6 +243,35 @@
 }
 
 @layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid) / 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid) / 0.4) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-grid-sm {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid) / 0.35) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  .mask-fade-t {
+    -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
+    mask-image: linear-gradient(to top, black 60%, transparent 100%);
+  }
+
+  .mask-fade-edges {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
   /* Scroll-reveal animation utility */
   .reveal {
     opacity: 0;
