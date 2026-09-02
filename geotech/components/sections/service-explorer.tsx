@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
-import { Button } from "@/geotech/components/ui/button";
 import { siteImages } from "@/geotech/lib/images";
 import { cn } from "@/geotech/lib/utils";
 
@@ -117,16 +115,53 @@ const serviceImages: Record<ServiceKey, string> = {
   "mining-exploration": siteImages.mining,
 };
 
+const contentVariants = {
+  initial: (direction: number) => ({
+    opacity: 0,
+    y: direction > 0 ? 12 : -12,
+    filter: "blur(4px)",
+  }),
+  animate: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+  },
+  exit: (direction: number) => ({
+    opacity: 0,
+    y: direction < 0 ? 12 : -12,
+    filter: "blur(4px)",
+    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+  }),
+} as const;
+
 export function ServiceExplorer() {
   const { dict, locale } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [category, setCategory] = useState(0);
   const [activeService, setActiveService] = useState<ServiceKey>(
-    "geotechnical-investigation",
+    categories[0]!.services[0]!,
   );
+  // Tracks direction for the content-animation transitions.
+  const [direction, setDirection] = useState(1);
 
   if (!dict) return null;
 
-  const currentCategory = categories[activeCategory];
+  const currentCategory = categories[category];
+  const list = currentCategory.services;
+  const activeIdx = list.indexOf(activeService);
+
+  const pickCategory = (i: number) => {
+    setCategory(i);
+    setDirection(1);
+    setActiveService(categories[i]!.services[0]!);
+  };
+
+  const selectService = (id: ServiceKey) => {
+    const currentIndex = list.indexOf(activeService);
+    const nextIndex = list.indexOf(id);
+    setDirection(nextIndex >= currentIndex ? 1 : -1);
+    setActiveService(id);
+  };
 
   return (
     <section
@@ -141,153 +176,162 @@ export function ServiceExplorer() {
           className="mb-12"
         />
 
-        <div className="grid gap-8 lg:grid-cols-[260px_1fr_320px]">
-          {/* Left: Categories */}
-          <div className="flex flex-col gap-1">
-            {categories.map((cat, i) => (
+        {/* Categories Tab Navigation */}
+        <div className="flex flex-wrap gap-2">
+          {categories.map((cat, i) => {
+            const isSelected = category === i;
+            return (
               <button
                 key={cat.key}
-                onClick={() => {
-                  setActiveCategory(i);
-                  setActiveService(cat.services[0]);
-                }}
+                type="button"
+                onClick={() => pickCategory(i)}
+                aria-pressed={isSelected}
                 className={cn(
-                  "group flex items-center justify-between border-s-2 px-4 py-3.5 text-start transition-all",
-                  activeCategory === i
-                    ? "border-primary bg-surface text-foreground"
-                    : "border-transparent text-muted-foreground hover:text-foreground hover:bg-surface/50",
+                  "relative rounded-md px-4 py-2.5 text-xs font-semibold uppercase tracking-wider outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-primary",
+                  isSelected
+                    ? "text-primary-foreground"
+                    : "border border-border bg-surface text-muted-foreground hover:border-primary/50 hover:bg-surface/80 hover:text-primary",
                 )}
               >
-                <span className="text-sm font-medium">
+                {isSelected && (
+                  <motion.div
+                    layoutId="active-category"
+                    transition={{ type: "spring", stiffness: 260, damping: 24, mass: 0.9 }}
+                    className="absolute inset-0 rounded-md bg-primary shadow-[0_0_18px_rgba(201,162,39,0.45)]"
+                  />
+                )}
+                <motion.span
+                  layout
+                  transition={{ type: "spring", stiffness: 260, damping: 24, mass: 0.9 }}
+                  className="relative z-10 block"
+                >
                   {dict.services.categories[cat.labelKey]}
-                </span>
-                <span className="font-mono text-xs text-muted-foreground/60">
-                  {cat.services.length}
-                </span>
+                </motion.span>
               </button>
-            ))}
-          </div>
-
-          {/* Center: Visual */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border lg:aspect-auto lg:min-h-[420px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeService}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="absolute inset-0"
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${serviceImages[activeService]})`,
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-                <div className="absolute inset-0 bg-grid-sm opacity-10" />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Service number overlay */}
-            <div className="absolute start-4 top-4 z-10">
-              <span className="font-mono text-6xl font-bold text-primary/20">
-                {String(
-                  currentCategory.services.indexOf(activeService) + 1,
-                ).padStart(2, "0")}
-              </span>
-            </div>
-
-            {/* Active service name on image */}
-            <div className="absolute inset-x-4 bottom-4 z-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeService}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <h3 className="text-xl font-semibold text-foreground sm:text-2xl">
-                    {dict.services.items[activeService].name}
-                  </h3>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-
-          {/* Right: Service info */}
-          <div className="flex flex-col">
-            {/* Service list for current category */}
-            <div className="mb-6 flex flex-col gap-1">
-              {currentCategory.services.map((service) => (
-                <button
-                  key={service}
-                  onClick={() => setActiveService(service)}
-                  className={cn(
-                    "group flex items-center justify-between rounded-md px-3 py-2.5 text-start text-sm transition-all",
-                    activeService === service
-                      ? "bg-surface text-foreground"
-                      : "text-muted-foreground hover:bg-surface/50 hover:text-foreground",
-                  )}
-                >
-                  <span className="font-medium">
-                    {dict.services.items[service].name}
-                  </span>
-                  <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity rtl:rotate-180 group-hover:opacity-60" />
-                </button>
-              ))}
-            </div>
-
-            {/* Active service details */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeService}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-1 flex-col rounded-lg border border-border/70 bg-surface/30 p-4"
-              >
-                <div className="mb-3 h-px w-12 bg-primary" />
-                <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {dict.services.items[activeService].description}
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="mt-6 self-start"
-                >
-                  <Link
-                    href={`/geotechnical/services/${serviceSlugMap[activeService]}`}
-                  >
-                    {dict.services.explore}
-                    <ArrowRight className="ms-2 h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-                  </Link>
-                </Button>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+            );
+          })}
         </div>
 
-        {/* Mobile: accordion-style */}
-        <div className="mt-8 lg:hidden">
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat, i) => (
-              <button
-                key={cat.key}
-                onClick={() => setActiveCategory(i)}
-                className={cn(
-                  "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
-                  activeCategory === i
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border text-muted-foreground",
-                )}
+        {/* Master-Detail Interactive Grid */}
+        <div className="mt-8 grid overflow-hidden rounded-md border border-border/80 bg-border/60 shadow-xl lg:grid-cols-[280px_1.1fr_1fr]">
+          {/* Left: service list for the current category */}
+          <ul className="divide-y divide-border/60 bg-background">
+            {list.map((s, i) => {
+              const isActive = s === activeService;
+              return (
+                <li key={s}>
+                  <button
+                    type="button"
+                    onMouseEnter={() => selectService(s)}
+                    onFocus={() => selectService(s)}
+                    onClick={() => selectService(s)}
+                    aria-current={isActive}
+                    className={cn(
+                      "group relative flex w-full items-start gap-3.5 px-5 py-4 text-start transition-colors duration-200 hover:bg-surface/80",
+                      isActive && "bg-surface",
+                    )}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="service-indicator"
+                        className="absolute inset-y-0 start-0 w-1 rounded-e bg-primary shadow-[0_0_10px_rgba(201,162,39,0.5)]"
+                        transition={{ type: "spring", stiffness: 300, damping: 26, mass: 0.9 }}
+                      />
+                    )}
+                    <span
+                      className={cn(
+                        "pt-0.5 font-mono text-xs transition-colors",
+                        isActive
+                          ? "font-bold text-primary"
+                          : "text-muted-foreground/60",
+                      )}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span
+                      className={cn(
+                        "text-sm font-medium leading-snug transition-colors",
+                        isActive
+                          ? "font-semibold text-foreground"
+                          : "text-muted-foreground group-hover:text-foreground",
+                      )}
+                    >
+                      {dict.services.items[s].name}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Middle: dynamic service visual */}
+          <div className="relative min-h-[320px] overflow-hidden bg-black lg:min-h-[420px]">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeService}
+                src={serviceImages[activeService]}
+                alt={dict.services.items[activeService].name}
+                loading="lazy"
+                initial={{ opacity: 0, scale: 1.08 }}
+                animate={{ opacity: 0.85, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+            {/* Discipline / index badge */}
+            <div className="absolute bottom-5 start-5 z-10">
+              <span className="inline-flex rounded border border-white/10 bg-black/40 px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-white/80 backdrop-blur-sm">
+                {dict.services.categories[currentCategory.labelKey]} /{" "}
+                {String(activeIdx + 1).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+          {/* Right: service details panel */}
+          <div className="relative flex flex-col justify-between bg-background p-6 md:p-8">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={activeService}
+                custom={direction}
+                variants={contentVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="flex h-full flex-col justify-between"
               >
-                {dict.services.categories[cat.labelKey]}
-              </button>
-            ))}
+                <div>
+                  <span className="font-mono text-xs font-semibold text-primary">
+                    {String(activeIdx + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 text-2xl font-bold tracking-tight text-balance text-foreground">
+                    {dict.services.items[activeService].name}
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {dict.services.items[activeService].description}
+                  </p>
+
+                  {/* Category tag */}
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <TechnicalBadge>
+                      {dict.services.categories[currentCategory.labelKey]}
+                    </TechnicalBadge>
+                  </div>
+                </div>
+
+                <div className="mt-8 border-t border-border/60 pt-6">
+                  <a
+                    href={`/geotechnical/${locale}/services/${serviceSlugMap[activeService]}`}
+                    className="group inline-flex items-center gap-2.5 rounded-full border border-primary bg-transparent px-6 py-2.5 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_18px_rgba(201,162,39,0.45)]"
+                  >
+                    <span>{dict.services.explore}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5 rtl:rotate-180 rtl:group-hover:-translate-x-1.5" />
+                  </a>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
