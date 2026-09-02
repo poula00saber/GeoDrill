@@ -32,7 +32,7 @@ export function TechnicalCapabilities() {
         <SectionHeading
           eyebrow="Technical Methods"
           title="Technical Capabilities & Methods"
-          subtitle="Industry-standard investigation, testing and analytical techniques"
+          description="Industry-standard investigation, testing and analytical techniques"
           align="center"
           className="mb-16"
         />

@@ -22,6 +22,7 @@ import { Textarea } from "@/geotech/components/ui/textarea";
 import { Label } from "@/geotech/components/ui/label";
 import { ContourLines } from "@/geotech/components/geological/background";
 import { siteConfig } from "@/geotech/lib/site-config";
+import { submitGeotechContact } from "@/lib/submit-geotech-contact";
 
 const schema = z.object({
   fullName: z.string().min(1, "Please enter your full name"),
@@ -59,11 +60,16 @@ export function ContactSection() {
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
     setError(false);
+    setSuccess(false);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setSuccess(true);
-      reset();
-      setTimeout(() => setSuccess(false), 5000);
+      const result = await submitGeotechContact(data);
+      if (result.ok) {
+        setSuccess(true);
+        reset();
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        setError(true);
+      }
     } catch {
       setError(true);
     } finally {

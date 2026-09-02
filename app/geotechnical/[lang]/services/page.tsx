@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { SectionHeading } from "@/geotech/components/section-heading";
+import { Button } from "@/geotech/components/ui/button";
 import { WhatAreYouSolving } from "@/geotech/components/sections/what-are-you-solving";
 import { TechnicalCapabilities } from "@/geotech/components/sections/technical-capabilities";
 import {
@@ -104,13 +105,15 @@ export default function ServicesPage({ params }: PageProps) {
             return (
               <section key={category} className="mb-20">
                 <SectionHeading
-                  label={category}
+                  eyebrow={category}
                   title={categoryDescriptions[category]}
                 />
 
                 <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {categoryServices.map((service) => {
-                    const imageSrc = serviceImages[service.slug] || "/images/geotech-portal-placeholder.png";
+                    const imageSrc =
+                      serviceImages[service.slug] ||
+                      "/images/geotech-portal-placeholder.png";
                     return (
                       <motion.article
                         key={service.slug}
@@ -118,7 +121,7 @@ export default function ServicesPage({ params }: PageProps) {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
-                        className="group overflow-hidden rounded-lg border border-border/60 bg-surface/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface hover:shadow-lg"
+                        className="group flex flex-col overflow-hidden rounded-lg border border-border bg-surface/50 backdrop-blur-sm transition-all hover:border-primary/60 hover:bg-surface hover:shadow-lg"
                       >
                         <div className="relative aspect-video w-full overflow-hidden bg-muted">
                           <Image
@@ -136,21 +139,26 @@ export default function ServicesPage({ params }: PageProps) {
                           </div>
                         </div>
 
-                        <div className="p-6">
+                        <div className="flex flex-1 flex-col p-6">
                           <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
                             {service.title}
                           </h3>
-                          <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                          <p className="mt-3 flex-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                             {service.shortDescription}
                           </p>
 
-                          <Link
-                            href={`/geotechnical/${lang}/services/${service.slug}`}
-                            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary transition-all hover:gap-3"
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="mt-5 self-start"
                           >
-                            Explore
-                            <ArrowRight className="h-4 w-4" />
-                          </Link>
+                            <Link
+                              href={`/geotechnical/${lang}/services/${service.slug}`}
+                            >
+                              Explore
+                              <ArrowRight className="ms-2 h-4 w-4" />
+                            </Link>
+                          </Button>
                         </div>
                       </motion.article>
                     );
@@ -177,13 +185,12 @@ export default function ServicesPage({ params }: PageProps) {
               Contact our team to discuss custom solutions for your project
               requirements.
             </p>
-            <Link
-              href={`/geotechnical/${lang}/contact`}
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-all hover:gap-3"
-            >
-              Get in Touch
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <Button asChild size="lg" className="mt-8">
+              <Link href={`/geotechnical/${lang}/contact`}>
+                Get in Touch
+                <ArrowRight className="ms-2 h-4 w-4" />
+              </Link>
+            </Button>
           </motion.div>
         </section>
       </main>

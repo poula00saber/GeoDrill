@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
+import { Button } from "@/geotech/components/ui/button";
 import { siteImages } from "@/geotech/lib/images";
 import { cn } from "@/geotech/lib/utils";
 
@@ -247,19 +248,24 @@ export function ServiceExplorer() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="flex flex-1 flex-col"
+                className="flex flex-1 flex-col rounded-lg border border-border/70 bg-surface/30 p-4"
               >
                 <div className="mb-3 h-px w-12 bg-primary" />
                 <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
                   {dict.services.items[activeService].description}
                 </p>
-                <Link
-                  href={`/geotechnical/services/${serviceSlugMap[activeService]}`}
-                  className="group mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
+                <Button
+                  asChild
+                  variant="outline"
+                  className="mt-6 self-start"
                 >
-                  {dict.services.explore}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-                </Link>
+                  <Link
+                    href={`/geotechnical/services/${serviceSlugMap[activeService]}`}
+                  >
+                    {dict.services.explore}
+                    <ArrowRight className="ms-2 h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+                  </Link>
+                </Button>
               </motion.div>
             </AnimatePresence>
           </div>

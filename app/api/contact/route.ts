@@ -224,6 +224,7 @@ export async function POST(request: Request) {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
+          site: "construction",
           fullName: payload.fullName,
           companyName: payload.companyName || "Individual",
           email: payload.email,

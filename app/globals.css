@@ -94,13 +94,13 @@
   --accent: oklch(0.94 0.08 85);
   --accent-foreground: oklch(0.22 0.02 240);
   --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.92 0.006 84);
-  --input: oklch(0.94 0.006 84);
+  --border: oklch(0.86 0.012 80);
+  --input: oklch(0.85 0.012 80);
   --ring: oklch(0.78 0.17 85);
   --navy: oklch(0.19 0.02 240);
   --teal: oklch(0.78 0.17 85);
   --teal-dark: oklch(0.66 0.15 80);
-  --grid: 45 10% 70%;
+  --grid: 45 15% 62%;
 }
 
 .dark .geotech-theme {
@@ -127,6 +127,16 @@
   --teal: oklch(0.85 0.19 88);
   --teal-dark: oklch(0.72 0.17 85);
   --grid: 220 15% 28%;
+}
+/* Subtle gold gradient glow for the geotech dark background —
+   layered over the base --background colour via background-image. */
+.dark .geotech-theme {
+  background-image:
+    radial-gradient(900px 500px at 85% -5%, hsl(45 100% 60% / 0.10), transparent 60%),
+    radial-gradient(700px 420px at 8% 12%, hsl(45 100% 60% / 0.07), transparent 60%),
+    radial-gradient(1100px 700px at 50% 110%, hsl(220 20% 40% / 0.18), transparent 65%),
+    linear-gradient(180deg, hsl(220 18% 7% / 0) 0%, hsl(220 16% 4% / 0.6) 100%);
+  background-attachment: fixed;
 }
 
 /*

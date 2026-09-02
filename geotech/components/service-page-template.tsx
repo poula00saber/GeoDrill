@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ServiceContent } from "@/geotech/lib/services-data";
+import { ServiceContent, servicesData } from "@/geotech/lib/services-data";
 import { Button } from "@/geotech/components/ui/button";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
 import { SectionHeading } from "@/geotech/components/section-heading";
@@ -126,7 +126,7 @@ export function ServicePageTemplate({
               </h2>
               <div className="flex flex-wrap gap-2">
                 {service.standardsReferenced.map((standard) => (
-                  <TechnicalBadge key={standard} label={standard} />
+                  <TechnicalBadge key={standard}>{standard}</TechnicalBadge>
                 ))}
               </div>
             </motion.section>
@@ -135,33 +135,28 @@ export function ServicePageTemplate({
         {/* Process Steps */}
         {service.processSteps && service.processSteps.length > 0 && (
           <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading label="Process" title="How We Work" />
-            <div className="mt-12 grid gap-8">
+            <SectionHeading eyebrow="Process" title="How We Work" />
+            <div className="mt-12 grid gap-4">
               {service.processSteps.map((step, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="relative flex gap-6 pb-8 lg:gap-8"
+                  className="relative flex gap-6 rounded-lg border border-border/70 bg-surface/40 p-5 lg:gap-8"
                 >
-                  {/* Connector line */}
-                  {idx < service.processSteps!.length - 1 && (
-                    <div className="absolute left-6 top-16 h-12 w-px bg-gradient-to-b from-primary/50 to-transparent lg:left-8" />
-                  )}
-
                   {/* Step number */}
-                  <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-primary bg-primary/10 lg:h-16 lg:w-16">
+                  <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-primary bg-primary/10 lg:h-14 lg:w-14">
                     <span className="font-mono text-sm font-bold text-primary lg:text-base">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 pt-2">
+                  <div className="flex-1">
                     <h3 className="font-bold text-foreground lg:text-lg">
                       {step.label}
                     </h3>
                     {step.description && (
-                      <p className="mt-2 text-muted-foreground">
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                         {step.description}
                       </p>
                     )}
@@ -181,30 +176,32 @@ export function ServicePageTemplate({
 
         {/* Capabilities Section */}
         <motion.section variants={itemVariants} className="mb-20">
-          <SectionHeading label="Capabilities" title="What We Deliver" />
+          <SectionHeading eyebrow="Capabilities" title="What We Deliver" />
 
           {isCapabilitiesGrouped ? (
             // Grouped capabilities
-            <div className="mt-12 grid gap-12 lg:grid-cols-2">
+            <div className="mt-12 grid gap-8 lg:grid-cols-2">
               {Object.entries(
                 service.capabilities as Record<string, string[]>,
               ).map(([groupName, items]) => (
                 <motion.div
                   key={groupName}
                   variants={itemVariants}
-                  className="space-y-4"
+                  className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
                 >
-                  <h3 className="font-bold text-foreground lg:text-lg">
-                    {groupName}
-                  </h3>
-                  <ul className="space-y-2">
+                  <div className="border-b border-border bg-surface px-5 py-3">
+                    <h3 className="font-bold text-foreground lg:text-lg">
+                      {groupName}
+                    </h3>
+                  </div>
+                  <ul className="divide-y divide-border">
                     {items.map((item, idx) => (
                       <motion.li
                         key={idx}
                         variants={itemVariants}
-                        className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+                        className="flex items-start gap-3 px-5 py-3 text-sm leading-relaxed text-foreground/90"
                       >
-                        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                        <span className="mt-1.5 flex h-2.5 w-2.5 flex-shrink-0 items-center justify-center rounded-full bg-primary" />
                         {item}
                       </motion.li>
                     ))}
@@ -213,16 +210,16 @@ export function ServicePageTemplate({
               ))}
             </div>
           ) : (
-            // Flat capabilities list
-            <div className="mt-12 grid gap-4 sm:grid-cols-2">
+            // Flat capabilities list -> bordered card grid
+            <div className="mt-12 grid gap-3 sm:grid-cols-2">
               {(service.capabilities as string[]).map((item, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="flex gap-3"
+                  className="flex items-start gap-3 rounded-lg border border-border/70 bg-card px-4 py-3 transition-colors hover:border-primary/50"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                  <span className="text-sm leading-relaxed text-muted-foreground">
+                  <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
+                  <span className="text-sm leading-relaxed text-foreground/90">
                     {item}
                   </span>
                 </motion.div>
@@ -234,7 +231,7 @@ export function ServicePageTemplate({
         {/* Gallery */}
         {service.gallery && service.gallery.length > 0 && (
           <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading label="Gallery" title="In Action" />
+            <SectionHeading eyebrow="Gallery" title="In Action" />
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {service.gallery.map((image, idx) => (
@@ -265,28 +262,36 @@ export function ServicePageTemplate({
         {/* Related Services */}
         {service.relatedServices && service.relatedServices.length > 0 && (
           <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading label="Explore" title="Related Services" />
+            <SectionHeading eyebrow="Explore" title="Related Services" />
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {service.relatedServices.map((slugNum) => (
-                <motion.div
-                  key={slugNum}
-                  variants={itemVariants}
-                  className="group rounded-lg border border-border/60 bg-surface/50 p-6 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface"
-                >
-                  <h3 className="font-bold text-foreground">{slugNum}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                    Related technical expertise
-                  </p>
-                  <Link
-                    href={`${baseHref}/services/${slugNum}`}
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+              {service.relatedServices.map((slug) => {
+                const related = servicesData[slug];
+                const title = related?.title ?? slug;
+                const desc = related?.shortDescription ?? "Related technical expertise";
+                return (
+                  <motion.div
+                    key={slug}
+                    variants={itemVariants}
+                    className="group flex flex-col rounded-lg border border-border/70 bg-surface/50 p-6 backdrop-blur-sm transition-all hover:border-primary/60 hover:bg-surface hover:shadow-md hover:shadow-primary/5"
                   >
-                    Learn more
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </motion.div>
-              ))}
+                    <h3 className="font-bold text-foreground">{title}</h3>
+                    <p className="mt-2 flex-1 text-sm text-muted-foreground line-clamp-2">
+                      {desc}
+                    </p>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="mt-5 self-start"
+                    >
+                      <Link href={`${baseHref}/services/${slug}`}>
+                        Learn more
+                        <ArrowRight className="ms-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.section>
         )}
@@ -294,25 +299,26 @@ export function ServicePageTemplate({
         {/* CTA */}
         <motion.section
           variants={itemVariants}
-          className="rounded-lg border border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 p-12 text-center"
+          className="rounded-lg border border-border bg-gradient-to-r from-primary/10 to-primary/5 p-10 text-center sm:p-12"
         >
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
             Ready to discuss your project?
           </h2>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             Our experts are ready to provide technical consultation and support
             for your specific needs.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-            >
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <a href={`${baseHref}/contact`}>
                 Get in Touch
                 <ArrowRight className="ms-2 h-4 w-4" />
               </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href={`${baseHref}/services`}>
+                Explore All Services
+              </Link>
             </Button>
           </div>
         </motion.section>
