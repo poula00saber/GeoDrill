@@ -37,13 +37,70 @@ function escapeHtml(value: string): string {
 
 function customerEmailHtml(data: ContactFormInput): string {
   const name = escapeHtml(data.fullName.trim());
-  return `<!doctype html><html><body style="font-family:Arial,Helvetica,sans-serif;color:#0d2b34;line-height:1.6">
-  <h2 style="color:#0fb5b9">Thank you, ${name} 🤝</h2>
-  <p>We've received your message and our team will get back to you as soon as possible.</p>
-  <p>If your enquiry is urgent, feel free to reach us directly.</p>
-  <br/>
-  <p style="color:#6b7280">— GEODRILL Construction Experts</p>
-</body></html>`;
+  return `<!doctype html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;padding:0;background-color:#eef4f4;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#eef4f4;padding:32px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #d5e2e3;box-shadow:0 8px 30px rgba(13,43,52,0.10);">
+
+        <!-- Header -->
+        <tr><td style="background:linear-gradient(135deg,#0d2b34 0%,#114550 100%);padding:32px 40px;text-align:center;">
+          <div style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#0fb5b9;font-family:Arial,Helvetica,sans-serif;font-weight:700;">☰ GEODRILL KSA</div>
+          <div style="margin-top:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.55);font-family:Arial,Helvetica,sans-serif;">Construction Experts</div>
+          <div style="height:2px;width:56px;margin:18px auto 0;background:#0fb5b9;border-radius:2px;"></div>
+        </td></tr>
+
+        <!-- Hero -->
+        <tr><td style="background:linear-gradient(180deg,#f2fafb 0%,#ffffff 100%);padding:40px 40px 8px;text-align:center;">
+          <div style="width:64px;height:64px;margin:0 auto 20px;border-radius:50%;background:rgba(15,181,185,0.12);font-size:30px;line-height:64px;text-align:center;">🤝</div>
+          <h1 style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:26px;line-height:1.3;color:#0d2b34;font-weight:800;">Thank You — We've Got Your Message 💬</h1>
+          <p style="margin:10px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#2f5b66;font-weight:700;">Dear ${name},</p>
+        </td></tr>
+
+        <!-- Body -->
+        <tr><td style="padding:24px 40px 8px;">
+          <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.7;color:#3f5560;">We've received your message and our construction team will be in touch within 24–48 hours.</p>
+          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3f5560;">If your enquiry is urgent, reply to this email and one of our project managers will assist you directly.</p>
+        </td></tr>
+
+        <!-- Next steps -->
+        <tr><td style="padding:16px 40px 24px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2fafb;border:1px solid #d5e6e8;border-radius:12px;">
+            <tr><td style="padding:20px 24px;">
+              <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#0b8b8f;font-family:Arial,Helvetica,sans-serif;font-weight:700;margin-bottom:10px;">What happens next</div>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial,Helvetica,sans-serif;">
+                <tr><td style="padding:7px 0;font-size:14px;color:#2f5b66;vertical-align:top;">01</td><td style="padding:7px 12px;font-size:14px;color:#0d2b34;font-weight:600;vertical-align:top;white-space:nowrap;">We review</td><td style="padding:7px 0 7px 4px;font-size:14px;color:#3f5560;">A project manager reviews your requirements.</td></tr>
+                <tr><td style="padding:7px 0;font-size:14px;color:#2f5b66;vertical-align:top;">02</td><td style="padding:7px 12px;font-size:14px;color:#0d2b34;font-weight:600;vertical-align:top;white-space:nowrap;">We scope</td><td style="padding:7px 0 7px 4px;font-size:14px;color:#3f5560;">We align the right execution &amp; delivery approach.</td></tr>
+                <tr><td style="padding:7px 0;font-size:14px;color:#2f5b66;vertical-align:top;">03</td><td style="padding:7px 12px;font-size:14px;color:#0d2b34;font-weight:600;vertical-align:top;white-space:nowrap;">We contact you</td><td style="padding:7px 0 7px 4px;font-size:14px;color:#3f5560;">We reach out with a tailored solution &amp; estimate.</td></tr>
+              </table>
+            </td></tr>
+          </table>
+        </td></tr>
+
+        <!-- CTA -->
+        <tr><td align="center" style="padding:0 40px 32px;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td style="border-radius:10px;background:#0fb5b9;">
+              <a href="mailto:contracting@geodrillksa.com" style="display:inline-block;padding:14px 32px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;color:#0d2b34;text-decoration:none;">Contact Our Team Directly</a>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#0d2b34;padding:24px 40px;text-align:center;">
+          <div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgba(255,255,255,0.65);line-height:1.8;">
+            GEODRILL KSA — Construction Experts<br/>contracting@geodrillksa.com<br/>Riyadh, Saudi Arabia
+          </div>
+          <div style="height:1px;width:48px;margin:14px auto 0;background:rgba(15,181,185,0.6);"></div>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
 }
 
 function internalEmailHtml(
@@ -51,23 +108,58 @@ function internalEmailHtml(
   attachmentName?: string,
 ): string {
   const row = (label: string, value: string) =>
-    `<tr><td style="padding:8px 12px;font-weight:600;color:#0d2b34;border-top:1px solid #e5e7eb">${label}</td><td style="padding:8px 12px;color:#374151;border-top:1px solid #e5e7eb">${escapeHtml(value)}</td></tr>`;
+    `<tr>
+      <td style="padding:12px 20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#2f5b66;border-top:1px solid #d5e6e8;border-right:1px solid #d5e6e8;width:38%;white-space:nowrap;">${label}</td>
+      <td style="padding:12px 20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#0d2b34;border-top:1px solid #d5e6e8;">${escapeHtml(value)}</td>
+    </tr>`;
 
-  return `<!doctype html><html><body style="font-family:Arial,sans-serif;background:#f3f4f6;padding:24px">
-  <table style="width:100%;max-width:560px;margin:auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;border-collapse:collapse">
-    <tr><td style="padding:20px;background:#0d2b34;color:#fff;border-radius:12px 12px 0 0">
-      <h2 style="margin:0;color:#fff">New Contact Inquiry</h2>
+  return `<!doctype html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;padding:0;background-color:#eef4f4;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#eef4f4;padding:32px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #d5e2e3;box-shadow:0 8px 30px rgba(13,43,52,0.10);">
+
+        <!-- Header -->
+        <tr><td style="background:linear-gradient(135deg,#0d2b34 0%,#114550 100%);padding:28px 40px;text-align:center;">
+          <div style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#0fb5b9;font-family:Arial,Helvetica,sans-serif;font-weight:700;">☰ GEODRILL KSA</div>
+          <div style="margin-top:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.55);font-family:Arial,Helvetica,sans-serif;">Construction Division</div>
+          <h1 style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:20px;color:#ffffff;font-weight:800;">New Contact Inquiry</h1>
+        </td></tr>
+
+        <!-- Body -->
+        <tr><td style="padding:28px 40px 20px;">
+          <p style="margin:0 0 18px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#0d2b34;">A new contact inquiry has been submitted through the website. Details below:</p>
+        </td></tr>
+
+        <!-- Details table -->
+        <tr><td style="padding:0 24px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #d5e6e8;border-radius:12px;overflow:hidden;">
+            ${row("Full Name", data.fullName + "")}
+            ${row("Company", data.companyName + "")}
+            ${row("Email", data.email + "")}
+            ${row("Phone", data.phone + "")}
+            ${row("Project Description", data.projectDescription + "")}
+            ${attachmentName ? row("Attachment", attachmentName) : ""}
+          </table>
+        </td></tr>
+
+        <!-- Note -->
+        <tr><td style="padding:20px 24px 32px;">
+          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#2f5b66;font-style:italic;">Reply to this email to respond to the client.</p>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#0d2b34;padding:20px 40px;text-align:center;">
+          <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.7;">Sent from the GEODRILL website contact form.</div>
+        </td></tr>
+
+      </table>
     </td></tr>
-    <tr><td style="padding:0"><table style="border-collapse:collapse;width:100%">
-      ${row("Full Name", data.fullName + "")}
-      ${row("Company", data.companyName + "")}
-      ${row("Email", data.email + "")}
-      ${row("Phone", data.phone + "")}
-      ${row("Project Description", data.projectDescription + "")}
-      ${attachmentName ? row("Attachment", attachmentName) : ""}
-    </table></td></tr>
-    <tr><td style="padding:12px 16px;color:#6b7280;font-size:13px">Sent via the GEODRILL website contact form.</td></tr>
-  </table></body></html>`;
+  </table>
+</body>
+</html>`;
 }
 
 export async function POST(request: Request) {

@@ -40,11 +40,35 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+// Allowed attachment types: PDFs, CAD files (DWG/DXF), images, and Word docs.
+const ACCEPTED_MIME = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/dwg",
+  "image/vnd.dxf",
+  "application/x-dwg",
+  "application/x-autocad",
+  "application/acad",
+  "application/dxf",
+]);
+// AutoCAD files are often reported with a generic MIME type, so also accept
+// them via their file extension.
+const ACCEPTED_EXT = /\.(pdf|doc|docx|dwg|dxf|jpe?g|png|gif|webp)$/i;
+const ACCEPT_HINT = ".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.dwg,.dxf";
+const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
+
 export function ContactSection() {
   const { dict, locale } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState("");
 
   const {
     register,
@@ -57,14 +81,43 @@ export function ContactSection() {
 
   if (!dict) return null;
 
+  const handleFileChange = (file: File | null) => {
+    setFileError("");
+    if (!file) {
+      setAttachmentFile(null);
+      return;
+    }
+    if (!ACCEPTED_MIME.has(file.type) && !ACCEPTED_EXT.test(file.name)) {
+      setFileError(
+        locale !== "ar"
+          ? "Unsupported file type. Please upload a PDF, DWG, DXF, image, or Word document."
+          : "نوع الملف غير مدعوم. يرجى رفع ملف PDF أو DWG أو DXF أو صورة أو Word.",
+      );
+      setAttachmentFile(null);
+      return;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      setFileError(
+        locale !== "ar"
+          ? "File is too large. Maximum size is 10 MB."
+          : "الملف كبير جدًا. الحد الأقصى هو 10 ميجابايت.",
+      );
+      setAttachmentFile(null);
+      return;
+    }
+    setAttachmentFile(file);
+  };
+
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
     setError(false);
     setSuccess(false);
     try {
-      const result = await submitGeotechContact(data);
+      const result = await submitGeotechContact(data, attachmentFile);
       if (result.ok) {
         setSuccess(true);
+        setAttachmentFile(null);
+        setFileError("");
         reset();
         setTimeout(() => setSuccess(false), 5000);
       } else {
@@ -238,13 +291,60 @@ export function ContactSection() {
                 </FormField>
 
                 <FormField label={dict.contact.form.uploadDocuments}>
-                  <div className="flex cursor-pointer items-center gap-3 rounded-md border border-dashed border-border bg-background px-4 py-3 transition-colors hover:border-primary/40">
-                    <Upload className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
-                      PDF, DWG, DXF (max 10MB)
+                  <label
+                    className={
+                      fileError
+                        ? "flex w-full cursor-pointer items-center justify-between gap-3 rounded-md border border-dashed border-destructive/60 bg-background px-4 py-3 transition-colors hover:border-primary/40"
+                        : "flex w-full cursor-pointer items-center justify-between gap-3 rounded-md border border-dashed border-border bg-background px-4 py-3 transition-colors hover:border-primary/40"
+                    }
+                  >
+                    <span className="flex min-w-0 items-center gap-3">
+                      <Upload className="h-4 w-4 shrink-0 text-muted-foreground" />
+                      <span className="truncate text-sm">
+                        {attachmentFile
+                          ? attachmentFile.name
+                          : locale !== "ar"
+                            ? "PDF, DWG, DXF (max 10MB)"
+                            : "PDF، DWG، DXF (بحد أقصى 10 ميجابايت)"}
+                      </span>
                     </span>
-                    <input type="file" className="hidden" />
-                  </div>
+                    {attachmentFile ? (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleFileChange(null);
+                        }}
+                        className="shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold text-destructive transition-colors hover:bg-destructive/10"
+                        aria-label={
+                          locale !== "ar" ? "Remove file" : "إزالة الملف"
+                        }
+                      >
+                        {locale !== "ar" ? "Remove" : "إزالة"}
+                      </button>
+                    ) : (
+                      <span className="shrink-0 text-xs font-medium text-primary">
+                        {locale !== "ar" ? "Browse" : "تصفح"}
+                      </span>
+                    )}
+                    <input
+                      type="file"
+                      accept={ACCEPT_HINT}
+                      onChange={(e) =>
+                        handleFileChange(e.target.files?.[0] ?? null)
+                      }
+                      className="sr-only"
+                    />
+                  </label>
+                  {fileError ? (
+                    <p className="text-xs text-destructive">{fileError}</p>
+                  ) : (
+                    <p className="text-xs text-muted-foreground">
+                      {locale !== "ar"
+                        ? "Attach a site plan, drawing, or specification to help us scope your project."
+                        : "أرفق مخططًا للموقع أو رسمًا أو مواصفات لمساعدتنا في تحديد نطاق مشروعك."}
+                    </p>
+                  )}
                 </FormField>
 
                 <Button

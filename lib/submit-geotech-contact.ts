@@ -2,8 +2,9 @@
 
 /**
  * Reusable client-side helper that POSTs the geotech contact form to
- * /api/geotech-contact. Centralises fetch + error handling so the contact
- * section stays clean and consistent with the construction site flow.
+ * /api/geotech-contact. Uses multipart/form-data so an optional file
+ * attachment (PDF / DWG / DXF / image / Word) can be sent along, mirroring
+ * the construction site flow.
  */
 
 export interface GeotechContactPayload {
@@ -24,12 +25,27 @@ export interface GeotechContactResult {
 
 export async function submitGeotechContact(
   data: GeotechContactPayload,
+  file?: File | null,
 ): Promise<GeotechContactResult> {
   try {
+    const formData = new FormData();
+    formData.set("fullName", data.fullName);
+    formData.set("company", data.company ?? "");
+    formData.set("email", data.email);
+    formData.set("phone", data.phone ?? "");
+    formData.set("projectType", data.projectType ?? "");
+    formData.set("requiredService", data.requiredService ?? "");
+    formData.set("projectLocation", data.projectLocation ?? "");
+    formData.set("projectDescription", data.projectDescription ?? "");
+    if (file) {
+      formData.set("attachment", file, file.name);
+    }
+
     const response = await fetch("/api/geotech-contact", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      // Do NOT set Content-Type manually — the browser adds the multipart
+      // boundary automatically when sending FormData.
+      body: formData,
     });
 
     const body = (await response.json().catch(() => null)) as
