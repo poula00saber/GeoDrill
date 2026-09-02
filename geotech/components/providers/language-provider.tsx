@@ -76,10 +76,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       <div
-        className="geotech-theme min-h-screen bg-background text-foreground"
+        className="geotech-theme isolate min-h-screen bg-background text-foreground"
         dir={getDirection(locale)}
         lang={locale}
       >
+        {/* Ambient background gradients shown across the whole page
+            (subtle glows over the base background, behind all content). */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -top-24 -start-24 size-[34rem] rounded-full bg-primary/10 blur-[140px]" />
+          <div className="absolute top-1/4 -end-28 size-[30rem] rounded-full bg-slate-400/10 blur-[140px] dark:bg-primary/10" />
+          <div className="absolute bottom-0 start-1/4 size-[26rem] rounded-full bg-primary/10 blur-[150px] dark:bg-primary/15" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        </div>
         {children}
       </div>
     </LanguageContext.Provider>

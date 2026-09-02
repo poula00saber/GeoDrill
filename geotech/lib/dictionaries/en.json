@@ -10,6 +10,7 @@
     "technology": "Technology",
     "projects": "Projects",
     "qhse": "QHSE",
+    "clients": "Clients",
     "contact": "Contact",
     "startProject": "Start a Project",
     "menu": "Menu",
@@ -490,6 +491,40 @@
   "organizations": {
     "title": "Experience Across Leading Organizations.",
     "subtitle": "Organizations represented below reflect the professional experience of GEODRILL team members across their careers."
+  },
+  "clients": {
+    "eyebrow": "Trusted By",
+    "title": "Clients Who Rely on Ground Intelligence.",
+    "subtitle": "From government institutions to private developers, we support the people behind Saudi Arabia's most ambitious projects.",
+    "viewAll": "View All Clients"
+  },
+  "clientsPage": {
+    "eyebrow": "Our Clients",
+    "title": "Trusted Organizations",
+    "subtitle": "Partners from the public and private sectors who rely on our geotechnical and geoscience expertise across Saudi Arabia.",
+    "search": "Search clients...",
+    "all": "All Clients",
+    "government": "Government & Giga",
+    "infrastructure": "Infrastructure & Real Estate",
+    "waterEnergy": "Water & Energy",
+    "contracting": "Contracting & Construction",
+    "clientsStat": "Clients",
+    "sectorsStat": "Sectors",
+    "verifiedStat": "Verified",
+    "verifiedBadge": "Verified",
+    "cta": "Start a Similar Project",
+    "empty": "No clients match your selected criteria.",
+    "reset": "Reset filters",
+    "backHome": "Back to home",
+    "prev": "Previous",
+    "next": "Next",
+    "close": "Close"
+  },
+  "ctaBanner": {
+    "eyebrow": "Let's Work Together",
+    "title": "Let's Build a Solid Foundation for Your Next Project",
+    "description": "Talk to our experts today and get reliable geotechnical solutions tailored to your needs.",
+    "button": "Get In Touch"
   },
   "projects": {
     "title": "Projects",

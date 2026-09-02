@@ -30,7 +30,7 @@ export default function QhsePage() {
     <>
       <Navigation />
       <main
-        className="min-h-screen w-full bg-background"
+        className="min-h-screen w-full"
         dir={isAr ? "rtl" : "ltr"}
       >
         {/* Modern Header Section */}

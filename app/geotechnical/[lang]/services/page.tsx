@@ -63,7 +63,7 @@ export default function ServicesPage({ params }: PageProps) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen w-full bg-background">
+      <main className="min-h-screen w-full">
         {/* Hero Section */}
         <section className="relative min-h-[40vh] w-full overflow-hidden bg-gradient-to-b from-surface to-background pt-24">
           <div className="absolute inset-0 opacity-30">

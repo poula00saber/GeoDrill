@@ -8,10 +8,12 @@ import { Approach } from "@/geotech/components/sections/approach";
 import { ServiceExplorer } from "@/geotech/components/sections/service-explorer";
 import { WhatSetsApart } from "@/geotech/components/sections/what-sets-apart";
 import { Organizations } from "@/geotech/components/sections/organizations";
+import { Clients } from "@/geotech/components/sections/clients";
 import { ContactSection } from "@/geotech/components/sections/contact";
 import { WhyGeoDrill } from "@/geotech/components/sections/why-geodrill";
 import { SelectedExperience } from "@/geotech/components/sections/selected-experience";
 import { Footer } from "@/geotech/components/sections/footer";
+import { CtaBanner } from "@/geotech/components/sections/cta-banner";
 
 export function GeotechHome() {
   return (
@@ -27,6 +29,8 @@ export function GeotechHome() {
         <SelectedExperience />
         <WhatSetsApart />
         <Organizations />
+        <Clients />
+        <CtaBanner />
         <ContactSection />
       </main>
       <Footer />

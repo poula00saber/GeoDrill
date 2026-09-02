@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { LanguageProvider } from "@/geotech/components/providers/language-provider";
+import { GeotechContactButton } from "@/geotech/components/geotech-contact-button";
 
 const geotechSans = Inter({
   subsets: ["latin"],
@@ -37,7 +38,10 @@ export default async function GeotechLayout({
     <div
       className={`${geotechSans.variable} ${geotechMono.variable} ${geotechArabic.variable}`}
     >
-      <LanguageProvider>{children}</LanguageProvider>
+      <LanguageProvider>
+        {children}
+        <GeotechContactButton />
+      </LanguageProvider>
     </div>
   );
 }

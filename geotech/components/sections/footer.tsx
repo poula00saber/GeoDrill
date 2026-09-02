@@ -19,10 +19,30 @@ export function Footer() {
   ];
 
   const socials = [
-    { icon: LinkedinIcon, href: siteConfig.social.linkedin },
-    { icon: InstagramIcon, href: siteConfig.social.instagram },
-    { icon: XIcon, href: siteConfig.social.twitter },
-    { icon: FacebookIcon, href: siteConfig.social.facebook },
+    {
+      icon: LinkedinIcon,
+      href: siteConfig.social.linkedin,
+      hoverClass:
+        "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white hover:shadow-lg hover:shadow-[#0A66C2]/30",
+    },
+    {
+      icon: InstagramIcon,
+      href: siteConfig.social.instagram,
+      hoverClass:
+        "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent hover:text-white hover:shadow-lg hover:shadow-[#dc2743]/30",
+    },
+    {
+      icon: XIcon,
+      href: siteConfig.social.twitter,
+      hoverClass:
+        "hover:bg-black hover:border-white/20 hover:text-white hover:shadow-lg hover:shadow-black/50 dark:hover:bg-white dark:hover:text-black",
+    },
+    {
+      icon: FacebookIcon,
+      href: siteConfig.social.facebook,
+      hoverClass:
+        "hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white hover:shadow-lg hover:shadow-[#1877F2]/30",
+    },
   ];
 
   return (
@@ -69,6 +89,8 @@ export function Footer() {
             <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
               {dict.footer.tagline}
             </p>
+
+            {/* Social Icons — Scales up with brand colors */}
             <div className="mt-6 flex gap-3">
               {socials.map((social, i) => (
                 <a
@@ -76,9 +98,9 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-md border border-border/40 bg-surface/50 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
+                  className={`group flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-surface/50 text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:scale-110 ${social.hoverClass}`}
                 >
-                  <social.icon className="h-4 w-4" />
+                  <social.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
               ))}
             </div>
@@ -113,7 +135,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="transition-colors hover:text-foreground"
+                  className="transition-colors hover:text-primary"
                 >
                   {siteConfig.email}
                 </a>
@@ -121,7 +143,7 @@ export function Footer() {
               <li>
                 <a
                   href={siteConfig.phoneHref}
-                  className="transition-colors hover:text-foreground"
+                  className="transition-colors hover:text-primary"
                 >
                   {siteConfig.phone}
                 </a>
@@ -148,10 +170,10 @@ export function Footer() {
             </span>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-border/40 transition-colors hover:border-primary/40 hover:text-primary"
+              className="group flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/50 transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-md"
               aria-label={dict.common.backToTop}
             >
-              <ArrowUp className="h-4 w-4" />
+              <ArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
             </button>
           </div>
         </div>
@@ -160,8 +182,7 @@ export function Footer() {
   );
 }
 
-/* Inline brand icons — the installed lucide version dropped the deprecated
-   social brand icons, so we keep the brand look with lightweight SVGs. */
+/* Inline brand icons */
 type IconProps = { className?: string };
 
 function LinkedinIcon({ className }: IconProps) {

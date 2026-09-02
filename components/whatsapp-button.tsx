@@ -1,9 +1,15 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/language-provider";
 
 export function WhatsAppButton() {
   const { t } = useLanguage();
+  const pathname = usePathname();
+
+  // The geotech site (under /geotechnical) uses its own gold WhatsApp button;
+  // hide the construction-teal button there so the two don't double up.
+  if (pathname?.startsWith("/geotechnical")) return null;
 
   return (
     <a

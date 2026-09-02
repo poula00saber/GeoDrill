@@ -63,7 +63,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen w-full bg-background">
+      <main className="min-h-screen w-full">
         <ServicePageTemplate service={service} locale={lang} />
       </main>
       <Footer />

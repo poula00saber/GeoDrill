@@ -72,6 +72,7 @@ export function Navigation() {
     { label: dict.nav.services, href: `${baseHref}/services` },
     { label: dict.nav.projects, href: `${baseHref}/projects` },
     { label: dict.nav.qhse, href: `${baseHref}/qhse` },
+    { label: dict.nav.clients, href: `${baseHref}/clients` },
     { label: dict.nav.contact, href: `${baseHref}/contact` },
   ];
 
