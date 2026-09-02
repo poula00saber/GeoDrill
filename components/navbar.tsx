@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Menu, X, Globe, ArrowUpRight, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/theme-provider";
 import { Logo } from "@/components/logo";
 import { useLanguage } from "@/components/language-provider";
 import { cn } from "@/lib/utils";

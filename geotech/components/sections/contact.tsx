@@ -1,29 +1,40 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Check, Loader2, Send, Upload } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { Button } from '@/geotech/components/ui/button';
-import { Input } from '@/geotech/components/ui/input';
-import { Textarea } from '@/geotech/components/ui/textarea';
-import { Label } from '@/geotech/components/ui/label';
-import { ContourLines } from '@/geotech/components/geological/background';
-import { siteConfig } from '@/geotech/lib/site-config';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Check,
+  Loader2,
+  Send,
+  Upload,
+} from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { Button } from "@/geotech/components/ui/button";
+import { Input } from "@/geotech/components/ui/input";
+import { Textarea } from "@/geotech/components/ui/textarea";
+import { Label } from "@/geotech/components/ui/label";
+import { ContourLines } from "@/geotech/components/geological/background";
+import { siteConfig } from "@/geotech/lib/site-config";
 
 const schema = z.object({
-  fullName: z.string().min(1, 'Please enter your full name'),
+  fullName: z.string().min(1, "Please enter your full name"),
   company: z.string().optional(),
-  email: z.string().min(1, 'Please enter your email').email('Please enter a valid email address'),
+  email: z
+    .string()
+    .min(1, "Please enter your email")
+    .email("Please enter a valid email address"),
   phone: z.string().optional(),
   projectType: z.string().optional(),
   requiredService: z.string().optional(),
   projectLocation: z.string().optional(),
-  projectDescription: z.string().min(1, 'Please describe your project'),
+  projectDescription: z.string().min(1, "Please describe your project"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -34,7 +45,12 @@ export function ContactSection() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
@@ -56,7 +72,10 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden border-y border-border/40 bg-surface/30 py-20 sm:py-28 md:py-32">
+    <section
+      id="contact"
+      className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32"
+    >
       <ContourLines className="text-primary" opacity={0.04} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -104,11 +123,15 @@ export function ContactSection() {
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-3">
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60">Status</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60">
+                      Status
+                    </span>
                     <p className="font-mono text-xs text-primary">Ready</p>
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60">Response</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60">
+                      Response
+                    </span>
                     <p className="font-mono text-xs">24-48h</p>
                   </div>
                 </div>
@@ -121,44 +144,99 @@ export function ContactSection() {
             <div className="rounded-lg border border-border/40 bg-card p-6 sm:p-8">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <FormField label={dict.contact.form.fullName} error={errors.fullName?.message && (locale === 'ar' ? dict.contact.validation.nameRequired : errors.fullName.message)} required>
-                    <Input {...register('fullName')} className="bg-background" />
+                  <FormField
+                    label={dict.contact.form.fullName}
+                    error={
+                      errors.fullName?.message &&
+                      (locale === "ar"
+                        ? dict.contact.validation.nameRequired
+                        : errors.fullName.message)
+                    }
+                    required
+                  >
+                    <Input
+                      {...register("fullName")}
+                      className="bg-background"
+                    />
                   </FormField>
                   <FormField label={dict.contact.form.company}>
-                    <Input {...register('company')} className="bg-background" />
+                    <Input {...register("company")} className="bg-background" />
                   </FormField>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <FormField label={dict.contact.form.email} error={errors.email?.message && (locale === 'ar' ? (errors.email.type === 'email' ? dict.contact.validation.emailInvalid : dict.contact.validation.emailRequired) : errors.email.message)} required>
-                    <Input type="email" {...register('email')} className="bg-background" />
+                  <FormField
+                    label={dict.contact.form.email}
+                    error={
+                      errors.email?.message &&
+                      (locale === "ar"
+                        ? errors.email.type === "email"
+                          ? dict.contact.validation.emailInvalid
+                          : dict.contact.validation.emailRequired
+                        : errors.email.message)
+                    }
+                    required
+                  >
+                    <Input
+                      type="email"
+                      {...register("email")}
+                      className="bg-background"
+                    />
                   </FormField>
                   <FormField label={dict.contact.form.phone}>
-                    <Input type="tel" {...register('phone')} className="bg-background" />
+                    <Input
+                      type="tel"
+                      {...register("phone")}
+                      className="bg-background"
+                    />
                   </FormField>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <FormField label={dict.contact.form.projectType}>
-                    <Input {...register('projectType')} className="bg-background" />
+                    <Input
+                      {...register("projectType")}
+                      className="bg-background"
+                    />
                   </FormField>
                   <FormField label={dict.contact.form.requiredService}>
-                    <Input {...register('requiredService')} className="bg-background" />
+                    <Input
+                      {...register("requiredService")}
+                      className="bg-background"
+                    />
                   </FormField>
                 </div>
 
                 <FormField label={dict.contact.form.projectLocation}>
-                  <Input {...register('projectLocation')} className="bg-background" />
+                  <Input
+                    {...register("projectLocation")}
+                    className="bg-background"
+                  />
                 </FormField>
 
-                <FormField label={dict.contact.form.projectDescription} error={errors.projectDescription?.message && (locale === 'ar' ? dict.contact.validation.descriptionRequired : errors.projectDescription.message)} required>
-                  <Textarea {...register('projectDescription')} rows={4} className="resize-none bg-background" />
+                <FormField
+                  label={dict.contact.form.projectDescription}
+                  error={
+                    errors.projectDescription?.message &&
+                    (locale === "ar"
+                      ? dict.contact.validation.descriptionRequired
+                      : errors.projectDescription.message)
+                  }
+                  required
+                >
+                  <Textarea
+                    {...register("projectDescription")}
+                    rows={4}
+                    className="resize-none bg-background"
+                  />
                 </FormField>
 
                 <FormField label={dict.contact.form.uploadDocuments}>
                   <div className="flex cursor-pointer items-center gap-3 rounded-md border border-dashed border-border bg-background px-4 py-3 transition-colors hover:border-primary/40">
                     <Upload className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">PDF, DWG, DXF (max 10MB)</span>
+                    <span className="text-sm text-muted-foreground">
+                      PDF, DWG, DXF (max 10MB)
+                    </span>
                     <input type="file" className="hidden" />
                   </div>
                 </FormField>
@@ -192,7 +270,9 @@ export function ContactSection() {
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
                         <Check className="h-4 w-4 text-primary-foreground" />
                       </div>
-                      <p className="text-sm text-primary">{dict.contact.form.success}</p>
+                      <p className="text-sm text-primary">
+                        {dict.contact.form.success}
+                      </p>
                     </motion.div>
                   )}
                   {error && (
@@ -202,7 +282,9 @@ export function ContactSection() {
                       exit={{ opacity: 0, y: -10 }}
                       className="rounded-md border border-destructive/30 bg-destructive/10 p-3"
                     >
-                      <p className="text-sm text-destructive">{dict.contact.form.error}</p>
+                      <p className="text-sm text-destructive">
+                        {dict.contact.form.error}
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -255,7 +337,9 @@ function ContactItem({
         <Icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
       </div>
       <div className="flex flex-col">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>
+        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+          {label}
+        </span>
         <span className="text-sm font-medium text-foreground">{value}</span>
       </div>
     </div>

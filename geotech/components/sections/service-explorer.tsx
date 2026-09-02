@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
@@ -33,6 +34,27 @@ interface Category {
   labelKey: "ground" | "testing" | "engineering" | "studies";
   services: ServiceKey[];
 }
+
+// Map explorer keys to actual service slugs
+const serviceSlugMap: Record<ServiceKey, string> = {
+  "geotechnical-investigation": "geotechnical-investigation",
+  "geophysical-survey": "geophysical-survey",
+  "geological-survey": "geological-survey-rock-slope-stability",
+  "hydrogeological-studies": "hydrogeological-studies",
+  "material-testing": "material-testing-quality-control",
+  "quality-control": "material-testing-quality-control",
+  "topographical-survey": "topographical-survey",
+  "environmental-survey": "environmental-survey",
+  "cavity-probing": "cavity-probing-grouting-micro-piling",
+  grouting: "cavity-probing-grouting-micro-piling",
+  micropiling: "cavity-probing-grouting-micro-piling",
+  "anchoring-shoring": "anchoring-shoring-design-execution",
+  dewatering: "dewatering-design-execution",
+  "soil-improvement": "soil-improvement-concrete-repair",
+  hydrology: "hydrology-studies",
+  "structural-assessment": "structural-assessment",
+  "mining-exploration": "mining-exploration",
+};
 
 const categories: Category[] = [
   {
@@ -146,7 +168,7 @@ export function ServiceExplorer() {
           </div>
 
           {/* Center: Visual */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border/40 lg:aspect-auto lg:min-h-[420px]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border lg:aspect-auto lg:min-h-[420px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService}
@@ -231,13 +253,13 @@ export function ServiceExplorer() {
                 <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
                   {dict.services.items[activeService].description}
                 </p>
-                <a
-                  href="#contact"
+                <Link
+                  href={`/geotechnical/services/${serviceSlugMap[activeService]}`}
                   className="group mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
                 >
                   {dict.services.explore}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-                </a>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>

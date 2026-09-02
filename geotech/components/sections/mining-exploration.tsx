@@ -18,7 +18,7 @@ export function MiningExploration() {
   ];
 
   return (
-    <section className="relative overflow-hidden border-y border-border/40 bg-surface/30 py-20 sm:py-28 md:py-32">
+    <section className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Mining Exploration"

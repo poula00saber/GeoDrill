@@ -15,7 +15,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Logo as BrandLogo } from "@/components/logo";
 

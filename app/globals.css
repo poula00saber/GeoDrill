@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* Class-based dark mode (toggled by next-themes on the <html> element) */
+/* Class-based dark mode (toggled by the theme provider on the <html> element) */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -133,7 +133,7 @@
   === THEME PALETTE (GLOBAL) ===
   Change any variable below and the ENTIRE website updates automatically.
   Theme is applied by toggling the `.dark` class on the <html> element
-  (managed by next-themes). Semantic tokens (bg-background, text-foreground,
+  (managed by the theme provider). Semantic tokens (bg-background, text-foreground,
   bg-card, bg-muted, border-border, etc.) all resolve to these variables.
 */
 .dark {
@@ -213,7 +213,7 @@
     }
   }
 
-  /* Smooth cross-fade whenever next-themes flips the theme */
+  /* Smooth cross-fade whenever the theme provider flips the theme */
   html.theme-transition,
   html.theme-transition *,
   html.theme-transition *::before,

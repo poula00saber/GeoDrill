@@ -1,11 +1,11 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import React from 'react';
+import { ThemeProvider as CustomThemeProvider } from '@/components/theme-provider';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemesProvider
+    <CustomThemeProvider
       attribute="class"
       defaultTheme="dark"
       enableSystem
@@ -13,6 +13,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       storageKey="geodrill-theme"
     >
       {children}
-    </NextThemesProvider>
+    </CustomThemeProvider>
   );
 }

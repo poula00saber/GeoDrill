@@ -26,7 +26,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t border-border/40 bg-background">
+    <footer className="relative overflow-hidden border-t border-border bg-background">
       <ContourLines className="text-primary" opacity={0.03} />
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

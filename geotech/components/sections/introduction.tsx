@@ -39,7 +39,7 @@ export function Introduction() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border/40">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border">
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
                 style={{ backgroundImage: `url(${siteImages.investigation})` }}

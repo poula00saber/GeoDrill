@@ -1,0 +1,24 @@
+⨯ Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at a.s.title (D:\Projects\React\GeoDrill\.next\server\chunks\ssr\[root-of-the-server]__0owg5wn._.js:1:1203) {
+  digest: '4289888578'
+}
+⨯ Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at a.s.title (D:\Projects\React\GeoDrill\.next\server\chunks\ssr\[root-of-the-server]__0owg5wn._.js:1:1203) {
+  digest: '4289888578'
+}
+⨯ Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at a.s.title (D:\Projects\React\GeoDrill\.next\server\chunks\ssr\[root-of-the-server]__1le_l1_._.js:1:840) {
+  digest: '3336510392'
+}
+⨯ Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at a.s.title (D:\Projects\React\GeoDrill\.next\server\chunks\ssr\[root-of-the-server]__06f_8en._.js:1:826) {
+  digest: '534463825'
+}
+⨯ Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at a.s.title (D:\Projects\React\GeoDrill\.next\server\chunks\ssr\[root-of-the-server]__1va-jp2._.js:1:826) {
+  digest: '1911141342'
+}
+⨯ Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at a.s.title (D:\Projects\React\GeoDrill\.next\server\chunks\ssr\[root-of-the-server]__1mi0sp6._.js:1:826) {
+  digest: '1288678349'
+}

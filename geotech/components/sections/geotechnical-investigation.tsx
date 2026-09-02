@@ -1,30 +1,35 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { TechnicalBadge } from '@/geotech/components/technical-badge';
-import { ContourLines, BoreholeGraphic } from '@/geotech/components/geological/background';
+import { motion } from "framer-motion";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { TechnicalBadge } from "@/geotech/components/technical-badge";
+import {
+  ContourLines,
+  BoreholeGraphic,
+} from "@/geotech/components/geological/background";
 
 export function GeotechnicalInvestigation() {
   const { dict } = useLanguage();
   if (!dict) return null;
 
   const workflow = [
-    { key: 'drill', label: dict.geotechnical.workflow.drill },
-    { key: 'sample', label: dict.geotechnical.workflow.sample },
-    { key: 'test', label: dict.geotechnical.workflow.test },
-    { key: 'analyze', label: dict.geotechnical.workflow.analyze },
-    { key: 'report', label: dict.geotechnical.workflow.report },
+    { key: "drill", label: dict.geotechnical.workflow.drill },
+    { key: "sample", label: dict.geotechnical.workflow.sample },
+    { key: "test", label: dict.geotechnical.workflow.test },
+    { key: "analyze", label: dict.geotechnical.workflow.analyze },
+    { key: "report", label: dict.geotechnical.workflow.report },
   ];
 
-  const methods = Object.entries(dict.geotechnical.methods).map(([key, label]) => ({
-    key,
-    label,
-  }));
+  const methods = Object.entries(dict.geotechnical.methods).map(
+    ([key, label]) => ({
+      key,
+      label,
+    }),
+  );
 
   return (
-    <section className="relative overflow-hidden border-y border-border/40 bg-surface/30 py-20 sm:py-28 md:py-32">
+    <section className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32">
       <ContourLines className="text-primary" opacity={0.04} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -49,8 +54,12 @@ export function GeotechnicalInvestigation() {
                       transition={{ delay: i * 0.15 }}
                       className="flex items-center gap-2"
                     >
-                      <span className="font-mono text-[10px] text-muted-foreground/60">0{i + 1}</span>
-                      <span className="text-sm font-semibold uppercase tracking-wide">{step.label}</span>
+                      <span className="font-mono text-[10px] text-muted-foreground/60">
+                        0{i + 1}
+                      </span>
+                      <span className="text-sm font-semibold uppercase tracking-wide">
+                        {step.label}
+                      </span>
                     </motion.div>
                     {i < workflow.length - 1 && (
                       <motion.div
@@ -86,7 +95,7 @@ export function GeotechnicalInvestigation() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8 }}
             className="relative"
           >
@@ -94,11 +103,11 @@ export function GeotechnicalInvestigation() {
               <BoreholeGraphic className="h-[500px] w-full text-primary" />
               {/* Layer labels */}
               {[
-                { y: '8%', label: 'Surface', color: 'bg-amber-600/40' },
-                { y: '22%', label: 'Alluvial', color: 'bg-yellow-700/40' },
-                { y: '40%', label: 'Sand', color: 'bg-orange-800/40' },
-                { y: '58%', label: 'Weathered Rock', color: 'bg-stone-600/40' },
-                { y: '78%', label: 'Bedrock', color: 'bg-slate-700/40' },
+                { y: "8%", label: "Surface", color: "bg-amber-600/40" },
+                { y: "22%", label: "Alluvial", color: "bg-yellow-700/40" },
+                { y: "40%", label: "Sand", color: "bg-orange-800/40" },
+                { y: "58%", label: "Weathered Rock", color: "bg-stone-600/40" },
+                { y: "78%", label: "Bedrock", color: "bg-slate-700/40" },
               ].map((layer, i) => (
                 <motion.div
                   key={i}
@@ -123,7 +132,9 @@ export function GeotechnicalInvestigation() {
                     className="absolute flex items-center gap-1"
                     style={{ top: `${(depth / 30) * 90}%` }}
                   >
-                    <span className="font-mono text-[9px] text-muted-foreground/50">{depth}m</span>
+                    <span className="font-mono text-[9px] text-muted-foreground/50">
+                      {depth}m
+                    </span>
                   </div>
                 ))}
               </div>

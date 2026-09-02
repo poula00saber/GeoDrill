@@ -1,13 +1,24 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
+import { motion } from "framer-motion";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
 
 const organizationNames = [
-  'ARAMCO', 'SABIC', 'NEOM', 'RED SEA GLOBAL', 'ROSHN',
-  'MODERN', 'SAUDI ELECTRICITY', 'ROYAL COMMISSION', 'MOW',
-  'SADARA', 'MAADEN', 'STC', 'DIRIYAH GATE', 'AL MARJAN',
+  "ARAMCO",
+  "SABIC",
+  "NEOM",
+  "RED SEA GLOBAL",
+  "ROSHN",
+  "MODERN",
+  "SAUDI ELECTRICITY",
+  "ROYAL COMMISSION",
+  "MOW",
+  "SADARA",
+  "MAADEN",
+  "STC",
+  "DIRIYAH GATE",
+  "AL MARJAN",
 ];
 
 export function Organizations() {
@@ -18,7 +29,7 @@ export function Organizations() {
   const row2 = organizationNames.slice(7);
 
   return (
-    <section className="relative overflow-hidden border-y border-border/40 bg-surface/30 py-20 sm:py-28 md:py-32">
+    <section className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Organizations"
@@ -33,9 +44,9 @@ export function Organizations() {
       <div className="group relative flex overflow-hidden mask-fade-edges">
         <motion.div
           className="flex shrink-0 gap-4 pe-4"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          style={{ width: 'max-content' }}
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          style={{ width: "max-content" }}
         >
           {[...row1, ...row1].map((name, i) => (
             <OrgCard key={i} name={name} />
@@ -47,9 +58,9 @@ export function Organizations() {
       <div className="group relative mt-4 flex overflow-hidden mask-fade-edges">
         <motion.div
           className="flex shrink-0 gap-4 pe-4"
-          animate={{ x: ['-50%', '0%'] }}
-          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-          style={{ width: 'max-content' }}
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          style={{ width: "max-content" }}
         >
           {[...row2, ...row2].map((name, i) => (
             <OrgCard key={i} name={name} />

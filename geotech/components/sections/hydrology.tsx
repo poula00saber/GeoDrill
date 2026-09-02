@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Droplets, Waves, CloudRain, Shield } from 'lucide-react';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { SectionHeading } from '@/geotech/components/section-heading';
-import { siteImages } from '@/geotech/lib/images';
+import { motion } from "framer-motion";
+import { Droplets, Waves, CloudRain, Shield } from "lucide-react";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SectionHeading } from "@/geotech/components/section-heading";
+import { siteImages } from "@/geotech/lib/images";
 
 export function HydrologySection() {
   const { dict } = useLanguage();
   if (!dict) return null;
 
   const flow = [
-    { key: 'rain', icon: CloudRain },
-    { key: 'watershed', icon: Shield },
-    { key: 'runoff', icon: Waves },
-    { key: 'groundwater', icon: Droplets },
-    { key: 'aquifer', icon: Droplets },
+    { key: "rain", icon: CloudRain },
+    { key: "watershed", icon: Shield },
+    { key: "runoff", icon: Waves },
+    { key: "groundwater", icon: Droplets },
+    { key: "aquifer", icon: Droplets },
   ];
 
   return (
-    <section className="relative overflow-hidden border-y border-border/40 bg-surface/30 py-20 sm:py-28 md:py-32">
+    <section className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Hydrology & Hydrogeology"
@@ -40,10 +40,17 @@ export function HydrologySection() {
                 className="flex flex-col items-center gap-2"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-primary/5">
-                  <step.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                  <step.icon
+                    className="h-5 w-5 text-primary"
+                    strokeWidth={1.5}
+                  />
                 </div>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                  {dict.hydrology.flow[step.key as keyof typeof dict.hydrology.flow]}
+                  {
+                    dict.hydrology.flow[
+                      step.key as keyof typeof dict.hydrology.flow
+                    ]
+                  }
                 </span>
               </motion.div>
               {i < flow.length - 1 && (
@@ -69,7 +76,9 @@ export function HydrologySection() {
           >
             <div className="mb-3 flex items-center gap-2">
               <div className="h-8 w-1 bg-primary" />
-              <h3 className="text-lg font-semibold">{dict.hydrology.hydrologyTitle}</h3>
+              <h3 className="text-lg font-semibold">
+                {dict.hydrology.hydrologyTitle}
+              </h3>
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
               {dict.hydrology.hydrology}
@@ -84,7 +93,9 @@ export function HydrologySection() {
           >
             <div className="mb-3 flex items-center gap-2">
               <div className="h-8 w-1 bg-primary" />
-              <h3 className="text-lg font-semibold">{dict.hydrology.hydrogeologyTitle}</h3>
+              <h3 className="text-lg font-semibold">
+                {dict.hydrology.hydrogeologyTitle}
+              </h3>
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
               {dict.hydrology.hydrogeology}

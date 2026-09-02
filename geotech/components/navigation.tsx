@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Monitor, Globe } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useLanguage } from '@/geotech/components/providers/language-provider';
-import { Button } from '@/geotech/components/ui/button';
-import { cn } from '@/geotech/lib/utils';
-import { ContourLines } from '@/geotech/components/geological/background';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Sun, Moon, Monitor, Globe } from "lucide-react";
+import { useTheme } from "@/components/theme-provider";
+import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { Button } from "@/geotech/components/ui/button";
+import { cn } from "@/geotech/lib/utils";
+import { ContourLines } from "@/geotech/components/geological/background";
+import { Logo } from "@/components/logo";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,30 +20,32 @@ export function Navigation() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   if (!dict) return null;
 
+  const baseHref = `/geotechnical/${locale}`;
   const navItems = [
-    { label: dict.nav.about, href: '#about' },
-    { label: dict.nav.services, href: '#services' },
-    { label: dict.nav.technology, href: '#technology' },
-    { label: dict.nav.projects, href: '#projects' },
-    { label: dict.nav.qhse, href: '#qhse' },
-    { label: dict.nav.contact, href: '#contact' },
+    { label: dict.nav.about, href: `${baseHref}/about` },
+    { label: dict.nav.services, href: `${baseHref}/services` },
+    { label: dict.nav.projects, href: `${baseHref}/projects` },
+    { label: dict.nav.qhse, href: `${baseHref}/qhse` },
+    { label: dict.nav.contact, href: `${baseHref}/contact` },
   ];
 
   const themeOptions = [
-    { value: 'light', label: dict.theme.light, icon: Sun },
-    { value: 'dark', label: dict.theme.dark, icon: Moon },
-    { value: 'system', label: dict.theme.system, icon: Monitor },
+    { value: "light", label: dict.theme.light, icon: Sun },
+    { value: "dark", label: dict.theme.dark, icon: Moon },
+    { value: "system", label: dict.theme.system, icon: Monitor },
   ] as const;
 
   return (
@@ -53,28 +56,18 @@ export function Navigation() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           scrolled
-            ? 'border-b border-border/60 bg-background/80 backdrop-blur-xl'
-            : 'border-b border-transparent bg-transparent'
+            ? "border-b border-border/60 bg-background/80 backdrop-blur-xl"
+            : "border-b border-transparent bg-transparent",
         )}
       >
         <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <a href="#hero" className="group flex items-center gap-2.5">
-            <div className="relative flex h-9 w-9 items-center justify-center">
-              <svg viewBox="0 0 40 40" className="h-9 w-9">
-                <rect x="2" y="2" width="36" height="36" rx="6" fill="hsl(var(--primary))" />
-                <path d="M10 14 L20 8 L30 14 L30 26 L20 32 L10 26 Z" fill="none" stroke="hsl(var(--primary-foreground))" strokeWidth="2" strokeLinejoin="round" />
-                <circle cx="20" cy="20" r="3" fill="hsl(var(--primary-foreground))" />
-              </svg>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-sm font-bold tracking-tight">GEODRILL</span>
-              <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground">KSA · GEOTECH</span>
-            </div>
+          <a href={baseHref} className="group flex items-center gap-2.5">
+            <Logo size="h-9" />
           </a>
 
           {/* Desktop nav */}
@@ -106,7 +99,10 @@ export function Navigation() {
               <AnimatePresence>
                 {langOpen && (
                   <>
-                    <div className="fixed inset-0 z-40" onClick={() => setLangOpen(false)} />
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setLangOpen(false)}
+                    />
                     <motion.div
                       initial={{ opacity: 0, y: -8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -115,14 +111,26 @@ export function Navigation() {
                       className="absolute end-0 z-50 mt-2 w-32 overflow-hidden rounded-md border border-border bg-popover shadow-lg"
                     >
                       <button
-                        onClick={() => { setLocale('en'); setLangOpen(false); }}
-                        className={cn('flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-surface', locale === 'en' && 'text-primary')}
+                        onClick={() => {
+                          setLocale("en");
+                          setLangOpen(false);
+                        }}
+                        className={cn(
+                          "flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-surface",
+                          locale === "en" && "text-primary",
+                        )}
                       >
                         English
                       </button>
                       <button
-                        onClick={() => { setLocale('ar'); setLangOpen(false); }}
-                        className={cn('flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-surface', locale === 'ar' && 'text-primary')}
+                        onClick={() => {
+                          setLocale("ar");
+                          setLangOpen(false);
+                        }}
+                        className={cn(
+                          "flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-surface",
+                          locale === "ar" && "text-primary",
+                        )}
                       >
                         العربية
                       </button>
@@ -145,7 +153,10 @@ export function Navigation() {
               <AnimatePresence>
                 {themeOpen && (
                   <>
-                    <div className="fixed inset-0 z-40" onClick={() => setThemeOpen(false)} />
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setThemeOpen(false)}
+                    />
                     <motion.div
                       initial={{ opacity: 0, y: -8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -156,10 +167,13 @@ export function Navigation() {
                       {themeOptions.map((opt) => (
                         <button
                           key={opt.value}
-                          onClick={() => { setTheme(opt.value); setThemeOpen(false); }}
+                          onClick={() => {
+                            setTheme(opt.value);
+                            setThemeOpen(false);
+                          }}
                           className={cn(
-                            'flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors hover:bg-surface',
-                            theme === opt.value && 'text-primary'
+                            "flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors hover:bg-surface",
+                            theme === opt.value && "text-primary",
                           )}
                         >
                           <opt.icon className="h-4 w-4" />
@@ -178,7 +192,7 @@ export function Navigation() {
               size="sm"
               className="hidden bg-primary text-primary-foreground hover:bg-primary/90 sm:inline-flex"
             >
-              <a href="#contact">{dict.nav.startProject}</a>
+              <a href={`${baseHref}/contact`}>{dict.nav.startProject}</a>
             </Button>
 
             {/* Mobile menu button */}
@@ -207,7 +221,9 @@ export function Navigation() {
             <ContourLines className="text-primary" opacity={0.05} />
             <div className="relative flex h-full flex-col p-6">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-bold tracking-tight">GEODRILL</span>
+                <span className="text-sm font-bold tracking-tight">
+                  GEODRILL
+                </span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="flex h-9 w-9 items-center justify-center rounded-md border border-border/60"
@@ -228,13 +244,20 @@ export function Navigation() {
                     className="flex items-center justify-between border-b border-border/40 py-4 text-2xl font-semibold transition-colors hover:text-primary"
                   >
                     {item.label}
-                    <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      0{i + 1}
+                    </span>
                   </motion.a>
                 ))}
               </nav>
               <div className="mt-auto">
-                <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                  <a href="#contact" onClick={() => setMobileOpen(false)}>{dict.nav.startProject}</a>
+                <Button
+                  asChild
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  <a href="#contact" onClick={() => setMobileOpen(false)}>
+                    {dict.nav.startProject}
+                  </a>
                 </Button>
               </div>
             </div>
@@ -253,9 +276,9 @@ function ScrollProgress() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (

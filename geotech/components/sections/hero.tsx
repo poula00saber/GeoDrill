@@ -2,23 +2,28 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown, Activity, MapPin } from "lucide-react";
+import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { Button } from "@/geotech/components/ui/button";
 import { ContourLines } from "@/geotech/components/geological/background";
 import { siteImages } from "@/geotech/lib/images";
+import { cn } from "@/geotech/lib/utils";
 
 export function Hero() {
+  const { theme } = useTheme();
   const { dict, locale } = useLanguage();
   if (!dict) return null;
 
   const isRtl = locale === "ar";
+  const baseHref = `/geotechnical/${locale}`;
+  const isDark = theme === "dark" || theme === "system";
 
   return (
     <section
       id="hero"
       className="relative min-h-[100svh] w-full overflow-hidden bg-background"
     >
-      {/* Background image with mask reveal */}
+      {/* Background image with enhanced legibility scrim */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -29,8 +34,22 @@ export function Hero() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${siteImages.hero})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/10" />
+        {/* Overlay gradients - adjusted for light/dark theme */}
+        {isDark ? (
+          <>
+            {/* Dark theme - dark overlays for contrast */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/15" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
+            <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-black/60 to-transparent" />
+          </>
+        ) : (
+          <>
+            {/* Light theme - lighter overlays to preserve image while ensuring text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-white/5" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-white/40" />
+            <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/50 to-transparent" />
+          </>
+        )}
       </motion.div>
 
       {/* Technical grid overlay */}
@@ -61,7 +80,12 @@ export function Hero() {
           </motion.div>
 
           {/* Headline */}
-          <h1 className="space-y-1 text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1
+            className={cn(
+              "space-y-1 text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl",
+              isDark ? "text-white" : "text-gray-900",
+            )}
+          >
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -85,7 +109,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2.5 }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg"
+            className={cn(
+              "mt-6 max-w-xl text-base leading-relaxed text-pretty sm:text-lg",
+              isDark ? "text-muted-foreground" : "text-gray-700",
+            )}
           >
             {dict.hero.description}
           </motion.p>
@@ -102,7 +129,7 @@ export function Hero() {
               size="lg"
               className="group bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <a href="#services">
+              <a href={`${baseHref}/services`}>
                 {dict.hero.ctaPrimary}
                 <ArrowRight className="ms-2 h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </a>
@@ -113,7 +140,7 @@ export function Hero() {
               variant="outline"
               className="border-border bg-background/50 backdrop-blur-sm hover:bg-surface"
             >
-              <a href="#contact">{dict.hero.ctaSecondary}</a>
+              <a href={`${baseHref}/contact`}>{dict.hero.ctaSecondary}</a>
             </Button>
           </motion.div>
         </div>
