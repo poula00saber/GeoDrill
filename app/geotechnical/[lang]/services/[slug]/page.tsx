@@ -53,7 +53,7 @@ export async function generateMetadata({
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
-  const { slug } = await params;
+  const { slug, lang } = await params;
   const service = getServiceBySlug(slug);
 
   if (!service) {
@@ -64,7 +64,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     <>
       <Navigation />
       <main className="min-h-screen w-full bg-background">
-        <ServicePageTemplate service={service} locale={params.lang} />
+        <ServicePageTemplate service={service} locale={lang} />
       </main>
       <Footer />
     </>

@@ -9,6 +9,8 @@ import { ServiceExplorer } from "@/geotech/components/sections/service-explorer"
 import { WhatSetsApart } from "@/geotech/components/sections/what-sets-apart";
 import { Organizations } from "@/geotech/components/sections/organizations";
 import { ContactSection } from "@/geotech/components/sections/contact";
+import { WhyGeoDrill } from "@/geotech/components/sections/why-geodrill";
+import { SelectedExperience } from "@/geotech/components/sections/selected-experience";
 import { Footer } from "@/geotech/components/sections/footer";
 
 export function GeotechHome() {
@@ -21,6 +23,8 @@ export function GeotechHome() {
         <Introduction />
         <Approach />
         <ServiceExplorer />
+        <WhyGeoDrill />
+        <SelectedExperience />
         <WhatSetsApart />
         <Organizations />
         <ContactSection />

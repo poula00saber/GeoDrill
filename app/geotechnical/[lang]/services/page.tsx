@@ -5,14 +5,35 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { use } from "react";
+import Image from "next/image";
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { SectionHeading } from "@/geotech/components/section-heading";
+import { WhatAreYouSolving } from "@/geotech/components/sections/what-are-you-solving";
+import { TechnicalCapabilities } from "@/geotech/components/sections/technical-capabilities";
 import {
   servicesData,
   serviceCategories,
   ServiceCategory,
 } from "@/geotech/lib/services-data";
+
+// Service image mapping
+const serviceImages: Record<string, string> = {
+  "geotechnical-investigation": "/images/service-excavation.png",
+  "geophysical-survey": "/images/service-infrastructure.png",
+  "geological-survey": "/images/sector-industrial.png",
+  "hydrogeological-studies": "/images/service-mep.png",
+  "material-testing-quality-control": "/images/service-concrete.png",
+  "topographical-survey": "/images/project-groundworks-01.jpg",
+  "cavity-probing-void-detection": "/images/service-steel.png",
+  grouting: "/images/service-finishing.png",
+  micropiling: "/images/project-industrial-01.jpg",
+  "anchoring-shoring": "/images/service-groundworks.png",
+  "soil-improvement": "/images/service-insulation.png",
+  "structural-assessment": "/images/project-structures-02.jpg",
+  "mining-exploration": "/images/sector-government.png",
+  "laboratory-analysis": "/images/service-concrete.png",
+};
 
 // Note: Can't export metadata with "use client", need to export from a server component
 // For now, keeping it for reference - metadata export will need to be in a wrapper if needed
@@ -67,6 +88,12 @@ export default function ServicesPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* Service Discovery */}
+        <WhatAreYouSolving />
+
+        {/* Technical Capabilities */}
+        <TechnicalCapabilities />
+
         {/* Services by Category */}
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           {categories.map((category) => {
@@ -82,42 +109,52 @@ export default function ServicesPage({ params }: PageProps) {
                 />
 
                 <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {categoryServices.map((service) => (
-                    <motion.article
-                      key={service.slug}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      viewport={{ once: true }}
-                      className="group overflow-hidden rounded-lg border border-border/60 bg-surface/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface hover:shadow-lg"
-                    >
-                      <div className="aspect-video w-full overflow-hidden bg-muted">
-                        {/* Placeholder for service image */}
-                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
-                          <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                            {service.category}
-                          </span>
+                  {categoryServices.map((service) => {
+                    const imageSrc = serviceImages[service.slug] || "/images/geotech-portal-placeholder.png";
+                    return (
+                      <motion.article
+                        key={service.slug}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        viewport={{ once: true }}
+                        className="group overflow-hidden rounded-lg border border-border/60 bg-surface/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface hover:shadow-lg"
+                      >
+                        <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                          <Image
+                            src={imageSrc}
+                            alt={service.title}
+                            fill
+                            className="object-cover transition-transform group-hover:scale-105"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all" />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="font-mono text-xs uppercase tracking-wider text-white/80">
+                              {service.category}
+                            </span>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="p-6">
-                        <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
-                          {service.title}
-                        </h3>
-                        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                          {service.shortDescription}
-                        </p>
+                        <div className="p-6">
+                          <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
+                            {service.title}
+                          </h3>
+                          <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                            {service.shortDescription}
+                          </p>
 
-                        <Link
-                          href={`/geotechnical/${lang}/services/${service.slug}`}
-                          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary transition-all hover:gap-3"
-                        >
-                          Explore
-                          <ArrowRight className="h-4 w-4" />
-                        </Link>
-                      </div>
-                    </motion.article>
-                  ))}
+                          <Link
+                            href={`/geotechnical/${lang}/services/${service.slug}`}
+                            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary transition-all hover:gap-3"
+                          >
+                            Explore
+                            <ArrowRight className="h-4 w-4" />
+                          </Link>
+                        </div>
+                      </motion.article>
+                    );
+                  })}
                 </div>
               </section>
             );

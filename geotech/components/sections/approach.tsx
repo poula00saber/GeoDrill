@@ -19,8 +19,10 @@ export function Approach() {
 
   const stages = [
     { ...dict.approach.stages.investigate, num: "01" },
-    { ...dict.approach.stages.analyze, num: "02" },
-    { ...dict.approach.stages.advise, num: "03" },
+    { ...dict.approach.stages.test, num: "02" },
+    { ...dict.approach.stages.analyze, num: "03" },
+    { ...dict.approach.stages.engineer, num: "04" },
+    { ...dict.approach.stages.advise, num: "05" },
   ];
 
   return (
@@ -36,7 +38,7 @@ export function Approach() {
           className="mb-16"
         />
 
-        <div className="relative grid gap-8 md:grid-cols-3 md:gap-0">
+        <div className="relative grid gap-8 md:grid-cols-5 md:gap-0">
           {/* Animated connecting line */}
           <div className="absolute inset-x-0 top-8 hidden h-px bg-border md:block">
             <motion.div
@@ -51,8 +53,8 @@ export function Approach() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="relative flex flex-col items-center text-center md:px-8"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="relative flex flex-col items-center text-center md:px-4"
             >
               <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-border bg-background">
                 <span className="font-mono text-lg font-bold text-primary">
@@ -62,14 +64,14 @@ export function Approach() {
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.15, type: "spring" }}
+                  transition={{ delay: 0.2 + i * 0.1, type: "spring" }}
                   className="absolute inset-0 rounded-full border-2 border-primary/30"
                 />
               </div>
               <span className="mt-6 font-mono text-xs uppercase tracking-wider text-primary">
                 {stage.label}
               </span>
-              <h3 className="mt-2 text-xl font-semibold">{stage.title}</h3>
+              <h3 className="mt-2 text-lg font-semibold">{stage.title}</h3>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground text-pretty">
                 {stage.description}
               </p>

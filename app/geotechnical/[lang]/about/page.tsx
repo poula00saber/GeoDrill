@@ -4,6 +4,13 @@ import { Metadata } from "next";
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { AboutSection } from "@/geotech/components/sections/about";
+import { WhoWeAre } from "@/geotech/components/sections/who-we-are";
+import { ExperienceHighlight } from "@/geotech/components/sections/experience-highlight";
+import { WhatSetsUsApart } from "@/geotech/components/sections/what-sets-us-apart-detail";
+import { VisionMissionGoals } from "@/geotech/components/sections/vision-mission-goals";
+import { SoftwareSection } from "@/geotech/components/sections/software-section";
+import { Organizations } from "@/geotech/components/sections/organizations";
+import { ContactSection } from "@/geotech/components/sections/contact";
 import { motion } from "framer-motion";
 
 // Note: Can't export metadata with "use client"
@@ -37,10 +44,14 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* About Content */}
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <AboutSection />
-        </div>
+        {/* About Sections */}
+        <WhoWeAre />
+        <ExperienceHighlight />
+        <WhatSetsUsApart />
+        <VisionMissionGoals />
+        <SoftwareSection />
+        <Organizations />
+        <ContactSection />
       </main>
       <Footer />
     </>

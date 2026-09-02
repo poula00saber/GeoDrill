@@ -61,16 +61,122 @@
         "title": "Investigate",
         "description": "Study the site through field investigation, drilling, sampling, surveying and geophysical techniques."
       },
+      "test": {
+        "label": "02 — TEST",
+        "title": "Test",
+        "description": "Laboratory and in-situ testing of soil, rock, materials and groundwater to characterize subsurface properties."
+      },
       "analyze": {
-        "label": "02 — ANALYZE",
+        "label": "03 — ANALYZE",
         "title": "Analyze",
-        "description": "Process, test and interpret field and laboratory data to develop a clearer understanding of subsurface conditions."
+        "description": "Process and interpret field and laboratory data to develop a clearer understanding of subsurface conditions."
+      },
+      "engineer": {
+        "label": "04 — ENGINEER",
+        "title": "Engineer",
+        "description": "Apply engineering principles and design analysis to develop site-specific solutions and recommendations."
       },
       "advise": {
-        "label": "03 — ADVISE",
+        "label": "05 — ADVISE",
         "title": "Advise",
         "description": "Translate technical findings into practical recommendations that support safer design, construction and project planning."
       }
+    }
+  },
+  "whyGeoDrill": {
+    "title": "Why Choose GEODRILL",
+    "groups": {
+      "expertise": {
+        "title": "TECHNICAL EXPERTISE",
+        "items": [
+          "Expert Team: Experienced geotechnical engineers, geophysicists and geologists across diverse project types.",
+          "Technical & Field Expertise: Deep knowledge of investigation methods, ground characterization and site-specific challenges."
+        ]
+      },
+      "technology": {
+        "title": "TECHNOLOGY & DELIVERY",
+        "items": [
+          "Cutting-Edge Technology: Modern investigation, testing and geophysical methods with current software and equipment.",
+          "Fast Turnaround: Efficient project execution without compromising quality or technical rigor.",
+          "Single Point of Coordination: One team manages your project from scope through delivery and reporting.",
+          "Time & Effort Savings for Clients: Streamlined processes reduce your project management overhead."
+        ]
+      },
+      "quality": {
+        "title": "QUALITY & COMPLIANCE",
+        "items": [
+          "Commitment to Quality: Structured processes aligned with BS EN ISO 9001:2015.",
+          "Reports in Compliance with Saudi and International Standards: All deliverables meet local and international standards.",
+          "Access to Certified Labs: Network of certified testing laboratories across KSA regions."
+        ]
+      },
+      "partnership": {
+        "title": "RESPONSIBLE PARTNERSHIP",
+        "items": [
+          "Client-Centric Approach: Solutions shaped around your project requirements and constraints.",
+          "Sustainability & Safety: Responsible practices protecting people, assets and environments.",
+          "Flexible Pricing Model: Services tailored to project scope and budget."
+        ]
+      }
+    }
+  },
+  "experienceHighlight": {
+    "title": "17+",
+    "subtitle": "YEARS OF PROVEN EXPERIENCE",
+    "description": "GEODRILL's team brings over 17 years of proven experience across leading projects in the Kingdom of Saudi Arabia.",
+    "highlight": "Team experience across major infrastructure, private development and government sector projects."
+  },
+  "whatSetsUs": {
+    "title": "What Sets Us Apart",
+    "items": [
+      {
+        "number": "01",
+        "title": "Strict Quality Assurance",
+        "description": "Quality processes aligned with international standards and continuous verification at every project stage."
+      },
+      {
+        "number": "02",
+        "title": "Culture of Continuous Improvement",
+        "description": "Ongoing refinement of methods, processes and team capability to deliver better results on each project."
+      },
+      {
+        "number": "03",
+        "title": "Consistent Performance",
+        "description": "Reliable delivery and professional standards applied consistently across projects of all sizes."
+      }
+    ]
+  },
+  "software": {
+    "title": "Software & Technology",
+    "subtitle": "GEODRILL utilizes industry-standard software for analysis, modeling and interpretation.",
+    "categories": {
+      "geotechnical": {
+        "title": "GEOTECHNICAL & SLOPE STABILITY",
+        "items": ["GEO5", "SLOPE/W", "Talren v5", "Rocscience"]
+      },
+      "geophysics": {
+        "title": "GEOPHYSICS & PROCESSING",
+        "items": ["RES2DINV", "GPR-SLICE", "REFLEXW", "Oasis Montaj", "Surfer"]
+      },
+      "hydrology": {
+        "title": "HYDROLOGY & GROUNDWATER",
+        "items": ["HEC-RAS", "MODFLOW 6", "FLOPY", "PHREEQC", "GMS"]
+      },
+      "gis": {
+        "title": "GIS & ENGINEERING",
+        "items": ["ArcGIS", "AutoCAD"]
+      }
+    }
+  },
+  "selectedExperience": {
+    "title": "Selected Experience",
+    "subtitle": "Representative projects from GEODRILL's portfolio across sectors and service areas.",
+    "placeholder": "Detailed project case studies coming soon.",
+    "columns": {
+      "project": "PROJECT",
+      "location": "LOCATION",
+      "service": "SERVICE",
+      "sector": "SECTOR"
     }
   },
   "services": {
@@ -310,7 +416,13 @@
     "title": "Engineering Insight Built on Experience.",
     "p1": "GEODRILL is a specialized geoscience company providing professional geotechnical, geophysical and related engineering investigation services for construction, infrastructure, private and government sectors.",
     "p2": "Our multidisciplinary approach combines field investigation, testing, technical analysis and engineering interpretation to provide practical insight into ground and site conditions.",
-    "p3": "Our team brings more than 17 years of experience across projects in Saudi Arabia."
+    "p3": "Our team brings more than 17 years of experience across projects in Saudi Arabia.",
+    "goals": [
+      "Establish a strong and trusted market presence.",
+      "Ensure client satisfaction through quality service.",
+      "Promote innovation and sustainability.",
+      "Invest in ongoing team development."
+    ]
   },
   "vision": {
     "title": "Supporting Better Development Through Better Ground Intelligence.",

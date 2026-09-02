@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { QhseSection } from "@/geotech/components/sections/qhse";
+import { QhseEnhanced } from "@/geotech/components/sections/qhse-enhanced";
 import { motion } from "framer-motion";
 
 // Note: Can't export metadata with "use client"
@@ -37,9 +38,14 @@ export default function QhsePage() {
           </div>
         </section>
 
-        {/* QHSE Content */}
+        {/* QHSE Content - Overview */}
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <QhseSection />
+        </div>
+
+        {/* QHSE Detailed Policies */}
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <QhseEnhanced />
         </div>
       </main>
       <Footer />
