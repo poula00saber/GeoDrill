@@ -84,7 +84,17 @@
     }
   },
   "whyGeoDrill": {
+    "eyebrow": "Advantage",
     "title": "Why Choose GEODRILL",
+    "headingLead": "Why Choose",
+    "brand": "GEODRILL",
+    "subtitle": "We combine technical expertise, advanced technology and a client-first approach to deliver reliable geotechnical solutions that build the strong foundation for your projects.",
+    "stats": {
+      "experience": "Years of Experience",
+      "projects": "Projects Completed",
+      "clients": "Satisfied Clients",
+      "cities": "Cities Served"
+    },
     "groups": {
       "expertise": {
         "title": "TECHNICAL EXPERTISE",

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -13,17 +13,22 @@ interface AnimatedCounterProps {
 
 export function AnimatedCounter({
   value,
-  suffix = '',
-  prefix = '',
+  suffix = "",
+  prefix = "",
   duration = 2000,
   className,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-50px' });
+  const inView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
+
+    // Fallback safeguard to prevent NaN calculations
+    const numericTarget =
+      typeof value === "number" && !isNaN(value) ? value : 0;
+
     let startTime: number | null = null;
     let raf: number;
 
@@ -31,11 +36,13 @@ export function AnimatedCounter({
       if (startTime === null) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * value));
+
+      setCount(Math.floor(eased * numericTarget));
+
       if (progress < 1) {
         raf = requestAnimationFrame(animate);
       } else {
-        setCount(value);
+        setCount(numericTarget);
       }
     };
 
