@@ -2,12 +2,21 @@
 
 import { ArrowUp } from "lucide-react";
 import { useLanguage } from "../providers/language-provider";
+import { useTheme } from "@/components/theme-provider";
+import { Logo } from "@/components/logo";
 import { ContourLines } from "../geological/background";
 import { siteConfig } from "../../lib/site-config";
 
 export function Footer() {
   const { dict } = useLanguage();
+  const { theme, resolvedTheme } = useTheme();
   if (!dict) return null;
+
+  // Geotech brand logo — dark-mark on light backgrounds, light-mark on dark.
+  const logoSrc =
+    (resolvedTheme ?? theme) === "dark"
+      ? "/geotech-logo2.png"
+      : "/geotech-logo.png";
 
   const navItems = [
     { label: dict.nav.about, href: "#about" },
@@ -53,39 +62,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <svg viewBox="0 0 40 40" className="h-10 w-10">
-                <rect
-                  x="2"
-                  y="2"
-                  width="36"
-                  height="36"
-                  rx="6"
-                  fill="hsl(var(--primary))"
-                />
-                <path
-                  d="M10 14 L20 8 L30 14 L30 26 L20 32 L10 26 Z"
-                  fill="none"
-                  stroke="hsl(var(--primary-foreground))"
-                  strokeWidth="2"
-                  strokeLinejoin="round"
-                />
-                <circle
-                  cx="20"
-                  cy="20"
-                  r="3"
-                  fill="hsl(var(--primary-foreground))"
-                />
-              </svg>
-              <div className="flex flex-col leading-none">
-                <span className="text-lg font-bold tracking-tight">
-                  GEODRILL
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-                  KSA · GEOTECH
-                </span>
-              </div>
-            </div>
+            <Logo src={logoSrc} size="h-12" />
             <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
               {dict.footer.tagline}
             </p>

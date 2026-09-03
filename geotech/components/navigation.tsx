@@ -17,8 +17,15 @@ export function Navigation() {
   const [themeOpen, setThemeOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
 
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const { locale, dict, setLocale } = useLanguage();
+
+  // Geotech brand logo — the dark-mark (geotech-logo.png) is used on light
+  // backgrounds; the light/cream-mark (geotech-logo2.png) on dark backgrounds.
+  const logoSrc =
+    (resolvedTheme ?? theme) === "dark"
+      ? "/geotech-logo2.png"
+      : "/geotech-logo.png";
 
   const pathname = usePathname();
   const router = useRouter();
@@ -103,7 +110,7 @@ export function Navigation() {
             href={baseHref}
             className="group flex items-center gap-2.5 outline-none"
           >
-            <Logo size="h-9" />
+            <Logo size="h-9" src={logoSrc} />
           </a>
 
           {/* Desktop Links */}
@@ -285,7 +292,7 @@ export function Navigation() {
             <ContourLines className="text-primary" opacity={0.04} />
             <div className="relative flex h-full flex-col p-6">
               <div className="flex items-center justify-between">
-                <Logo size="h-8" />
+                <Logo size="h-8" src={logoSrc} />
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-foreground"

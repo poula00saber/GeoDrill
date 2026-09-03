@@ -1,0 +1,10 @@
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.201.1:3000
+- Environments: .env.local
+✓ Ready in 741ms
+✓ Running next.config.mjs took 23ms
+
+ GET /geotechnical/ar/services/anchoring-shoring-design-execution 200 in 2.0s (next.js: 922ms, generate-params: 532ms, application-code: 549ms)
+ GET /geotechnical/ar/services 200 in 673ms (next.js: 503ms, application-code: 170ms)
+ GET /geotechnical/en 200 in 734ms (next.js: 49ms, generate-params: 457ms, application-code: 228ms)
