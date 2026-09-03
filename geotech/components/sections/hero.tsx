@@ -43,9 +43,9 @@ import { cn } from "@/geotech/lib/utils";
 // geotechnical-investigation, geophysical-survey, or mining-exploration
 // galleries already sourced). Keep to 3-4 images; more dilutes the carousel.
 const HERO_IMAGES = [
-  "/images/geotech-hero.jpg",
-  "/images/services/geophysical-survey/hero.webp",
-  "/images/services/mining-exploration/hero.webp",
+  "/images/geotech-hero1.jpg",
+  "/images/geotech-hero2.jpg",
+  "/images/geotech-hero3.jpg",
 ];
 
 const SLIDE_INTERVAL_MS = 6000;
