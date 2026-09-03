@@ -102,7 +102,7 @@ export function WhyGeoDrill() {
             className="object-cover transition-transform duration-700 hover:scale-105"
             sizes="(min-width: 768px) 50vw, 100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
           <div className="absolute -bottom-8 -right-8 h-32 w-32 rotate-45 bg-primary/80" />
         </motion.div>
       </div>

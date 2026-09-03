@@ -25,8 +25,8 @@ export function CtaBanner() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
@@ -42,10 +42,10 @@ export function CtaBanner() {
               <span className="h-px w-8 bg-primary" />
               {b.eyebrow}
             </p>
-            <h2 className="max-w-lg text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+            <h2 className="max-w-lg text-3xl font-bold leading-tight text-white sm:text-4xl">
               {b.title}
             </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
               {b.description}
             </p>
             <Link

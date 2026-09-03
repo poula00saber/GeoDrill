@@ -20,10 +20,10 @@ export function Navigation() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const { locale, dict, setLocale } = useLanguage();
 
-  // Geotech brand logo — the dark-mark (geotech-logo.png) is used on light
-  // backgrounds; the light/cream-mark (geotech-logo2.png) on dark backgrounds.
+  // The transparent hero header always uses the light logo over photography.
+  const isTransparent = !scrolled;
   const logoSrc =
-    (resolvedTheme ?? theme) === "dark"
+    isTransparent || (resolvedTheme ?? theme) === "dark"
       ? "/geotech-logo2.png"
       : "/geotech-logo.png";
 
@@ -110,7 +110,7 @@ export function Navigation() {
             href={baseHref}
             className="group flex items-center gap-2.5 outline-none"
           >
-            <Logo size={scrolled ? "h-20" : "h-34"} src={logoSrc} />
+            <Logo size={scrolled ? "h-30" : "h-36"} src={logoSrc} />
           </a>
 
           {/* Desktop Links */}
@@ -125,7 +125,9 @@ export function Navigation() {
                     "group relative rounded-md px-3.5 py-2 text-sm font-medium transition-colors",
                     isActive
                       ? "text-primary font-semibold"
-                      : "text-muted-foreground hover:text-foreground",
+                      : isTransparent
+                        ? "text-white hover:text-white/80"
+                        : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {item.label}
@@ -149,7 +151,12 @@ export function Navigation() {
                   setLangOpen(!langOpen);
                   setThemeOpen(false);
                 }}
-                className="flex h-9 items-center gap-1.5 rounded-lg border border-border/60 bg-surface/40 px-3 text-xs font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-surface"
+                className={cn(
+                  "flex h-9 items-center gap-1.5 rounded-lg border bg-surface/40 px-3 text-xs font-semibold transition-all hover:border-primary/40 hover:bg-surface",
+                  isTransparent
+                    ? "border-white/40 text-white"
+                    : "border-border/60 text-foreground",
+                )}
                 aria-label={dict.common.language}
               >
                 <Globe className="h-3.5 w-3.5 text-primary" />
@@ -207,7 +214,12 @@ export function Navigation() {
                   setThemeOpen(!themeOpen);
                   setLangOpen(false);
                 }}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/40 text-foreground transition-all hover:border-primary/40 hover:bg-surface"
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-lg border bg-surface/40 transition-all hover:border-primary/40 hover:bg-surface",
+                  isTransparent
+                    ? "border-white/40 text-white"
+                    : "border-border/60 text-foreground",
+                )}
                 aria-label={dict.theme.toggle}
               >
                 <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -269,7 +281,12 @@ export function Navigation() {
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/40 text-foreground transition-all hover:bg-surface lg:hidden"
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-lg border bg-surface/40 transition-all hover:bg-surface lg:hidden",
+                isTransparent
+                  ? "border-white/40 text-white"
+                  : "border-border/60 text-foreground",
+              )}
               aria-label={dict.nav.menu}
             >
               <Menu className="h-4 w-4" />

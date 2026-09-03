@@ -85,7 +85,7 @@ export default function ServicesPage({ params }: PageProps) {
                 site's drill-rig-at-sunset shot. Reuse one already sourced,
                 e.g. the geophysical-survey or mining-exploration hero. */}
             <Image
-              src="/images/geotech-hero.jpg"
+              src="/images/geotech-hero1.jpg"
               alt="GEODRILL field team on an active investigation site"
               fill
               className="object-cover"

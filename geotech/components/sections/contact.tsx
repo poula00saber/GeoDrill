@@ -13,6 +13,12 @@ import {
   Loader2,
   Send,
   Upload,
+  FileCheck2,
+  Clock,
+  ShieldCheck,
+  ArrowRight,
+  ArrowLeft,
+  X,
 } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
@@ -40,7 +46,6 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-// Allowed attachment types: PDFs, CAD files (DWG/DXF), images, and Word docs.
 const ACCEPTED_MIME = new Set([
   "image/jpeg",
   "image/png",
@@ -56,14 +61,15 @@ const ACCEPTED_MIME = new Set([
   "application/acad",
   "application/dxf",
 ]);
-// AutoCAD files are often reported with a generic MIME type, so also accept
-// them via their file extension.
+
 const ACCEPTED_EXT = /\.(pdf|doc|docx|dwg|dxf|jpe?g|png|gif|webp)$/i;
 const ACCEPT_HINT = ".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.dwg,.dxf";
 const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
 
 export function ContactSection() {
   const { dict, locale } = useLanguage();
+  const isAr = locale === "ar";
+
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -89,18 +95,18 @@ export function ContactSection() {
     }
     if (!ACCEPTED_MIME.has(file.type) && !ACCEPTED_EXT.test(file.name)) {
       setFileError(
-        locale !== "ar"
-          ? "Unsupported file type. Please upload a PDF, DWG, DXF, image, or Word document."
-          : "نوع الملف غير مدعوم. يرجى رفع ملف PDF أو DWG أو DXF أو صورة أو Word.",
+        isAr
+          ? "نوع الملف غير مدعوم. يرجى رفع ملف PDF أو DWG أو DXF أو صورة أو Word."
+          : "Unsupported file type. Please upload a PDF, DWG, DXF, image, or Word document.",
       );
       setAttachmentFile(null);
       return;
     }
     if (file.size > MAX_FILE_BYTES) {
       setFileError(
-        locale !== "ar"
-          ? "File is too large. Maximum size is 10 MB."
-          : "الملف كبير جدًا. الحد الأقصى هو 10 ميجابايت.",
+        isAr
+          ? "الملف كبير جدًا. الحد الأقصى هو 10 ميجابايت."
+          : "File is too large. Maximum size is 10 MB.",
       );
       setAttachmentFile(null);
       return;
@@ -133,81 +139,119 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32"
+      className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-surface/20 to-background py-20 sm:py-28 md:py-32"
     >
-      <ContourLines className="text-primary" opacity={0.04} />
+      <ContourLines className="text-primary" opacity={0.05} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left: Info */}
-          <div>
-            <SectionHeading
-              eyebrow="Contact"
-              title={dict.contact.title}
-              description={dict.contact.subtitle}
-              className="mb-10"
-            />
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Left Column: Info & Telemetry HUD (5 Cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <SectionHeading
+                eyebrow={isAr ? "تواصل معنا" : "Contact"}
+                title={dict.contact.title}
+                description={dict.contact.subtitle}
+                className="mb-10 text-start"
+              />
 
-            <div className="space-y-4">
-              <ContactItem
-                icon={Mail}
-                label={dict.contact.info.email}
-                value={siteConfig.email}
-                href={`mailto:${siteConfig.email}`}
-              />
-              <ContactItem
-                icon={Phone}
-                label={dict.contact.info.phone}
-                value={siteConfig.phone}
-                href={siteConfig.phoneHref}
-              />
-              <ContactItem
-                icon={MapPin}
-                label={dict.contact.info.address}
-                value={`${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.city}, ${siteConfig.address.country}`}
-              />
+              <div className="space-y-4">
+                <ContactItem
+                  icon={Mail}
+                  label={dict.contact.info.email}
+                  value={siteConfig.email}
+                  href={`mailto:${siteConfig.email}`}
+                  isAr={isAr}
+                />
+                <ContactItem
+                  icon={Phone}
+                  label={dict.contact.info.phone}
+                  value={siteConfig.phone}
+                  href={siteConfig.phoneHref}
+                  isAr={isAr}
+                />
+                <ContactItem
+                  icon={MapPin}
+                  label={dict.contact.info.address}
+                  value={`${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.city}, ${siteConfig.address.country}`}
+                  isAr={isAr}
+                />
+              </div>
             </div>
 
-            {/* Technical graphic */}
+            {/* Technical Interactive HUD */}
             <div className="mt-10 hidden lg:block">
-              <div className="rounded-lg border border-border/40 bg-card p-4">
-                <div className="flex items-center gap-2 border-b border-border/40 pb-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                    GEODRILL / PROJECT INTAKE
+              <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:shadow-primary/5">
+                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
+
+                <div className="flex items-center justify-between border-b border-border/40 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                    </span>
+                    <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      GEODRILL / {isAr ? "مكتب استقبال المشاريع" : "INTAKE HUD"}
+                    </span>
+                  </div>
+                  <span className="rounded bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary">
+                    v2.4
                   </span>
                 </div>
-                <div className="mt-3 grid grid-cols-2 gap-3">
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60">
-                      Status
-                    </span>
-                    <p className="font-mono text-xs text-primary">Ready</p>
+
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-border/30 bg-background/50 p-3">
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+                      <span className="font-mono text-[10px] uppercase tracking-wider">
+                        {isAr ? "الحالة" : "Status"}
+                      </span>
+                    </div>
+                    <p className="mt-1 font-mono text-xs font-semibold text-emerald-500">
+                      {isAr ? "نشط ومستعد" : "Active & Ready"}
+                    </p>
                   </div>
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60">
-                      Response
-                    </span>
-                    <p className="font-mono text-xs">24-48h</p>
+
+                  <div className="rounded-xl border border-border/30 bg-background/50 p-3">
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <Clock className="h-3.5 w-3.5 text-primary" />
+                      <span className="font-mono text-[10px] uppercase tracking-wider">
+                        {isAr ? "زمن الاستجابة" : "Response"}
+                      </span>
+                    </div>
+                    <p className="mt-1 font-mono text-xs font-semibold text-foreground">
+                      24-48 {isAr ? "ساعة" : "Hours"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right: Form */}
-          <div className="relative">
-            <div className="rounded-lg border border-border/40 bg-card p-6 sm:p-8">
+          {/* Right Column: Form Container (7 Cols) */}
+          <div className="lg:col-span-7">
+            <div className="relative rounded-3xl border border-border/60 bg-card/80 p-6 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-border sm:p-8">
+              {/* Form Corner Accents */}
+              <span className="absolute top-3 left-3 font-mono text-xs text-primary/40">
+                +
+              </span>
+              <span className="absolute top-3 right-3 font-mono text-xs text-primary/40">
+                +
+              </span>
+              <span className="absolute bottom-3 left-3 font-mono text-xs text-primary/40">
+                +
+              </span>
+              <span className="absolute bottom-3 right-3 font-mono text-xs text-primary/40">
+                +
+              </span>
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <FormField
                     label={dict.contact.form.fullName}
                     error={
                       errors.fullName?.message &&
-                      (locale === "ar"
+                      (isAr
                         ? dict.contact.validation.nameRequired
                         : errors.fullName.message)
                     }
@@ -215,11 +259,14 @@ export function ContactSection() {
                   >
                     <Input
                       {...register("fullName")}
-                      className="bg-background"
+                      className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                     />
                   </FormField>
                   <FormField label={dict.contact.form.company}>
-                    <Input {...register("company")} className="bg-background" />
+                    <Input
+                      {...register("company")}
+                      className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
+                    />
                   </FormField>
                 </div>
 
@@ -228,7 +275,7 @@ export function ContactSection() {
                     label={dict.contact.form.email}
                     error={
                       errors.email?.message &&
-                      (locale === "ar"
+                      (isAr
                         ? errors.email.type === "email"
                           ? dict.contact.validation.emailInvalid
                           : dict.contact.validation.emailRequired
@@ -239,14 +286,14 @@ export function ContactSection() {
                     <Input
                       type="email"
                       {...register("email")}
-                      className="bg-background"
+                      className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                     />
                   </FormField>
                   <FormField label={dict.contact.form.phone}>
                     <Input
                       type="tel"
                       {...register("phone")}
-                      className="bg-background"
+                      className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                     />
                   </FormField>
                 </div>
@@ -255,13 +302,13 @@ export function ContactSection() {
                   <FormField label={dict.contact.form.projectType}>
                     <Input
                       {...register("projectType")}
-                      className="bg-background"
+                      className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                     />
                   </FormField>
                   <FormField label={dict.contact.form.requiredService}>
                     <Input
                       {...register("requiredService")}
-                      className="bg-background"
+                      className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                     />
                   </FormField>
                 </div>
@@ -269,7 +316,7 @@ export function ContactSection() {
                 <FormField label={dict.contact.form.projectLocation}>
                   <Input
                     {...register("projectLocation")}
-                    className="bg-background"
+                    className="bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                   />
                 </FormField>
 
@@ -277,7 +324,7 @@ export function ContactSection() {
                   label={dict.contact.form.projectDescription}
                   error={
                     errors.projectDescription?.message &&
-                    (locale === "ar"
+                    (isAr
                       ? dict.contact.validation.descriptionRequired
                       : errors.projectDescription.message)
                   }
@@ -286,47 +333,69 @@ export function ContactSection() {
                   <Textarea
                     {...register("projectDescription")}
                     rows={4}
-                    className="resize-none bg-background"
+                    className="resize-none bg-background/60 transition-all duration-200 focus:bg-background focus:ring-2 focus:ring-primary/20"
                   />
                 </FormField>
 
+                {/* File Dropzone */}
                 <FormField label={dict.contact.form.uploadDocuments}>
                   <label
-                    className={
+                    className={`group relative flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed px-4 py-5 transition-all duration-300 ${
                       fileError
-                        ? "flex w-full cursor-pointer items-center justify-between gap-3 rounded-md border border-dashed border-destructive/60 bg-background px-4 py-3 transition-colors hover:border-primary/40"
-                        : "flex w-full cursor-pointer items-center justify-between gap-3 rounded-md border border-dashed border-border bg-background px-4 py-3 transition-colors hover:border-primary/40"
-                    }
+                        ? "border-destructive/60 bg-destructive/5 hover:border-destructive"
+                        : attachmentFile
+                          ? "border-primary/60 bg-primary/5 hover:border-primary"
+                          : "border-border/60 bg-background/40 hover:border-primary/50 hover:bg-background/80"
+                    }`}
                   >
-                    <span className="flex min-w-0 items-center gap-3">
-                      <Upload className="h-4 w-4 shrink-0 text-muted-foreground" />
-                      <span className="truncate text-sm">
-                        {attachmentFile
-                          ? attachmentFile.name
-                          : locale !== "ar"
-                            ? "PDF, DWG, DXF (max 10MB)"
-                            : "PDF، DWG، DXF (بحد أقصى 10 ميجابايت)"}
-                      </span>
-                    </span>
-                    {attachmentFile ? (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleFileChange(null);
-                        }}
-                        className="shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold text-destructive transition-colors hover:bg-destructive/10"
-                        aria-label={
-                          locale !== "ar" ? "Remove file" : "إزالة الملف"
-                        }
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 ${
+                          attachmentFile
+                            ? "border-primary/40 bg-primary/10 text-primary"
+                            : "border-border bg-card text-muted-foreground group-hover:border-primary/30 group-hover:text-primary"
+                        }`}
                       >
-                        {locale !== "ar" ? "Remove" : "إزالة"}
-                      </button>
-                    ) : (
-                      <span className="shrink-0 text-xs font-medium text-primary">
-                        {locale !== "ar" ? "Browse" : "تصفح"}
-                      </span>
-                    )}
+                        {attachmentFile ? (
+                          <FileCheck2 className="h-5 w-5" />
+                        ) : (
+                          <Upload className="h-5 w-5" />
+                        )}
+                      </div>
+
+                      <div className="flex flex-col text-start">
+                        <span className="truncate text-sm font-semibold text-foreground">
+                          {attachmentFile
+                            ? attachmentFile.name
+                            : isAr
+                              ? "انقر لرفع مخطط أو وثيقة"
+                              : "Click to upload drawing or document"}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {attachmentFile
+                            ? `${(attachmentFile.size / (1024 * 1024)).toFixed(2)} MB`
+                            : isAr
+                              ? "PDF, DWG, DXF, Images (بحد أقصى 10 ميجابايت)"
+                              : "PDF, DWG, DXF, Images (Max 10MB)"}
+                        </span>
+                      </div>
+
+                      {attachmentFile && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleFileChange(null);
+                          }}
+                          className="ms-auto flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                          aria-label={isAr ? "إزالة الملف" : "Remove file"}
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+
                     <input
                       type="file"
                       accept={ACCEPT_HINT}
@@ -336,47 +405,56 @@ export function ContactSection() {
                       className="sr-only"
                     />
                   </label>
+
                   {fileError ? (
-                    <p className="text-xs text-destructive">{fileError}</p>
+                    <p className="mt-1 text-xs text-destructive">{fileError}</p>
                   ) : (
-                    <p className="text-xs text-muted-foreground">
-                      {locale !== "ar"
-                        ? "Attach a site plan, drawing, or specification to help us scope your project."
-                        : "أرفق مخططًا للموقع أو رسمًا أو مواصفات لمساعدتنا في تحديد نطاق مشروعك."}
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {isAr
+                        ? "أرفق مخططًا للموقع أو رسمًا لمساعدتنا في تحديد نطاق عمل مشروعك."
+                        : "Attach a site plan, drawing, or specification to help us scope your project."}
                     </p>
                   )}
                 </FormField>
 
+                {/* Submit Button */}
                 <Button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="group relative h-12 w-full overflow-hidden rounded-xl bg-primary text-primary-foreground shadow-lg transition-all duration-300 hover:bg-primary/90 hover:shadow-primary/25"
                 >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="me-2 h-4 w-4 animate-spin" />
-                      {dict.contact.form.submitting}
-                    </>
-                  ) : (
-                    <>
-                      {dict.contact.form.submit}
-                      <Send className="ms-2 h-4 w-4" />
-                    </>
-                  )}
+                  <span className="relative z-10 flex items-center justify-center gap-2 font-semibold">
+                    {submitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        {dict.contact.form.submitting}
+                      </>
+                    ) : (
+                      <>
+                        {dict.contact.form.submit}
+                        {isAr ? (
+                          <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+                        ) : (
+                          <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        )}
+                      </>
+                    )}
+                  </span>
                 </Button>
 
+                {/* Form Status Notifications */}
                 <AnimatePresence>
                   {success && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center gap-3 rounded-md border border-primary/30 bg-primary/10 p-3"
+                      className="flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4"
                     >
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                        <Check className="h-4 w-4 text-primary-foreground" />
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
+                        <Check className="h-4 w-4" />
                       </div>
-                      <p className="text-sm text-primary">
+                      <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
                         {dict.contact.form.success}
                       </p>
                     </motion.div>
@@ -386,9 +464,9 @@ export function ContactSection() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="rounded-md border border-destructive/30 bg-destructive/10 p-3"
+                      className="rounded-xl border border-destructive/30 bg-destructive/10 p-4"
                     >
-                      <p className="text-sm text-destructive">
+                      <p className="text-sm font-medium text-destructive">
                         {dict.contact.form.error}
                       </p>
                     </motion.div>
@@ -416,9 +494,9 @@ function FormField({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <Label className="text-xs font-medium text-muted-foreground">
+      <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
-        {required && <span className="text-primary"> *</span>}
+        {required && <span className="text-primary">*</span>}
       </Label>
       {children}
       {error && <p className="text-xs text-destructive">{error}</p>}
@@ -431,25 +509,47 @@ function ContactItem({
   label,
   value,
   href,
+  isAr,
 }: {
   icon: React.ElementType;
   label: string;
   value: string;
   href?: string;
+  isAr?: boolean;
 }) {
   const content = (
-    <div className="group flex items-start gap-4 rounded-lg border border-border/40 bg-card p-4 transition-colors hover:border-primary/40">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10">
-        <Icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+    <div className="group flex items-start gap-4 rounded-2xl border border-border/50 bg-card/60 p-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-card hover:shadow-md hover:shadow-primary/5">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 transition-colors duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+        <Icon
+          className="h-5 w-5 text-primary transition-colors duration-300 group-hover:text-primary-foreground"
+          strokeWidth={1.75}
+        />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col text-start">
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           {label}
         </span>
-        <span className="text-sm font-medium text-foreground">{value}</span>
+        <span className="mt-0.5 text-sm font-semibold text-foreground">
+          {value}
+        </span>
       </div>
+      {href && (
+        <div className="ms-auto flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-all duration-300 group-hover:opacity-100">
+          {isAr ? (
+            <ArrowLeft className="h-4 w-4" />
+          ) : (
+            <ArrowRight className="h-4 w-4" />
+          )}
+        </div>
+      )}
     </div>
   );
 
-  return href ? <a href={href}>{content}</a> : content;
+  return href ? (
+    <a href={href} className="block">
+      {content}
+    </a>
+  ) : (
+    content
+  );
 }

@@ -33,7 +33,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowDown, Activity } from "lucide-react";
-import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { Button } from "@/geotech/components/ui/button";
 import { ContourLines } from "@/geotech/components/geological/background";
@@ -51,7 +50,6 @@ const HERO_IMAGES = [
 const SLIDE_INTERVAL_MS = 6000;
 
 export function Hero() {
-  const { theme } = useTheme();
   const { dict, locale } = useLanguage();
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -67,8 +65,6 @@ export function Hero() {
 
   const isRtl = locale === "ar";
   const baseHref = `/geotechnical/${locale}`;
-  const isDark = theme === "dark" || theme === "system";
-
   // Scrim darkens whichever side the headline actually renders on. Content
   // sits on the "start" side (left in LTR, right in RTL) — the gradient
   // must track that, not assume LTR.
@@ -95,42 +91,21 @@ export function Hero() {
           />
         </AnimatePresence>
 
-        {/* Overlay gradients — direction now RTL-aware, see note above */}
-        {isDark ? (
-          <>
-            <div
-              className={cn(
-                "absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/15",
-                isRtl && "bg-gradient-to-l",
-              )}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
-            <div
-              className={cn(
-                "absolute w-1/2 bg-gradient-to-r from-black/60 to-transparent",
-                sideOverlayPosition,
-                isRtl && "bg-gradient-to-l",
-              )}
-            />
-          </>
-        ) : (
-          <>
-            <div
-              className={cn(
-                "absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-white/5",
-                isRtl && "bg-gradient-to-l",
-              )}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-white/40" />
-            <div
-              className={cn(
-                "absolute w-1/2 bg-gradient-to-r from-white/50 to-transparent",
-                sideOverlayPosition,
-                isRtl && "bg-gradient-to-l",
-              )}
-            />
-          </>
-        )}
+        {/* Dark scrim keeps the photography legible in both themes. */}
+        <div
+          className={cn(
+            "absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/15",
+            isRtl && "bg-gradient-to-l",
+          )}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
+        <div
+          className={cn(
+            "absolute w-1/2 bg-gradient-to-r from-black/60 to-transparent",
+            sideOverlayPosition,
+            isRtl && "bg-gradient-to-l",
+          )}
+        />
       </div>
 
       {/* Technical grid overlay */}
@@ -138,7 +113,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute inset-0 bg-grid opacity-20"
+        className="hero-grid absolute inset-0 bg-grid opacity-20"
       />
       <ContourLines className="text-primary" opacity={0.08} />
 
@@ -161,7 +136,7 @@ export function Hero() {
           <h1
             className={cn(
               "text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl",
-              isDark ? "text-white" : "text-gray-900",
+              "text-white",
             )}
           >
             <motion.span
@@ -196,7 +171,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 1 }}
             className={cn(
               "mt-6 max-w-xl text-pretty text-base leading-relaxed sm:text-lg",
-              isDark ? "text-muted-foreground" : "text-gray-700",
+              "text-white/80",
             )}
           >
             {dict.hero.description}
@@ -243,7 +218,7 @@ export function Hero() {
           <div className="inline-flex flex-col gap-3 rounded-lg border border-border/60 bg-surface/50 p-4 backdrop-blur-md">
             <div className="flex items-center gap-2 border-b border-border/40 pb-2">
               <Activity className="h-3.5 w-3.5 text-primary" />
-              <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-white">
                 {dict.hero.hud.title}
               </span>
             </div>
@@ -332,10 +307,10 @@ function HudItem({
 }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/70">
+      <span className="font-mono text-[9px] uppercase tracking-wider text-white">
         {label}
       </span>
-      <span className="flex items-center gap-1.5 font-mono text-xs font-medium text-foreground">
+      <span className="flex items-center gap-1.5 font-mono text-xs font-medium text-white">
         {pulse && (
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />

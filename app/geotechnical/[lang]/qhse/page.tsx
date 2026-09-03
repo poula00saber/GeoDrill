@@ -5,6 +5,7 @@ import { Footer } from "@/geotech/components/sections/footer";
 import { QhseEnhanced } from "@/geotech/components/sections/qhse-enhanced";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const pageContent = {
   en: {
@@ -29,14 +30,22 @@ export default function QhsePage() {
   return (
     <>
       <Navigation />
-      <main
-        className="min-h-screen w-full"
-        dir={isAr ? "rtl" : "ltr"}
-      >
-        {/* Modern Header Section */}
-        <section className="relative overflow-hidden border-b border-border/60 bg-surface/30 pb-20 pt-32">
-          <div className="bg-grid absolute inset-0 opacity-20" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen w-full" dir={isAr ? "rtl" : "ltr"}>
+        {/* Simple photo hero matching the services page */}
+        <section className="relative min-h-[55vh] w-full overflow-hidden bg-background pt-24">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/geotech-hero1.jpg"
+              alt="GEODRILL field team on an active investigation site"
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50" />
+          </div>
+          <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -46,10 +55,10 @@ export default function QhsePage() {
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
                 {t.badge}
               </span>
-              <h1 className="mt-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 {t.title}
               </h1>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-lg leading-relaxed text-gray-200">
                 {t.description}
               </p>
             </motion.div>
