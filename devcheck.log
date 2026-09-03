@@ -8,3 +8,15 @@
  GET /geotechnical/ar/services/anchoring-shoring-design-execution 200 in 2.0s (next.js: 922ms, generate-params: 532ms, application-code: 549ms)
  GET /geotechnical/ar/services 200 in 673ms (next.js: 503ms, application-code: 170ms)
  GET /geotechnical/en 200 in 734ms (next.js: 49ms, generate-params: 457ms, application-code: 228ms)
+ GET /geotechnical/ar/services 200 in 782ms (next.js: 260ms, application-code: 522ms)
+ GET /geotechnical/ar 200 in 174ms (next.js: 42ms, generate-params: 16ms, application-code: 117ms)
+ GET /geotechnical/ar 200 in 600ms (next.js: 365ms, generate-params: 44ms, application-code: 191ms)
+✓ Compiled in 1189ms
+ GET /geotechnical/ar 200 in 136ms (next.js: 33ms, generate-params: 13ms, application-code: 89ms)
+✓ Compiled in 795ms
+ GET /geotechnical/ar 200 in 105ms (next.js: 26ms, generate-params: 11ms, application-code: 68ms)
+✓ Compiled in 1790ms
+ GET /geotechnical/ar 200 in 335ms (next.js: 55ms, generate-params: 20ms, application-code: 259ms)
+✓ Compiled in 440ms
+ GET /geotechnical/ar 200 in 109ms (next.js: 29ms, generate-params: 10ms, application-code: 71ms)
+[?25h

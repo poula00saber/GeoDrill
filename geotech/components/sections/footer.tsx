@@ -62,7 +62,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Logo src={logoSrc} size="h-12" />
+            <Logo src={logoSrc} size="h-30" />
             <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
               {dict.footer.tagline}
             </p>

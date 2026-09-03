@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Swaps the favicon to match the BROWSER/OS color scheme:
- *  - Light scheme -> public/logo.png,  visible on a light tab.
- *  - Dark scheme  -> public/logo2.png, visible on a dark tab.
+ *  - Light scheme -> public/logo.png (or geotech-logo.png on /geotechnical),
+ *                    visible on a light tab.
+ *  - Dark scheme  -> public/logo2.png (or geotech-logo2.png on /geotechnical),
+ *                    visible on a dark tab.
  *
  * A browser tab's favicon area follows the OS/browser theme
  * (`prefers-color-scheme`), not the website's own theme. We track the scheme
@@ -27,8 +30,16 @@ function schemeIsDark(): boolean {
   );
 }
 
-function applyFavicon(dark: boolean): void {
-  const href = dark ? "/logo2.png" : "/logo.png";
+function applyFavicon(dark: boolean, geotech: boolean): void {
+  // Geotech site (/geotechnical) ships its own brand marks; everywhere else
+  // (construction) uses the generic GEODRILL logo pair.
+  const href = dark
+    ? geotech
+      ? "/geotech-logo2.png"
+      : "/logo2.png"
+    : geotech
+      ? "/geotech-logo.png"
+      : "/logo.png";
   document
     .querySelectorAll<HTMLLinkElement>(ICON_SELECTOR)
     .forEach((link) => {
@@ -37,6 +48,14 @@ function applyFavicon(dark: boolean): void {
 }
 
 export default function ThemeFavicon() {
+  const pathname = usePathname();
+  const [geotech, setGeotech] = useState(false);
+
+  // Derive "is geotech route" from the path (client-side, post-hydration).
+  useEffect(() => {
+    setGeotech(pathname === "/geotechnical" || pathname?.startsWith("/geotechnical/"));
+  }, [pathname]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -49,13 +68,14 @@ export default function ThemeFavicon() {
     const sync = () =>
       applyFavicon(
         typeof native?.matches === "boolean" ? native.matches : schemeIsDark(),
+        geotech,
       );
 
     sync();
 
     if (native) {
       const onChange = (event: MediaQueryListEvent) =>
-        applyFavicon(event.matches);
+        applyFavicon(event.matches, geotech);
       native.addEventListener("change", onChange);
       return () => native.removeEventListener("change", onChange);
     }
@@ -63,7 +83,7 @@ export default function ThemeFavicon() {
     // No native matchMedia — poll the CSS scheme probe as a fallback.
     const id = window.setInterval(sync, 3000);
     return () => window.clearInterval(id);
-  }, []);
+  }, [geotech]);
 
   return null;
 }

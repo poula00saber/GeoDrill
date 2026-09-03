@@ -27,6 +27,15 @@ export const metadata: Metadata = {
   title: "GEODRILL KSA | Geotechnical & Geoscience Experts",
   description:
     "Advanced geotechnical, geophysical and engineering investigation services delivering reliable subsurface intelligence for safer, smarter and more efficient project decisions in Saudi Arabia.",
+  // Geotech brand favicon (light/dark marks), mirroring how /contracting ships
+  // its own logo pair in the root layout.
+  icons: {
+    icon: [
+      { url: "/geotech-logo.png", media: "(prefers-color-scheme: light)" },
+      { url: "/geotech-logo2.png", media: "(prefers-color-scheme: dark)" },
+    ],
+    apple: "/geotech-logo.png",
+  },
 };
 
 export default async function GeotechLayout({

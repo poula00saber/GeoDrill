@@ -110,7 +110,7 @@ export function Navigation() {
             href={baseHref}
             className="group flex items-center gap-2.5 outline-none"
           >
-            <Logo size="h-9" src={logoSrc} />
+            <Logo size="h-32" src={logoSrc} />
           </a>
 
           {/* Desktop Links */}
@@ -292,7 +292,7 @@ export function Navigation() {
             <ContourLines className="text-primary" opacity={0.04} />
             <div className="relative flex h-full flex-col p-6">
               <div className="flex items-center justify-between">
-                <Logo size="h-8" src={logoSrc} />
+                <Logo size="h-10" src={logoSrc} />
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-foreground"
