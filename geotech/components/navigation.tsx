@@ -110,7 +110,7 @@ export function Navigation() {
             href={baseHref}
             className="group flex items-center gap-2.5 outline-none"
           >
-            <Logo size="h-32" src={logoSrc} />
+            <Logo size={scrolled ? "h-20" : "h-34"} src={logoSrc} />
           </a>
 
           {/* Desktop Links */}

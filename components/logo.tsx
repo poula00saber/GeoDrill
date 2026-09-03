@@ -43,7 +43,7 @@ export function Logo({
         priority
         className={cn(
           size,
-          "w-auto object-contain",
+          "w-auto object-contain transition-all duration-300",
           // Pure black in light theme, pure white in dark theme.
           monochrome && "brightness-0 dark:brightness-0 dark:invert",
         )}
