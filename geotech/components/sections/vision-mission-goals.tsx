@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Flag, Target, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 
 export function VisionMissionGoals() {
@@ -12,7 +13,7 @@ export function VisionMissionGoals() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
         delayChildren: 0.1,
       },
     },
@@ -22,6 +23,42 @@ export function VisionMissionGoals() {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 },
   };
+
+  const defaultGoals = [
+    "Establish a strong and trusted market presence",
+    "Ensure client satisfaction through quality service",
+    "Promote innovation and sustainability",
+    "Invest in ongoing team development",
+  ];
+
+  const goals =
+    dict.about?.goals && Array.isArray(dict.about.goals)
+      ? dict.about.goals
+      : defaultGoals;
+
+  const cards = [
+    {
+      icon: Flag,
+      label: isArabic ? "الرؤية" : "Vision",
+      title: dict.vision.title,
+      body: dict.vision.description,
+      type: "text" as const,
+    },
+    {
+      icon: Target,
+      label: isArabic ? "الرسالة" : "Mission",
+      title: dict.mission.title,
+      body: dict.mission.description,
+      type: "text" as const,
+    },
+    {
+      icon: TrendingUp,
+      label: isArabic ? "الأهداف" : "Goals",
+      title: isArabic ? "الأهداف الاستراتيجية" : "Strategic Objectives",
+      goals,
+      type: "list" as const,
+    },
+  ];
 
   return (
     <section className="relative overflow-hidden py-20 sm:py-28 md:py-32 border-b border-border bg-surface/30">
@@ -33,91 +70,48 @@ export function VisionMissionGoals() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid gap-8 md:grid-cols-3"
         >
-          {/* Vision */}
-          <motion.div variants={itemVariants} className="group">
-            <div className="mb-4">
-              <span className="inline-block font-mono text-xs uppercase tracking-widest text-primary mb-3">
-                Vision
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold leading-tight">
-                {dict.vision.title}
-              </h3>
-            </div>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              {dict.vision.description}
-            </p>
-          </motion.div>
+          {cards.map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="group rounded-xl border border-border/40 bg-card p-8 sm:p-10 text-center hover:border-primary/40 hover:shadow-lg transition-all"
+              >
+                <span className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md shadow-primary/20">
+                  <Icon className="h-7 w-7" />
+                </span>
 
-          {/* Mission */}
-          <motion.div
-            variants={itemVariants}
-            className="group md:border-l-2 md:border-r-2 md:border-border/40 md:px-8"
-          >
-            <div className="mb-4">
-              <span className="inline-block font-mono text-xs uppercase tracking-widest text-primary mb-3">
-                Mission
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold leading-tight">
-                {dict.mission.title}
-              </h3>
-            </div>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              {dict.mission.description}
-            </p>
-          </motion.div>
+                <span className="mb-2 inline-block font-mono text-xs uppercase tracking-widest text-primary">
+                  {card.label}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold leading-tight mb-4">
+                  {card.title}
+                </h3>
 
-          {/* Goals */}
-          <motion.div variants={itemVariants} className="group">
-            <div className="mb-4">
-              <span className="inline-block font-mono text-xs uppercase tracking-widest text-primary mb-3">
-                Goals
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold leading-tight mb-4">
-                Strategic Objectives
-              </h3>
-            </div>
-            <ul className="space-y-3 text-base leading-relaxed text-muted-foreground">
-              {dict.about?.goals && Array.isArray(dict.about.goals) ? (
-                dict.about.goals.map((goal: string, i: number) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="text-primary font-bold flex-shrink-0">
-                      ·
-                    </span>
-                    <span>{goal}</span>
-                  </li>
-                ))
-              ) : (
-                <>
-                  <li className="flex gap-3">
-                    <span className="text-primary font-bold flex-shrink-0">
-                      ·
-                    </span>
-                    <span>Establish a strong and trusted market presence</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-primary font-bold flex-shrink-0">
-                      ·
-                    </span>
-                    <span>
-                      Ensure client satisfaction through quality service
-                    </span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-primary font-bold flex-shrink-0">
-                      ·
-                    </span>
-                    <span>Promote innovation and sustainability</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-primary font-bold flex-shrink-0">
-                      ·
-                    </span>
-                    <span>Invest in ongoing team development</span>
-                  </li>
-                </>
-              )}
-            </ul>
-          </motion.div>
+                {card.type === "text" ? (
+                  <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+                    {card.body}
+                  </p>
+                ) : (
+                  <ul
+                    className={`space-y-3 text-sm sm:text-base leading-relaxed text-muted-foreground ${
+                      isArabic ? "text-right" : "text-left"
+                    }`}
+                  >
+                    {card.goals!.map((goal: string, gi: number) => (
+                      <li key={gi} className="flex gap-3">
+                        <span className="text-primary font-bold flex-shrink-0">
+                          ·
+                        </span>
+                        <span>{goal}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

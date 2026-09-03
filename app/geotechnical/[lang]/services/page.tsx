@@ -173,7 +173,10 @@ export default function ServicesPage({ params }: PageProps) {
                           <div className="absolute inset-0 bg-black/40 transition-all group-hover:bg-black/30" />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="font-mono text-xs uppercase tracking-wider text-white/80">
-                              {pickLocalized(serviceCategoryLabels[service.category], lang)}
+                              {pickLocalized(
+                                serviceCategoryLabels[service.category],
+                                lang,
+                              )}
                             </span>
                           </div>
                         </div>
@@ -189,13 +192,16 @@ export default function ServicesPage({ params }: PageProps) {
                           <Button
                             asChild
                             variant="outline"
-                            className="mt-5 self-start"
+                            className="mt-5 self-start border-primary bg-transparent text-black hover:bg-primary hover:text-black"
                           >
                             <Link
                               href={`/geotechnical/${lang}/services/${service.slug}`}
                             >
                               {pickLocalized(servicesPageCopy.explore, lang)}
-                              <ArrowRight className="ms-2 h-4 w-4" />
+
+                              <ArrowRight
+                                className={`ms-2 h-4 w-4 ${lang === "ar" ? "rotate-180" : ""}`}
+                              />
                             </Link>
                           </Button>
                         </div>

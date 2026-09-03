@@ -20,6 +20,7 @@ interface LanguageContextValue {
   locale: Locale;
   dict: Dictionary | null;
   dir: "ltr" | "rtl";
+  isArabic: boolean;
   setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
 }
@@ -71,6 +72,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         locale,
         dict,
         dir: getDirection(locale),
+        isArabic: locale === "ar",
         setLocale,
         toggleLocale,
       }}

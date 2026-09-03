@@ -22,7 +22,7 @@ const organizationNames = [
 ];
 
 export function Organizations() {
-  const { dict } = useLanguage();
+  const { dict, isArabic } = useLanguage();
   if (!dict) return null;
 
   const row1 = organizationNames.slice(0, 7);
@@ -32,7 +32,7 @@ export function Organizations() {
     <section className="relative overflow-hidden border-y border-border bg-surface/30 py-20 sm:py-28 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Organizations"
+          eyebrow={isArabic ? "المؤسسات" : "Organizations"}
           title={dict.organizations.title}
           description={dict.organizations.subtitle}
           align="center"
@@ -69,7 +69,9 @@ export function Organizations() {
       </div>
 
       <p className="mt-8 text-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
-        Organizations Our Team Has Worked With
+        {isArabic
+          ? "المؤسسات التي عمل معها فريقنا"
+          : "Organizations Our Team Has Worked With"}
       </p>
     </section>
   );

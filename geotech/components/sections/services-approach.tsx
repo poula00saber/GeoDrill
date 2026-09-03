@@ -1,16 +1,5 @@
 // ============================================================================
 // geotech/components/sections/services-approach.tsx
-//
-// FLAG: this is a 4-step process (Investigate -> Analyze -> Recommend ->
-// Deliver), matching the reference layout. Your homepage's existing
-// `approach.tsx` describes a DIFFERENT 3-step process (Investigate ->
-// Analyze -> Advise). Two different process descriptions on two pages is a
-// consistency problem, not a variety feature — decide which one is the real
-// canonical description of how GEODRILL works, and either:
-//   (a) reuse that exact content/step-count here instead of this 4-step
-//       version, or
-//   (b) update homepage's approach.tsx to match this 4-step version instead.
-// Don't ship both as-is.
 // ============================================================================
 
 "use client";
@@ -23,23 +12,48 @@ import { Button } from "@/geotech/components/ui/button";
 const steps = [
   {
     icon: Search,
-    en: { label: "Investigate", description: "Understand site conditions through advanced investigation." },
-    ar: { label: "تحري", description: "فهم ظروف الموقع من خلال التحري المتقدم." },
+    en: {
+      label: "Investigate",
+      description: "Understand site conditions through advanced investigation.",
+    },
+    ar: {
+      label: "تحري",
+      description: "فهم ظروف الموقع من خلال التحري المتقدم.",
+    },
   },
   {
     icon: FileText,
-    en: { label: "Analyze", description: "Analyze data using proven methods and engineering judgment." },
-    ar: { label: "تحليل", description: "تحليل البيانات باستخدام أساليب مثبتة والحكم الهندسي." },
+    en: {
+      label: "Analyze",
+      description:
+        "Analyze data using proven methods and engineering judgment.",
+    },
+    ar: {
+      label: "تحليل",
+      description: "تحليل البيانات باستخدام أساليب مثبتة والحكم الهندسي.",
+    },
   },
   {
     icon: Lightbulb,
-    en: { label: "Recommend", description: "Provide practical and cost-effective recommendations." },
-    ar: { label: "توصية", description: "تقديم توصيات عملية وفعالة من حيث التكلفة." },
+    en: {
+      label: "Recommend",
+      description: "Provide practical and cost-effective recommendations.",
+    },
+    ar: {
+      label: "توصية",
+      description: "تقديم توصيات عملية وفعالة من حيث التكلفة.",
+    },
   },
   {
     icon: Rocket,
-    en: { label: "Deliver", description: "Support your project from design through construction." },
-    ar: { label: "تنفيذ", description: "دعم مشروعك بدءًا من التصميم وحتى البناء." },
+    en: {
+      label: "Deliver",
+      description: "Support your project from design through construction.",
+    },
+    ar: {
+      label: "تنفيذ",
+      description: "دعم مشروعك بدءًا من التصميم وحتى البناء.",
+    },
   },
 ];
 
@@ -47,66 +61,94 @@ export function ServicesApproach({ locale = "en" }: { locale?: string }) {
   const isAr = locale === "ar";
 
   return (
-    <section className="relative overflow-hidden bg-foreground py-20 text-background sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:gap-16">
-          {/* Left: intro + link */}
+    <section className="relative overflow-hidden bg-slate-950 py-20 text-slate-100 sm:py-24">
+      {/* Decorative Engineering Grid Overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+          backgroundSize: "24px 24px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:items-center lg:gap-16">
+          {/* Left Column: Heading + CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: isAr ? 20 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
+            className={isAr ? "text-right" : "text-left"}
           >
-            <p className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-mono font-semibold uppercase tracking-widest text-amber-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
               {isAr ? "نهجنا" : "Our Approach"}
-            </p>
-            <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
+            </div>
+
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
               {isAr
                 ? "نهج مُثبت لنتائج موثوقة"
                 : "A Proven Approach for Reliable Results"}
             </h2>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-background/70">
+
+            <p className="mt-4 max-w-md text-base leading-relaxed text-slate-400">
               {isAr
                 ? "نتبع عملية منظمة لضمان تنفيذ كل مشروع بدقة وجودة وكفاءة."
-                : "We follow a structured process to ensure every project is executed with accuracy, quality and efficiency."}
+                : "We follow a structured geotechnical workflow to ensure every site project is executed with accuracy, quality, and engineering efficiency."}
             </p>
+
             <Button
               asChild
-              variant="outline"
-              className="mt-6 border-background/30 bg-transparent text-background hover:bg-background/10"
+              className="mt-8 border border-amber-500/40 bg-amber-500 text-slate-950 font-semibold hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/10"
             >
-              <Link href={`/geotechnical/${locale}/about`}>
+              <Link
+                href={`/geotechnical/${locale}/about`}
+                className="inline-flex items-center gap-2"
+              >
                 {isAr ? "اعرف المزيد عنا" : "Learn More About Us"}
-                <ArrowRight className="ms-2 h-4 w-4" />
+                <ArrowRight className={`h-4 w-4 ${isAr ? "rotate-180" : ""}`} />
               </Link>
             </Button>
           </motion.div>
 
-          {/* Right: 4-step row with connecting line */}
-          <div className="relative grid grid-cols-2 gap-y-10 sm:grid-cols-4 sm:gap-y-0">
-            <div className="absolute inset-x-0 top-6 hidden h-px border-t border-dashed border-background/25 sm:block" />
+          {/* Right Column: Steps Stepper */}
+          <div className="relative grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            {/* Horizontal Connecting Bar (Desktop) */}
+            <div
+              className="absolute inset-x-8 top-7 hidden h-0.5 bg-gradient-to-r from-amber-500/20 via-amber-500/50 to-amber-500/20 lg:block"
+              aria-hidden="true"
+            />
+
             {steps.map((step, i) => (
               <motion.div
                 key={step.en.label}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative flex flex-col items-center text-center"
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="group relative flex flex-col items-center rounded-xl border border-slate-800 bg-slate-900/60 p-5 text-center backdrop-blur-sm transition-all hover:border-amber-500/40 hover:bg-slate-900"
               >
-                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-background">
+                {/* Step Icon Badge */}
+                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-amber-500/50 bg-slate-950 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:border-amber-400">
                   <step.icon
-                    className="h-6 w-6 text-foreground"
-                    strokeWidth={1.5}
+                    className="h-6 w-6 text-amber-400 transition-colors group-hover:text-amber-300"
+                    strokeWidth={1.75}
                   />
                 </div>
-                <span className="mt-3 inline-flex h-6 min-w-6 items-center justify-center rounded bg-primary px-1.5 font-mono text-xs font-bold text-primary-foreground">
-                  {String(i + 1).padStart(2, "0")}
+
+                {/* Step Number Tag */}
+                <span className="mt-4 inline-flex h-5 min-w-[2rem] items-center justify-center rounded bg-slate-800 px-2 font-mono text-xs font-bold text-slate-300 transition-colors group-hover:bg-amber-500/20 group-hover:text-amber-400">
+                  0{i + 1}
                 </span>
-                <p className="mt-2 text-sm font-bold">
+
+                {/* Step Label */}
+                <h3 className="mt-3 text-base font-bold text-white group-hover:text-amber-400 transition-colors">
                   {isAr ? step.ar.label : step.en.label}
-                </p>
-                <p className="mt-1 max-w-[9rem] text-xs leading-relaxed text-background/60">
+                </h3>
+
+                {/* Step Description */}
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">
                   {isAr ? step.ar.description : step.en.description}
                 </p>
               </motion.div>

@@ -14,6 +14,7 @@ interface PageProps {
 
 export default function ClientsPage({ params }: PageProps) {
   const { lang } = use(params);
+  const isAr = lang === "ar";
 
   return (
     <PageTransition>
@@ -43,14 +44,17 @@ export default function ClientsPage({ params }: PageProps) {
             <div className="max-w-3xl">
               <p className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-primary">
                 <span className="h-px w-8 bg-primary" />
-                GEODRILL KSA
+                {isAr ? "عملاؤنا" : "Our Clients"}
               </p>
               <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Our Clients
+                {isAr
+                  ? "جهات تثق بنا"
+                  : "Clients Who Trust Us"}
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-200">
-                Trusted by organizations delivering infrastructure, commercial,
-                and industrial developments across Saudi Arabia.
+                {isAr
+                  ? "جهات موثوقة تقود مشاريع البنية التحتية والتجارية والصناعية في جميع أنحاء المملكة العربية السعودية."
+                  : "Trusted by organizations delivering infrastructure, commercial, and industrial developments across Saudi Arabia."}
               </p>
             </div>
           </motion.div>
