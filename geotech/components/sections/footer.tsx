@@ -121,6 +121,7 @@ export function Footer() {
                 <a
                   href={siteConfig.phoneHref}
                   className="transition-colors hover:text-primary"
+                  dir="ltr"
                 >
                   {siteConfig.phone}
                 </a>

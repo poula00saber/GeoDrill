@@ -192,7 +192,7 @@ export default function ServicesPage({ params }: PageProps) {
                           <Button
                             asChild
                             variant="outline"
-                            className="mt-5 self-start border-primary bg-transparent text-black hover:bg-primary hover:text-black"
+                            className="mt-5 self-start border-primary bg-transparent text-black hover:bg-primary hover:text-black dark:text-white dark:hover:text-black"
                           >
                             <Link
                               href={`/geotechnical/${lang}/services/${service.slug}`}
@@ -220,32 +220,7 @@ export default function ServicesPage({ params }: PageProps) {
         {/* ── CTA banner — reused from the earlier build ── */}
         <CtaBanner />
 
-        {/* ── Stat bar — verified figures only, same rule as the homepage's WhyGeoDrill stat bar ── */}
-        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 rounded-xl bg-surface px-8 py-8 sm:justify-between">
-            <div className="flex items-center gap-3">
-              <Calendar className="h-6 w-6 text-primary" strokeWidth={1.5} />
-              <div>
-                <p className="text-2xl font-bold text-foreground">17+</p>
-                <p className="text-xs text-muted-foreground">
-                  {pickLocalized(servicesPageCopy.yearsLabel, lang)}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Building2 className="h-6 w-6 text-primary" strokeWidth={1.5} />
-              <div>
-                <p className="text-2xl font-bold text-foreground">14</p>
-                <p className="text-xs text-muted-foreground">
-                  {pickLocalized(servicesPageCopy.servicesLabel, lang)}
-                </p>
-              </div>
-            </div>
-            {/* Add "Projects Completed" / "Satisfied Clients" / "Cities Served"
-                here once you have real, verified figures — do not reuse the
-                reference site's 1000+ / 500+ / 10+, those aren't yours. */}
-          </div>
-        </section>
+        
       </main>
       <Footer />
     </>

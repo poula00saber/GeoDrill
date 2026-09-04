@@ -529,7 +529,7 @@ function ContactItem({
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           {label}
         </span>
-        <span className="mt-0.5 text-sm font-semibold text-foreground">
+        <span className="mt-0.5 text-sm font-semibold text-foreground" dir="ltr">
           {value}
         </span>
       </div>

@@ -160,7 +160,9 @@ export function SoftwareSection() {
                     : "Certifications & Accreditations"}
                 </span>
                 <h3 className="mb-2 mt-3 text-xl font-bold text-white sm:text-2xl">
-                  {isArabic ? "جودة يمكنك الاعتماد عليها" : "Quality You Can Rely On"}
+                  {isArabic
+                    ? "جودة يمكنك الاعتماد عليها"
+                    : "Quality You Can Rely On"}
                 </h3>
                 <p className="text-sm leading-relaxed text-white/60">
                   {isArabic
@@ -171,7 +173,9 @@ export function SoftwareSection() {
                   href={`/geotechnical/${locale}/qhse`}
                   className="group/link mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/85 hover:shadow-lg hover:shadow-primary/30"
                 >
-                  {isArabic ? "تعرف على معايير الجودة" : "Explore Our QHSE Standards"}
+                  {isArabic
+                    ? "تعرف على معايير الجودة"
+                    : "Explore Our QHSE Standards"}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1 rtl:rotate-180 rtl:group-hover/link:-translate-x-1" />
                 </Link>
               </div>

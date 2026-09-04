@@ -100,7 +100,7 @@ export function ServicesApproach({ locale = "en" }: { locale?: string }) {
 
             <Button
               asChild
-              className="mt-8 border border-amber-500/40 bg-amber-500 text-slate-950 font-semibold hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/10"
+              className="mt-8 bg-primary font-semibold text-primary-foreground transition-colors hover:bg-primary/90 shadow-lg shadow-primary/10"
             >
               <Link
                 href={`/geotechnical/${locale}/about`}

@@ -92,11 +92,15 @@ export function WhoWeAre() {
                     <div>
                       <h4 className="text-sm font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                         {dict.about.features?.[feature.titleKey]?.title ||
-                          (isArabic ? feature.fallbackTitleAr : feature.fallbackTitle)}
+                          (isArabic
+                            ? feature.fallbackTitleAr
+                            : feature.fallbackTitle)}
                       </h4>
                       <p className="mt-1 text-xs leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
                         {dict.about.features?.[feature.titleKey]?.description ||
-                          (isArabic ? feature.fallbackDescAr : feature.fallbackDesc)}
+                          (isArabic
+                            ? feature.fallbackDescAr
+                            : feature.fallbackDesc)}
                       </p>
                     </div>
                   </motion.div>
