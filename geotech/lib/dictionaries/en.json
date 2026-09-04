@@ -159,7 +159,7 @@
   },
   "software": {
     "title": "Software & Technology",
-    "subtitle": "GEODRILL utilizes industry-standard software for analysis, modeling and interpretation.",
+    "subtitle": "Powered by industry-leading software for investigation, analysis and design across every stage of a project.",
     "categories": {
       "geotechnical": {
         "title": "GEOTECHNICAL & SLOPE STABILITY",
@@ -424,9 +424,9 @@
     }
   },
   "about": {
-    "title": "Engineering Insight Built on Experience.",
-    "p1": "GEODRILL is a specialized geoscience company providing professional geotechnical, geophysical and related engineering investigation services for construction, infrastructure, private and government sectors.",
-    "p2": "Our multidisciplinary approach combines field investigation, testing, technical analysis and engineering interpretation to provide practical insight into ground and site conditions.",
+    "title": "Engineering Insight Built on Experience",
+    "p1": "GEODRILL is a specialized geoscience company providing professional geotechnical, geophysical and related engineering investigation services for the construction, infrastructure, private and government sectors.",
+    "p2": "Our multidisciplinary approach combines field investigation, testing, technical analysis and engineering interpretation to deliver practical insight into ground and site conditions.",
     "p3": "Our team brings more than 17 years of experience across projects in Saudi Arabia.",
     "goals": [
       "Establish a strong and trusted market presence.",

@@ -39,7 +39,7 @@ export function AboutHero() {
         titleLead: "نبني الثقة",
         titleEnd: "من أعماق الأرض",
         description:
-          "جيودريل شركة هندسية جيوتقنية رائدة تقدم حلولًا موثوقة لعلوم الأرض تدعم أعمال البناء الآمنة والمستدامة والناجحة.",
+          "جيودريل شركة رائدة في مجال الجيوتقنية وعلوم الأرض، تقدم خدمات هندسية وتحريات موثوقة ومدفوعة بالتقنية، تدعم أعمال البناء الآمنة والمستدامة والناجحة في جميع أنحاء المملكة العربية السعودية.",
         story: "قصتنا",
         stats: [
           "سنوات من الخبرة",
@@ -53,7 +53,7 @@ export function AboutHero() {
         titleLead: "Building Confidence",
         titleEnd: "from the Ground Up",
         description:
-          "GEODRILL is a leading geotechnical engineering company delivering reliable subsurface solutions that support safe, sustainable and successful construction.",
+          "GEODRILL is a leading geotechnical and geoscience company delivering reliable, technology-driven engineering and investigation services that support safe, sustainable and successful construction across Saudi Arabia.",
         story: "Our Story",
         stats: [
           "Years of Experience",
