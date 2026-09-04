@@ -11,6 +11,8 @@
 // "material-testing") that do NOT match the live route slugs, so it is NOT the
 // right source for this page. This file is the canonical page-local source.
 
+import type { ServiceContent } from "./services-data";
+
 export interface LocalizedText {
   en: string;
   ar: string;
@@ -258,6 +260,25 @@ export const servicesPageItems: Record<string, ServiceItemLocalized> = {
     },
   },
 };
+
+export function getLocalizedService(
+  service: ServiceContent,
+  locale: string,
+): ServiceContent {
+  const localized = servicesPageItems[service.slug]?.[locale === "ar" ? "ar" : "en"];
+  if (!localized || locale !== "ar") return service;
+
+  return {
+    ...service,
+    title: localized.name,
+    shortDescription: localized.description,
+    overview: [localized.description],
+  };
+}
+
+export function getLocalizedServiceItem(slug: string, locale: string) {
+  return servicesPageItems[slug]?.[locale === "ar" ? "ar" : "en"];
+}
 
 // Pick the value for the active locale (falls back to English).
 export function pickLocalized(t: LocalizedText, lang: string): string {

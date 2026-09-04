@@ -29,7 +29,6 @@ export interface ServiceContent {
   capabilities: string[] | Record<string, string[]>;
   standardsReferenced?: string[];
   processSteps?: { label: string; description?: string }[];
-  customVisual?: React.ReactNode;
   gallery: { src: string; alt: string; caption: string }[];
   relatedServices: string[];
 }

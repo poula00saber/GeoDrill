@@ -6,7 +6,17 @@ import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
 import { cn } from "@/geotech/lib/utils";
 
-type MethodKey = "masw" | "gpr" | "ert" | "seismic" | "emi" | "microgravity";
+type MethodKey =
+  | "masw"
+  | "gpr"
+  | "ert"
+  | "seismic"
+  | "emi"
+  | "microgravity"
+  | "magnetic"
+  | "borehole"
+  | "crosshole"
+  | "suspension";
 
 export function GeophysicalTechnology() {
   const { dict } = useLanguage();
@@ -21,6 +31,10 @@ export function GeophysicalTechnology() {
     "seismic",
     "emi",
     "microgravity",
+    "magnetic",
+    "borehole",
+    "crosshole",
+    "suspension",
   ];
 
   return (
@@ -193,6 +207,10 @@ function GeophysicalVisualizer({ method }: { method: MethodKey }) {
           {method === "seismic" && <SeismicViz key="seismic" />}
           {method === "emi" && <EmiViz key="emi" />}
           {method === "microgravity" && <MicrogravityViz key="microgravity" />}
+          {method === "magnetic" && <MagneticViz key="magnetic" />}
+          {method === "borehole" && <BoreholeViz key="borehole" />}
+          {method === "crosshole" && <CrossholeViz key="crosshole" />}
+          {method === "suspension" && <SuspensionViz key="suspension" />}
         </AnimatePresence>
       </svg>
 
@@ -643,6 +661,182 @@ function MicrogravityViz() {
       >
         GRAVITY LOW
       </motion.text>
+    </motion.g>
+  );
+}
+
+function MagneticViz() {
+  return (
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {[100, 200, 300, 400, 500, 600, 700].map((x, i) => (
+        <motion.path
+          key={x}
+          d={`M${x},100 Q${x - 35},${190 + i * 8} ${x},${280 + i * 12}`}
+          stroke="hsl(var(--primary))"
+          strokeWidth="1.5"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1, delay: i * 0.08 }}
+        />
+      ))}
+      <text
+        x="400"
+        y="360"
+        fill="hsl(var(--muted-foreground))"
+        fontSize="9"
+        fontFamily="monospace"
+        textAnchor="middle"
+      >
+        MAGNETIC ANOMALY
+      </text>
+    </motion.g>
+  );
+}
+
+function BoreholeViz() {
+  return (
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <rect
+        x="370"
+        y="100"
+        width="60"
+        height="350"
+        fill="none"
+        stroke="hsl(var(--primary))"
+        strokeWidth="2"
+      />
+      {[150, 220, 290, 360].map((y) => (
+        <motion.ellipse
+          key={y}
+          cx="400"
+          cy={y}
+          rx="24"
+          ry="12"
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth="1.5"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: (y - 150) / 500 }}
+        />
+      ))}
+      <text
+        x="400"
+        y="475"
+        fill="hsl(var(--muted-foreground))"
+        fontSize="9"
+        fontFamily="monospace"
+        textAnchor="middle"
+      >
+        OPTICAL / ACOUSTIC LOGGING
+      </text>
+    </motion.g>
+  );
+}
+
+function CrossholeViz() {
+  return (
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <line
+        x1="240"
+        y1="100"
+        x2="240"
+        y2="450"
+        stroke="hsl(var(--primary))"
+        strokeWidth="3"
+      />
+      <line
+        x1="560"
+        y1="100"
+        x2="560"
+        y2="450"
+        stroke="hsl(var(--primary))"
+        strokeWidth="3"
+      />
+      {[170, 250, 330].map((y) => (
+        <motion.path
+          key={y}
+          d={`M240,${y} Q400,${y - 35} 560,${y}`}
+          stroke="hsl(var(--primary))"
+          strokeWidth="1.5"
+          fill="none"
+          strokeDasharray="5 5"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 0.8 }}
+        />
+      ))}
+      <text
+        x="400"
+        y="475"
+        fill="hsl(var(--muted-foreground))"
+        fontSize="9"
+        fontFamily="monospace"
+        textAnchor="middle"
+      >
+        P / S WAVE TRAVEL TIMES
+      </text>
+    </motion.g>
+  );
+}
+
+function SuspensionViz() {
+  return (
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <rect
+        x="370"
+        y="100"
+        width="60"
+        height="350"
+        fill="none"
+        stroke="hsl(var(--primary))"
+        strokeWidth="2"
+      />
+      <motion.circle
+        cx="400"
+        cy="250"
+        r="32"
+        fill="none"
+        stroke="hsl(var(--primary))"
+        strokeWidth="1.5"
+        animate={{ r: [20, 45, 20], opacity: [0.8, 0.2, 0.8] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      <motion.circle
+        cx="400"
+        cy="250"
+        r="10"
+        fill="hsl(var(--primary))"
+        animate={{ y: [0, 100, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+      />
+      <text
+        x="400"
+        y="475"
+        fill="hsl(var(--muted-foreground))"
+        fontSize="9"
+        fontFamily="monospace"
+        textAnchor="middle"
+      >
+        FORMATION VELOCITY LOG
+      </text>
     </motion.g>
   );
 }

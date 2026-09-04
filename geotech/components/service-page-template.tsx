@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,10 +8,11 @@ import { ServiceContent, servicesData } from "@/geotech/lib/services-data";
 import { Button } from "@/geotech/components/ui/button";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
 import { SectionHeading } from "@/geotech/components/section-heading";
+import { serviceVisuals } from "@/geotech/components/service-visuals-map";
+import { getLocalizedServiceItem } from "@/geotech/lib/services-page-i18n";
 
 interface ServicePageTemplateProps {
   service: ServiceContent;
-  customVisual?: ReactNode;
   locale?: string;
 }
 
@@ -38,11 +38,47 @@ const itemVariants = {
 
 export function ServicePageTemplate({
   service,
-  customVisual,
   locale = "en",
 }: ServicePageTemplateProps) {
-  const isCapabilitiesGrouped = typeof service.capabilities[0] !== "string";
+  const isCapabilitiesGrouped = !Array.isArray(service.capabilities);
   const baseHref = `/geotechnical/${locale}`;
+  const ServiceVisual = serviceVisuals[service.slug];
+  const isArabic = locale === "ar";
+  const labels = isArabic
+    ? {
+        standards: "المعايير والأطر",
+        process: "المنهجية",
+        howWeWork: "كيف نعمل",
+        capabilities: "القدرات",
+        whatWeDeliver: "ما نقدمه",
+        gallery: "معرض الصور",
+        inAction: "في الميدان",
+        explore: "استكشف",
+        related: "خدمات ذات صلة",
+        learnMore: "اعرف المزيد",
+        ctaTitle: "هل أنت مستعد لمناقشة مشروعك؟",
+        ctaDescription: "خبراؤنا مستعدون لتقديم الاستشارة والدعم الفني لاحتياجاتك الخاصة.",
+        getInTouch: "تواصل معنا",
+        allServices: "استكشف جميع الخدمات",
+        relatedFallback: "خبرة فنية ذات صلة",
+      }
+    : {
+        standards: "Standards & Frameworks",
+        process: "Process",
+        howWeWork: "How We Work",
+        capabilities: "Capabilities",
+        whatWeDeliver: "What We Deliver",
+        gallery: "Gallery",
+        inAction: "In Action",
+        explore: "Explore",
+        related: "Related Services",
+        learnMore: "Learn more",
+        ctaTitle: "Ready to discuss your project?",
+        ctaDescription: "Our experts are ready to provide technical consultation and support for your specific needs.",
+        getInTouch: "Get in Touch",
+        allServices: "Explore All Services",
+        relatedFallback: "Related technical expertise",
+      };
 
   return (
     <motion.div
@@ -65,6 +101,9 @@ export function ServicePageTemplate({
             fill
             className="object-cover"
             priority
+            onError={(event) => {
+              event.currentTarget.src = "/images/geotech-hero1.jpg";
+            }}
           />
           {/* Gradient overlay for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/15" />
@@ -122,7 +161,7 @@ export function ServicePageTemplate({
           service.standardsReferenced.length > 0 && (
             <motion.section variants={itemVariants} className="mb-20">
               <h2 className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                Standards & Frameworks
+                {labels.standards}
               </h2>
               <div className="flex flex-wrap gap-2">
                 {service.standardsReferenced.map((standard) => (
@@ -135,7 +174,7 @@ export function ServicePageTemplate({
         {/* Process Steps */}
         {service.processSteps && service.processSteps.length > 0 && (
           <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading eyebrow="Process" title="How We Work" />
+            <SectionHeading eyebrow={labels.process} title={labels.howWeWork} />
             <div className="mt-12 grid gap-4">
               {service.processSteps.map((step, idx) => (
                 <motion.div
@@ -167,16 +206,16 @@ export function ServicePageTemplate({
           </motion.section>
         )}
 
-        {/* Custom Visual */}
-        {customVisual && (
+        {/* Service-specific visual selected outside the content data. */}
+        {ServiceVisual && (
           <motion.section variants={itemVariants} className="mb-20">
-            {customVisual}
+            <ServiceVisual />
           </motion.section>
         )}
 
         {/* Capabilities Section */}
         <motion.section variants={itemVariants} className="mb-20">
-          <SectionHeading eyebrow="Capabilities" title="What We Deliver" />
+          <SectionHeading eyebrow={labels.capabilities} title={labels.whatWeDeliver} />
 
           {isCapabilitiesGrouped ? (
             // Grouped capabilities
@@ -231,7 +270,7 @@ export function ServicePageTemplate({
         {/* Gallery */}
         {service.gallery && service.gallery.length > 0 && (
           <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading eyebrow="Gallery" title="In Action" />
+            <SectionHeading eyebrow={labels.gallery} title={labels.inAction} />
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {service.gallery.map((image, idx) => (
@@ -246,6 +285,9 @@ export function ServicePageTemplate({
                       alt={image.alt}
                       fill
                       className="object-cover transition-transform duration-300 hover:scale-105"
+                      onError={(event) => {
+                        event.currentTarget.src = "/images/contact-us-hero.jpg";
+                      }}
                     />
                   </div>
                   {image.caption && (
@@ -262,13 +304,17 @@ export function ServicePageTemplate({
         {/* Related Services */}
         {service.relatedServices && service.relatedServices.length > 0 && (
           <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading eyebrow="Explore" title="Related Services" />
+            <SectionHeading eyebrow={labels.explore} title={labels.related} />
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {service.relatedServices.map((slug) => {
                 const related = servicesData[slug];
-                const title = related?.title ?? slug;
-                const desc = related?.shortDescription ?? "Related technical expertise";
+                const localizedRelated = getLocalizedServiceItem(slug, locale);
+                const title = localizedRelated?.name ?? related?.title ?? slug;
+                const desc =
+                  localizedRelated?.description ??
+                  related?.shortDescription ??
+                  labels.relatedFallback;
                 return (
                   <motion.div
                     key={slug}
@@ -285,7 +331,7 @@ export function ServicePageTemplate({
                       className="mt-5 self-start"
                     >
                       <Link href={`${baseHref}/services/${slug}`}>
-                        Learn more
+                        {labels.learnMore}
                         <ArrowRight className="ms-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -302,23 +348,24 @@ export function ServicePageTemplate({
           className="rounded-lg border border-border bg-gradient-to-r from-primary/10 to-primary/5 p-10 text-center sm:p-12"
         >
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            Ready to discuss your project?
+            {labels.ctaTitle}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Our experts are ready to provide technical consultation and support
-            for your specific needs.
+            {labels.ctaDescription}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
               <a href={`${baseHref}/contact`}>
-                Get in Touch
+                {labels.getInTouch}
                 <ArrowRight className="ms-2 h-4 w-4" />
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href={`${baseHref}/services`}>
-                Explore All Services
-              </Link>
+              <Link href={`${baseHref}/services`}>{labels.allServices}</Link>
             </Button>
           </div>
         </motion.section>

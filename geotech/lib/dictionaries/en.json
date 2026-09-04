@@ -361,6 +361,16 @@
         "name": "Borehole Logging",
         "full": "Optical / Acoustic Televiewer",
         "use": "Fracture detection, bedding interpretation, lithological interpretation, borehole structural information."
+      },
+      "crosshole": {
+        "name": "Cross-hole Seismic",
+        "full": "Cross-hole and Down-hole Seismic",
+        "use": "Elastic properties and dynamic moduli between and below boreholes."
+      },
+      "suspension": {
+        "name": "Suspension Logging",
+        "full": "Suspension Seismic Logging",
+        "use": "Formation velocity, aquifer, geotechnical and mineral exploration logging."
       }
     }
   },

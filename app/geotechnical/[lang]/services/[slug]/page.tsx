@@ -6,6 +6,7 @@ import {
   getServiceBySlug,
   getAllServiceSlugs,
 } from "@/geotech/lib/services-data";
+import { getLocalizedService } from "@/geotech/lib/services-page-i18n";
 import { notFound } from "next/navigation";
 
 interface ServicePageProps {
@@ -30,9 +31,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { lang, slug } = await params;
   const service = getServiceBySlug(slug);
 
   if (!service) {
@@ -41,12 +42,14 @@ export async function generateMetadata({
     };
   }
 
+  const localizedService = getLocalizedService(service, lang);
+
   return {
-    title: `${service.title} | GEODRILL KSA`,
-    description: service.shortDescription,
+    title: `${localizedService.title} | GEODRILL KSA`,
+    description: localizedService.shortDescription,
     openGraph: {
-      title: service.title,
-      description: service.shortDescription,
+      title: localizedService.title,
+      description: localizedService.shortDescription,
       type: "website",
     },
   };
@@ -60,11 +63,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
+  const localizedService = getLocalizedService(service, lang);
+
   return (
     <>
       <Navigation />
       <main className="min-h-screen w-full">
-        <ServicePageTemplate service={service} locale={lang} />
+        <ServicePageTemplate service={localizedService} locale={lang} />
       </main>
       <Footer />
     </>
