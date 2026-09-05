@@ -63,7 +63,10 @@ export function WhyGeoDrill() {
   const groups = Object.values(dict.whyGeoDrill.groups) as WhyGroup[];
 
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-tr from-amber-500/10 via-background to-primary/10 py-20 sm:py-28 md:py-32">
+      {/* Soft gold orbs */}
+      <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-amber-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-1/4 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
       {/* ── Split hero ── */}
       <div className="mx-auto mb-20 grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center lg:px-8">
         <motion.div

@@ -166,8 +166,11 @@ export function ServiceExplorer() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden py-20 sm:py-28 md:py-32"
+      className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-amber-500/10 py-20 sm:py-28 md:py-32"
     >
+      {/* Soft gold orbs */}
+      <div className="pointer-events-none absolute -left-32 top-1/3 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-32 bottom-1/3 h-72 w-72 rounded-full bg-amber-500/15 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Services"

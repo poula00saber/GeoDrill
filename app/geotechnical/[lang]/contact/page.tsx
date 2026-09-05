@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { ContactSection } from "@/geotech/components/sections/contact";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { motion } from "framer-motion";
 
@@ -74,6 +75,21 @@ export default function ContactPage() {
             </motion.div>
           </div>
         </section>
+
+        {/* Centered gold-gradient band under the hero */}
+        <GoldGradientBand
+          eyebrow={isAr ? "تواصل معنا" : "Get in Touch"}
+          title={
+            isAr
+              ? "دعنا نفهم مشروعك"
+              : "Let's Understand Your Project"
+          }
+          description={
+            isAr
+              ? "أخبرنا بما تخطط له، وسيساعدك فريقنا في تحديد نهج التحقيق والهندسة المناسب لمتطلباتك الخاصة."
+              : "Tell us what you are planning, investigating or building. Our team can help identify the right investigation and engineering approach for your specific needs."
+          }
+        />
 
         {/* Contact Content */}
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">

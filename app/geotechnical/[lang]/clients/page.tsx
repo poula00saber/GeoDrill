@@ -6,6 +6,7 @@ import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { ClientsGallery } from "@/geotech/components/pages/clients-gallery";
 import { PageTransition } from "@/geotech/components/page-transition";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
 import Image from "next/image";
 
 interface PageProps {
@@ -59,6 +60,20 @@ export default function ClientsPage({ params }: PageProps) {
             </div>
           </motion.div>
         </section>
+
+        <GoldGradientBand
+          eyebrow={isAr ? "عملاؤنا" : "Our Clients"}
+          title={
+            isAr
+              ? "جهات تثق بخدماتنا"
+              : "Organizations That Trust Our Work"
+          }
+          description={
+            isAr
+              ? "جهات رائدة تقود مشاريع البنية التحتية والتجارية والصناعية في جميع أنحاء المملكة العربية السعودية."
+              : "Leading organizations delivering infrastructure, commercial, and industrial developments across Saudi Arabia."
+          }
+        />
 
         <div className="py-16 sm:py-20">
           <ClientsGallery />

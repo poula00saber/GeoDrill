@@ -3,6 +3,7 @@
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { QhseEnhanced } from "@/geotech/components/sections/qhse-enhanced";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -64,6 +65,21 @@ export default function QhsePage() {
             </motion.div>
           </div>
         </section>
+
+        {/* Centered gold-gradient band under the hero */}
+        <GoldGradientBand
+          eyebrow={isAr ? "الجودة والسلامة" : "Quality & Safety"}
+          title={
+            isAr
+              ? "التميز في كل موقع"
+              : "Excellence on Every Site"
+          }
+          description={
+            isAr
+              ? "أعلى معايير السلامة والدقة والاعتماد الدولي في جميع عملياتنا عبر المملكة العربية السعودية."
+              : "The highest standards of safety, precision, and international accreditation across every operation in Saudi Arabia."
+          }
+        />
 
         {/* Dynamic QHSE Body */}
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

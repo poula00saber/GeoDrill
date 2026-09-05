@@ -27,6 +27,7 @@ import { SectionHeading } from "@/geotech/components/section-heading";
 import { Button } from "@/geotech/components/ui/button";
 import { ServicesTrustStrip } from "@/geotech/components/sections/services-trust-strip";
 import { ServicesApproach } from "@/geotech/components/sections/services-approach";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
 import { CtaBanner } from "@/geotech/components/sections/cta-banner";
 import {
   servicesData,
@@ -122,6 +123,21 @@ export default function ServicesPage({ params }: PageProps) {
 
         {/* Floating trust strip, overlapping the hero */}
         <ServicesTrustStrip />
+
+        {/* Centered gold-gradient band under the hero */}
+        <GoldGradientBand
+          eyebrow={pickLocalized(servicesPageCopy.servicesLabel, lang)}
+          title={
+            isAr
+              ? "حلول جيوتقنية شاملة"
+              : "Comprehensive Geotechnical Solutions"
+          }
+          description={
+            isAr
+              ? "من الاستكشاف إلى التنفيذ، نقدم خدمات متكاملة مصممة لتلبية متطلبات البنية التحتية في المملكة العربية السعودية."
+              : "From exploration to execution, we deliver integrated services tailored to infrastructure project requirements across Saudi Arabia."
+          }
+        />
 
         {/* ── Services by category — UNCHANGED from your existing build ── */}
         <div className="mx-auto max-w-7xl px-4 pb-4 pt-24 sm:px-6 lg:px-8">

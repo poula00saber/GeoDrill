@@ -3,6 +3,7 @@
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
 import { ProjectNavigator } from "@/geotech/components/sections/project-navigator";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
 import { motion } from "framer-motion";
 import { use } from "react";
 import Image from "next/image";
@@ -59,6 +60,17 @@ export default function ProjectsPage({ params }: PageProps) {
             </motion.div>
           </div>
         </section>
+
+        {/* Centered gold-gradient band directly under the hero */}
+        <GoldGradientBand
+          eyebrow={isAr ? "سجل الأعمال" : "Track Record"}
+          title={isAr ? "الخبرات المختارة" : "Selected Experience"}
+          description={
+            isAr
+              ? "مشاريع جيوتقنية وجيوفيزيائية تمثيلية من أعمال جيودريل في جميع أنحاء المملكة العربية السعودية."
+              : "Representative geotechnical and geoscience projects from GEODRILL's portfolio across Saudi Arabia."
+          }
+        />
 
         {/* Projects Content */}
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

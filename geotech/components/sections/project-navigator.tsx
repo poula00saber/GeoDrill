@@ -64,6 +64,9 @@ return (
       id="projects"
       className={cn("relative overflow-hidden py-20 sm:py-28 md:py-32", className)}
     >
+      {/* Soft gold orbs */}
+      <div className="pointer-events-none absolute -left-24 top-1/4 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-1/4 h-64 w-64 rounded-full bg-amber-500/15 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow={t.eyebrow}

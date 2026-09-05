@@ -10,15 +10,35 @@ import { Organizations } from "@/geotech/components/sections/organizations";
 import { ContactSection } from "@/geotech/components/sections/contact";
 import { AboutHero } from "@/geotech/components/sections/about-hero";
 import { Clients } from "@/geotech/components/sections/clients";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
+import { use } from "react";
 
 // Note: Can't export metadata with "use client"
 
-export default function AboutPage() {
+interface PageProps {
+  params: Promise<{ lang: string }>;
+}
+
+export default function AboutPage({ params }: PageProps) {
+  const { lang } = use(params);
+  const isAr = lang === "ar";
+
   return (
     <>
       <Navigation />
       <main className="min-h-screen w-full">
         <AboutHero />
+        <GoldGradientBand
+          eyebrow={isAr ? "من نحن" : "Who We Are"}
+          title={
+            isAr ? "شريكك الموثوق في علوم الأرض" : "Your Trusted Geoscience Partner"
+          }
+          description={
+            isAr
+              ? "تعرف على قصة جيودريل، والمبادئ التي تقود عملنا، وفريقنا الذي يجعل الدقة ممكنة في الموقع."
+              : "Discover the GEODRILL story, the principles that drive our work, and the team that makes precision possible on site."
+          }
+        />
         <WhoWeAre />
         <WhatSetsUsApart />
         <VisionMissionGoals />

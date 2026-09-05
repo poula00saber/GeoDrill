@@ -10,6 +10,7 @@ import { TechnicalBadge } from "@/geotech/components/technical-badge";
 import { SectionHeading } from "@/geotech/components/section-heading";
 import { serviceVisuals } from "@/geotech/components/service-visuals-map";
 import { getLocalizedServiceItem } from "@/geotech/lib/services-page-i18n";
+import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
 
 interface ServicePageTemplateProps {
   service: ServiceContent;
@@ -140,6 +141,17 @@ export function ServicePageTemplate({
           </motion.div>
         </div>
       </section>
+
+      {/* Centered gold-gradient band directly under the hero */}
+      <GoldGradientBand
+        eyebrow={
+          isArabic
+            ? labels.relatedFallback
+            : "Service Overview"
+        }
+        title={service.title}
+        description={service.shortDescription}
+      />
 
       {/* Main Content */}
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
