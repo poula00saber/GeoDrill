@@ -42,22 +42,24 @@ import {
   pickLocalized,
 } from "@/geotech/lib/services-page-i18n";
 
-// Service image mapping — UNCHANGED from your existing code
+// Service hero images — all 14 services share the hero photos under
+// public/images/geotech/services/services-heros/.
+const HERO = "/images/geotech/services/services-heros";
 const serviceImages: Record<string, string> = {
-  "geotechnical-investigation": "/images/service-excavation.png",
-  "geophysical-survey": "/images/service-infrastructure.png",
-  "geological-survey": "/images/sector-industrial.png",
-  "hydrogeological-studies": "/images/service-mep.png",
-  "material-testing-quality-control": "/images/service-concrete.png",
-  "topographical-survey": "/images/project-groundworks-01.jpg",
-  "cavity-probing-void-detection": "/images/service-steel.png",
-  grouting: "/images/service-finishing.png",
-  micropiling: "/images/project-industrial-01.jpg",
-  "anchoring-shoring": "/images/service-groundworks.png",
-  "soil-improvement": "/images/service-insulation.png",
-  "structural-assessment": "/images/project-structures-02.jpg",
-  "mining-exploration": "/images/sector-government.png",
-  "laboratory-analysis": "/images/service-concrete.png",
+  "geotechnical-investigation": `${HERO}/geotechnical-investigation-hero.jpg`,
+  "geophysical-survey": `${HERO}/geophysical-survey-hero.jpg`,
+  "geological-survey-rock-slope-stability": `${HERO}/geological-survey-rock-slope-stability-hero.jpg`,
+  "hydrogeological-studies": `${HERO}/hydrogeological-studies-hero.jpg`,
+  "material-testing-quality-control": `${HERO}/material-testing-quality-control-hero.jpg`,
+  "topographical-survey": `${HERO}/topographical-survey-hero.jpg`,
+  "cavity-probing-grouting-micro-piling": `${HERO}/cavity-probing-grouting-micro-piling-hero.jpg`,
+  "anchoring-shoring-design-execution": `${HERO}/anchoring-shoring-design-execution-hero.jpg`,
+  "dewatering-design-execution": `${HERO}/dewatering-design-execution-hero.jpg`,
+  "soil-improvement-concrete-repair": `${HERO}/soil-improvement-concrete-repair-hero.jpg`,
+  "structural-assessment": `${HERO}/structural-assessment-hero.jpg`,
+  "hydrology-studies": `${HERO}/hydrology-studies-hero.jpg`,
+  "environmental-survey": `${HERO}/environmental-survey-hero.jpg`,
+  "mining-exploration": `${HERO}/mining-exploration-hero.jpg`,
 };
 
 const categories: ServiceCategory[] = [

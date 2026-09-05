@@ -40,7 +40,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Ground",
     title: "Geotechnical Investigation",
     // source: old.geodrillksa.com/wp-content/uploads/2021/11/Geotechnical-Investigation.webp
-    heroImage: "/images/services/geotechnical-investigation/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/geotechnical-investigation-hero.jpg",
     heroAlt: "Geotechnical investigation drilling equipment on site",
     shortDescription:
       "Comprehensive soil and rock investigation using modern drilling techniques and in-situ testing.",
@@ -124,7 +124,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Testing",
     title: "Material Testing & Quality Control",
     // source: .../2025/08/Material-Testing-Quality-Control-1024x1024.webp
-    heroImage: "/images/services/material-testing/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/material-testing-quality-control-hero.jpg",
     heroAlt: "Material testing laboratory equipment and concrete samples",
     shortDescription:
       "Independent testing of soil, concrete, asphalt, cement, aggregates and steel, plus on-site quality control.",
@@ -304,7 +304,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Testing",
     title: "Topographical Survey",
     // source: .../2025/08/Topographical-Survey-1024x1024.webp
-    heroImage: "/images/services/topographical-survey/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/topographical-survey-hero.jpg",
     heroAlt: "Topographical survey mapping with drone and GPS equipment",
     shortDescription:
       "High-precision topographic surveying using GPS, GIS, drone mapping and mobile mapping systems.",
@@ -379,7 +379,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Ground",
     title: "Geophysical Survey",
     // source: .../2025/08/Geophysical-Survey-1024x1024.webp
-    heroImage: "/images/services/geophysical-survey/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/geophysical-survey-hero.jpg",
     heroAlt:
       "Geophysical survey equipment including GPR and seismic instruments",
     shortDescription:
@@ -542,7 +542,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Studies",
     title: "Hydrology Studies",
     // source: .../2025/08/Hydrology-Studies-1024x1024.webp
-    heroImage: "/images/services/hydrology/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/hydrology-studies-hero.jpg",
     heroAlt: "Hydrological field measurement and water flow analysis",
     shortDescription:
       "Surface and groundwater analysis, flood risk assessment, and hydrological modeling.",
@@ -594,7 +594,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Ground",
     title: "Hydrogeological Studies",
     // source: .../2025/08/Hydrogeological-Studies-1024x1024.webp
-    heroImage: "/images/services/hydrogeological/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/hydrogeological-studies-hero.jpg",
     heroAlt: "Hydrogeological well drilling and groundwater testing",
     shortDescription:
       "Groundwater assessment, aquifer characterization and geoelectrical investigation for water resource management.",
@@ -638,7 +638,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Engineering",
     title: "Cavity Probing, Grouting & Micropiling",
     // source: .../2025/08/Cavity-Probing-Grouting-Micro-piling-Services-1-1024x1024.webp
-    heroImage: "/images/services/cavity-probing/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/cavity-probing-grouting-micro-piling-hero.jpg",
     heroAlt: "Micropile installation and cavity grouting operations",
     shortDescription:
       "Subsurface void detection, pressure grouting, and micropile foundation solutions for complex ground conditions.",
@@ -690,7 +690,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Ground",
     title: "Geological Survey & Rock Slope Stability",
     // source: .../2025/08/Geological-Survey-Rock-Slope-Stability-Services-1-1024x1024.webp
-    heroImage: "/images/services/geological-survey/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/geological-survey-rock-slope-stability-hero.jpg",
     heroAlt: "Rock slope stability assessment and geological mapping",
     shortDescription:
       "Geological characterization and rock slope stability assessment for infrastructure, mining and mountainous developments.",
@@ -748,7 +748,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Studies",
     title: "Structural Assessment",
     // source: .../2025/08/Structural-Assessment-Services-1024x1024.webp
-    heroImage: "/images/services/structural-assessment/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/structural-assessment-hero.jpg",
     heroAlt: "Structural inspection and damage assessment on building",
     shortDescription:
       "Expert evaluation of building safety, integrity, and performance using visual inspection and non-destructive testing.",
@@ -806,7 +806,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Testing",
     title: "Environmental Survey",
     // source: .../2025/08/Environmental-Survey-Services-1024x1024.webp
-    heroImage: "/images/services/environmental-survey/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/environmental-survey-hero.jpg",
     heroAlt: "Environmental site assessment and soil sampling",
     shortDescription:
       "Environmental impact assessment, baseline studies, and monitoring to support sustainable development and compliance.",
@@ -853,7 +853,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Engineering",
     title: "Anchoring & Shoring Design & Execution",
     // source: .../2025/08/Anchoring-Shoring-Design-and-Execution-1-1024x1024.webp
-    heroImage: "/images/services/anchoring-shoring/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/anchoring-shoring-design-execution-hero.jpg",
     heroAlt: "Ground anchoring and shoring system installation",
     shortDescription:
       "Design and execution of retaining walls, ground anchors, tiebacks and shoring systems for safe excavation and structural stability.",
@@ -910,7 +910,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Engineering",
     title: "Dewatering Design & Execution",
     // source: .../2025/08/Dewatering-Design-and-Execution-3-1024x1024.webp
-    heroImage: "/images/services/dewatering/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/dewatering-design-execution-hero.jpg",
     heroAlt: "Dewatering pumping system for excavation site",
     shortDescription:
       "Groundwater control systems — deep wells, wellpoints, eductors and sump pumps — for safe, dry excavation.",
@@ -951,7 +951,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Engineering",
     title: "Soil Improvement & Concrete Repair",
     // source: .../2025/08/Soil-improvement-and-Concrete-Repair-Services-1-1024x1024.webp
-    heroImage: "/images/services/soil-improvement/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/soil-improvement-concrete-repair-hero.jpg",
     heroAlt: "FRP strengthening and concrete repair works",
     shortDescription:
       "FRP strengthening, micropiling, soil injection, jacketing and epoxy floor repair for structural rehabilitation.",
@@ -1009,7 +1009,7 @@ export const servicesData: Record<string, ServiceContent> = {
     category: "Studies",
     title: "Mining Exploration",
     // source: .../2025/08/mineral-exploration-services-1-1024x1024.webp
-    heroImage: "/images/services/mining-exploration/hero.webp",
+    heroImage: "/images/geotech/services/services-heros/mining-exploration-hero.jpg",
     heroAlt: "Mining exploration drill rig and geological sampling",
     shortDescription:
       "End-to-end mineral exploration — mapping, sampling, geophysics, drilling and resource estimation — to JORC/NI 43-101 classification.",

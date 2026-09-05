@@ -7,6 +7,12 @@ import { SectionHeading } from "@/geotech/components/section-heading";
 
 export function Approach() {
   const { dict } = useLanguage();
+  if (!dict) return null;
+
+  return <ApproachContent dict={dict} />;
+}
+
+function ApproachContent({ dict }: { dict: any }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -14,8 +20,6 @@ export function Approach() {
   });
 
   const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  if (!dict) return null;
 
   const stages = [
     { ...dict.approach.stages.investigate, num: "01" },

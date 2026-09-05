@@ -8,6 +8,12 @@ import { SectionHeading } from '@/geotech/components/section-heading';
 
 export function QhseSection() {
   const { dict } = useLanguage();
+  if (!dict) return null;
+
+  return <QhseContent dict={dict} />;
+}
+
+function QhseContent({ dict }: { dict: any }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -15,8 +21,6 @@ export function QhseSection() {
   });
 
   const lineHeight = useTransform(scrollYProgress, [0.2, 0.8], ['0%', '100%']);
-
-  if (!dict) return null;
 
   const pillars = [
     {

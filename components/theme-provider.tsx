@@ -71,24 +71,28 @@ export function ThemeProvider({
   storageKey = DEFAULT_STORAGE_KEY,
   attribute = 'class',
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme)
-
-  // Read the persisted preference and apply the theme class before the browser
-  // paints. Applied via useInsertionEffect (runs before layout effects and
-  // paint), so no rendered <script> is needed and React emits no warning.
-  useInsertionEffect(() => {
-    let stored: string | null = null
+  // Read the persisted preference lazily during the initial render.
+  // On the server `window` is undefined, so we fall back to defaultTheme.
+  // Doing the read in the useState initializer (instead of a post-mount
+  // effect) avoids the "setState during render" warning React emits when
+  // useInsertionEffect synchronously updates state in React 19+.
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return defaultTheme
     try {
-      stored = window.localStorage.getItem(storageKey)
+      return window.localStorage.getItem(storageKey) || defaultTheme
     } catch {
-      // localStorage unavailable; fall back to defaultTheme
+      return defaultTheme
     }
-    const initial = stored || defaultTheme
-    setThemeState(initial)
-    if (initial !== 'system') applyTheme(initial, attribute)
-    else if (enableSystem) applyTheme(getSystemTheme(), attribute)
+  })
+
+  // Apply the theme class to <html> before the browser paints. Pure DOM
+  // mutation, no React state update — safe inside useInsertionEffect.
+  useInsertionEffect(() => {
+    const initial =
+      theme && theme !== 'system' ? theme : resolveTheme(theme, enableSystem)
+    if (initial) applyTheme(initial, attribute)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storageKey, defaultTheme, enableSystem, attribute])
+  }, [theme, enableSystem, attribute])
 
   const setTheme = useCallback(
     (next: Theme | ((prev: Theme) => Theme)) => {
