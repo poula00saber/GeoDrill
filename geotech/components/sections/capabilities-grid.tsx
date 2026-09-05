@@ -141,7 +141,9 @@ function FlatGrid({
       </div>
       {items.length > 6 && (
         <p className="mt-6 text-center text-xs text-muted-foreground">
-          + {items.length - 6} more tests — see project gallery or contact us for the full list.
+          {isArabic
+            ? `+ ${items.length - 6} اختبارات أخرى — راجع معرض المشاريع أو تواصل معنا للاطلاع على القائمة الكاملة.`
+            : `+ ${items.length - 6} more tests — see project gallery or contact us for the full list.`}
         </p>
       )}
     </>
@@ -205,7 +207,7 @@ function CapabilityCard({
       </div>
 
       <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        {String(index + 1).padStart(2, "0")} · {tone.tag}
+        {String(index + 1).padStart(2, "0")} · {isArabic ? tone.arabicTag : tone.tag}
       </span>
 
       <h3 className="mt-1 text-balance text-sm font-bold leading-snug text-foreground sm:text-base">
@@ -433,15 +435,16 @@ function splitCapabilityLabel(item: string): { title: string; label: string } {
 
 interface Tone {
   tag: string;
+  arabicTag: string;
   icon: LucideIcon;
   ring: string;
 }
 
 const TONES: Tone[] = [
-  { tag: "Field", icon: Sparkles, ring: "hover:border-primary/60" },
-  { tag: "Lab", icon: Layers, ring: "hover:border-amber-500/60" },
-  { tag: "NDT", icon: ImageIcon, ring: "hover:border-sky-500/60" },
-  { tag: "QC", icon: CheckCircle2, ring: "hover:border-emerald-500/60" },
-  { tag: "Specialty", icon: X, ring: "hover:border-violet-500/60" },
-  { tag: "Testing", icon: Layers, ring: "hover:border-rose-500/60" },
+  { tag: "Field", arabicTag: "حقلي", icon: Sparkles, ring: "hover:border-primary/60" },
+  { tag: "Lab", arabicTag: "مخبري", icon: Layers, ring: "hover:border-amber-500/60" },
+  { tag: "NDT", arabicTag: "غير إتلافي", icon: ImageIcon, ring: "hover:border-sky-500/60" },
+  { tag: "QC", arabicTag: "جودة", icon: CheckCircle2, ring: "hover:border-emerald-500/60" },
+  { tag: "Specialty", arabicTag: "متخصص", icon: X, ring: "hover:border-violet-500/60" },
+  { tag: "Testing", arabicTag: "اختبار", icon: Layers, ring: "hover:border-rose-500/60" },
 ];

@@ -1,4 +1,3 @@
-import { GeotechnicalInvestigation } from "./sections/geotechnical-investigation";
 import { GeophysicalTechnology } from "./sections/geophysical-technology";
 import { GeologicalCrossSection } from "./sections/geological-cross-section";
 import { GeologySlope } from "./sections/geology-slope";
@@ -7,19 +6,6 @@ import { MiningExploration } from "./sections/mining-exploration";
 import { ServiceVisualShowcase } from "./sections/service-visual-showcase";
 import { serviceShowcaseConfig } from "@/geotech/lib/service-showcase-data";
 import type { ComponentType } from "react";
-
-/**
- * Bespoke visual that combines two strong section components for the
- * geotechnical-investigation page.
- */
-function GeotechnicalInvestigationVisual() {
-  return (
-    <>
-      <GeotechnicalInvestigation />
-      <GeologicalCrossSection />
-    </>
-  );
-}
 
 /**
  * Reusable wrapper that renders the premium `ServiceVisualShowcase`
@@ -33,7 +19,7 @@ function ShowcaseFor({ slug }: { slug: string }) {
 }
 
 export const serviceVisuals: Partial<Record<string, ComponentType>> = {
-  "geotechnical-investigation": GeotechnicalInvestigationVisual,
+  "geotechnical-investigation": GeologicalCrossSection,
   "geophysical-survey": GeophysicalTechnology,
   "material-testing-quality-control": () => <ShowcaseFor slug="material-testing-quality-control" />,
   "topographical-survey": () => <ShowcaseFor slug="topographical-survey" />,

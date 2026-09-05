@@ -76,6 +76,7 @@ export function ServicePager({
             href={`${baseHref}/services/${prev.slug}`}
             direction="prev"
             label={prevLabel}
+            isArabic={isArabic}
             ArrowEnd={ArrowStart}
             delay={0}
           />
@@ -84,6 +85,7 @@ export function ServicePager({
             href={`${baseHref}/services/${next.slug}`}
             direction="next"
             label={nextLabel}
+            isArabic={isArabic}
             ArrowEnd={ArrowEnd}
             delay={0.05}
           />
@@ -121,6 +123,7 @@ function PagerCard({
   href,
   direction,
   label,
+  isArabic,
   ArrowEnd,
   delay,
 }: {
@@ -128,9 +131,12 @@ function PagerCard({
   href: string;
   direction: "prev" | "next";
   label: string;
+  isArabic: boolean;
   ArrowEnd: typeof ArrowRight;
   delay: number;
 }) {
+  const category = isArabic ? getArabicCategory(service.category) : service.category;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -172,7 +178,7 @@ function PagerCard({
           <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
             <span className="text-primary">{label}</span>
             <span className="h-px w-4 bg-border" />
-            <span>{service.category}</span>
+            <span>{category}</span>
           </div>
           <h3 className="mt-2 text-balance text-base font-bold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-lg">
             {service.title}
@@ -184,4 +190,13 @@ function PagerCard({
       </Link>
     </motion.div>
   );
+}
+
+function getArabicCategory(category: ServiceContent["category"]): string {
+  return {
+    Ground: "تحريات الأرض",
+    Testing: "اختبارات ومسوح",
+    Engineering: "هندسة الأرض",
+    Studies: "دراسات متخصصة",
+  }[category];
 }

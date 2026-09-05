@@ -135,7 +135,14 @@ export function ServicePageTemplate({
             {/* Category badge */}
             <motion.div className="mb-6 inline-flex">
               <span className="rounded-full bg-primary/20 px-3 py-1 font-mono text-xs uppercase tracking-widest text-primary">
-                {service.category}
+                {isArabic
+                  ? {
+                      Ground: "تحريات الأرض",
+                      Testing: "اختبارات ومسوح",
+                      Engineering: "هندسة الأرض",
+                      Studies: "دراسات متخصصة",
+                    }[service.category]
+                  : service.category}
               </span>
             </motion.div>
 
@@ -237,7 +244,7 @@ export function ServicePageTemplate({
         )}
 
         {/* Service-specific visual selected outside the content data. */}
-        {ServiceVisual && (
+        {ServiceVisual && !isArabic && (
           <motion.section variants={itemVariants} className="mb-20">
             <ServiceVisual />
           </motion.section>

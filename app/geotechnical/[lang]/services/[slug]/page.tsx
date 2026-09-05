@@ -73,7 +73,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     .flatMap((cat) =>
       serviceCategories[cat].map((s) => servicesData[s]),
     )
-    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+    .filter((s): s is NonNullable<typeof s> => Boolean(s))
+    .map((s) => getLocalizedService(s, lang));
 
   return (
     <>
