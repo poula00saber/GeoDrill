@@ -7,7 +7,6 @@ import { SectionHeading } from "@/geotech/components/section-heading";
 import Link from "next/link";
 
 // Flat list of software names for the logo-tile grid.
-// Each name maps to /images/software/<slug>.png — see note below component.
 const softwareList = [
   "RocScience",
   "GMS",
@@ -108,32 +107,27 @@ export function SoftwareSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-4 lg:grid-cols-6"
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 sm:gap-4"
         >
           {softwareList.map((name, i) => (
             <motion.div
               key={i}
               variants={itemVariants}
-              className="group flex h-20 items-center justify-center rounded-lg border border-border/40 bg-surface/50 p-3 hover:border-primary/40 hover:bg-surface/80 transition-all"
+              className="group relative flex h-24 sm:h-28 items-center justify-center rounded-xl border border-border/40 bg-white/90 p-4 transition-all hover:border-primary/60 hover:bg-white hover:shadow-lg hover:shadow-primary/10 dark:bg-zinc-900/80 dark:hover:bg-zinc-900"
             >
-              {/*
-                PHOTO/LOGO NEEDED: software/${slugify(name)}.png
-                Small transparent-background PNG or SVG logo for "{name}".
-                Roughly 160x60px, centered, transparent bg preferred.
-              */}
               <img
                 src={`/images/software/${slugify(name)}.png`}
                 alt={name}
-                className="max-h-8 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all"
+                className="h-full w-full object-contain filter transition-all duration-300 group-hover:scale-105"
                 onError={(e) => {
                   // Fallback to text label if logo image is missing
                   const target = e.currentTarget;
                   target.style.display = "none";
                   const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = "block";
+                  if (fallback) fallback.style.display = "flex";
                 }}
               />
-              <span className="hidden text-center text-xs font-medium text-muted-foreground">
+              <span className="hidden h-full w-full items-center justify-center text-center text-xs font-semibold text-muted-foreground group-hover:text-primary">
                 {name}
               </span>
             </motion.div>
