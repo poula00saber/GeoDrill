@@ -5,6 +5,9 @@ import { ServicePageTemplate } from "@/geotech/components/service-page-template"
 import {
   getServiceBySlug,
   getAllServiceSlugs,
+  servicesData,
+  serviceCategories,
+  type ServiceCategory,
 } from "@/geotech/lib/services-data";
 import { getLocalizedService } from "@/geotech/lib/services-page-i18n";
 import { notFound } from "next/navigation";
@@ -65,11 +68,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   const localizedService = getLocalizedService(service, lang);
 
+  // Canonical services list for the bottom pager (same order as /services).
+  const allServices = (Object.keys(serviceCategories) as ServiceCategory[])
+    .flatMap((cat) =>
+      serviceCategories[cat].map((s) => servicesData[s]),
+    )
+    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
   return (
     <>
       <Navigation />
       <main className="min-h-screen w-full">
-        <ServicePageTemplate service={localizedService} locale={lang} />
+        <ServicePageTemplate
+          service={localizedService}
+          locale={lang}
+          allServices={allServices}
+        />
       </main>
       <Footer />
     </>

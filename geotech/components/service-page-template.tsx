@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ServiceContent, servicesData } from "@/geotech/lib/services-data";
+import { ServiceContent, servicesData, serviceCategories, type ServiceCategory } from "@/geotech/lib/services-data";
 import { Button } from "@/geotech/components/ui/button";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
 import { SectionHeading } from "@/geotech/components/section-heading";
@@ -15,10 +15,14 @@ import {
   CapabilityVisualizer,
   STRUCTURAL_ASSESSMENT_CAPABILITIES,
 } from "@/geotech/components/sections/capability-visualizer";
+import { CapabilitiesGrid } from "@/geotech/components/sections/capabilities-grid";
+import { ServicePager } from "@/geotech/components/sections/service-pager";
 
 interface ServicePageTemplateProps {
   service: ServiceContent;
   locale?: string;
+  /** All services in the order they should appear in the bottom pager. */
+  allServices?: ServiceContent[];
 }
 
 const containerVariants = {
@@ -44,11 +48,19 @@ const itemVariants = {
 export function ServicePageTemplate({
   service,
   locale = "en",
+  allServices,
 }: ServicePageTemplateProps) {
-  const isCapabilitiesGrouped = !Array.isArray(service.capabilities);
   const baseHref = `/geotechnical/${locale}`;
   const ServiceVisual = serviceVisuals[service.slug];
   const isArabic = locale === "ar";
+
+  // Build the canonical services list for the bottom pager. Falls back to
+  // `servicesData` if the parent didn't pass `allServices` explicitly.
+  const pagerServices: ServiceContent[] =
+    allServices ??
+    (Object.keys(serviceCategories) as ServiceCategory[]).flatMap((cat) =>
+      serviceCategories[cat].map((slug) => servicesData[slug]),
+    );
   const labels = isArabic
     ? {
         standards: "المعايير والأطر",
@@ -231,11 +243,11 @@ export function ServicePageTemplate({
           </motion.section>
         )}
 
-        {/* Capabilities Section */}
+{/* Capabilities Section */}
         <motion.section variants={itemVariants} className="mb-20">
           {service.slug === "structural-assessment" ? (
-            // Rich interactive visualizer for services that ship detailed
-            // capability data (icons, photos, features).
+            // Structural assessment already has its own rich interactive
+            // capability visualizer (`CapabilityVisualizer`).
             <CapabilityVisualizer
               eyebrow={labels.capabilities}
               heading={labels.whatWeDeliver}
@@ -251,65 +263,14 @@ export function ServicePageTemplate({
                   : STRUCTURAL_ASSESSMENT_CAPABILITIES.en
               }
             />
-          ) : isCapabilitiesGrouped ? (
-            <>
-              <SectionHeading
-                eyebrow={labels.capabilities}
-                title={labels.whatWeDeliver}
-              />
-
-              <div className="mt-12 grid gap-8 lg:grid-cols-2">
-                {Object.entries(
-                  service.capabilities as Record<string, string[]>,
-                ).map(([groupName, items]) => (
-                  <motion.div
-                    key={groupName}
-                    variants={itemVariants}
-                    className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
-                  >
-                    <div className="border-b border-border bg-surface px-5 py-3">
-                      <h3 className="font-bold text-foreground lg:text-lg">
-                        {groupName}
-                      </h3>
-                    </div>
-                    <ul className="divide-y divide-border">
-                      {items.map((item, idx) => (
-                        <motion.li
-                          key={idx}
-                          variants={itemVariants}
-                          className="flex items-start gap-3 px-5 py-3 text-sm leading-relaxed text-foreground/90"
-                        >
-                          <span className="mt-1.5 flex h-2.5 w-2.5 flex-shrink-0 items-center justify-center rounded-full bg-primary" />
-                          {item}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
-              </div>
-            </>
           ) : (
-            <>
-              <SectionHeading
-                eyebrow={labels.capabilities}
-                title={labels.whatWeDeliver}
-              />
-
-              <div className="mt-12 grid gap-3 sm:grid-cols-2">
-                {(service.capabilities as string[]).map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    className="flex items-start gap-3 rounded-lg border border-border/70 bg-card px-4 py-3 transition-colors hover:border-primary/50"
-                  >
-                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
-                    <span className="text-sm leading-relaxed text-foreground/90">
-                      {item}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </>
+            <CapabilitiesGrid
+              capabilities={service.capabilities}
+              heroImage={service.heroImage}
+              eyebrow={labels.capabilities}
+              heading={labels.whatWeDeliver}
+              isArabic={isArabic}
+            />
           )}
         </motion.section>
 
@@ -347,46 +308,7 @@ export function ServicePageTemplate({
           </motion.section>
         )}
 
-        {/* Related Services */}
-        {service.relatedServices && service.relatedServices.length > 0 && (
-          <motion.section variants={itemVariants} className="mb-20">
-            <SectionHeading eyebrow={labels.explore} title={labels.related} />
-
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {service.relatedServices.map((slug) => {
-                const related = servicesData[slug];
-                const localizedRelated = getLocalizedServiceItem(slug, locale);
-                const title = localizedRelated?.name ?? related?.title ?? slug;
-                const desc =
-                  localizedRelated?.description ??
-                  related?.shortDescription ??
-                  labels.relatedFallback;
-                return (
-                  <motion.div
-                    key={slug}
-                    variants={itemVariants}
-                    className="group flex flex-col rounded-lg border border-border/70 bg-surface/50 p-6 backdrop-blur-sm transition-all hover:border-primary/60 hover:bg-surface hover:shadow-md hover:shadow-primary/5"
-                  >
-                    <h3 className="font-bold text-foreground">{title}</h3>
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground line-clamp-2">
-                      {desc}
-                    </p>
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="mt-5 self-start"
-                    >
-                      <Link href={`${baseHref}/services/${slug}`}>
-                        {labels.learnMore}
-                        <ArrowRight className="ms-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.section>
-        )}
+          
 
         {/* CTA */}
         <motion.section
@@ -416,6 +338,16 @@ export function ServicePageTemplate({
           </div>
         </motion.section>
       </div>
+
+      {/* Bottom prev / next pager */}
+      {pagerServices.length > 1 && (
+        <ServicePager
+          allServices={pagerServices}
+          currentSlug={service.slug}
+          baseHref={baseHref}
+          isArabic={isArabic}
+        />
+      )}
     </motion.div>
   );
 }
