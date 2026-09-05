@@ -1,124 +1,155 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from '@/geotech/components/providers/language-provider';
 import { SectionHeading } from '@/geotech/components/section-heading';
+import { ContourLines } from '@/geotech/components/geological/background';
 import { cn } from '@/geotech/lib/utils';
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 interface Layer {
   key: string;
-  labelKey: 'surface' | 'alluvial' | 'sand' | 'clay' | 'weathered' | 'fractured' | 'bedrock';
-  height: number;
-  color: string;
-  darkColor: string;
+  depth: string;
+  h: number;
 }
 
-const layers: Layer[] = [
-  { key: 'surface', labelKey: 'surface', height: 8, color: 'bg-amber-500/60', darkColor: 'dark:bg-amber-600/50' },
-  { key: 'alluvial', labelKey: 'alluvial', height: 12, color: 'bg-yellow-700/50', darkColor: 'dark:bg-yellow-800/40' },
-  { key: 'sand', labelKey: 'sand', height: 18, color: 'bg-orange-300/50', darkColor: 'dark:bg-orange-900/40' },
-  { key: 'clay', labelKey: 'clay', height: 15, color: 'bg-rose-400/40', darkColor: 'dark:bg-rose-900/40' },
-  { key: 'weathered', labelKey: 'weathered', height: 18, color: 'bg-stone-500/50', darkColor: 'dark:bg-stone-700/40' },
-  { key: 'fractured', labelKey: 'fractured', height: 14, color: 'bg-slate-600/50', darkColor: 'dark:bg-slate-700/40' },
-  { key: 'bedrock', labelKey: 'bedrock', height: 15, color: 'bg-zinc-800/60', darkColor: 'dark:bg-zinc-900/60' },
+// Visual strata stack. Labels + relevance come from the bilingual dictionary.
+// heights are row percentages; depth is the top-of-layer marker shown in the UI.
+const LAYERS: Layer[] = [
+  { key: 'surface', depth: '0.0 m', h: 46 },
+  { key: 'alluvial', depth: '1.5 m', h: 56 },
+  { key: 'sand', depth: '4.0 m', h: 62 },
+  { key: 'clay', depth: '8.0 m', h: 66 },
+  { key: 'weathered', depth: '14.0 m', h: 70 },
+  { key: 'fractured', depth: '20.0 m', h: 74 },
+  { key: 'bedrock', depth: '26.0 m', h: 84 },
 ];
 
-export function GeologicalCrossSection() {
-  const { dict } = useLanguage();
-  const [activeLayer, setActiveLayer] = useState<number | null>(null);
+// Map each strata key to a thematic layer colour (strata-* tokens).
+function layerKeyColor(key: string): string {
+  switch (key) {
+    case 'alluvial':
+    case 'sand':
+      return 'bg-strata-2';
+    case 'clay':
+      return 'bg-strata-3';
+    case 'weathered':
+    case 'fractured':
+      return 'bg-strata-4';
+    case 'bedrock':
+      return 'bg-strata-5';
+    case 'surface':
+    default:
+      return 'bg-strata-1';
+  }
+}
 
-  if (!dict) return null;
+export function GeologicalCrossSection() {
+  const { dict, isArabic } = useLanguage();
+  const [activeLayer, setActiveLayer] = useState<number>(0);
+
+  if (!dict?.crossSection) return null;
+
+  const labels = dict.crossSection.layers as Record<string, string>;
+  const relevance = dict.crossSection.relevance as Record<string, string>;
 
   return (
     <section className="relative overflow-hidden py-20 sm:py-28 md:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <ContourLines className="text-primary" opacity={0.06} />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Geological Visualization"
-          title={dict.crossSection.label}
+          eyebrow={dict.crossSection.label}
+          title={dict.crossSection.title}
+          description={dict.crossSection.intro}
           align="center"
-          className="mb-12"
+          className="mb-14"
         />
 
-        <div className="relative mx-auto max-w-4xl">
-          {/* Cross section */}
-          <div className="relative overflow-hidden rounded-lg border border-border/40">
+        <div className="mt-14 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-start">
+          {/* Strata stack */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="relative overflow-hidden rounded-lg border border-border"
+          >
             <div className="flex h-[480px] flex-col">
-              {layers.map((layer, i) => {
+              {LAYERS.map((layer, i) => {
                 const isActive = activeLayer === i;
                 return (
-                  <motion.div
+                  <button
                     key={layer.key}
-                    initial={{ opacity: 0, scaleX: 0.95 }}
-                    whileInView={{ opacity: 1, scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                    type="button"
                     onMouseEnter={() => setActiveLayer(i)}
-                    onMouseLeave={() => setActiveLayer(null)}
-                    onClick={() => setActiveLayer(isActive ? null : i)}
+                    onFocus={() => setActiveLayer(i)}
+                    onClick={() => setActiveLayer(isActive ? 0 : i)}
+                    aria-pressed={isActive}
+                    style={{ height: `${layer.h}%` }}
                     className={cn(
-                      'group relative flex cursor-pointer items-center justify-between border-b border-border/30 px-4 transition-all',
-                      layer.color,
-                      layer.darkColor,
-                      isActive && 'ring-2 ring-primary ring-inset'
+                      'group relative flex w-full items-center justify-between px-5 text-start transition-all duration-300',
+                      layerKeyColor(layer.key),
+                      isActive ? 'brightness-110' : 'brightness-95 saturate-75',
                     )}
-                    style={{ height: `${layer.height}%` }}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-[10px] text-muted-foreground/60">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span className={cn(
-                        'text-sm font-medium transition-colors',
-                        isActive ? 'text-foreground' : 'text-muted-foreground'
-                      )}>
-                        {dict.crossSection.layers[layer.labelKey]}
-                      </span>
-                    </div>
                     {/* Texture pattern */}
                     <div className="pointer-events-none absolute inset-0 opacity-20">
                       <svg className="h-full w-full" preserveAspectRatio="none">
-                        <pattern id={`pattern-${i}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <pattern id={`strata-pattern-${i}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                           <path d={i % 2 === 0 ? 'M0,10 L20,10' : 'M0,5 L20,5 M0,15 L20,15'} stroke="currentColor" strokeWidth="0.5" />
                         </pattern>
-                        <rect width="100%" height="100%" fill={`url(#pattern-${i})`} />
+                        <rect width="100%" height="100%" fill={`url(#strata-pattern-${i})`} />
                       </svg>
                     </div>
-                    {/* Depth indicator */}
-                    <span className="relative z-10 font-mono text-[10px] text-muted-foreground/60">
-                      {Math.round(layers.slice(0, i).reduce((acc, l) => acc + l.height, 0) * 0.5)}m
-                    </span>
-                  </motion.div>
+
+                    <span className="font-mono text-sm font-medium text-foreground/90">{labels[layer.key]}</span>
+                    <span className="font-mono text-xs text-foreground/60">{layer.depth}</span>
+
+                    {isActive && (
+                      <motion.span
+                        layoutId="strata-indicator"
+                        className="absolute start-0 top-0 h-full w-1 bg-primary"
+                      />
+                    )}
+                  </button>
                 );
               })}
             </div>
+          </motion.div>
 
-            {/* Active layer info */}
-            {activeLayer !== null && (
+          {/* Active layer detail panel */}
+          <div className="lg:sticky lg:top-28">
+            <AnimatePresence mode="wait">
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                key={LAYERS[activeLayer]!.key}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute inset-x-4 bottom-4 z-20"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35 }}
+                className="rounded-lg border border-border bg-card p-7"
               >
-                <div className="rounded-md border border-primary/30 bg-background/90 p-3 backdrop-blur-md">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-primary" />
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-primary">
-                      {dict.crossSection.layers[layers[activeLayer].labelKey]}
-                    </span>
-                  </div>
-                  <p className="mt-1.5 text-sm text-muted-foreground">
-                    {dict.crossSection.relevance[layers[activeLayer].labelKey]}
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </div>
+                <span className="font-mono text-xs uppercase tracking-widest text-primary">
+                  {isArabic ? 'العمق' : 'Depth'} · {LAYERS[activeLayer]!.depth}
+                </span>
 
-          {/* Disclaimer */}
-          <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
-            {dict.crossSection.disclaimer}
-          </p>
+                <div className="mt-4 flex items-center gap-3">
+                  <span className={cn('h-4 w-4 rounded-full', layerKeyColor(LAYERS[activeLayer]!.key))} />
+                  <h3 className="text-2xl font-semibold tracking-tight">{labels[LAYERS[activeLayer]!.key]}</h3>
+                </div>
+
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  {relevance[LAYERS[activeLayer]!.key]}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
+              {dict.crossSection.disclaimer}
+            </p>
+          </div>
         </div>
       </div>
     </section>

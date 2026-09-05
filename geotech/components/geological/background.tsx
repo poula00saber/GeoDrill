@@ -6,28 +6,33 @@ import { cn } from '@/geotech/lib/utils';
 interface ContourLinesProps {
   className?: string;
   opacity?: number;
+  animated?: boolean;
 }
 
-export function ContourLines({ className, opacity = 0.15 }: ContourLinesProps) {
+export function ContourLines({
+  className,
+  opacity = 0.15,
+  animated = true,
+}: ContourLinesProps) {
   return (
     <svg
+      aria-hidden="true"
       className={cn('pointer-events-none absolute inset-0 h-full w-full', className)}
-      viewBox="0 0 1200 800"
-      preserveAspectRatio="xMidYMid slice"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="none"
       fill="none"
       style={{ opacity }}
     >
-      <defs>
-        <pattern id="contour-pattern" x="0" y="0" width="1200" height="800" patternUnits="userSpaceOnUse">
-          <path d="M0,200 Q300,150 600,200 T1200,200" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M0,280 Q300,230 600,280 T1200,280" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M0,360 Q300,310 600,360 T1200,360" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M0,440 Q300,390 600,440 T1200,440" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M0,520 Q300,470 600,520 T1200,520" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M0,600 Q300,550 600,600 T1200,600" stroke="currentColor" strokeWidth="0.5" />
-        </pattern>
-      </defs>
-      <rect width="1200" height="800" fill="url(#contour-pattern)" />
+      {Array.from({ length: 9 }).map((_, i) => (
+        <path
+          key={i}
+          d={`M0 ${90 + i * 52} C 220 ${40 + i * 52}, 420 ${150 + i * 48}, 640 ${100 + i * 50} S 1000 ${30 + i * 54}, 1200 ${110 + i * 48}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={i % 3 === 0 ? 1.1 : 0.6}
+          className={animated && i % 3 === 0 ? 'flow-dash' : undefined}
+        />
+      ))}
     </svg>
   );
 }

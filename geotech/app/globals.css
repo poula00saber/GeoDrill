@@ -29,6 +29,20 @@
     --surface-foreground: 220 14% 12%;
     --technical: 220 10% 55%;
     --grid: 220 8% 82%;
+
+    /* Deep technical environment (geophysics) + geological strata */
+    --geo: oklch(0.837 0.166 86.5);
+    --geo-soft: oklch(0.837 0.166 86.5 / 0.14);
+    --deep: oklch(0.19 0.007 70);
+    --deep-foreground: oklch(0.97 0.003 95);
+    --deep-muted: oklch(0.68 0.008 80);
+    --deep-line: oklch(1 0 0 / 0.09);
+    --strata-1: oklch(0.84 0.05 80);
+    --strata-2: oklch(0.75 0.07 72);
+    --strata-3: oklch(0.63 0.06 62);
+    --strata-4: oklch(0.5 0.04 55);
+    --strata-5: oklch(0.36 0.02 50);
+
     --chart-1: 45 100% 51%;
     --chart-2: 200 70% 45%;
     --chart-3: 160 50% 40%;
@@ -62,6 +76,20 @@
     --surface-foreground: 40 20% 96%;
     --technical: 220 8% 58%;
     --grid: 220 10% 20%;
+
+    /* Deep technical environment (geophysics) + geological strata (dark) */
+    --geo: oklch(0.837 0.166 86.5);
+    --geo-soft: oklch(0.837 0.166 86.5 / 0.14);
+    --deep: oklch(0.19 0.007 70);
+    --deep-foreground: oklch(0.97 0.003 95);
+    --deep-muted: oklch(0.68 0.008 80);
+    --deep-line: oklch(1 0 0 / 0.09);
+    --strata-1: oklch(0.62 0.05 80);
+    --strata-2: oklch(0.54 0.055 72);
+    --strata-3: oklch(0.45 0.045 62);
+    --strata-4: oklch(0.36 0.03 55);
+    --strata-5: oklch(0.28 0.02 50);
+
     --chart-1: 45 100% 51%;
     --chart-2: 200 70% 50%;
     --chart-3: 160 50% 45%;
@@ -117,6 +145,12 @@
       linear-gradient(to bottom, hsl(var(--grid) / 0.35) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+  .grid-technical {
+    background-image:
+      linear-gradient(to right, var(--grid-color, hsl(var(--grid) / 0.8)) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color, hsl(var(--grid) / 0.8)) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
   .bg-contour {
     background-image: radial-gradient(
       ellipse at center,
@@ -147,6 +181,17 @@
       black 90%,
       transparent
     );
+  }
+
+  /* Animated dashed contour strokes (flow-dash) */
+  .flow-dash {
+    stroke-dasharray: 6 10;
+    animation: geo-dash 18s linear infinite;
+  }
+  @keyframes geo-dash {
+    to {
+      stroke-dashoffset: -1000;
+    }
   }
 }
 

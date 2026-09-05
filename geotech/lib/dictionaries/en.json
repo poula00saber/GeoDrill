@@ -297,6 +297,8 @@
   },
   "crossSection": {
     "label": "Conceptual Geological Visualization",
+    "title": "A Section Through the Ground.",
+    "intro": "Hover or focus a layer to see why it matters to engineering decisions. This is a conceptual visualization and does not represent an actual GEODRILL site.",
     "disclaimer": "Conceptual visualization — not project data",
     "layers": {
       "surface": "Surface",

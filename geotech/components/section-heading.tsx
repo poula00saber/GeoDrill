@@ -8,6 +8,7 @@ interface SectionHeadingProps {
   title: string;
   description?: string;
   align?: 'left' | 'center';
+  tone?: 'default' | 'deep';
   className?: string;
 }
 
@@ -16,8 +17,10 @@ export function SectionHeading({
   title,
   description,
   align = 'left',
+  tone = 'default',
   className,
 }: SectionHeadingProps) {
+  const onDeep = tone === 'deep';
   return (
     <div
       className={cn(
@@ -35,7 +38,7 @@ export function SectionHeading({
           className="flex items-center gap-3"
         >
           <span className="h-px w-8 bg-primary" />
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+          <span className={cn('font-mono text-xs uppercase tracking-[0.2em] text-primary')}>
             {eyebrow}
           </span>
         </motion.div>
@@ -45,7 +48,10 @@ export function SectionHeading({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl"
+        className={cn(
+          'text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl',
+          onDeep ? 'text-deep-foreground' : 'text-foreground',
+        )}
       >
         {title}
       </motion.h2>
@@ -55,7 +61,10 @@ export function SectionHeading({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg"
+          className={cn(
+            'max-w-2xl text-base leading-relaxed text-pretty sm:text-lg',
+            onDeep ? 'text-deep-muted' : 'text-muted-foreground',
+          )}
         >
           {description}
         </motion.p>

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
+import { ContourLines } from "@/geotech/components/geological/background";
 import { cn } from "@/geotech/lib/utils";
 
 type MethodKey =
@@ -19,7 +20,7 @@ type MethodKey =
   | "suspension";
 
 export function GeophysicalTechnology() {
-  const { dict } = useLanguage();
+  const { dict, isArabic } = useLanguage();
   const [activeMethod, setActiveMethod] = useState<MethodKey>("masw");
 
   if (!dict) return null;
@@ -40,181 +41,330 @@ export function GeophysicalTechnology() {
   return (
     <section
       id="technology"
-      className="relative overflow-hidden border-y border-border bg-gradient-to-b from-background via-surface to-background py-20 sm:py-28 md:py-32"
+      className="relative overflow-hidden border-y border-border bg-deep py-20 text-deep-foreground sm:py-28 md:py-32"
     >
-      {/* Dark technical grid */}
-      <div className="absolute inset-0 bg-grid opacity-30" />
+      {/* Faint technical grid + animated contour lines on the deep background */}
+      <div
+        className="pointer-events-none absolute inset-0 grid-technical"
+        style={{ ['--grid-color' as string]: 'oklch(1 0 0 / 0.045)' }}
+      />
+      <ContourLines className="text-deep-foreground" opacity={0.1} />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Geophysical Technology"
+          eyebrow={isArabic ? "التقنيات الجيوفيزيائية" : "Geophysical Technology"}
           title={dict.geophysical.title}
           description={dict.geophysical.description}
           align="center"
+          tone="deep"
           className="mb-12"
         />
 
-        {/* Method selector */}
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
-          {methods.map((method) => (
-            <button
-              key={method}
-              onClick={() => setActiveMethod(method)}
-              className={cn(
-                "rounded-md border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all",
-                activeMethod === method
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border text-muted-foreground hover:text-foreground hover:border-primary/40",
-              )}
-            >
-              {dict.geophysical.methods[method].name}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-          {/* Visualizer */}
-          <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-border/40 bg-background/50">
-            <GeophysicalVisualizer method={activeMethod} />
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+          {/* Method selector — vertical column */}
+          <div className="flex flex-wrap gap-2 lg:flex-col lg:flex-nowrap">
+            {methods.map((method) => (
+              <button
+                key={method}
+                type="button"
+                onClick={() => setActiveMethod(method)}
+                aria-pressed={activeMethod === method}
+                className={cn(
+                  "group relative w-full rounded-md border px-4 py-3 text-start transition-colors",
+                  activeMethod === method
+                    ? "border-primary bg-primary/10"
+                    : "border-deep-line hover:border-primary/50",
+                )}
+              >
+                <span
+                  className={cn(
+                    "font-mono text-xs uppercase tracking-wider",
+                    activeMethod === method ? "text-primary" : "text-deep-muted",
+                  )}
+                >
+                  {dict.geophysical.methods[method].name}
+                </span>
+                <span className="mt-0.5 block text-sm font-medium text-deep-foreground/85">
+                  {dict.geophysical.methods[method].full}
+                </span>
+              </button>
+            ))}
           </div>
 
-          {/* Method info */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeMethod}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="flex flex-col justify-center rounded-lg border border-border/40 bg-surface/50 p-6"
-            >
-              <span className="font-mono text-xs uppercase tracking-wider text-primary">
-                {dict.geophysical.methods[activeMethod].name}
+          {/* Visualizer + info */}
+          <div>
+            <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-deep-line bg-deep">
+              <GeophysicalVisualizer method={activeMethod} />
+              <span className="absolute bottom-3 start-4 font-mono text-[10px] uppercase tracking-wider text-deep-muted">
+                {dict.geophysical.disclaimer}
               </span>
-              <h3 className="mt-2 text-lg font-semibold">
-                {dict.geophysical.methods[activeMethod].full}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-                {dict.geophysical.methods[activeMethod].use}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            </div>
 
-        <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
-          {dict.geophysical.disclaimer}
-        </p>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeMethod}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="mt-6 flex flex-col justify-center rounded-lg border border-deep-line bg-deep p-6"
+              >
+                <span className="font-mono text-xs uppercase tracking-wider text-primary">
+                  {dict.geophysical.methods[activeMethod].name}
+                </span>
+                <h3 className="mt-2 text-lg font-semibold text-deep-foreground">
+                  {dict.geophysical.methods[activeMethod].full}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-deep-muted text-pretty">
+                  {dict.geophysical.methods[activeMethod].use}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+const GEO = "var(--geo)";
+const DEEP_MUTED = "var(--deep-muted)";
+
+function visualFor(method: MethodKey): string {
+  switch (method) {
+    case "masw":
+      return "masw";
+    case "gpr":
+      return "gpr";
+    case "ert":
+      return "ert";
+    case "seismic":
+    case "crosshole":
+      return "seismic";
+    case "emi":
+      return "emi";
+    case "microgravity":
+    case "suspension":
+      return "microgravity";
+    case "magnetic":
+      return "magnetic";
+    case "borehole":
+      return "logging";
+    default:
+      return "masw";
+  }
+}
 
 function GeophysicalVisualizer({ method }: { method: MethodKey }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
+  const visualId = visualFor(method);
   return (
-    <div ref={containerRef} className="relative h-full w-full">
-      <svg
-        viewBox="0 0 800 500"
-        className="h-full w-full"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        {/* Ground line */}
-        <line
-          x1="0"
-          y1="100"
-          x2="800"
-          y2="100"
-          stroke="hsl(var(--primary))"
-          strokeWidth="1"
-          opacity="0.5"
-        />
-        <text
-          x="10"
-          y="90"
-          fill="hsl(var(--muted-foreground))"
-          fontSize="10"
-          fontFamily="monospace"
-          opacity="0.5"
-        >
-          SURFACE
-        </text>
+    <div className="relative h-full w-full">
+      <svg viewBox="0 0 600 300" className="h-full w-full" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="beam" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor={GEO} stopOpacity="0.75" />
+            <stop offset="100%" stopColor={GEO} stopOpacity="0" />
+          </linearGradient>
+        </defs>
 
-        {/* Layers */}
-        <rect
-          x="0"
-          y="100"
-          width="800"
-          height="80"
-          fill="hsl(var(--muted))"
-          opacity="0.2"
-        />
-        <rect
-          x="0"
-          y="180"
-          width="800"
-          height="100"
-          fill="hsl(var(--muted))"
-          opacity="0.3"
-        />
-        <rect
-          x="0"
-          y="280"
-          width="800"
-          height="120"
-          fill="hsl(var(--muted))"
-          opacity="0.4"
-        />
-        <rect
-          x="0"
-          y="400"
-          width="800"
-          height="100"
-          fill="hsl(var(--muted))"
-          opacity="0.5"
-        />
-
-        {/* Grid */}
-        {[0, 100, 200, 300, 400, 500, 600, 700, 800].map((x) => (
+        {[0, 1, 2, 3].map((i) => (
           <line
-            key={x}
-            x1={x}
-            y1="100"
-            x2={x}
-            y2="500"
-            stroke="hsl(var(--border))"
-            strokeWidth="0.5"
-            opacity="0.3"
-          />
-        ))}
-        {[100, 200, 300, 400, 500].map((y) => (
-          <line
-            key={y}
+            key={i}
             x1="0"
-            y1={y}
-            x2="800"
-            y2={y}
-            stroke="hsl(var(--border))"
-            strokeWidth="0.5"
-            opacity="0.3"
+            x2="600"
+            y1={90 + i * 52}
+            y2={90 + i * 52}
+            stroke="currentColor"
+            strokeOpacity="0.18"
+            strokeWidth="1"
           />
         ))}
+        <line x1="0" x2="600" y1="70" y2="70" stroke={GEO} strokeOpacity="0.5" strokeWidth="1.5" />
 
         <AnimatePresence mode="wait">
-          {method === "masw" && <MaswViz key="masw" />}
-          {method === "gpr" && <GprViz key="gpr" />}
-          {method === "ert" && <ErtViz key="ert" />}
-          {method === "seismic" && <SeismicViz key="seismic" />}
-          {method === "emi" && <EmiViz key="emi" />}
-          {method === "microgravity" && <MicrogravityViz key="microgravity" />}
-          {method === "magnetic" && <MagneticViz key="magnetic" />}
-          {method === "borehole" && <BoreholeViz key="borehole" />}
-          {method === "crosshole" && <CrossholeViz key="crosshole" />}
-          {method === "suspension" && <SuspensionViz key="suspension" />}
+          <motion.g
+            key={visualId}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            {visualId === "masw" ? (
+              <>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <motion.circle
+                    key={i}
+                    cx="120"
+                    cy="70"
+                    fill="none"
+                    stroke={GEO}
+                    strokeWidth="1.2"
+                    initial={{ r: 14, opacity: 0.8 }}
+                    animate={{ r: 240, opacity: 0 }}
+                    transition={{ duration: 3, delay: i * 0.6, repeat: Infinity }}
+                  />
+                ))}
+              </>
+            ) : null}
+
+            {visualId === "gpr" ? (
+              <>
+                {[0, 1, 2].map((i) => (
+                  <motion.path
+                    key={i}
+                    d="M300 70 L240 260 M300 70 L360 260"
+                    stroke="url(#beam)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 0.9, 0] }}
+                    transition={{ duration: 2.2, delay: i * 0.7, repeat: Infinity }}
+                  />
+                ))}
+              </>
+            ) : null}
+
+            {visualId === "ert" ? (
+              <>
+                {[0, 1, 2, 3].map((i) => (
+                  <motion.ellipse
+                    key={i}
+                    cx={140 + i * 110}
+                    cy={150 + (i % 2) * 50}
+                    rx="70"
+                    ry="34"
+                    fill={GEO}
+                    initial={{ opacity: 0.08 }}
+                    animate={{ opacity: [0.08, 0.3, 0.08] }}
+                    transition={{ duration: 3.4, delay: i * 0.4, repeat: Infinity }}
+                  />
+                ))}
+              </>
+            ) : null}
+
+            {visualId === "seismic" ? (
+              <>
+                {[0, 1, 2].map((i) => (
+                  <motion.path
+                    key={i}
+                    d="M60 70 C 180 150, 300 40, 420 160 S 540 90, 590 140"
+                    fill="none"
+                    stroke={GEO}
+                    strokeWidth="1.6"
+                    initial={{ pathLength: 0, opacity: 0.2 }}
+                    animate={{ pathLength: 1, opacity: [0.2, 0.9, 0.2] }}
+                    transition={{
+                      duration: 3,
+                      delay: i * 0.9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+              </>
+            ) : null}
+
+            {visualId === "emi" ? (
+              <>
+                <motion.rect
+                  x="270"
+                  y="180"
+                  width="70"
+                  height="16"
+                  rx="8"
+                  fill={GEO}
+                  initial={{ opacity: 0.3 }}
+                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  transition={{ duration: 2.4, repeat: Infinity }}
+                />
+                {[0, 1, 2].map((i) => (
+                  <motion.ellipse
+                    key={i}
+                    cx="305"
+                    cy="188"
+                    rx="60"
+                    ry="28"
+                    fill="none"
+                    stroke={GEO}
+                    strokeWidth="1"
+                    initial={{ scale: 0.4, opacity: 0.9 }}
+                    animate={{ scale: 2.2, opacity: 0 }}
+                    style={{ transformOrigin: "305px 188px" }}
+                    transition={{ duration: 2.6, delay: i * 0.8, repeat: Infinity }}
+                  />
+                ))}
+              </>
+            ) : null}
+
+            {visualId === "microgravity" ? (
+              <g>
+                <motion.ellipse
+                  cx="320"
+                  cy="200"
+                  rx="66"
+                  ry="42"
+                  fill="var(--deep)"
+                  stroke={GEO}
+                  strokeWidth="1.4"
+                  initial={{ opacity: 0.4 }}
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+                <motion.path
+                  d="M60 120 C 180 120, 240 96, 320 96 S 470 122, 590 120"
+                  fill="none"
+                  stroke={GEO}
+                  strokeOpacity="0.6"
+                  strokeWidth="1.2"
+                  className="flow-dash"
+                />
+              </g>
+            ) : null}
+
+            {visualId === "magnetic" ? (
+              <>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <motion.ellipse
+                    key={i}
+                    cx={120 + i * 90}
+                    cy={150 + (i % 2) * 60}
+                    rx="40"
+                    ry="40"
+                    fill="none"
+                    stroke={GEO}
+                    strokeWidth="1.2"
+                    initial={{ opacity: 0.15, scale: 0.6 }}
+                    animate={{ opacity: [0.15, 0.7], scale: [0.6, 1.2] }}
+                    transition={{
+                      duration: 3,
+                      delay: i * 0.5,
+                      repeat: Infinity,
+                    }}
+                  />
+                ))}
+              </>
+            ) : null}
+
+            {visualId === "logging" ? (
+              <g>
+                <rect x="280" y="90" width="40" height="200" fill="none" stroke={GEO} strokeWidth="2" />
+                <motion.circle
+                  cx="300"
+                  cy="190"
+                  r="14"
+                  fill={GEO}
+                  animate={{ y: [0, 60, 0] }}
+                  transition={{ duration: 2.8, repeat: Infinity }}
+                />
+              </g>
+            ) : null}
+
+            <text x="12" y="18" fill={DEEP_MUTED} fontSize="10" fontFamily="monospace" opacity="0.6">
+              {visualId.toUpperCase()}
+            </text>
+          </motion.g>
         </AnimatePresence>
       </svg>
 
-      {/* Label */}
       <div className="absolute start-3 top-3 flex items-center gap-2">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
@@ -225,618 +375,5 @@ function GeophysicalVisualizer({ method }: { method: MethodKey }) {
         </span>
       </div>
     </div>
-  );
-}
-
-function MaswViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Surface waves */}
-      {[0, 1, 2, 3, 4].map((i) => (
-        <motion.path
-          key={i}
-          d={`M0,${120 + i * 20} Q200,${100 + i * 20} 400,${120 + i * 20} T800,${120 + i * 20}`}
-          stroke="hsl(var(--primary))"
-          strokeWidth="1.5"
-          fill="none"
-          opacity={0.6 - i * 0.1}
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, delay: i * 0.2 }}
-        />
-      ))}
-      {/* Geophones */}
-      {[100, 200, 300, 400, 500, 600, 700].map((x) => (
-        <g key={x}>
-          <line
-            x1={x}
-            y1="100"
-            x2={x}
-            y2="90"
-            stroke="hsl(var(--primary))"
-            strokeWidth="1.5"
-          />
-          <circle cx={x} cy="85" r="4" fill="hsl(var(--primary))" />
-        </g>
-      ))}
-      <text
-        x="350"
-        y="75"
-        fill="hsl(var(--primary))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        GEOPHONE ARRAY
-      </text>
-    </motion.g>
-  );
-}
-
-function GprViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Antenna */}
-      <rect
-        x="380"
-        y="80"
-        width="40"
-        height="15"
-        fill="hsl(var(--primary))"
-        rx="2"
-      />
-      <text
-        x="400"
-        y="75"
-        fill="hsl(var(--primary))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        GPR
-      </text>
-      {/* Radar cone */}
-      <motion.path
-        d="M400,100 L200,500 L600,500 Z"
-        fill="hsl(var(--primary))"
-        opacity="0.1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.15 }}
-        transition={{ duration: 0.5 }}
-      />
-      {/* Radar waves */}
-      {[1, 2, 3, 4].map((i) => (
-        <motion.path
-          key={i}
-          d={`M400,100 L${400 - i * 60},500 L${400 + i * 60},500 Z`}
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="1"
-          opacity={0.4 - i * 0.08}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.4 - i * 0.08 }}
-          transition={{
-            duration: 1,
-            delay: i * 0.15,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          style={{ transformOrigin: "400px 100px" }}
-        />
-      ))}
-      {/* Buried utility */}
-      <rect
-        x="300"
-        y="320"
-        width="200"
-        height="20"
-        fill="hsl(var(--primary))"
-        opacity="0.4"
-        rx="4"
-      />
-      <text
-        x="400"
-        y="355"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        UTILITY
-      </text>
-    </motion.g>
-  );
-}
-
-function ErtViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Electrodes */}
-      {[100, 200, 300, 400, 500, 600, 700].map((x) => (
-        <g key={x}>
-          <line
-            x1={x}
-            y1="100"
-            x2={x}
-            y2="120"
-            stroke="hsl(var(--primary))"
-            strokeWidth="2"
-          />
-          <circle cx={x} cy="125" r="3" fill="hsl(var(--primary))" />
-        </g>
-      ))}
-      {/* Resistivity zones */}
-      <motion.rect
-        x="100"
-        y="150"
-        width="200"
-        height="100"
-        fill="hsl(var(--primary))"
-        opacity="0.15"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.15 }}
-      />
-      <motion.rect
-        x="350"
-        y="200"
-        width="250"
-        height="150"
-        fill="hsl(var(--primary))"
-        opacity="0.25"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.25 }}
-        transition={{ delay: 0.2 }}
-      />
-      <motion.rect
-        x="150"
-        y="280"
-        width="300"
-        height="120"
-        fill="hsl(var(--primary))"
-        opacity="0.1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ delay: 0.4 }}
-      />
-      {/* Current flow lines */}
-      {[0, 1, 2].map((i) => (
-        <motion.path
-          key={i}
-          d={`M${100 + i * 50},120 Q400,${200 + i * 60} ${700 - i * 50},120`}
-          stroke="hsl(var(--primary))"
-          strokeWidth="1"
-          fill="none"
-          opacity="0.3"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, delay: i * 0.2 }}
-        />
-      ))}
-      <text
-        x="400"
-        y="490"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        RESISTIVITY MODEL
-      </text>
-    </motion.g>
-  );
-}
-
-function SeismicViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Source */}
-      <circle cx="100" cy="100" r="6" fill="hsl(var(--primary))" />
-      <text
-        x="100"
-        y="85"
-        fill="hsl(var(--primary))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        SOURCE
-      </text>
-      {/* Wave fronts */}
-      {[1, 2, 3, 4, 5].map((i) => (
-        <motion.circle
-          key={i}
-          cx="100"
-          cy="100"
-          r={i * 70}
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="1"
-          opacity={0.5 - i * 0.08}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.5 - i * 0.08 }}
-          transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
-          style={{ transformOrigin: "100px 100px" }}
-        />
-      ))}
-      {/* Reflected wave */}
-      <motion.path
-        d="M100,100 Q400,300 700,100"
-        stroke="hsl(var(--primary))"
-        strokeWidth="1.5"
-        fill="none"
-        strokeDasharray="4 4"
-        opacity="0.5"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-      />
-      {/* Bedrock line */}
-      <line
-        x1="0"
-        y1="300"
-        x2="800"
-        y2="300"
-        stroke="hsl(var(--primary))"
-        strokeWidth="1"
-        opacity="0.4"
-        strokeDasharray="6 6"
-      />
-      <text
-        x="750"
-        y="295"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="end"
-      >
-        BEDROCK
-      </text>
-    </motion.g>
-  );
-}
-
-function EmiViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Instrument */}
-      <rect
-        x="350"
-        y="75"
-        width="100"
-        height="20"
-        fill="hsl(var(--primary))"
-        rx="3"
-      />
-      <text
-        x="400"
-        y="70"
-        fill="hsl(var(--primary))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        EMI
-      </text>
-      {/* EM field */}
-      {[1, 2, 3, 4].map((i) => (
-        <motion.ellipse
-          key={i}
-          cx="400"
-          cy="150"
-          rx={i * 80}
-          ry={i * 40}
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="1"
-          opacity={0.4 - i * 0.08}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 - i * 0.08 }}
-          transition={{ delay: i * 0.15 }}
-        />
-      ))}
-      {/* Buried object */}
-      <rect
-        x="320"
-        y="350"
-        width="160"
-        height="30"
-        fill="hsl(var(--primary))"
-        opacity="0.3"
-        rx="4"
-      />
-      <text
-        x="400"
-        y="395"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        ANOMALY
-      </text>
-      {/* Signal lines */}
-      <motion.line
-        x1="400"
-        y1="100"
-        x2="400"
-        y2="350"
-        stroke="hsl(var(--primary))"
-        strokeWidth="1"
-        strokeDasharray="3 3"
-        opacity="0.4"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1 }}
-      />
-    </motion.g>
-  );
-}
-
-function MicrogravityViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Measurement points */}
-      {[100, 200, 300, 400, 500, 600, 700].map((x) => (
-        <g key={x}>
-          <circle cx={x} cy="100" r="3" fill="hsl(var(--primary))" />
-          <text
-            x={x}
-            y="90"
-            fill="hsl(var(--muted-foreground))"
-            fontSize="8"
-            fontFamily="monospace"
-            textAnchor="middle"
-          >
-            g
-          </text>
-        </g>
-      ))}
-      {/* Gravity curve */}
-      <motion.path
-        d="M100,100 L200,100 L250,100 Q300,80 350,100 L400,100 Q450,120 500,100 L550,100 Q600,80 650,100 L700,100"
-        stroke="hsl(var(--primary))"
-        strokeWidth="2"
-        fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 1.5 }}
-      />
-      {/* Cavity */}
-      <motion.ellipse
-        cx="400"
-        cy="300"
-        rx="80"
-        ry="50"
-        fill="hsl(var(--primary))"
-        opacity="0.2"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.5 }}
-      />
-      <text
-        x="400"
-        y="305"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        CAVITY
-      </text>
-      {/* Gravity low indicator */}
-      <motion.text
-        x="400"
-        y="75"
-        fill="hsl(var(--primary))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        GRAVITY LOW
-      </motion.text>
-    </motion.g>
-  );
-}
-
-function MagneticViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {[100, 200, 300, 400, 500, 600, 700].map((x, i) => (
-        <motion.path
-          key={x}
-          d={`M${x},100 Q${x - 35},${190 + i * 8} ${x},${280 + i * 12}`}
-          stroke="hsl(var(--primary))"
-          strokeWidth="1.5"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1, delay: i * 0.08 }}
-        />
-      ))}
-      <text
-        x="400"
-        y="360"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        MAGNETIC ANOMALY
-      </text>
-    </motion.g>
-  );
-}
-
-function BoreholeViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <rect
-        x="370"
-        y="100"
-        width="60"
-        height="350"
-        fill="none"
-        stroke="hsl(var(--primary))"
-        strokeWidth="2"
-      />
-      {[150, 220, 290, 360].map((y) => (
-        <motion.ellipse
-          key={y}
-          cx="400"
-          cy={y}
-          rx="24"
-          ry="12"
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="1.5"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: (y - 150) / 500 }}
-        />
-      ))}
-      <text
-        x="400"
-        y="475"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        OPTICAL / ACOUSTIC LOGGING
-      </text>
-    </motion.g>
-  );
-}
-
-function CrossholeViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <line
-        x1="240"
-        y1="100"
-        x2="240"
-        y2="450"
-        stroke="hsl(var(--primary))"
-        strokeWidth="3"
-      />
-      <line
-        x1="560"
-        y1="100"
-        x2="560"
-        y2="450"
-        stroke="hsl(var(--primary))"
-        strokeWidth="3"
-      />
-      {[170, 250, 330].map((y) => (
-        <motion.path
-          key={y}
-          d={`M240,${y} Q400,${y - 35} 560,${y}`}
-          stroke="hsl(var(--primary))"
-          strokeWidth="1.5"
-          fill="none"
-          strokeDasharray="5 5"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.8 }}
-        />
-      ))}
-      <text
-        x="400"
-        y="475"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        P / S WAVE TRAVEL TIMES
-      </text>
-    </motion.g>
-  );
-}
-
-function SuspensionViz() {
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <rect
-        x="370"
-        y="100"
-        width="60"
-        height="350"
-        fill="none"
-        stroke="hsl(var(--primary))"
-        strokeWidth="2"
-      />
-      <motion.circle
-        cx="400"
-        cy="250"
-        r="32"
-        fill="none"
-        stroke="hsl(var(--primary))"
-        strokeWidth="1.5"
-        animate={{ r: [20, 45, 20], opacity: [0.8, 0.2, 0.8] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      />
-      <motion.circle
-        cx="400"
-        cy="250"
-        r="10"
-        fill="hsl(var(--primary))"
-        animate={{ y: [0, 100, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity }}
-      />
-      <text
-        x="400"
-        y="475"
-        fill="hsl(var(--muted-foreground))"
-        fontSize="9"
-        fontFamily="monospace"
-        textAnchor="middle"
-      >
-        FORMATION VELOCITY LOG
-      </text>
-    </motion.g>
   );
 }

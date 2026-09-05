@@ -63,6 +63,20 @@ const config: Config = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
+        geo: 'var(--geo)',
+        deep: {
+          DEFAULT: 'var(--deep)',
+          foreground: 'var(--deep-foreground)',
+          muted: 'var(--deep-muted)',
+          line: 'var(--deep-line)',
+        },
+        strata: {
+          '1': 'var(--strata-1)',
+          '2': 'var(--strata-2)',
+          '3': 'var(--strata-3)',
+          '4': 'var(--strata-4)',
+          '5': 'var(--strata-5)',
+        },
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',
