@@ -11,6 +11,10 @@ import { SectionHeading } from "@/geotech/components/section-heading";
 import { serviceVisuals } from "@/geotech/components/service-visuals-map";
 import { getLocalizedServiceItem } from "@/geotech/lib/services-page-i18n";
 import { GoldGradientBand } from "@/geotech/components/sections/gold-gradient-band";
+import {
+  CapabilityVisualizer,
+  STRUCTURAL_ASSESSMENT_CAPABILITIES,
+} from "@/geotech/components/sections/capability-visualizer";
 
 interface ServicePageTemplateProps {
   service: ServiceContent;
@@ -229,58 +233,83 @@ export function ServicePageTemplate({
 
         {/* Capabilities Section */}
         <motion.section variants={itemVariants} className="mb-20">
-          <SectionHeading
-            eyebrow={labels.capabilities}
-            title={labels.whatWeDeliver}
-          />
+          {service.slug === "structural-assessment" ? (
+            // Rich interactive visualizer for services that ship detailed
+            // capability data (icons, photos, features).
+            <CapabilityVisualizer
+              eyebrow={labels.capabilities}
+              heading={labels.whatWeDeliver}
+              subheading={
+                isArabic
+                  ? "ست قدرات إنشائية متكاملة، من الفحص الميداني إلى دعم التصميم، مصممة لتقييم سلامة المباني والمنشآت القائمة."
+                  : "Six integrated structural capabilities — from field inspection to design support — built to evaluate the safety of existing buildings and facilities."
+              }
+              locale={isArabic ? "ar" : "en"}
+              items={
+                isArabic
+                  ? STRUCTURAL_ASSESSMENT_CAPABILITIES.ar
+                  : STRUCTURAL_ASSESSMENT_CAPABILITIES.en
+              }
+            />
+          ) : isCapabilitiesGrouped ? (
+            <>
+              <SectionHeading
+                eyebrow={labels.capabilities}
+                title={labels.whatWeDeliver}
+              />
 
-          {isCapabilitiesGrouped ? (
-            // Grouped capabilities
-            <div className="mt-12 grid gap-8 lg:grid-cols-2">
-              {Object.entries(
-                service.capabilities as Record<string, string[]>,
-              ).map(([groupName, items]) => (
-                <motion.div
-                  key={groupName}
-                  variants={itemVariants}
-                  className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
-                >
-                  <div className="border-b border-border bg-surface px-5 py-3">
-                    <h3 className="font-bold text-foreground lg:text-lg">
-                      {groupName}
-                    </h3>
-                  </div>
-                  <ul className="divide-y divide-border">
-                    {items.map((item, idx) => (
-                      <motion.li
-                        key={idx}
-                        variants={itemVariants}
-                        className="flex items-start gap-3 px-5 py-3 text-sm leading-relaxed text-foreground/90"
-                      >
-                        <span className="mt-1.5 flex h-2.5 w-2.5 flex-shrink-0 items-center justify-center rounded-full bg-primary" />
-                        {item}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
+              <div className="mt-12 grid gap-8 lg:grid-cols-2">
+                {Object.entries(
+                  service.capabilities as Record<string, string[]>,
+                ).map(([groupName, items]) => (
+                  <motion.div
+                    key={groupName}
+                    variants={itemVariants}
+                    className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+                  >
+                    <div className="border-b border-border bg-surface px-5 py-3">
+                      <h3 className="font-bold text-foreground lg:text-lg">
+                        {groupName}
+                      </h3>
+                    </div>
+                    <ul className="divide-y divide-border">
+                      {items.map((item, idx) => (
+                        <motion.li
+                          key={idx}
+                          variants={itemVariants}
+                          className="flex items-start gap-3 px-5 py-3 text-sm leading-relaxed text-foreground/90"
+                        >
+                          <span className="mt-1.5 flex h-2.5 w-2.5 flex-shrink-0 items-center justify-center rounded-full bg-primary" />
+                          {item}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            </>
           ) : (
-            // Flat capabilities list -> bordered card grid
-            <div className="mt-12 grid gap-3 sm:grid-cols-2">
-              {(service.capabilities as string[]).map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  className="flex items-start gap-3 rounded-lg border border-border/70 bg-card px-4 py-3 transition-colors hover:border-primary/50"
-                >
-                  <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
-                  <span className="text-sm leading-relaxed text-foreground/90">
-                    {item}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
+            <>
+              <SectionHeading
+                eyebrow={labels.capabilities}
+                title={labels.whatWeDeliver}
+              />
+
+              <div className="mt-12 grid gap-3 sm:grid-cols-2">
+                {(service.capabilities as string[]).map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={itemVariants}
+                    className="flex items-start gap-3 rounded-lg border border-border/70 bg-card px-4 py-3 transition-colors hover:border-primary/50"
+                  >
+                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
+                    <span className="text-sm leading-relaxed text-foreground/90">
+                      {item}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </>
           )}
         </motion.section>
 
