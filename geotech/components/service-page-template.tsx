@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ServiceContent, servicesData, serviceCategories, type ServiceCategory } from "@/geotech/lib/services-data";
+import {
+  ServiceContent,
+  servicesData,
+  serviceCategories,
+  type ServiceCategory,
+} from "@/geotech/lib/services-data";
 import { Button } from "@/geotech/components/ui/button";
 import { TechnicalBadge } from "@/geotech/components/technical-badge";
 import { SectionHeading } from "@/geotech/components/section-heading";
@@ -17,6 +22,7 @@ import {
 } from "@/geotech/components/sections/capability-visualizer";
 import { CapabilitiesGrid } from "@/geotech/components/sections/capabilities-grid";
 import { ServicePager } from "@/geotech/components/sections/service-pager";
+import { serviceShowcaseConfig } from "@/geotech/lib/service-showcase-data";
 
 interface ServicePageTemplateProps {
   service: ServiceContent;
@@ -167,11 +173,7 @@ export function ServicePageTemplate({
 
       {/* Centered gold-gradient band directly under the hero */}
       <GoldGradientBand
-        eyebrow={
-          isArabic
-            ? labels.relatedFallback
-            : "Service Overview"
-        }
+        eyebrow={isArabic ? labels.relatedFallback : "Service Overview"}
         title={service.title}
         description={service.shortDescription}
       />
@@ -244,42 +246,45 @@ export function ServicePageTemplate({
         )}
 
         {/* Service-specific visual selected outside the content data. */}
-        {ServiceVisual && !isArabic && (
+        {ServiceVisual && (
           <motion.section variants={itemVariants} className="mb-20">
             <ServiceVisual />
           </motion.section>
         )}
 
-{/* Capabilities Section */}
-        <motion.section variants={itemVariants} className="mb-20">
-          {service.slug === "structural-assessment" ? (
-            // Structural assessment already has its own rich interactive
-            // capability visualizer (`CapabilityVisualizer`).
-            <CapabilityVisualizer
-              eyebrow={labels.capabilities}
-              heading={labels.whatWeDeliver}
-              subheading={
-                isArabic
-                  ? "ست قدرات إنشائية متكاملة، من الفحص الميداني إلى دعم التصميم، مصممة لتقييم سلامة المباني والمنشآت القائمة."
-                  : "Six integrated structural capabilities — from field inspection to design support — built to evaluate the safety of existing buildings and facilities."
-              }
-              locale={isArabic ? "ar" : "en"}
-              items={
-                isArabic
-                  ? STRUCTURAL_ASSESSMENT_CAPABILITIES.ar
-                  : STRUCTURAL_ASSESSMENT_CAPABILITIES.en
-              }
-            />
-          ) : (
-            <CapabilitiesGrid
-              capabilities={service.capabilities}
-              heroImage={service.heroImage}
-              eyebrow={labels.capabilities}
-              heading={labels.whatWeDeliver}
-              isArabic={isArabic}
-            />
+        {/* Capabilities Section */}
+        {service.slug !== "geophysical-survey" &&
+          !serviceShowcaseConfig[service.slug] && (
+            <motion.section variants={itemVariants} className="mb-20">
+              {service.slug === "structural-assessment" ? (
+                // Structural assessment already has its own rich interactive
+                // capability visualizer (`CapabilityVisualizer`).
+                <CapabilityVisualizer
+                  eyebrow={labels.capabilities}
+                  heading={labels.whatWeDeliver}
+                  subheading={
+                    isArabic
+                      ? "ست قدرات إنشائية متكاملة، من الفحص الميداني إلى دعم التصميم، مصممة لتقييم سلامة المباني والمنشآت القائمة."
+                      : "Six integrated structural capabilities — from field inspection to design support — built to evaluate the safety of existing buildings and facilities."
+                  }
+                  locale={isArabic ? "ar" : "en"}
+                  items={
+                    isArabic
+                      ? STRUCTURAL_ASSESSMENT_CAPABILITIES.ar
+                      : STRUCTURAL_ASSESSMENT_CAPABILITIES.en
+                  }
+                />
+              ) : (
+                <CapabilitiesGrid
+                  capabilities={service.capabilities}
+                  heroImage={service.heroImage}
+                  eyebrow={labels.capabilities}
+                  heading={labels.whatWeDeliver}
+                  isArabic={isArabic}
+                />
+              )}
+            </motion.section>
           )}
-        </motion.section>
 
         {/* Gallery */}
         {service.gallery && service.gallery.length > 0 && (
@@ -314,8 +319,6 @@ export function ServicePageTemplate({
             </div>
           </motion.section>
         )}
-
-          
 
         {/* CTA */}
         <motion.section

@@ -207,7 +207,8 @@ function CapabilityCard({
       </div>
 
       <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        {String(index + 1).padStart(2, "0")} · {isArabic ? tone.arabicTag : tone.tag}
+        {String(index + 1).padStart(2, "0")} ·{" "}
+        {isArabic ? tone.arabicTag : tone.tag}
       </span>
 
       <h3 className="mt-1 text-balance text-sm font-bold leading-snug text-foreground sm:text-base">
@@ -338,7 +339,8 @@ function GroupedGrid({
               <div className="mb-1 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 <span>{isArabic ? "الفئة الحالية" : "Current category"}</span>
                 <span>
-                  {String(active + 1).padStart(2, "0")} / {String(groups.length).padStart(2, "0")}
+                  {String(active + 1).padStart(2, "0")} /{" "}
+                  {String(groups.length).padStart(2, "0")}
                 </span>
               </div>
               <div className="h-1 w-full overflow-hidden rounded-full bg-border/40">
@@ -363,7 +365,9 @@ function GroupedGrid({
             >
               <button
                 type="button"
-                onClick={() => setActive((active - 1 + groups.length) % groups.length)}
+                onClick={() =>
+                  setActive((active - 1 + groups.length) % groups.length)
+                }
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-background/60 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary rtl:rotate-180"
                 aria-label={isArabic ? "السابق" : "Previous category"}
               >
@@ -397,14 +401,17 @@ function GroupedGrid({
                   key={item}
                   initial={{ opacity: 0, x: isArabic ? -6 : 6 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.25, delay: Math.min(idx * 0.02, 0.3) }}
+                  transition={{
+                    duration: 0.25,
+                    delay: Math.min(idx * 0.02, 0.3),
+                  }}
                   className="flex items-start gap-2 rounded-lg border border-border/40 bg-surface/40 p-3 transition-colors hover:border-primary/40 hover:bg-surface/60"
                 >
                   <CheckCircle2
                     className={cn(
-                          "mt-0.5 h-4 w-4 flex-shrink-0 text-primary",
-                          isArabic && "rotate-180",
-                        )}
+                      "mt-0.5 h-4 w-4 flex-shrink-0 text-primary",
+                      isArabic && "rotate-180",
+                    )}
                     strokeWidth={2}
                   />
                   <span className="text-xs leading-relaxed text-foreground/90 sm:text-sm">
@@ -441,10 +448,40 @@ interface Tone {
 }
 
 const TONES: Tone[] = [
-  { tag: "Field", arabicTag: "حقلي", icon: Sparkles, ring: "hover:border-primary/60" },
-  { tag: "Lab", arabicTag: "مخبري", icon: Layers, ring: "hover:border-amber-500/60" },
-  { tag: "NDT", arabicTag: "غير إتلافي", icon: ImageIcon, ring: "hover:border-sky-500/60" },
-  { tag: "QC", arabicTag: "جودة", icon: CheckCircle2, ring: "hover:border-emerald-500/60" },
-  { tag: "Specialty", arabicTag: "متخصص", icon: X, ring: "hover:border-violet-500/60" },
-  { tag: "Testing", arabicTag: "اختبار", icon: Layers, ring: "hover:border-rose-500/60" },
+  {
+    tag: "Field",
+    arabicTag: "حقلي",
+    icon: Sparkles,
+    ring: "hover:border-primary/60",
+  },
+  {
+    tag: "Lab",
+    arabicTag: "مخبري",
+    icon: Layers,
+    ring: "hover:border-amber-500/60",
+  },
+  {
+    tag: "NDT",
+    arabicTag: "غير إتلافي",
+    icon: ImageIcon,
+    ring: "hover:border-sky-500/60",
+  },
+  {
+    tag: "QC",
+    arabicTag: "جودة",
+    icon: CheckCircle2,
+    ring: "hover:border-emerald-500/60",
+  },
+  {
+    tag: "Specialty",
+    arabicTag: "متخصص",
+    icon: X,
+    ring: "hover:border-violet-500/60",
+  },
+  {
+    tag: "Testing",
+    arabicTag: "اختبار",
+    icon: Layers,
+    ring: "hover:border-rose-500/60",
+  },
 ];

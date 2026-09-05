@@ -70,9 +70,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   // Canonical services list for the bottom pager (same order as /services).
   const allServices = (Object.keys(serviceCategories) as ServiceCategory[])
-    .flatMap((cat) =>
-      serviceCategories[cat].map((s) => servicesData[s]),
-    )
+    .flatMap((cat) => serviceCategories[cat].map((s) => servicesData[s]))
     .filter((s): s is NonNullable<typeof s> => Boolean(s))
     .map((s) => getLocalizedService(s, lang));
 

@@ -40,9 +40,10 @@ export function ServicePager({
   const idx = allServices.findIndex((s) => s.slug === currentSlug);
   if (idx === -1) return null;
 
-  const prev = idx === 0 ? allServices[allServices.length - 1] : allServices[idx - 1];
+  const prev =
+    idx === 0 ? allServices[allServices.length - 1] : allServices[idx - 1];
   const next =
- idx === allServices.length - 1 ? allServices[0] : allServices[idx + 1];
+    idx === allServices.length - 1 ? allServices[0] : allServices[idx + 1];
 
   const ArrowEnd = isArabic ? ArrowLeft : ArrowRight;
   const ArrowStart = isArabic ? ArrowRight : ArrowLeft;
@@ -135,7 +136,9 @@ function PagerCard({
   ArrowEnd: typeof ArrowRight;
   delay: number;
 }) {
-  const category = isArabic ? getArabicCategory(service.category) : service.category;
+  const category = isArabic
+    ? getArabicCategory(service.category)
+    : service.category;
 
   return (
     <motion.div

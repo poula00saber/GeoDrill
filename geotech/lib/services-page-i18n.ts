@@ -328,11 +328,20 @@ const arabicServiceOverviews: Record<string, string[]> = {
 const arabicCapabilityTerms: [string, string][] = [
   ["Soil Investigation", "التحريات الجيوتقنية للتربة"],
   ["Concrete — Fresh Concrete Tests", "الخرسانة — اختبارات الخرسانة الطازجة"],
-  ["Concrete — Hardened Concrete (Non-Destructive)", "الخرسانة — اختبارات الخرسانة المتصلدة غير الإتلافية"],
+  [
+    "Concrete — Hardened Concrete (Non-Destructive)",
+    "الخرسانة — اختبارات الخرسانة المتصلدة غير الإتلافية",
+  ],
   ["Concrete — Destructive Tests", "الخرسانة — الاختبارات الإتلافية"],
   ["Concrete — On-site Quality Control", "الخرسانة — ضبط الجودة في الموقع"],
-  ["On-site Soil/Fill/Backfill Quality Control", "ضبط جودة التربة والدفان والردم في الموقع"],
-  ["Soil/Fill/Backfill Materials Testing", "اختبارات مواد التربة والدفان والردم"],
+  [
+    "On-site Soil/Fill/Backfill Quality Control",
+    "ضبط جودة التربة والدفان والردم في الموقع",
+  ],
+  [
+    "Soil/Fill/Backfill Materials Testing",
+    "اختبارات مواد التربة والدفان والردم",
+  ],
   ["Fresh", "الطازجة"],
   ["Hardened", "المتصلدة"],
   ["Non-Destructive", "غير الإتلافية"],
@@ -366,7 +375,10 @@ const arabicCapabilityTerms: [string, string][] = [
   ["Piezometers", "مقاييس منسوب المياه"],
   ["Pressuremeter Testing", "اختبار الضغط الحقلي"],
   ["Packer (Lugeon) Test for Rock", "اختبار الباكر للصخور"],
-  ["Falling & Constant Head Permeability", "اختبار النفاذية بالرأس الساقط والثابت"],
+  [
+    "Falling & Constant Head Permeability",
+    "اختبار النفاذية بالرأس الساقط والثابت",
+  ],
   ["Plate Load Test", "اختبار تحميل اللوح"],
   ["Percolation Testing", "اختبار النفاذية السطحية"],
   ["Test Pits Excavation", "حفر الاختبار"],
