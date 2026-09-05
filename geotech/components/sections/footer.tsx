@@ -8,9 +8,13 @@ import { ContourLines } from "../geological/background";
 import { siteConfig } from "../../lib/site-config";
 
 export function Footer() {
-  const { dict } = useLanguage();
+  const { dict, locale } = useLanguage();
   const { theme, resolvedTheme } = useTheme();
   if (!dict) return null;
+
+  // Build absolute locale prefix so footer links always resolve under the
+  // correct language tree (e.g. /geotechnical/ar/about).
+  const localePrefix = `/geotechnical/${locale}`;
 
   // Geotech brand logo — dark-mark on light backgrounds, light-mark on dark.
   const logoSrc =
@@ -19,12 +23,12 @@ export function Footer() {
       : "/geotech-logo.png";
 
   const navItems = [
-    { label: dict.nav.about, href: "#about" },
-    { label: dict.nav.services, href: "#services" },
-    { label: dict.nav.technology, href: "#technology" },
-    { label: dict.nav.projects, href: "#projects" },
-    { label: dict.nav.qhse, href: "#qhse" },
-    { label: dict.nav.contact, href: "#contact" },
+    { label: dict.nav.about, href: `${localePrefix}/about` },
+    { label: dict.nav.services, href: `${localePrefix}/services` },
+    { label: dict.nav.projects, href: `${localePrefix}/projects` },
+    { label: dict.nav.qhse, href: `${localePrefix}/qhse` },
+    { label: dict.nav.clients, href: `${localePrefix}/clients` },
+    { label: dict.nav.contact, href: `${localePrefix}/contact` },
   ];
 
   const socials = [

@@ -62,7 +62,7 @@ export default function ContactPage() {
             >
               <div className="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
                 <span className="h-px w-8 bg-primary" />
-                {dict.contact.title}
+                {isAr ? "تواصل" : "Contact"}
               </div>
 
               <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -70,7 +70,9 @@ export default function ContactPage() {
               </h1>
 
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-200">
-                {dict.contact.subtitle}
+                {isAr
+                  ? "أخبرنا بما تخطط له، وسيساعدك فريقنا في تحديد نهج التحقيق والهندسة المناسب لمتطلباتك الخاصة."
+                  : "Tell us what you are planning, investigating or building. Our team can help identify the right investigation and engineering approach for your specific needs."}
               </p>
             </motion.div>
           </div>

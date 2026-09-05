@@ -1,22 +1,54 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Award, Layers, MapPin, ShieldCheck } from 'lucide-react';
+import { Award, Layers, MapPin, Building2 } from 'lucide-react';
 import { useLanguage } from '@/geotech/components/providers/language-provider';
 import { AnimatedCounter } from '@/geotech/components/animated-counter';
 import { ContourLines } from '@/geotech/components/geological/background';
 import { cn } from '@/geotech/lib/utils';
+import { SITE_STATS } from '@/geotech/lib/site-stats';
+
+const STAT_ICONS: Record<string, typeof Award> = {
+  years: Award,
+  services: Layers,
+  projects: Building2,
+  organizations: MapPin,
+};
+
+const STAT_ACCENTS: Record<string, string> = {
+  years: 'from-amber-400/30',
+  services: 'from-primary/30',
+  projects: 'from-amber-300/25',
+  organizations: 'from-amber-500/25',
+};
 
 export function TrustBar() {
   const { dict } = useLanguage();
   if (!dict) return null;
 
-  const items = [
-    { icon: Award, value: 17, suffix: '+', label: dict.trust.years, accent: 'from-amber-400/30' },
-    { icon: Layers, value: 14, suffix: '', label: dict.trust.services, accent: 'from-primary/30' },
-    { icon: MapPin, value: null, text: 'KSA', label: dict.trust.ksa, accent: 'from-amber-300/25' },
-    { icon: ShieldCheck, value: null, text: 'ISO 9001', label: dict.trust.cert, accent: 'from-amber-500/25' },
-  ];
+  const labelFor = (key: string) => {
+      switch (key) {
+        case 'years':
+          return dict.trust.years;
+        case 'services':
+          return dict.trust.services;
+        case 'projects':
+          return dict.trust.projects;
+        case 'clients':
+          return dict.trust.clients;
+        default:
+          return '';
+      }
+    };
+
+  const items = SITE_STATS.map((stat) => ({
+    icon: STAT_ICONS[stat.id] ?? Award,
+    value: stat.value,
+    text: stat.text,
+    suffix: stat.suffix,
+    label: labelFor(stat.labelKey),
+    accent: STAT_ACCENTS[stat.id] ?? 'from-primary/30',
+  }));
 
   return (
     <section className="relative overflow-hidden border-b border-border/40">

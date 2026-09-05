@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import Image from "next/image";
 import {
+  ArrowLeft,
   ArrowRight,
   Sparkles,
   CheckCircle2,
@@ -40,6 +41,14 @@ export interface ShowcaseCapability {
   icon?: LucideIcon;
   /** Optional accent tone — defaults to "primary". */
   tone?: "primary" | "amber" | "sky" | "rose" | "violet" | "emerald" | "blue";
+  /**
+   * Arabic translations. When `isAr` is true the showcase prefers these over
+   * the English `label` / `description` / `features`. If a field is omitted
+   * it falls back to the English copy.
+   */
+  labelAr?: string;
+  descriptionAr?: string;
+  featuresAr?: string[];
 }
 
 export interface ServiceVisualShowcaseProps {
@@ -251,6 +260,7 @@ export function ServiceVisualShowcase({
           const isActive = i === activeIdx;
           const t = TONE[cap.tone ?? "primary"];
           const Icon2 = cap.icon ?? Sparkles;
+          const chipLabel = isAr ? cap.labelAr ?? cap.label : cap.label;
           return (
             <button
               key={cap.id ?? i}
@@ -265,7 +275,7 @@ export function ServiceVisualShowcase({
               )}
             >
               <Icon2 className="h-3.5 w-3.5" strokeWidth={2} />
-              <span className="line-clamp-1">{cap.label}</span>
+              <span className="line-clamp-1">{chipLabel}</span>
             </button>
           );
         })}
@@ -361,17 +371,23 @@ export function ServiceVisualShowcase({
                 </span>
               </span>
 
-              <h3 className="mt-2 text-balance text-xl- font-bold leading-tight tracking-tight text-foreground sm:text-2xl lg:text-3xl">
-                {active.label}
+              <h3 className="mt-2 text-balance text-xl font-bold leading-tight tracking-tight text-foreground sm:text-2xl lg:text-3xl">
+                {isAr ? active.labelAr ?? active.label : active.label}
               </h3>
 
               <p className="mt-4 text-balance text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {active.description}
+                {isAr ? active.descriptionAr ?? active.description : active.description}
               </p>
 
-              {active.features.length > 0 && (
+              {(isAr
+                ? active.featuresAr ?? active.features
+                : active.features
+              ).length > 0 && (
                 <ul className="mt-6 grid gap-2.5">
-                  {active.features.map((f, fi) => (
+                  {(isAr
+                    ? active.featuresAr ?? active.features
+                    : active.features
+                  ).map((f, fi) => (
                     <motion.li
                       key={fi}
                       initial={{ opacity: 0, x: isAr ? -8 : 8 }}
@@ -380,12 +396,8 @@ export function ServiceVisualShowcase({
                       className="flex items-start gap-2.5 rounded-lg border border-border/40 bg-surface/40 p-2.5"
                     >
                       <CheckCircle2
-                        className={cn(
-                          "mt-0.5 h-4 w-4 flex-shrink-0",
-                          isAr && "rotate-180",
-                        )}
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
                         strokeWidth={2}
-                        style={{ color: "hsl(var(--primary))" }}
                       />
                       <span className="text-xs leading-relaxed text-foreground/90 sm:text-sm">
                         {f}
@@ -402,19 +414,24 @@ export function ServiceVisualShowcase({
                   isAr ? "flex-row-reverse" : "",
                 )}
               >
+                {/* In LTR: prev = ArrowLeft, next = ArrowRight.
+                    In RTL (mirrored layout via flex-row-reverse): the first
+                    button becomes "next" so it gets the ArrowLeft icon (which
+                    now points "forward" / to the start of the list), and the
+                    second becomes "prev" so it gets ArrowRight. */}
                 <button
                   type="button"
-                  onClick={prev}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary rtl:rotate-180"
-                  aria-label={isAr ? "السابق" : "Previous"}
+                  onClick={isAr ? next : prev}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                  aria-label={isAr ? "التالي" : "Previous"}
                 >
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowLeft className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
-                  onClick={next}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary rtl:rotate-180"
-                  aria-label={isAr ? "التالي" : "Next"}
+                  onClick={isAr ? prev : next}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                  aria-label={isAr ? "السابق" : "Next"}
                 >
                   <ArrowRight className="h-4 w-4" />
                 </button>

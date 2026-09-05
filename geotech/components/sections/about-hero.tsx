@@ -1,33 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Award, Building2, Users, MapPin } from "lucide-react";
+import { ArrowRight, Award, Building2, Users } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
+import { SITE_STATS } from "@/geotech/lib/site-stats";
+
+// Single source of truth for the About-page stat row.
+// Years / Service Areas / Delivered Projects / Organizations Served.
+// Verified numbers (no fabricated 1000+/500+/10+).
+const STAT_ID = {
+  years: SITE_STATS.find((s) => s.id === "years")!,
+  serviceAreas: SITE_STATS.find((s) => s.id === "serviceAreas")!,
+  projects: SITE_STATS.find((s) => s.id === "projects")!,
+  organizations: SITE_STATS.find((s) => s.id === "organizations")!,
+};
 
 const stats = [
   {
     icon: Award,
-    value: "20+",
+    value: `${STAT_ID.years.value}${STAT_ID.years.suffix}`,
     labelKey: "yearsExperience",
     fallback: "Years of Experience",
   },
   {
     icon: Building2,
-    value: "1000+",
+    value: `${STAT_ID.projects.value}${STAT_ID.projects.suffix}`,
     labelKey: "projectsCompleted",
     fallback: "Projects Completed",
   },
   {
     icon: Users,
-    value: "500+",
+    value: `${STAT_ID.organizations.value}${STAT_ID.organizations.suffix}`,
     labelKey: "satisfiedClients",
-    fallback: "Satisfied Clients",
-  },
-  {
-    icon: MapPin,
-    value: "10+",
-    labelKey: "citiesServed",
-    fallback: "Cities Served",
+    fallback: "Organizations Served",
   },
 ];
 

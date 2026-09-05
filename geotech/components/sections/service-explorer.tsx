@@ -166,13 +166,23 @@ export function ServiceExplorer() {
                 {isSelected && (
                   <motion.div
                     layoutId="active-category"
-                    transition={{ type: "spring", stiffness: 260, damping: 24, mass: 0.9 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 18,
+                      mass: 1,
+                    }}
                     className="absolute inset-0 rounded-md bg-primary shadow-[0_0_18px_rgba(201,162,39,0.45)]"
                   />
                 )}
                 <motion.span
                   layout
-                  transition={{ type: "spring", stiffness: 260, damping: 24, mass: 0.9 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 24,
+                    mass: 0.9,
+                  }}
                   className="relative z-10 block"
                 >
                   {dict.services.categories[CATEGORY_LABEL_KEY[cat]]}
@@ -206,7 +216,12 @@ export function ServiceExplorer() {
                       <motion.span
                         layoutId="service-indicator"
                         className="absolute inset-y-0 start-0 w-1 rounded-e bg-primary shadow-[0_0_10px_rgba(201,162,39,0.5)]"
-                        transition={{ type: "spring", stiffness: 300, damping: 26, mass: 0.9 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 90,
+                          damping: 18,
+                          mass: 1,
+                        }}
                       />
                     )}
                     <span

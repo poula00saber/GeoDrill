@@ -46,7 +46,9 @@
     "years": "Years of Team Experience",
     "services": "Core Service Areas",
     "ksa": "Project Experience",
-    "cert": "Quality Management"
+    "cert": "Quality Management",
+    "projects": "Delivered Projects",
+    "clients": "Organizations Served"
   },
   "intro": {
     "title": "Every Structure Begins Below the Surface.",
@@ -92,9 +94,8 @@
     "subtitle": "We combine technical expertise, advanced technology and a client-first approach to deliver reliable geotechnical solutions that build the strong foundation for your projects.",
     "stats": {
       "experience": "Years of Experience",
-      "projects": "Projects Completed",
-      "clients": "Satisfied Clients",
-      "cities": "Cities Served"
+      "projects": "Delivered Projects",
+      "clients": "Organizations Served"
     },
     "groups": {
       "expertise": {

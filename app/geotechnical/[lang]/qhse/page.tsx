@@ -11,15 +11,15 @@ import Image from "next/image";
 const pageContent = {
   en: {
     badge: "Quality • Health • Safety • Environment",
-    title: "QHSE Framework",
+    title: "Quality. Health. Safety. Environment.",
     description:
-      "Operating with absolute safety integrity, uncompromising precision, and accredited international compliance standards across Saudi Arabia.",
+      "Our QHSE framework governs how we plan, execute and deliver every project — protecting people, the environment and the integrity of our work.",
   },
   ar: {
     badge: "الجودة • الصحة • السلامة • البيئة",
-    title: "إطار عمل الصحة والسلامة والجودة والبيئة",
+    title: "الجودة. الصحة. السلامة. البيئة.",
     description:
-      "العمل بسلامة مطلقة، ودقة متناهية، وبأعلى المعايير والاعتمادات الدولية المعتمدة في جميع أنحاء المملكة العربية السعودية.",
+      "يوجّه إطار عمل الجودة والسلامة والبيئة لدينا كيفية تخطيط وتنفيذ وتسليم كل مشروع — لحماية الناس والبيئة وسلامة عملنا.",
   },
 };
 

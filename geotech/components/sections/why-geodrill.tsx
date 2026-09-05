@@ -21,7 +21,6 @@ import {
   DollarSign,
   Calendar,
   FolderCheck,
-  Target,
 } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { AnimatedCounter } from "@/geotech/components/animated-counter";
@@ -51,9 +50,8 @@ const ITEM_ICON_POOL = [
 
 const STATS = [
   { icon: Calendar, value: 17, suffix: "+", labelKey: "experience" },
-  { icon: FolderCheck, value: 1000, suffix: "+", labelKey: "projects" },
-  { icon: Users, value: 500, suffix: "+", labelKey: "clients" },
-  { icon: Target, value: 10, suffix: "+", labelKey: "cities" },
+  { icon: FolderCheck, value: 68, suffix: "+", labelKey: "projects" },
+  { icon: Users, value: 72, suffix: "+", labelKey: "clients" },
 ] as const;
 
 export function WhyGeoDrill() {

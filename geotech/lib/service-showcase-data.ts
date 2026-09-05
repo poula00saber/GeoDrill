@@ -66,6 +66,9 @@ const materialTesting: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/concrete_rebar_footing.jpg`,
       icon: Beaker,
       tone: "amber",
+      labelAr: "التربة والركام",
+      descriptionAr: "تصنيف التربة واختبار الدمك والركام — تحليل المناخل، حدود أتربرج، بروكتور/CBR، الكبريتات والكلوريد، الثباتية، وسحق لوس أنجلوس.",
+      featuresAr: ["المناخل، الهيدرومتر، وحدود أتربرج","بروكتور، CBR والكثافة النسبية","الثباتية، سحق لوس أنجلوس، الكبريتات والكلوريد"],
     },
     {
       id: "concrete",
@@ -80,6 +83,9 @@ const materialTesting: ServiceConfig = {
       image: `${PROJECTS}/new_finishing_named_projects/worker_carpet_tile_install_sal.jpg`,
       icon: TestTube2,
       tone: "primary",
+      labelAr: "اختبار الخرسانة",
+      descriptionAr: "اختبار الخرسانة الطازجة والمتصلدة — الهبوط، الحرارة، محتوى الهواء، مقاومة الانضغاط، الاختبارات اللاإتلافية (شميت، الموجات فوق الصوتية، نصف الخلية) وأخذ اللب.",
+      featuresAr: ["طازجة: هبوط، حرارة، هواء، أخذ عينات","لا إنتلافية: شميت، الموجات فوق الصوتية، السحب، نصف الخلية","إتلافية: مكعبات، لب، انحناء"],
     },
     {
       id: "asphalt-cement",
@@ -94,6 +100,9 @@ const materialTesting: ServiceConfig = {
       image: `${PROJECTS}/05_waterproofing_and_insulation/insulation_rooftop_finished.jpg`,
       icon: Layers3,
       tone: "sky",
+      labelAr: "الأسفلت والأسمنت",
+      descriptionAr: "تصميم خلطات الأسفلت، ثبات مارشال، اختبار البيتومين ومراقبة جودة الأسمنت (النعومة، زمن الشك، مقاومة الانضغاط، فقدان الوزن بالاحتراق).",
+      featuresAr: ["مارشال، الاستخلاص وأخذ اللب","اختراق البيتومين، المطاوعة، اللزوجة","الأسمنت: الكثافة النوعية، الشك، المقاومة، النعومة"],
     },
     {
       id: "qc-steel-pile",
@@ -108,6 +117,9 @@ const materialTesting: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/concrete_pour_lab.jpg`,
       icon: ShieldAlert,
       tone: "emerald",
+      labelAr: "مراقبة الجودة، الفولاذ، والركائز",
+      descriptionAr: "مراقبة الجودة في الموقع، الاختبارات الميكانيكية للحديد (الكلتة المرنة، المتانة، الاستطالة، الانحناء) واختبار سلامة الأساسات (PDA، PIT، CHL، MCL، السحب).",
+      featuresAr: ["الكثافة الحقلية ومراقبة الخرسانة في الموقع","حديد: مقاومة الخضوع/المتانة/الانحناء","الأساسات: PDA، PIT، CHL، MCL، اختبار السحب"],
     },
   ],
 };
@@ -130,6 +142,9 @@ const topographicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_landscaping/landscape_garden_pathway_stones.jpg`,
       icon: Map,
       tone: "amber",
+      labelAr: "الطبوغرافيا والمساحة العقارية",
+      descriptionAr: "مسوحات طبوغرافية وعقارية تفصيلية — خرائط كنتور، شبكات المناسيب، تسجيل الأراضي، وتنفيذ المخططات المعتمدة.",
+      featuresAr: ["خرائط كنتور ومناسيب شبكية","تسجيل الأراضي وإثبات الملكية","تنفيذ المخططات الإنشائية على الطبيعة"],
     },
     {
       id: "roads-infra",
@@ -144,6 +159,9 @@ const topographicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/excavation_roadside_traffic_cones.jpg`,
       icon: Compass,
       tone: "primary",
+      labelAr: "الطرق والبنية التحتية",
+      descriptionAr: "المسح للطرق والبنية التحتية وشبكات المياه والصرف الصحي وإنشاء الشبكات الجيوديسية.",
+      featuresAr: ["مسح الطرق والبنية التحتية","شبكات المياه والصرف الصحي","إنشاء الشبكات الجيوديسية"],
     },
     {
       id: "drone-gis-bim",
@@ -158,6 +176,9 @@ const topographicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/gso_building_entrance_render.jpg`,
       icon: Satellite,
       tone: "sky",
+      labelAr: "الدرون، نظم المعلومات الجغرافية، وBIM",
+      descriptionAr: "المسح بالدرون، المسح المتنقل، نظم المعلومات الجغرافية، الاستشعار عن بعد، ومسح BIM والمعماري لتسليم رقمي متكامل للمشاريع.",
+      featuresAr: ["المسح بالدرون والمتنقل","نظم المعلومات الجغرافية والاستشعار عن بعد","المسح المعماري ونمذجة BIM"],
     },
     {
       id: "bathymetric-urban",
@@ -172,6 +193,9 @@ const topographicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_landscaping/landscape_pool_palm_walkway.jpg`,
       icon: Waves,
       tone: "violet",
+      labelAr: "قياس الأعماق والتخطيط",
+      descriptionAr: "مسوحات قياس أعماق الخزانات والقنوات والخطوط الساحلية، إضافة إلى خدمات التخطيط الحضري وتقنية المعلومات.",
+      featuresAr: ["قياس أعماق الخزانات والقنوات","التخطيط الحضري","تقنية المعلومات"],
     },
   ],
 };
@@ -194,6 +218,9 @@ const hydrologyStudies: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/excavation_roadside_traffic_cones.jpg`,
       icon: Waves,
       tone: "sky",
+      labelAr: "مخاطر الفيضانات",
+      descriptionAr: "تقييم مخاطر الفيضانات ورسم خرائط الغمر لفترات عودة مختلفة لدعم التخطيط والتخفيف والاستجابة للطوارئ.",
+      featuresAr: ["مناسيب فيضان العواصم التصميمية","خرائط الغمر","التصميمات التخفيفية والصرف"],
     },
     {
       id: "runoff",
@@ -208,6 +235,9 @@ const hydrologyStudies: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/groundworks_water_truck_trench.jpg`,
       icon: Droplets,
       tone: "blue",
+      labelAr: "الجريان السطحي والصرف",
+      descriptionAr: "تحليل الجريان السطحي لمياه الأمطار وتصميم الصرف باستخدام HEC-HMS وHEC-RAS.",
+      featuresAr: ["جريان الحوض (HEC-HMS)","هيدروليكا القنوات (HEC-RAS)","تصميم أحواض الاحتجاز"],
     },
     {
       id: "groundwater",
@@ -222,6 +252,9 @@ const hydrologyStudies: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_basement_plant_room.jpg`,
       icon: FlaskConical,
       tone: "violet",
+      labelAr: "المياه الجوفية",
+      descriptionAr: "دراسات المياه الجوفية لتوصيف الخزانات الجوفية، وتقدير التغذية ودراسات الميزان المائي.",
+      featuresAr: ["توصيف الخزان الجوفي","تقدير التغذية","دراسات الميزان المائي"],
     },
     {
       id: "watershed-resources",
@@ -236,6 +269,9 @@ const hydrologyStudies: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/gso_building_entrance_render.jpg`,
       icon: Compass,
       tone: "emerald",
+      labelAr: "الأحواض المائية والموارد",
+      descriptionAr: "تحليل الأحواض المائية والجاري المائي، إضافة إلى استراتيجيات إدارة الموارد المائية وفق المعايير التنظيمية.",
+      featuresAr: ["تحليل الأحواض المائية","إدارة الموارد المائية","الامتثال التنظيمي"],
     },
   ],
 };
@@ -258,6 +294,9 @@ const hydrogeologicalStudies: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_water_pump_ksb_blue.jpg`,
       icon: Droplets,
       tone: "sky",
+      labelAr: "آبار المياه",
+      descriptionAr: "حفر آبار مياه للاستخدام المنزلي والزراعي والصناعي مع تقييم شامل لأداء الخزان الجوفي.",
+      featuresAr: ["آبار منزلية/زراعية/صناعية","اختبارات الضخ والاختبار اللحظي","تقييم أداء الخزان الجوفي"],
     },
     {
       id: "permeability",
@@ -272,6 +311,9 @@ const hydrogeologicalStudies: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_underfloor_conduit_closeup.jpg`,
       icon: FlaskConical,
       tone: "blue",
+      labelAr: "النفاذية والتوصيل الهيدروليكي",
+      descriptionAr: "اختبارات النفاذية والتوصيل الهيدروليكي بطرق حقلية ومعملية لتحديد سعة الآبار وإنتاجيتها.",
+      featuresAr: ["اختبارات نفاذية حقلية","اختبارات معملية ذات منسوب ثابت/متغير","توصيف التوصيل الهيدروليكي"],
     },
     {
       id: "quality",
@@ -286,6 +328,9 @@ const hydrogeologicalStudies: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_basement_plant_room.jpg`,
       icon: TestTube2,
       tone: "violet",
+      labelAr: "جودة المياه",
+      descriptionAr: "التحاليل الكيميائية والميكروبيولوجية لجودة المياه لمشاريع الشرب والزراعة والصناعة.",
+      featuresAr: ["تحليل المعايير الكيميائية","الاختبار الميكروبيولوجي","تقارير الامتثال والصالحة للشرب"],
     },
     {
       id: "geoelectric",
@@ -300,6 +345,9 @@ const hydrogeologicalStudies: ServiceConfig = {
       image: `${PROJECTS}/new_landscaping/landscape_pool_palm_walkway.jpg`,
       icon: Radio,
       tone: "emerald",
+      labelAr: "المسح الكهربائي",
+      descriptionAr: "مسوحات كهربائية لتوصيف باطن الأرض ورسم الخرائط الجوفية — بديل سريع وغير جراحي للحفر.",
+      featuresAr: ["السبر الكهربائي العمودي","التصوير بالمقاومة النوعية","رسم خرائط الخزان الجوفي"],
     },
   ],
 };
@@ -322,6 +370,9 @@ const cavityProbing: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/excavation_foundation_pits.jpg`,
       icon: Shovel,
       tone: "amber",
+      labelAr: "كشف التجاويف",
+      descriptionAr: "التحقق والكشف عن التجاويف تحت الأساسات والأرصفة باستخدام الجيوفيزياء وتقنيات الحفر لاستكشاف الفراغات الجوفية.",
+      featuresAr: ["الجيوفيزياء: رادار اختراق الأرض","حفر تحقق دقيق موجه","رسم خرائط التجاويف"],
     },
     {
       id: "grouting",
@@ -336,6 +387,9 @@ const cavityProbing: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/concrete_slab_reinforcement.jpg`,
       icon: Droplets,
       tone: "primary",
+      labelAr: "الحقن بالضغط",
+      descriptionAr: "الحقن بالضغط لتحسين التربة وعلاج الفراغات تحت الأساسات بإسمنت أو مواد كيميائية متخصصة.",
+      featuresAr: ["حقن الإسمنت والميكروإسمنت","الحقن الكيميائي المتخصص","علاج الفراغات"],
     },
     {
       id: "micropiling",
@@ -350,6 +404,9 @@ const cavityProbing: ServiceConfig = {
       image: `${PROJECTS}/new_towers_highrise/structural_foundation_footings_v2.jpg`,
       icon: Hammer,
       tone: "sky",
+      labelAr: "الركائز الدقيقة",
+      descriptionAr: "تنفيذ الركائز الدقيقة لتحسين قدرة تحمل التربة ونقل الأحمال إلى طبقات أعمق وأكثر استقرارًا.",
+      featuresAr: ["تصميم الركائز الدقيقة","حفر وتثبيت","اختبار الحمل"],
     },
     {
       id: "compaction",
@@ -364,6 +421,9 @@ const cavityProbing: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/infrastructure_compaction_roller.jpg`,
       icon: Wrench,
       tone: "violet",
+      labelAr: "الحقن بالدمك",
+      descriptionAr: "حقن الدمك لرفع وتحسين التربة تحت الأساسات، ومعالجة الهبوط وتقوية التربة السطحية.",
+      featuresAr: ["رفع الهبوط","تحسين قدرة تحمل التربة","تقليل مخاطر الهبوط المستقبلي"],
     },
   ],
 };
@@ -386,6 +446,9 @@ const geologicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/excavation_deep_trench.jpg`,
       icon: Mountain,
       tone: "amber",
+      labelAr: "الخرائط الجيولوجية",
+      descriptionAr: "رسم خرائط جيولوجية تفصيلية لتوصيف الوحدات الصخرية والشقوق والتركيبات الجيولوجية في الموقع.",
+      featuresAr: ["رسم الخرائط الجيولوجية التفصيلية","توصيف الوحدات والشقوق","تحديد التركيبات الجيولوجية"],
     },
     {
       id: "models",
@@ -400,6 +463,9 @@ const geologicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/glass_facade_curved_building.jpg`,
       icon: Compass,
       tone: "primary",
+      labelAr: "النمذجة الجيولوجية",
+      descriptionAr: "بناء نماذج جيولوجية ثلاثية الأبعاد باستخدام بيانات الحفر والمسوحات الجيوفيزيائية لتوصيف باطن الأرض.",
+      featuresAr: ["نمذجة ثلاثية الأبعاد","دمج بيانات الحفر والجيوفيزياء","توصيف طبقات باطن الأرض"],
     },
     {
       id: "kinematic",
@@ -414,6 +480,9 @@ const geologicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/steel_frame_silo_tank_structure.jpg`,
       icon: MountainSnow,
       tone: "sky",
+      labelAr: "التحليل الحركي",
+      descriptionAr: "تحليل حركي لتقييم مخاطر انزلاق الكتل الصخرية والكتل المنفصلة على المنحدرات والمشاريع.",
+      featuresAr: ["تحليل أسطح الانزلاق","تقييم مخاطر السقوط الصخري","تحديد أنماط الانهيار الممكنة"],
     },
     {
       id: "limit-equilibrium",
@@ -428,6 +497,9 @@ const geologicalSurvey: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/excavation_deep_trench.jpg`,
       icon: ShieldAlert,
       tone: "violet",
+      labelAr: "التوازن الحدي والتخفيف",
+      descriptionAr: "تحليل التوازن الحدي وتصميم إجراءات التخفيف لحماية المنحدرات من الانزلاق والانهيار.",
+      featuresAr: ["تحليلات التوازن الحدي","تصميم حلول التخفيف","تقييم معايير الأمان"],
     },
   ],
 };
@@ -450,6 +522,9 @@ const structuralAssessment: ServiceConfig = {
       image: `${PROJECTS}/02_structures_and_steel/steel_frame_closeup_sky.jpg`,
       icon: Eye,
       tone: "amber",
+      labelAr: "الفحوصات البصرية",
+      descriptionAr: "فحوصات بصرية تفصيلية لتقييم حالة الهياكل القائمة وتحديد التشققات والأضرار الظاهرة.",
+      featuresAr: ["فحص الشقوق والتشوهات","تقييم حالة المواد","توثيق تفصيلي بصري"],
     },
     {
       id: "ndt",
@@ -464,6 +539,9 @@ const structuralAssessment: ServiceConfig = {
       image: `${PROJECTS}/02_structures_and_steel/steel_panel_ladder_detail.jpg`,
       icon: ScanLine,
       tone: "primary",
+      labelAr: "الاختبارات اللاإتلافية",
+      descriptionAr: "اختبارات لا إنتلافية (Schmidt، الموجات فوق الصوتية، نصف الخلية، مطرقة الارتداد) لتقييم قوة وصلابة الهياكل الخرسانية دون تلف.",
+      featuresAr: ["مطرقة شميت الارتدادية","سرعة الموجات فوق الصوتية","نصف الخلية والتسليح"],
     },
     {
       id: "analysis",
@@ -478,6 +556,9 @@ const structuralAssessment: ServiceConfig = {
       image: `${PROJECTS}/02_structures_and_steel/steel_frame_industrial_tanks.jpg`,
       icon: Building2,
       tone: "blue",
+      labelAr: "التحليل الإنشائي",
+      descriptionAr: "تحليل إنشائي شامل لتقييم قدرة المنشآت القائمة على تحمل الأحمال وتحديد الإجراءات التصحيحية اللازمة.",
+      featuresAr: ["نمذجة إنشائية","تحليل الأحمال","تقييم السعة والطلب"],
     },
     {
       id: "damage-incident-foundation",
@@ -492,6 +573,9 @@ const structuralAssessment: ServiceConfig = {
       image: `${PROJECTS}/02_structures_and_steel/steel_modular_units_desert.jpg`,
       icon: ShieldAlert,
       tone: "rose",
+      labelAr: "الأضرار والحوادث والأساسات",
+      descriptionAr: "تقارير الأضرار والحوادث وفحص الأساسات لتحديد أسباب التشققات والهبوط واقتراح حلول الترميم.",
+      featuresAr: ["تقارير فحص الأضرار","تحقيق أسباب الهبوط","اقتراحات الترميم"],
     },
   ],
 };
@@ -514,6 +598,9 @@ const environmentalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_landscaping/landscape_pool_palm_walkway.jpg`,
       icon: Leaf,
       tone: "emerald",
+      labelAr: "تقييم الأثر البيئي والتدقيق",
+      descriptionAr: "دراسات تقييم الأثر البيئي، وتدقيق الامتثال، وتقارير بيئية شاملة لمشاريع متنوعة.",
+      featuresAr: ["دراسات تقييم الأثر البيئي","تدقيق بيئي","تقارير بيئية شاملة"],
     },
     {
       id: "baseline",
@@ -528,6 +615,9 @@ const environmentalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_landscaping/landscape_garden_pathway_stones.jpg`,
       icon: FlaskConical,
       tone: "amber",
+      labelAr: "دراسات خط الأساس",
+      descriptionAr: "دراسات خط الأساس البيئي للظروف القائمة قبل تنفيذ المشاريع لتوفير مرجع للقياس والمقارنة.",
+      featuresAr: ["مسوحات خط الأساس","نمذجة بيئية","الدراسات المرجعية"],
     },
     {
       id: "monitoring",
@@ -542,6 +632,9 @@ const environmentalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/gso_building_entrance_render.jpg`,
       icon: Wind,
       tone: "sky",
+      labelAr: "مراقبة الامتثال",
+      descriptionAr: "برامج مراقبة الامتثال البيئي المستمر خلال تنفيذ وتشغيل المشاريع وفق المعايير التنظيمية.",
+      featuresAr: ["مراقبة دورية","تقارير امتثال","توصيات تصحيحية"],
     },
     {
       id: "ecological",
@@ -556,6 +649,9 @@ const environmentalSurvey: ServiceConfig = {
       image: `${PROJECTS}/new_landscaping/landscape_pool_deck_pergola.jpg`,
       icon: Eye,
       tone: "violet",
+      labelAr: "المسوحات البيئية",
+      descriptionAr: "مسوحات بيئية للنظم البيئية والحياة البرية والتنوع البيولوجي في منطقة المشروع.",
+      featuresAr: ["توصيف النظم البيئية","مسوحات التنوع البيولوجي","تقييم الموائل الطبيعية"],
     },
   ],
 };
@@ -578,6 +674,9 @@ const anchoringShoring: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/excavation_deep_trench.jpg`,
       icon: Anchor,
       tone: "amber",
+      labelAr: "مراسي التربة والدعائم الخلفية",
+      descriptionAr: "تصميم وتنفيذ مراسي التربة والدعائم الخلفية لتثبيت الجدران الاستنادية والمنحدرات والحفريات العميقة.",
+      featuresAr: ["تصميم المراسي","اختبار الشد","التنفيذ في الموقع"],
     },
     {
       id: "walls",
@@ -592,6 +691,9 @@ const anchoringShoring: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/concrete_column_reinforcement.jpg`,
       icon: Layers3,
       tone: "primary",
+      labelAr: "الجدران الاستنادية",
+      descriptionAr: "تصميم وتنفيذ الجدران الاستنادية الخرسانية والمسلحة لدعم الحفريات ومنع انزلاق التربة.",
+      featuresAr: ["تصميم الجدران الاستنادية","تنفيذ الجدران","التصريف والتحميل"],
     },
     {
       id: "shotcrete-nails",
@@ -606,6 +708,9 @@ const anchoringShoring: ServiceConfig = {
       image: `${PROJECTS}/02_structures_and_steel/steel_frame_complete_blockwork.jpg`,
       icon: Wrench,
       tone: "sky",
+      labelAr: "الخرسانة المرشوشة ومسامير التربة",
+      descriptionAr: "تطبيق الخرسانة المرشوشة مع مسامير التربة لتثبيت المنحدرات والحفريات المؤقتة.",
+      featuresAr: ["خرسانة مرشوشة","مسامير تربة","تثبيت الحفريات المؤقتة"],
     },
     {
       id: "slope-reinforcement",
@@ -620,6 +725,9 @@ const anchoringShoring: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/excavation_foundation_pits.jpg`,
       icon: MountainSnow,
       tone: "violet",
+      labelAr: "تقوية المنحدرات",
+      descriptionAr: "حلول متكاملة لتقوية المنحدرات المعرضة للانزلاق باستخدام تقنيات هندسية متنوعة.",
+      featuresAr: ["تقييم مخاطر المنحدر","تصميم أنظمة التقوية","تنفيذ حلول التقوية"],
     },
   ],
 };
@@ -642,6 +750,9 @@ const dewatering: ServiceConfig = {
       image: `${PROJECTS}/new_mep_variety/mep_water_pump_ksb_blue.jpg`,
       icon: Droplets,
       tone: "sky",
+      labelAr: "الآبار العميقة",
+      descriptionAr: "تصميم وتنفيذ أنظمة الآبار العميقة لخفض منسوب المياه الجوفية في الحفريات والمشاريع الكبيرة.",
+      featuresAr: ["تصميم شبكة الآبار","حفر وتركيب الآبار العميقة","مضخات خفض منسوب المياه"],
     },
     {
       id: "wellpoints",
@@ -656,6 +767,9 @@ const dewatering: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_basement_plant_room.jpg`,
       icon: FlaskConical,
       tone: "blue",
+      labelAr: "أنظمة آبار النقاط",
+      descriptionAr: "أنظمة آبار النقاط لخفض منسوب المياه في الحفريات الضحلة والمتوسطة بكفاءة ومرونة عالية.",
+      featuresAr: ["تصميم نظام النقاط","تركيب الرأس والمضخات","مراقبة مستمرة"],
     },
     {
       id: "eductors",
@@ -670,6 +784,9 @@ const dewatering: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_underfloor_conduit_slab.jpg`,
       icon: Waves,
       tone: "violet",
+      labelAr: "أنظمة الرفع بالمحرّك",
+      descriptionAr: "أنظمة الرفع بالمحرّك (Eductor) لخفض منسوب المياه في الحفريات العميقة والمعقدة.",
+      featuresAr: ["رفع المياه بالضغط","مناسبة للأعماق الكبيرة","كفاءة في الترب الدقيقة"],
     },
     {
       id: "sump-monitoring",
@@ -684,6 +801,9 @@ const dewatering: ServiceConfig = {
       image: `${PROJECTS}/03_mep/mep_facade_duct_install.jpg`,
       icon: Compass,
       tone: "emerald",
+      labelAr: "الحُفر والمراقبة",
+      descriptionAr: "حُفر تجميع المياه الجوفية مع أنظمة مراقبة لحظية لضمان جفاف الموقع وسلامة الحفريات.",
+      featuresAr: ["حُفر تجميع وتصريف","مراقبة لحظية للمنسوب","تقارير يومية"],
     },
   ],
 };
@@ -706,6 +826,9 @@ const soilImprovement: ServiceConfig = {
       image: `${PROJECTS}/02_structures_and_steel/steel_panel_ladder_detail.jpg`,
       icon: Layers3,
       tone: "primary",
+      labelAr: "تقوية بألياف FRP",
+      descriptionAr: "تقوية العناصر الإنشائية بألياف البوليمر المسلحة (FRP) لزيادة قدرة التحمل وتحسين الأداء.",
+      featuresAr: ["تصميم نظام FRP","تطبيق ألياف الكربون/الزجاج","اختبار بعد التقوية"],
     },
     {
       id: "micropiling",
@@ -720,6 +843,9 @@ const soilImprovement: ServiceConfig = {
       image: `${PROJECTS}/new_towers_highrise/structural_foundation_footings_v2.jpg`,
       icon: Hammer,
       tone: "amber",
+      labelAr: "الركائز الدقيقة",
+      descriptionAr: "تنفيذ الركائز الدقيقة لتحسين قدرة تحمل التربة ونقل الأحمال إلى طبقات أعمق وأكثر استقرارًا.",
+      featuresAr: ["تصميم الركائز الدقيقة","حفر وتثبيت","اختبار الحمل"],
     },
     {
       id: "soil-injection",
@@ -734,6 +860,9 @@ const soilImprovement: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/infrastructure_compaction_roller.jpg`,
       icon: Wrench,
       tone: "sky",
+      labelAr: "حقن التربة",
+      descriptionAr: "حقن التربة بمواد متخصصة لتحسين خصائصها وتقليل النفاذية وزيادة قوة القص.",
+      featuresAr: ["تحسين قوة القص","تقليل النفاذية","تثبيت التربة"],
     },
     {
       id: "jacketing-epoxy",
@@ -748,6 +877,9 @@ const soilImprovement: ServiceConfig = {
       image: `${PROJECTS}/05_waterproofing_and_insulation/insulation_epoxy_floor_dots.jpg`,
       icon: ShieldAlert,
       tone: "violet",
+      labelAr: "التغليف والإصلاح بالإيبوكسي",
+      descriptionAr: "تغليف الأعمدة والجسور بالإيبوكسي لزيادة مقطعها وتحسين مقاومتها للأحمال والظروف البيئية.",
+      featuresAr: ["تغليف الأعمدة والجسور","إصلاح التشققات بالإيبوكسي","حماية من البيئة"],
     },
   ],
 };
@@ -770,6 +902,9 @@ const miningExploration: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/steel_frame_silo_tank_structure.jpg`,
       icon: Mountain,
       tone: "amber",
+      labelAr: "الخرائط الجيولوجية للتعدين",
+      descriptionAr: "رسم خرائط جيولوجية تفصيلية لمناطق التعدين لتوصيف الوحدات الصخرية والتراكيب المعدنية.",
+      featuresAr: ["رسم خرائط جيولوجية","توصيف التكوينات المعدنية","تحديد أنماط الترسيب"],
     },
     {
       id: "geochem",
@@ -784,6 +919,9 @@ const miningExploration: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/groundworks_water_truck_trench.jpg`,
       icon: FlaskConical,
       tone: "primary",
+      labelAr: "أخذ العينات الجيوكيميائية",
+      descriptionAr: "برامج أخذ العينات الجيوكيميائية لتوصيف المعادن وتحديد مؤشرات التمعدن في منطقة الاستكشاف.",
+      featuresAr: ["عينات صخرية وتربة","تحاليل جيوكيميائية","تحديد مناطق التمعدن"],
     },
     {
       id: "drilling",
@@ -798,6 +936,9 @@ const miningExploration: ServiceConfig = {
       image: `${PROJECTS}/01_groundworks/concrete_rebar_footing.jpg`,
       icon: Pickaxe,
       tone: "sky",
+      labelAr: "حفر اللب والمسح الجيوفيزيائي",
+      descriptionAr: "حفر اللب الاستكشافي والمسح الجيوفيزيائي لتوصيف جسم الخام وحساب الاحتياطيات المعدنية.",
+      featuresAr: ["حفر لب استكشافي","مسح جيوفيزيائي","تقدير الاحتياطيات"],
     },
     {
       id: "resource-licensing",
@@ -812,6 +953,9 @@ const miningExploration: ServiceConfig = {
       image: `${PROJECTS}/new_misc_industrial/gso_building_entrance_render.jpg`,
       icon: Compass,
       tone: "emerald",
+      labelAr: "الموارد والتراخيص",
+      descriptionAr: "تقييم موارد التعدين وإعداد دراسات الجدوى ووثائق التراخيص وفق الأنظمة المحلية والدولية.",
+      featuresAr: ["تقدير موارد التعدين","دراسات جدوى","وثائق التراخيص"],
     },
   ],
 };

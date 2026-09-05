@@ -80,7 +80,6 @@ function StageNode({
   total: number;
   progress: MotionValue<number>;
 }) {
-  // Trigger highlight right when the line reaches this node's relative position
   const nodeThreshold = index / (total - 1);
 
   const scale = useTransform(
@@ -92,7 +91,7 @@ function StageNode({
   const borderColor = useTransform(
     progress,
     [nodeThreshold - 0.02, nodeThreshold],
-    ["var(--border)", "#f59e0b"], // Tailwind border-border to amber-500
+    ["var(--border)", "#f59e0b"],
   );
 
   const activeGlow = useTransform(
@@ -122,10 +121,9 @@ function StageNode({
         </span>
       </motion.div>
 
-      <span className="mt-6 font-mono text-xs uppercase tracking-wider text-primary">
-        {stage.label}
-      </span>
-      <h3 className="mt-2 text-lg font-semibold">{stage.title}</h3>
+      {/* Render title only: amber color, larger font size */}
+      <h3 className="mt-6 text-xl font-bold text-amber-500">{stage.title}</h3>
+
       <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground text-pretty">
         {stage.description}
       </p>

@@ -124,22 +124,9 @@ export default function ServicesPage({ params }: PageProps) {
         </section>
 
         {/* Floating trust strip, overlapping the hero */}
+        <br></br>
+        <br></br>
         <ServicesTrustStrip />
-
-        {/* Centered gold-gradient band under the hero */}
-        <GoldGradientBand
-          eyebrow={pickLocalized(servicesPageCopy.servicesLabel, lang)}
-          title={
-            isAr
-              ? "حلول جيوتقنية شاملة"
-              : "Comprehensive Geotechnical Solutions"
-          }
-          description={
-            isAr
-              ? "من الاستكشاف إلى التنفيذ، نقدم خدمات متكاملة مصممة لتلبية متطلبات البنية التحتية في المملكة العربية السعودية."
-              : "From exploration to execution, we deliver integrated services tailored to infrastructure project requirements across Saudi Arabia."
-          }
-        />
 
         {/* ── Services by category — UNCHANGED from your existing build ── */}
         <div className="mx-auto max-w-7xl px-4 pb-4 pt-24 sm:px-6 lg:px-8">
@@ -152,7 +139,10 @@ export default function ServicesPage({ params }: PageProps) {
               <section key={category} className="mb-20">
                 <SectionHeading
                   eyebrow={pickLocalized(serviceCategoryLabels[category], lang)}
-                  title={pickLocalized(serviceCategoryDescriptions[category], lang)}
+                  title={pickLocalized(
+                    serviceCategoryDescriptions[category],
+                    lang,
+                  )}
                 />
 
                 <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -237,8 +227,6 @@ export default function ServicesPage({ params }: PageProps) {
 
         {/* ── CTA banner — reused from the earlier build ── */}
         <CtaBanner />
-
-        
       </main>
       <Footer />
     </>

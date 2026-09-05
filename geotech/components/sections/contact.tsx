@@ -54,6 +54,8 @@ const ACCEPTED_MIME = new Set([
   "application/pdf",
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
   "application/dwg",
   "image/vnd.dxf",
   "application/x-dwg",
@@ -62,8 +64,9 @@ const ACCEPTED_MIME = new Set([
   "application/dxf",
 ]);
 
-const ACCEPTED_EXT = /\.(pdf|doc|docx|dwg|dxf|jpe?g|png|gif|webp)$/i;
-const ACCEPT_HINT = ".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.dwg,.dxf";
+const ACCEPTED_EXT = /\.(pdf|doc|docx|ppt|pptx|dwg|dxf|jpe?g|png|gif|webp)$/i;
+const ACCEPT_HINT =
+  ".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.ppt,.pptx,.dwg,.dxf";
 const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
 
 export function ContactSection() {
@@ -96,8 +99,8 @@ export function ContactSection() {
     if (!ACCEPTED_MIME.has(file.type) && !ACCEPTED_EXT.test(file.name)) {
       setFileError(
         isAr
-          ? "نوع الملف غير مدعوم. يرجى رفع ملف PDF أو DWG أو DXF أو صورة أو Word."
-          : "Unsupported file type. Please upload a PDF, DWG, DXF, image, or Word document.",
+          ? "نوع الملف غير مدعوم. يرجى رفع ملف PDF أو DWG أو DXF أو صورة أو Word أو PowerPoint."
+          : "Unsupported file type. Please upload a PDF, DWG, DXF, image, Word, or PowerPoint document.",
       );
       setAttachmentFile(null);
       return;
@@ -145,7 +148,7 @@ export function ContactSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left Column: Info & Telemetry HUD (5 Cols) */}
+          {/* Left Column: Info & 2 Large Buttons (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <SectionHeading
@@ -179,52 +182,28 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* Technical Interactive HUD */}
-            <div className="mt-10 hidden lg:block">
-              <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:shadow-primary/5">
-                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
-
-                <div className="flex items-center justify-between border-b border-border/40 pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    </span>
-                    <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                      GEODRILL / {isAr ? "مكتب استقبال المشاريع" : "INTAKE HUD"}
-                    </span>
-                  </div>
-                  <span className="rounded bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary">
-                    v2.4
-                  </span>
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-border/30 bg-background/50 p-3">
-                    <div className="flex items-center gap-1.5 text-muted-foreground">
-                      <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-                      <span className="font-mono text-[10px] uppercase tracking-wider">
-                        {isAr ? "الحالة" : "Status"}
-                      </span>
-                    </div>
-                    <p className="mt-1 font-mono text-xs font-semibold text-emerald-500">
-                      {isAr ? "نشط ومستعد" : "Active & Ready"}
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-border/30 bg-background/50 p-3">
-                    <div className="flex items-center gap-1.5 text-muted-foreground">
-                      <Clock className="h-3.5 w-3.5 text-primary" />
-                      <span className="font-mono text-[10px] uppercase tracking-wider">
-                        {isAr ? "زمن الاستجابة" : "Response"}
-                      </span>
-                    </div>
-                    <p className="mt-1 font-mono text-xs font-semibold text-foreground">
-                      24-48 {isAr ? "ساعة" : "Hours"}
-                    </p>
-                  </div>
-                </div>
+            {/* 2 Large Action / Status Buttons Replacing HUD */}
+            <div className="mt-10 grid gap-4">
+              {/* Button 1: Respond in 24-48 Hours */}
+              <div className="flex h-16 w-full items-center justify-center gap-3.5 rounded-2xl border border-primary/30 bg-primary/10 px-6 font-semibold text-primary shadow-lg backdrop-blur-md transition-all duration-300 hover:border-primary hover:bg-primary/15">
+                <Clock className="h-6 w-6 shrink-0 text-primary" />
+                <span className="text-base sm:text-lg">
+                  {isAr
+                    ? "الاستجابة خلال 24 - 48 ساعة"
+                    : "Respond in 24 to 48 Hours"}
+                </span>
               </div>
+
+              {/* Button 2: Immediate Technical Support */}
+              <a
+                href={siteConfig.phoneHref}
+                className="flex h-16 w-full items-center justify-center gap-3.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-6 font-semibold text-emerald-600 dark:text-emerald-400 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-emerald-500 hover:bg-emerald-500/15"
+              >
+                <ShieldCheck className="h-6 w-6 shrink-0 text-emerald-500" />
+                <span className="text-base sm:text-lg">
+                  {isAr ? "تواصل عن طريق الواتس اب" : "Call us on Whatsapp"}
+                </span>
+              </a>
             </div>
           </div>
 
@@ -375,8 +354,8 @@ export function ContactSection() {
                           {attachmentFile
                             ? `${(attachmentFile.size / (1024 * 1024)).toFixed(2)} MB`
                             : isAr
-                              ? "PDF, DWG, DXF, Images (بحد أقصى 10 ميجابايت)"
-                              : "PDF, DWG, DXF, Images (Max 10MB)"}
+                              ? "PDF, DWG, DXF, Word, PowerPoint, Images (بحد أقصى 10 ميجابايت)"
+                              : "PDF, DWG, DXF, Word, PowerPoint, Images (Max 10MB)"}
                         </span>
                       </div>
 
@@ -411,8 +390,8 @@ export function ContactSection() {
                   ) : (
                     <p className="mt-1 text-xs text-muted-foreground">
                       {isAr
-                        ? "أرفق مخططًا للموقع أو رسمًا لمساعدتنا في تحديد نطاق عمل مشروعك."
-                        : "Attach a site plan, drawing, or specification to help us scope your project."}
+                        ? "أرفق مخططًا للموقع أو رسمًا أو عرضًا توضيحيًا لمساعدتنا في تحديد نطاق عمل مشروعك."
+                        : "Attach a site plan, drawing, presentation, or specification to help us scope your project."}
                     </p>
                   )}
                 </FormField>
@@ -529,7 +508,10 @@ function ContactItem({
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           {label}
         </span>
-        <span className="mt-0.5 text-sm font-semibold text-foreground" dir="ltr">
+        <span
+          className="mt-0.5 text-sm font-semibold text-foreground"
+          dir="ltr"
+        >
           {value}
         </span>
       </div>
