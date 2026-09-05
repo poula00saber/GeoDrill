@@ -57,7 +57,8 @@ export function ServicePageTemplate({
         related: "خدمات ذات صلة",
         learnMore: "اعرف المزيد",
         ctaTitle: "هل أنت مستعد لمناقشة مشروعك؟",
-        ctaDescription: "خبراؤنا مستعدون لتقديم الاستشارة والدعم الفني لاحتياجاتك الخاصة.",
+        ctaDescription:
+          "خبراؤنا مستعدون لتقديم الاستشارة والدعم الفني لاحتياجاتك الخاصة.",
         getInTouch: "تواصل معنا",
         allServices: "استكشف جميع الخدمات",
         relatedFallback: "خبرة فنية ذات صلة",
@@ -74,7 +75,8 @@ export function ServicePageTemplate({
         related: "Related Services",
         learnMore: "Learn more",
         ctaTitle: "Ready to discuss your project?",
-        ctaDescription: "Our experts are ready to provide technical consultation and support for your specific needs.",
+        ctaDescription:
+          "Our experts are ready to provide technical consultation and support for your specific needs.",
         getInTouch: "Get in Touch",
         allServices: "Explore All Services",
         relatedFallback: "Related technical expertise",
@@ -215,7 +217,10 @@ export function ServicePageTemplate({
 
         {/* Capabilities Section */}
         <motion.section variants={itemVariants} className="mb-20">
-          <SectionHeading eyebrow={labels.capabilities} title={labels.whatWeDeliver} />
+          <SectionHeading
+            eyebrow={labels.capabilities}
+            title={labels.whatWeDeliver}
+          />
 
           {isCapabilitiesGrouped ? (
             // Grouped capabilities

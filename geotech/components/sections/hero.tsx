@@ -108,14 +108,8 @@ export function Hero() {
         />
       </div>
 
-      {/* Technical grid overlay */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="hero-grid absolute inset-0 bg-grid opacity-20"
-      />
-      <ContourLines className="text-primary" opacity={0.08} />
+      {/* Decorative contour overlay (kept subtle — square grid removed) */}
+      <ContourLines className="text-primary" opacity={0.05} />
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pt-16 pb-12 sm:px-6 lg:px-8">

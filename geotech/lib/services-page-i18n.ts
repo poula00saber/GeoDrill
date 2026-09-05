@@ -65,7 +65,10 @@ export const serviceCategoryLabels: Record<
   Ground: { en: "Ground Investigation", ar: "تحري باطن الأرض" },
   Testing: { en: "Testing & Survey", ar: "الاختبار والمسح" },
   Engineering: { en: "Ground Engineering", ar: "هندسة باطن الأرض" },
-  Studies: { en: "Engineering & Specialized Studies", ar: "دراسات هندسية متخصصة" },
+  Studies: {
+    en: "Engineering & Specialized Studies",
+    ar: "دراسات هندسية متخصصة",
+  },
 };
 
 export const serviceCategoryDescriptions: Record<
@@ -265,7 +268,8 @@ export function getLocalizedService(
   service: ServiceContent,
   locale: string,
 ): ServiceContent {
-  const localized = servicesPageItems[service.slug]?.[locale === "ar" ? "ar" : "en"];
+  const localized =
+    servicesPageItems[service.slug]?.[locale === "ar" ? "ar" : "en"];
   if (!localized || locale !== "ar") return service;
 
   return {
