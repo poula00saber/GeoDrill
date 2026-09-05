@@ -554,6 +554,23 @@
     "placeholder": "Official project case study coming soon.",
     "label": "Project Showcase"
   },
+  "projectNavigator": {
+    "eyebrow": "Track Record",
+    "title": "Selected Experience",
+    "subtitle": "Representative geotechnical and geoscience projects from GEODRILL's portfolio across Saudi Arabia.",
+    "all": "All",
+    "filters": {
+      "geotechnical": "Geotechnical",
+      "geophysical": "Geophysical & GPR",
+      "survey": "Survey & Scanning",
+      "testing": "Testing & QC",
+      "structural": "Structural Assessment",
+      "slope": "Slope Stability",
+      "shoring": "Shoring & Foundations"
+    },
+    "viewAll": "View All Projects",
+    "placeholder": "Project photos and case-study details are being added."
+  },
   "contact": {
     "title": "Let's Understand Your Project.",
     "subtitle": "Tell us what you are planning, investigating or building. Our team can help identify the appropriate investigation and engineering approach.",

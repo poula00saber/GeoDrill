@@ -48,7 +48,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${ibmPlex.variable} bg-background`}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

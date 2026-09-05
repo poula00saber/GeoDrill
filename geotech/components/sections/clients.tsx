@@ -2,8 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useMemo } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useTransform,
+  wrap,
+} from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
@@ -72,30 +78,53 @@ function LogoRow({
   // Repeat the row once so the marquee loops seamlessly.
   const items = useMemo(() => [...logos, ...logos], [logos]);
 
+  // Pausable, GPU-only marquee. The row is doubled (200% wide), so translating
+  // x between `0%` and `-50%` (of the element width) is one seamless loop.
+  const [paused, setPaused] = useState(false);
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+
+  // Loop distance for x is 50 (percent of element width). A full loop equals
+  // one row width, so we travel 50% over `duration` seconds → 50/duration %/s.
+  const speed = 50 / Math.max(duration, 1);
+
+  const baseX = useMotionValue(0);
+  useAnimationFrame((_t, delta) => {
+    if (pausedRef.current) return;
+    // Moving right (reverse) means increasing toward 0; moving left (default)
+    // means decreasing toward -50. wrap() keeps the value inside [-50, 0].
+    const next = baseX.get() + (reverse ? speed : -speed) * (delta / 1000);
+    baseX.set(wrap(-50, 0, next));
+  });
+  const x = useTransform(baseX, (v) => `${v}%`);
+
   return (
-    <div className="relative overflow-hidden py-3" dir="ltr">
+    <div
+      className="relative overflow-hidden py-3"
+      dir="ltr"
+      onPointerEnter={() => setPaused(true)}
+      onPointerLeave={() => setPaused(false)}
+    >
       <div className="pointer-events-none absolute inset-y-0 start-0 z-10 w-24 bg-gradient-to-r from-surface/40 to-transparent" aria-hidden />
       <div className="pointer-events-none absolute inset-y-0 end-0 z-10 w-24 bg-gradient-to-l from-surface/40 to-transparent" aria-hidden />
 
       <motion.div
         className="flex w-max shrink-0 items-center gap-5"
-        initial={false}
-        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={{ duration, repeat: Infinity, ease: "linear" }}
+        style={{ x }}
       >
         {items.map((logo, i) => (
           <div
             key={`${logo.slug}-${i}`}
             className="group/logo relative shrink-0 before:pointer-events-none before:absolute before:-inset-3 before:-z-10 before:rounded-[inherit] before:bg-primary/0 before:blur-xl before:transition-colors before:duration-300 hover:before:bg-primary/10"
           >
-            <div className="relative z-10 flex h-24 w-[200px] items-center justify-center rounded-xl border border-border/80 bg-card p-5 shadow-sm transition-all duration-500 ease-out group-hover/logo:-translate-y-1.5 group-hover/logo:scale-[1.015] group-hover/logo:border-primary/50 group-hover/logo:shadow-xl group-hover/logo:shadow-primary/15 sm:h-28 sm:w-[220px]">
-              <span className="relative block h-14 w-[170px] rounded-lg border border-black/5 bg-gradient-to-br from-white to-slate-100 p-1.5 shadow-inner transition-transform duration-500 ease-out group-hover/logo:scale-105 sm:h-16 sm:w-[185px]">
+            <div className="relative z-10 flex h-24 w-[200px] items-center justify-center rounded-xl border border-border/80 bg-card p-5 shadow-sm transition-all duration-500 ease-out group-hover/logo:-translate-y-1.5 group-hover/logo:scale-105 group-hover/logo:border-primary/50 group-hover/logo:shadow-xl group-hover/logo:shadow-primary/15 sm:h-28 sm:w-[220px]">
+              <span className="relative block h-14 w-[170px] rounded-lg border border-black/5 bg-gradient-to-br from-white to-slate-100 p-1.5 shadow-inner transition-transform duration-500 ease-out group-hover/logo:scale-110 sm:h-16 sm:w-[185px]">
                 <Image
                   src={logo.src}
                   alt={logo.name}
                   fill
                   sizes="190px"
-                  className="object-contain"
+                  className="object-contain transition-transform duration-500 group-hover/logo:scale-105"
                 />
               </span>
             </div>

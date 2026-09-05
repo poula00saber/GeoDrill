@@ -1,11 +1,9 @@
 "use client";
 
-import { Metadata } from "next";
 import { Navigation } from "@/geotech/components/navigation";
 import { Footer } from "@/geotech/components/sections/footer";
+import { ProjectNavigator } from "@/geotech/components/sections/project-navigator";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { use } from "react";
 import Image from "next/image";
 
@@ -63,41 +61,8 @@ export default function ProjectsPage({ params }: PageProps) {
         </section>
 
         {/* Projects Content */}
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          {/* Placeholder: Real projects to be added */}
-          <motion.section
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="rounded-lg border border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 p-12">
-              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-                {isAr ? "معرض المشاريع قريبًا" : "Project Gallery Coming Soon"}
-              </h2>
-              <p className="mt-4 text-muted-foreground">
-                {isAr
-                  ? "نعمل على تنظيم أمثلة من أفضل أعمالنا لإبراز خبراتنا. بينما نستعد لذلك، يمكنك استكشاف خدماتنا أو التواصل معنا لمناقشة احتياجات مشروعك."
-                  : "We're curating our finest project work to showcase our expertise. In the meantime, explore our services or contact us to discuss your specific project needs."}
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Link
-                  href={`/geotechnical/${lang}/services`}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-all hover:gap-3"
-                >
-                  {isAr ? "استكشف خدماتنا" : "Explore Our Services"}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href={`/geotechnical/${lang}/contact`}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary/50 px-6 py-3 font-medium text-foreground transition-all hover:bg-surface"
-                >
-                  {isAr ? "ناقش مشروعك" : "Discuss Your Project"}
-                </Link>
-              </div>
-            </div>
-          </motion.section>
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <ProjectNavigator showAll className="py-8 md:py-12" />
         </div>
       </main>
       <Footer />
