@@ -2,11 +2,8 @@
 //
 // REAL GEODRILL geotechnical / geoscience project records (2025–2026 portfolio).
 // Each row corresponds to a delivered project: bilingual name, location and
-// client. Per-project photography is not yet available, so each card uses a
-// representative category photo from `public/images/final/projects/`.
-//
-// To add real per-project photos later: drop the image into
-// `public/images/projects/<id>.jpg` and set the `image` field on that record.
+// client, plus a unique per-project photo from `public/images/geotech/projects/`.
+// The photography is index-aligned with the project order (files named 01_…–68_…).
 
 export type ProjectCategory =
   | "geotechnical"
@@ -30,65 +27,82 @@ export interface Project {
   alt: string;
 }
 
-// Base path for the real site photography.
-const P = "/images/final/projects";
+// Base path for the real per-project site photography (68 images).
+const P = "/images/geotech/projects";
 
-// Representative, on-disk photos per service category (cycled across cards so a
-// category grid does not repeat a single image).
-const CATEGORY_IMAGES: Record<ProjectCategory, string[]> = {
-  geotechnical: [
-    `${P}/01_groundworks/concrete_rebar_footing.jpg`,
-    `${P}/01_groundworks/excavation_foundation_pits.jpg`,
-    `${P}/01_groundworks/groundworks_desert_grading.jpg`,
-    `${P}/new_towers_highrise/structural_foundation_footings_v2.jpg`,
-    `${P}/02_structures_and_steel/steel_frame_erection_wide.jpg`,
-  ],
-  geophysical: [
-    `${P}/03_mep/mep_underfloor_conduit_slab.jpg`,
-    `${P}/new_towers_highrise/cable_reels_infrastructure_site.jpg`,
-    `${P}/01_groundworks/infrastructure_trench_layout.jpg`,
-  ],
-  survey: [
-    `${P}/new_landscaping/landscape_garden_pathway_stones.jpg`,
-    `${P}/01_groundworks/excavation_trench_wall.jpg`,
-    `${P}/new_landscaping/landscape_pool_palm_walkway.jpg`,
-  ],
-  testing: [
-    `${P}/03_mep/mep_basement_plant_room.jpg`,
-    `${P}/new_mep_variety/mep_water_pump_ksb_blue.jpg`,
-    `${P}/04_finishing/finishing_lobby_reception.jpg`,
-  ],
-  structural: [
-    `${P}/02_structures_and_steel/steel_frame_closeup_sky.jpg`,
-    `${P}/04_finishing/finishing_glass_office_partition.jpg`,
-    `${P}/new_steel_variety/steel_interior_columns_wide.jpg`,
-  ],
-  slope: [
-    `${P}/01_groundworks/excavation_deep_trench.jpg`,
-    `${P}/new_misc_industrial/steel_frame_silo_tank_structure.jpg`,
-    `${P}/02_structures_and_steel/steel_roof_truss_angle.jpg`,
-  ],
-  shoring: [
-    `${P}/01_groundworks/excavation_deep_trench.jpg`,
-    `${P}/01_groundworks/concrete_column_reinforcement.jpg`,
-    `${P}/new_towers_highrise/cable_reels_infrastructure_site.jpg`,
-  ],
-};
-
-function imageFor(category: ProjectCategory, index: number): string {
-  const images = CATEGORY_IMAGES[category];
-  return images[index % images.length];
-}
-
-export const projectBases: Record<ProjectCategory, string> = {
-  geotechnical: `${P}/01_groundworks`,
-  geophysical: `${P}/03_mep`,
-  survey: `${P}/new_landscaping`,
-  testing: `${P}/03_mep`,
-  structural: `${P}/02_structures_and_steel`,
-  slope: `${P}/01_groundworks`,
-  shoring: `${P}/01_groundworks`,
-};
+// One unique, already-processed image per project, index-aligned with
+// `rawRows` below (order NN_… matches the project order 1–68). Naming follows
+// NN_SERVICE_Project_Name.jpg as staged in `public/images/geotech/projects/`.
+const PROJECT_IMAGES: string[] = [
+  `${P}/01_Geo_Al_Yamama_Residential_tower_-_Al_Olya_street_-_Riy.jpg`,
+  `${P}/02_Geo_Al_Munajem_main_warehouses_-_Riyadh.jpg`,
+  `${P}/03_Geo_Park_view_6_commercial_towers_-_King_Abdulaziz_roa.jpg`,
+  `${P}/04_Geo_Schools_complex_-_Dhrat_Laban_-_Riyadh.jpg`,
+  `${P}/05_GYP_Geophysical_study_for_Awfa_Commercial_towers_-_Het.jpg`,
+  `${P}/06_Geo_QC_testing_for_Boran_Squair_-_Olya_street_-_riyadh.jpg`,
+  `${P}/07_Geo_Commercial_Resedintial_buildings_at_Al_Rimal_Distr.jpg`,
+  `${P}/08_Geo_Geotechnical_Investigation_for_the_Design_and_Cons.jpg`,
+  `${P}/09_TOPO_Topographic_survey_for_Malfa_Living_Al-Arad_Distri.jpg`,
+  `${P}/10_GYP_Geophysical_study_for_Al_Shbiely_tower_-_Al_Muhamd.jpg`,
+  `${P}/11_GYP_GPR_Scanning_for_Utilities_Detection_work_for_Site.jpg`,
+  `${P}/12_GEO_TOPO_Geotechnical_and_topographic_survey_work_for_Lazor.jpg`,
+  `${P}/13_TOPO_3D_laser_scanning_survey_for_GOSI_building_Project.jpg`,
+  `${P}/14_GEO_Commercial_buildings_at_Fakhria_District_-_Riyadh.jpg`,
+  `${P}/15_GEO_Hotel_Building_at_Al_Madina_Al_Munawarah.jpg`,
+  `${P}/16_SS_ROCK_SLOPE_STABILITY_INVESTIGATION_SUPERVISION_WOR.jpg`,
+  `${P}/17_GEO_Probing_Grouting_works_for_Malqa_Al_Andalus_commer.jpg`,
+  `${P}/18_GEO_Geotechnical_investigation_works_for_Malqa_Al_Anda.jpg`,
+  `${P}/19_GEO_Geotechnical_Investigation_works_for_Mama_Sauce_fa.jpg`,
+  `${P}/20_GEO_Commercial_towers_at_King_Salman_Road.jpg`,
+  `${P}/21_GEO_Geotechnical_works_for_Al_Rajhi_Development_Region.jpg`,
+  `${P}/22_GEO_Geotechnical_works_for_DR_Suliman_Al_Habib_palace_.jpg`,
+  `${P}/23_GEO_GEOTECHINAL_INVESTIGATION_WORKS_FOR_Yamama_New_Cem.jpg`,
+  `${P}/24_TOPO_Geotechnical_and_topographic_survey_work_for_Dr_Su.jpg`,
+  `${P}/25_QC_Structural_assessment_for_Hotel_project_at_King_Ab.jpg`,
+  `${P}/26_GEIO_GEOTECHINAL_INVESTIGATION_Utilities_survey_WORKS_F.jpg`,
+  `${P}/27_GEO_Probing_Grouting_works_for_Al_Shebily_tower_projec.jpg`,
+  `${P}/28_GEO_Geotechnical_works_for_pipe_lines_project_with_NWC.jpg`,
+  `${P}/29_QC_LABORATORY_AND_QUALITY_CONTROL_TESTING_FOR_DR_SULI.jpg`,
+  `${P}/30_GEO_Geotechnical_works_for_commercial_tower_-_Ashbiliy.jpg`,
+  `${P}/31_GEO_Design_Analysis_and_Specifications_for_Shoring_Sys.jpg`,
+  `${P}/32_GEO_GEOTECHINAL_INVESTIGATION_WORKS_FOR_Telalah_Reside.jpg`,
+  `${P}/33_GEO_Al_Kredes_Commercial_tower_-_Faisalia_District.jpg`,
+  `${P}/34_SHO_Shoring_System_Design_Project_Mixed-Use_Residentia.jpg`,
+  `${P}/35_GEO_Geotechnical_works_for_School_complex_-_Al_Manar_D.jpg`,
+  `${P}/36_GEO_Geotechnical_works_for_Water_pipe_line_Riyadh.jpg`,
+  `${P}/37_SHO_Design_of_a_Temporary_Excavation_Support_and_Shori.jpg`,
+  `${P}/38_GEO_Geotechnical_works_for_Petrol_Station_-_around_ksa.jpg`,
+  `${P}/39_GYP_Geophysical_study_for_Al_Sahafa_tower_-_Riyadh.jpg`,
+  `${P}/40_SA_Structural_assessment_for_Al_Watania_central_wareh.jpg`,
+  `${P}/41_GYP_Geophysical_study_for_Commercial_office_tower_-_Ri.jpg`,
+  `${P}/42_GEO_Geotechnical_works_for_Yousef_Al_Rajhi_Tower_-_Al_.jpg`,
+  `${P}/43_GEO_GEOTECHINAL_INVESTIGATION_WORKS_FOR_Diriyah_FC_You.jpg`,
+  `${P}/44_GYP_GPR_Scanning_for_Underground_Utility_Detection_at_.jpg`,
+  `${P}/45_GEO_Probing_Grouting_works_for_Commercial_office_tower.jpg`,
+  `${P}/46_GEO_Geotechnical_works_for_Commercial_towers_-_Al_Muro.jpg`,
+  `${P}/47_GPY_Geophysical_study_for_Noma_living_compound_-_Riyad.jpg`,
+  `${P}/48_GYP_GPR_EM_Scanning_for_Underground_Utility_Detection_.jpg`,
+  `${P}/49_GEO_Geotechnical_Investigation_for_the_Early_Childhood.jpg`,
+  `${P}/50_GEO_GEOTECHINAL_INVESTIGATION_WORKS_FOR_-Al_Hazem_comm.jpg`,
+  `${P}/51_GEO_Geotechnical_works_for_Safwa_Fad_Commercial_towers.jpg`,
+  `${P}/52_Sho_shoring_design_for_the_Proposed_Commercial_Residen.jpg`,
+  `${P}/53_GEO_Testing_of_Concrete_Structural_Elements_for_Struct.jpg`,
+  `${P}/54_GEO_Shoring_System_Design_Al-Madinah_Water_Transmissio.jpg`,
+  `${P}/55_GEO_GEOTECHINAL_INVESTIGATION_WORKS_FOR_Al-Othaim_Kuno.jpg`,
+  `${P}/56_GEO_Geotechnical_works_for_Commercial_Buildings_Show_r.jpg`,
+  `${P}/57_GEO_Geotechnical_works_for_Residintial_Compounds_-_Al_.jpg`,
+  `${P}/58_pile_Execution_of_Foundation_Pile_for_warehouse_and_wor.jpg`,
+  `${P}/59_GEO_Geotechnical_works_for_Residintial_Compounds_-_Al_.jpg`,
+  `${P}/60_GEO_Geotechnical_works_for_Rafen_Commercial_Buildings_.jpg`,
+  `${P}/61_GYP_GPR_Scanning_EM_survey_for_Underground_Utility_Det.jpg`,
+  `${P}/62_GEO_Geotechnical_works_for_Fahd_Al_Owidah_Commercial_T.jpg`,
+  `${P}/63_GEO_Geotechnical_works_forPalaces_projectr_at_Al_Hada_.jpg`,
+  `${P}/64_GEO_Geotechnical_works_for_Mosques_in_Riyadh.jpg`,
+  `${P}/65_GEO_Geotechnical_works_forAl_Joud_Commercial_tower_-_R.jpg`,
+  `${P}/66_GYP_GPR_Scanning_for_Underground_Utility_Detection_for.jpg`,
+  `${P}/67_GPY_Geophysical_study_for_Signature_tower_-_Riyadh.jpg`,
+  `${P}/68_GEO_Geotechnical_works_for_Family_Development_Associat.jpg`,
+];
 // Each raw row: [category, nameEn, nameAr, location, client].
 type RawRow = [ProjectCategory, string, string, string, string];
 
@@ -446,7 +460,7 @@ export const projects: Project[] = rawRows.map((row, index) => {
     nameAr,
     location,
     client,
-    image: imageFor(category, index),
+    image: PROJECT_IMAGES[index],
     alt: nameEn || nameAr,
   };
 });
