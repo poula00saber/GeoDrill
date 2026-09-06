@@ -66,53 +66,45 @@ export const servicesData: Record<string, ServiceContent> = {
     ],
     standardsReferenced: ["ASTM", "BS", "SBC"],
     gallery: [
-      // source: .../2025/08/1-e1755843969145-1024x1011.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-1.webp",
-        alt: "Geotechnical investigation fieldwork",
-        caption: "Field investigation and drilling operations",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-1.jpg",
+        alt: "Geotechnical investigation drilling equipment on site",
+        caption: "Drilling equipment mobilized for subsurface investigation",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-26.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-2.webp",
-        alt: "Borehole drilling rig on site",
-        caption: "Borehole drilling rig on site",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-2.jpeg",
+        alt: "Borehole drilling operation in progress",
+        caption: "Borehole drilling operation on site",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-25.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-3.webp",
-        alt: "SPT sampling during investigation",
-        caption: "SPT sampling during a field investigation",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-3.jpg",
+        alt: "Soil sampling and SPT testing",
+        caption: "Soil sampling and standard penetration testing",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-41.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-4.webp",
-        alt: "In-situ testing equipment",
-        caption: "In-situ testing equipment deployed on site",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-4.jpeg",
+        alt: "Field crew conducting in-situ testing",
+        caption: "Field crew conducting in-situ testing",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-40.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-5.webp",
-        alt: "Test pit excavation",
-        caption: "Test pit excavation and logging",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-5.jpg",
+        alt: "Test pit excavation and logging",
+        caption: "Test pit excavation and soil logging",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-44.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-6.webp",
-        alt: "Piezometer installation",
-        caption: "Piezometer installation for water table monitoring",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-6.jpg",
+        alt: "Piezometer installation for water monitoring",
+        caption: "Piezometer installation for groundwater monitoring",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-50.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-7.webp",
-        alt: "Soil sample recovery",
-        caption: "Soil sample recovery and labeling",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-7.jpg",
+        alt: "Core drilling and sample recovery",
+        caption: "Core drilling and rock sample recovery",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-54.webp
       {
-        src: "/images/services/geotechnical-investigation/gallery-8.webp",
-        alt: "Geotechnical crew on active site",
-        caption: "GEODRILL field crew on an active investigation site",
+        src: "/images/services/geotechnical-investigation/geotechnical-investigation-8.jpg",
+        alt: "GEODRILL field crew on active site",
+        caption: "GEODRILL geotechnical field crew on site",
       },
     ],
     relatedServices: ["geophysical-survey", "material-testing-quality-control"],
@@ -246,53 +238,45 @@ export const servicesData: Record<string, ServiceContent> = {
     },
     standardsReferenced: ["ASTM", "AASHTO", "BS"],
     gallery: [
-      // source: .../2025/08/Geodrill-profile-source-1-60.webp
       {
-        src: "/images/services/material-testing/gallery-1.webp",
-        alt: "Fresh concrete slump testing",
-        caption: "Fresh concrete slump testing on site",
+        src: "/images/services/material-testing-quality-control/material-testing-1.jpg",
+        alt: "Laboratory testing equipment and samples",
+        caption: "Material testing laboratory setup",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-62.webp
       {
-        src: "/images/services/material-testing/gallery-2.webp",
-        alt: "Soil sample preparation in lab",
-        caption: "Soil sample preparation for laboratory testing",
+        src: "/images/services/material-testing-quality-control/material-testing-2.jpg",
+        alt: "Concrete testing in the laboratory",
+        caption: "Concrete compressive strength testing",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-69.webp
       {
-        src: "/images/services/material-testing/gallery-3.webp",
-        alt: "Field density testing, sand cone method",
-        caption: "Field density testing, sand cone method",
+        src: "/images/services/material-testing-quality-control/material-testing-3.jpg",
+        alt: "Soil sample preparation for testing",
+        caption: "Soil sample preparation and labeling",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-75.webp
       {
-        src: "/images/services/material-testing/gallery-4.webp",
-        alt: "Schmidt hammer non-destructive test",
+        src: "/images/services/material-testing-quality-control/material-testing-4.jpg",
+        alt: "Field density testing equipment",
+        caption: "Field density testing with sand cone method",
+      },
+      {
+        src: "/images/services/material-testing-quality-control/material-testing-5.jpeg",
+        alt: "Fresh concrete slump testing on site",
+        caption: "Fresh concrete slump test in progress",
+      },
+      {
+        src: "/images/services/material-testing-quality-control/material-testing-6.jpg",
+        alt: "Aggregate sieve analysis in lab",
+        caption: "Aggregate sieve analysis and grading",
+      },
+      {
+        src: "/images/services/material-testing-quality-control/material-testing-7.jpg",
+        alt: "Non-destructive testing on concrete",
         caption: "Schmidt hammer test on hardened concrete",
       },
-      // source: .../2025/08/Geodrill-profile-source-1-78-e1756188182498.webp
       {
-        src: "/images/services/material-testing/gallery-5.webp",
-        alt: "Concrete core extraction",
-        caption: "Concrete core extraction for compressive strength testing",
-      },
-      // source: .../2025/08/Geodrill-profile-source-1-83.webp
-      {
-        src: "/images/services/material-testing/gallery-6.webp",
-        alt: "Asphalt sample testing",
-        caption: "Asphalt mix sample testing",
-      },
-      // source: .../2025/08/Geodrill-profile-source-1-100.webp
-      {
-        src: "/images/services/material-testing/gallery-7.webp",
-        alt: "Aggregate sieve analysis",
-        caption: "Aggregate sieve analysis in the lab",
-      },
-      // source: .../2025/08/Geodrill-profile-source-1-101.webp
-      {
-        src: "/images/services/material-testing/gallery-8.webp",
-        alt: "Pile integrity testing equipment",
-        caption: "Low strain pile integrity testing (PIT) equipment",
+        src: "/images/services/material-testing-quality-control/material-testing-8.jpeg",
+        alt: "Asphalt mix sample testing",
+        caption: "Asphalt mix design and Marshall testing",
       },
     ],
     relatedServices: ["topographical-survey", "geotechnical-investigation"],
@@ -336,35 +320,60 @@ export const servicesData: Record<string, ServiceContent> = {
       ],
     },
     gallery: [
-      // source: .../2025/09/Geodrill-profile-source-1-109.webp
       {
-        src: "/images/services/topographical-survey/gallery-1.webp",
-        alt: "GPS topographic survey equipment",
-        caption: "GPS survey equipment in the field",
+        src: "/images/services/topographical-survey/topographical-survey-1.jpeg",
+        alt: "GPS survey equipment in the field",
+        caption: "High-precision GPS survey setup",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-110.webp
       {
-        src: "/images/services/topographical-survey/gallery-2.webp",
-        alt: "Drone mapping in progress",
-        caption: "Drone mapping survey in progress",
+        src: "/images/services/topographical-survey/topographical-survey-2.jpeg",
+        alt: "Drone mapping survey in progress",
+        caption: "UAV drone mapping for topographic survey",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-111.webp
       {
-        src: "/images/services/topographical-survey/gallery-3.webp",
-        alt: "Total station setup on site",
-        caption: "Total station setup for site survey",
+        src: "/images/services/topographical-survey/topographical-survey-3.jpeg",
+        alt: "Total station setup for site survey",
+        caption: "Total station theodolite setup on site",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-115.webp
       {
-        src: "/images/services/topographical-survey/gallery-4.webp",
-        alt: "Contour mapping fieldwork",
-        caption: "Fieldwork supporting contour and grid elevation mapping",
+        src: "/images/services/topographical-survey/topographical-survey-4.jpeg",
+        alt: "Contour and grid elevation mapping",
+        caption: "Fieldwork for contour and elevation mapping",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-120.webp
       {
-        src: "/images/services/topographical-survey/gallery-5.webp",
+        src: "/images/services/topographical-survey/topographical-survey-5.jpeg",
         alt: "GIS data collection on site",
-        caption: "GIS-based data collection on site",
+        caption: "GIS-based data collection and mapping",
+      },
+      {
+        src: "/images/services/topographical-survey/topographical-survey-6.jpeg",
+        alt: "Topographic survey crew at work",
+        caption: "Survey crew conducting field measurements",
+      },
+      {
+        src: "/images/services/topographical-survey/topographical-survey-7.jpeg",
+        alt: "Bathymetric survey equipment",
+        caption: "Bathymetric survey for water body mapping",
+      },
+      {
+        src: "/images/services/topographical-survey/topographical-survey-8.jpeg",
+        alt: "Mobile mapping system in vehicle",
+        caption: "Mobile mapping system deployment",
+      },
+      {
+        src: "/images/services/topographical-survey/topographical-survey-9.jpeg",
+        alt: "Remote sensing survey work",
+        caption: "Remote sensing and aerial survey operations",
+      },
+      {
+        src: "/images/services/topographical-survey/topographical-survey-10.jpeg",
+        alt: "Urban planning survey documentation",
+        caption: "Urban planning and cadastral survey documentation",
+      },
+      {
+        src: "/images/services/topographical-survey/topographical-survey-11.jpeg",
+        alt: "Survey control point establishment",
+        caption: "Geodetic network control point establishment",
       },
     ],
     relatedServices: [
