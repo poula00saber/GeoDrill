@@ -28,7 +28,7 @@ export function GeologySlope() {
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
                 style={{ backgroundImage: `url(${siteImages.geology})` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               <ContourLines className="text-primary" opacity={0.08} />
               {/* Slope arrows */}
               <svg

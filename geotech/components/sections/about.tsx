@@ -5,7 +5,6 @@ import { Eye, Target } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
 import { ContourLines } from "@/geotech/components/geological/background";
-import { siteImages } from "@/geotech/lib/images";
 
 export function AboutSection() {
   const { dict } = useLanguage();
@@ -42,9 +41,9 @@ export function AboutSection() {
           >
             <div className="relative aspect-square overflow-hidden rounded-lg border border-border/40">
               <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${siteImages.about})` }}
-              />
+                 className="absolute inset-0 bg-cover bg-center"
+                 style={{ backgroundImage: `url(/images/geotech/projects/02_Geo_Al_Munajem_main_warehouses_-_Riyadh.jpg)` }}
+               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
             </div>
           </motion.div>

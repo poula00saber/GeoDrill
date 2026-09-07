@@ -178,7 +178,7 @@ export default function ServicesPage({ params }: PageProps) {
                             className="object-cover transition-transform group-hover:scale-105"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           />
-                          <div className="absolute inset-0 bg-black/40 transition-all group-hover:bg-black/30" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-all group-hover:from-black/50" />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="font-mono text-xs uppercase tracking-wider text-white/80">
                               {pickLocalized(
@@ -200,7 +200,7 @@ export default function ServicesPage({ params }: PageProps) {
                           <Button
                             asChild
                             variant="outline"
-                            className="mt-5 self-start border-primary bg-transparent text-black hover:bg-primary hover:text-black dark:text-white dark:hover:text-black"
+                            className="mt-5 self-start border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground"
                           >
                             <Link
                               href={`/geotechnical/${lang}/services/${service.slug}`}

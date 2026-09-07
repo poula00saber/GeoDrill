@@ -101,32 +101,31 @@ function StageNode({
   );
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative flex flex-col items-center text-center md:px-4"
-    >
-      <motion.div
-        style={{
-          scale,
-          borderColor,
-          boxShadow: activeGlow,
-        }}
-        className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-background transition-colors duration-300"
-      >
-        <span className="font-mono text-lg font-bold text-amber-500">
-          {stage.num}
-        </span>
-      </motion.div>
+       <motion.div
+         initial={{ opacity: 0, y: 30 }}
+         whileInView={{ opacity: 1, y: 0 }}
+         viewport={{ once: true, margin: "-50px" }}
+         transition={{ duration: 0.6, delay: index * 0.1 }}
+         className="relative flex flex-col items-center text-center md:px-4"
+       >
+         <motion.div
+           style={{
+             scale,
+             borderColor,
+             boxShadow: activeGlow,
+           }}
+           className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-background transition-colors duration-300"
+         >
+           <span className="font-mono text-lg font-bold text-amber-500">
+             {stage.num}
+           </span>
+         </motion.div>
 
-      {/* Render title only: amber color, larger font size */}
-      <h3 className="mt-6 text-xl font-bold text-amber-500">{stage.title}</h3>
+         <h3 className="mt-6 text-xl font-bold text-foreground">{stage.title}</h3>
 
-      <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground text-pretty">
-        {stage.description}
-      </p>
-    </motion.div>
+         <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground text-pretty">
+           {stage.description}
+         </p>
+       </motion.div>
   );
 }

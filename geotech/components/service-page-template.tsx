@@ -296,21 +296,22 @@ export function ServicePageTemplate({
                 <motion.figure
                   key={idx}
                   variants={itemVariants}
-                  className="overflow-hidden rounded-lg border border-border bg-surface transition-all hover:shadow-md hover:shadow-primary/10"
+                  className="group overflow-hidden rounded-xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10"
                 >
                   <div className="relative aspect-video w-full overflow-hidden bg-muted">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-cover transition-transform duration-300 hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       onError={(event) => {
                         event.currentTarget.src = "/images/contact-us-hero.jpg";
                       }}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   </div>
                   {image.caption && (
-                    <figcaption className="p-4 text-sm text-muted-foreground">
+                    <figcaption className="p-4 text-sm font-medium text-foreground/80">
                       {image.caption}
                     </figcaption>
                   )}

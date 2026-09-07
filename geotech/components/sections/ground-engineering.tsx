@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
-import { siteImages } from "@/geotech/lib/images";
 
 export function GroundEngineering() {
   const { dict } = useLanguage();
@@ -58,11 +57,11 @@ export function GroundEngineering() {
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border/40">
               <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-                style={{
-                  backgroundImage: `url(${siteImages.groundEngineering})`,
-                }}
-              />
+                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
+                 style={{
+                   backgroundImage: `url(/images/geotech/projects/31_GEO_Design_Analysis_and_Specifications_for_Shoring_Sys.jpg)`,
+                 }}
+               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4">
                 <div className="flex items-center gap-2 rounded-md border border-border/40 bg-background/60 p-3 backdrop-blur-md">

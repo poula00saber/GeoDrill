@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Droplets, Waves, CloudRain, Shield } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
-import { siteImages } from "@/geotech/lib/images";
 
 export function HydrologySection() {
   const { dict } = useLanguage();

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Map, Search, FlaskConical, Lightbulb } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
-import { siteImages } from "@/geotech/lib/images";
 
 export function MiningExploration() {
   const { dict } = useLanguage();
@@ -31,7 +30,9 @@ export function MiningExploration() {
           <div className="relative aspect-[21/9]">
             <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${siteImages.mining})` }}
+              style={{
+                backgroundImage: `url(/images/geotech/services/grok/mining-exploration.jpg)`,
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute inset-0 bg-grid-sm opacity-10" />
