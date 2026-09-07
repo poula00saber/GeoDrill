@@ -192,26 +192,26 @@ export const servicesPageItems: Record<string, ServiceItemLocalized> = {
   },
   "structural-assessment": {
     en: {
-      name: "Structural Assessment",
+      name: "Structural Assessment Services",
       description:
         "Expert evaluation of building safety, integrity, and performance using visual inspection and non-destructive testing.",
     },
     ar: {
-      name: "التقييم الإنشائي",
+      name: "التقييم الإنشائي للمباني",
       description:
-        "تقييم خبير لسلامة المباني وسلامتها وأدائها باستخدام الفحص البصري والاختبارات غير الإتلافية.",
+        "تقييم متخصص لسلامة المباني ومتانتها وأدائها باستخدام الفحص البصري والاختبارات غير الإتلافية.",
     },
   },
   "environmental-survey": {
     en: {
-      name: "Environmental Survey",
+      name: "Environmental Survey Services",
       description:
         "Environmental impact assessment, baseline studies, and monitoring to support sustainable development and compliance.",
     },
     ar: {
-      name: "المسح البيئي",
+      name: "الدراسات البيئية",
       description:
-        "تقييم الأثر البيئي ودراسات الحالة الأساسية والمراقبة لدعم التنمية المستدامة والامتثال.",
+        "تقييم الأثر البيئي والدراسات الأساسية ومراقبة الهواء والمياه والتربة والضوضاء والمسوح البيئية والتدقيق البيئي.",
     },
   },
   "anchoring-shoring-design-execution": {
@@ -221,7 +221,7 @@ export const servicesPageItems: Record<string, ServiceItemLocalized> = {
         "Design and execution of retaining walls, ground anchors, tiebacks and shoring systems for safe excavation and structural stability.",
     },
     ar: {
-      name: "تصميم وتنفيذ التثبيتات والساندة",
+      name: "تصميم وتنفيذ أنظمة التدعيم وسند جوانب الحفر",
       description:
         "تصميم وتنفيذ الحوائط الساندة والمثبتات الأرضية وروابط السحب وأنظمة الساندة لحفر آمن وثبات إنشائي.",
     },
@@ -257,9 +257,9 @@ export const servicesPageItems: Record<string, ServiceItemLocalized> = {
         "End-to-end mineral exploration — mapping, sampling, geophysics, drilling, resource estimation — to JORC/NI 43-101 classification.",
     },
     ar: {
-      name: "استكشاف التعدين",
+      name: "استكشاف المعادن وتقييم الخامات",
       description:
-        "استكشاف معدني متكامل — رسم الخرائط وأخذ العينات والجيوفيزياء والحفر وتقدير الموارد — وفق تصنيف JORC/NI 43-101.",
+        "خدمات متكاملة لاستكشاف المعادن وتقييم الخامات — رسم الخرائط وأخذ العينات والجيوفيزياء والحفر وتقدير الموارد والنمذجة ثلاثية الأبعاد — وفق تصنيف JORC وNI 43-101.",
     },
   },
 };
@@ -305,7 +305,7 @@ const arabicServiceOverviews: Record<string, string[]> = {
   ],
   "environmental-survey": [
     "تقدم جيو دريل دراسات بيئية شاملة لدعم التنمية المستدامة والالتزام بالمتطلبات التنظيمية وتقييم تأثيرات المشاريع ومراقبة ظروف المواقع.",
-    "تشمل خدماتنا تقييم الأثر البيئي والدراسات الأساسية ومراقبة الهواء والمياه والتربة والضوضاء والمسوح البيئية والتدقيق البيئي.",
+    "تشمل خدماتنا تقييم الأثر البيئي والدراسات الأساسية ومراقبة الهواء والمياه والتربة والضوضاء والمسوح البيئية والتدقيق البيئي والتحاليل الفيزيائية والكيميائية والميكروبيولوجية للتربة والمياه.",
   ],
   "anchoring-shoring-design-execution": [
     "تقدم جيو دريل حلول تصميم وتنفيذ أنظمة التدعيم وسند جوانب الحفر لضمان سلامة الحفريات واستقرار المنشآت.",
@@ -321,7 +321,8 @@ const arabicServiceOverviews: Record<string, string[]> = {
   ],
   "mining-exploration": [
     "تقدم جيو دريل خدمات متكاملة لاستكشاف المعادن وتقييم الموارد المعدنية المجدية اقتصاديًا بواسطة جيولوجيين وجيوفيزيائيين ومهندسين ميدانيين متخصصين.",
-    "تشمل خدماتنا الخرائط الجيولوجية وأخذ العينات الجيوكيميائية والمسوح الجيوفيزيائية والحفر وتقدير الموارد والنمذجة ثلاثية الأبعاد وإعداد تقارير التراخيص التعدينية.",
+    "تشمل خدماتنا الخرائط الجيولوجية وأخذ العينات الجيوكيميائية وتحضيرها وإجراء الاختبارات اللازمة، والمسوح الجيوفيزيائية، والحفر اللبّي، وتقدير الموارد والنمذجة ثلاثية الأبعاد، والدراسات الجيولوجية وإدارة المشاريع.",
+    "كما نعد التقارير الفنية اللازمة للحصول على رخص الاستكشاف والاستغلال وتجديدها أو تمديدها، إلى جانب دراسات الجدوى وإعادة التأهيل والإغلاق والأثر البيئي والاجتماعي وخطط الاستثمار.",
   ],
 };
 
@@ -384,6 +385,29 @@ const arabicCapabilityTerms: [string, string][] = [
   ["Test Pits Excavation", "حفر الاختبار"],
   ["Installation of Piezometers", "تركيب مقاييس منسوب المياه"],
   ["Pull-out Testing", "اختبار السحب"],
+  ["Supervision of Static Load Test", "الإشراف على اختبار التحميل الساكن"],
+  ["Geological Studies", "الدراسات الجيولوجية"],
+  ["Project Management", "إدارة المشاريع"],
+  [
+    "Technical Reports for Exploration and Exploitation Licenses",
+    "التقارير الفنية لرخص الاستكشاف والاستغلال",
+  ],
+  ["Feasibility Studies", "دراسات الجدوى"],
+  ["Rehabilitation and Closure Studies", "دراسات إعادة التأهيل والإغلاق"],
+  [
+    "Environmental and Social Impact Studies",
+    "دراسات الأثر البيئي والاجتماعي",
+  ],
+  ["Investment Plans", "خطط الاستثمار"],
+  ["Static and Dynamic Penetration Testing", "اختبار الاختراق الساكن والديناميكي"],
+  [
+    "Information Technology",
+    "تقنية المعلومات",
+  ],
+  [
+    "Physical, Chemical and Microbiological Analysis of Soil and Water",
+    "التحاليل الفيزيائية والكيميائية والميكروبيولوجية للتربة والمياه",
+  ],
   ["Geophysical Survey", "المسح الجيوفيزيائي"],
   ["Environmental Survey", "المسح البيئي"],
   ["Structural Assessment", "التقييم الإنشائي"],

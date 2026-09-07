@@ -63,6 +63,7 @@ export const servicesData: Record<string, ServiceContent> = {
       "In-Situ CBR",
       "Installation of Piezometers (Water Table Monitoring Wells)",
       "Pull-out Testing",
+      "Static and Dynamic Penetration Testing",
     ],
     standardsReferenced: ["ASTM", "BS", "SBC"],
     gallery: [
@@ -233,6 +234,7 @@ export const servicesData: Record<string, ServiceContent> = {
         "Mechanical Caliper Logging (MCL)",
         "Low Strain Pile Integrity Testing, PIT (Cast In-Situ Concrete Piles)",
         "Pile Instrumentation (PI)",
+        "Supervision of Static Load Test (SLT)",
         "Pile Pull-out Test (PPOT)",
       ],
     },
@@ -315,6 +317,7 @@ export const servicesData: Record<string, ServiceContent> = {
         "Geographic Information Systems (GIS)",
         "Remote Sensing",
         "Urban Planning",
+        "Information Technology",
         "Building Information Modeling (BIM)",
         "Architectural Survey",
       ],
@@ -832,6 +835,7 @@ export const servicesData: Record<string, ServiceContent> = {
       "Air, Water, Soil, and Noise Monitoring",
       "Ecological Surveys",
       "Environmental Audits",
+      "Physical, Chemical and Microbiological Analysis of Soil and Water",
     ],
     gallery: [
       // source: .../2025/09/Geodrill-profile-source-1-210.webp
@@ -1034,6 +1038,13 @@ export const servicesData: Record<string, ServiceContent> = {
       "Core Drilling",
       "Resource Estimation",
       "3D Modelling",
+      "Geological Studies",
+      "Project Management",
+      "Technical Reports for Exploration and Exploitation Licenses",
+      "Feasibility Studies",
+      "Rehabilitation and Closure Studies",
+      "Environmental and Social Impact Studies",
+      "Investment Plans",
     ],
     standardsReferenced: ["JORC", "NI 43-101"],
     gallery: [
