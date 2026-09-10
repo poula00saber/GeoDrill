@@ -32,7 +32,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowDown, Activity } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { Button } from "@/geotech/components/ui/button";
 import { ContourLines } from "@/geotech/components/geological/background";
@@ -112,7 +112,7 @@ export function Hero() {
       <ContourLines className="text-primary" opacity={0.05} />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pt-16 pb-12 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pt-16 pb-16 sm:px-6 lg:px-8 lg:pb-20">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -201,42 +201,6 @@ export function Hero() {
             </Button>
           </motion.div>
         </div>
-
-        {/* Technical HUD — unchanged from previous version */}
-        <motion.div
-          initial={{ opacity: 0, x: isRtl ? -30 : 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-          className="mt-12 hidden md:block"
-        >
-          <div className="inline-flex flex-col gap-3 rounded-lg border border-border/60 bg-surface/50 p-4 backdrop-blur-md">
-            <div className="flex items-center gap-2 border-b border-border/40 pb-2">
-              <Activity className="h-3.5 w-3.5 text-primary" />
-              <span className="font-mono text-[10px] uppercase tracking-wider text-white">
-                {dict.hero.hud.title}
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              <HudItem
-                label={dict.hero.hud.investigation}
-                value={dict.hero.hud.investigationValue}
-              />
-              <HudItem
-                label={dict.hero.hud.dataStatus}
-                value={dict.hero.hud.dataStatusValue}
-                pulse
-              />
-              <HudItem
-                label={dict.hero.hud.siteType}
-                value={dict.hero.hud.siteTypeValue}
-              />
-              <HudItem
-                label={dict.hero.hud.region}
-                value={dict.hero.hud.regionValue}
-              />
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* Slide dot indicators — bottom-start, matches the reference */}
@@ -287,33 +251,6 @@ export function Hero() {
         <GeologicalLayerTransition />
       </div>
     </section>
-  );
-}
-
-function HudItem({
-  label,
-  value,
-  pulse,
-}: {
-  label: string;
-  value: string;
-  pulse?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <span className="font-mono text-[9px] uppercase tracking-wider text-white">
-        {label}
-      </span>
-      <span className="flex items-center gap-1.5 font-mono text-xs font-medium text-white">
-        {pulse && (
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
-        )}
-        {value}
-      </span>
-    </div>
   );
 }
 

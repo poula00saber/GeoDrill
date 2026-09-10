@@ -298,12 +298,12 @@ export function ServicePageTemplate({
                   variants={itemVariants}
                   className="group overflow-hidden rounded-xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10"
                 >
-                  <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                  <div className="relative aspect-square w-full overflow-hidden bg-muted">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
                       onError={(event) => {
                         event.currentTarget.src = "/images/contact-us-hero.jpg";
                       }}

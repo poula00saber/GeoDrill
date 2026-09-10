@@ -29,17 +29,6 @@
     "description": "Advanced geotechnical, geophysical and engineering investigation services delivering reliable subsurface intelligence for safer, smarter and more efficient project decisions.",
     "ctaPrimary": "Explore Our Services",
     "ctaSecondary": "Start a Project",
-    "hud": {
-      "title": "GEODRILL / FIELD ANALYSIS",
-      "investigation": "INVESTIGATION",
-      "investigationValue": "SUBSURFACE",
-      "dataStatus": "DATA STATUS",
-      "dataStatusValue": "ANALYZING",
-      "siteType": "SITE TYPE",
-      "siteTypeValue": "ENGINEERING",
-      "region": "REGION",
-      "regionValue": "KSA"
-    },
     "scroll": "Scroll to explore"
   },
   "trust": {

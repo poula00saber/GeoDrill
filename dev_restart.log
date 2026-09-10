@@ -1,0 +1,19 @@
+
+> my-project@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.201.1:3000
+- Environments: .env.local
+✓ Ready in 700ms
+✓ Running next.config.mjs took 16ms
+
+ GET /geotechnical/ar/services/geotechnical-investigation 200 in 7.3s (next.js: 3.8s, generate-params: 1553ms, application-code: 1912ms)
+ GET /geotechnical/ar/services/geophysical-survey 200 in 296ms (next.js: 34ms, generate-params: 9ms, application-code: 253ms)
+ GET /geotechnical/ar/services/geological-survey-rock-slope-stability 200 in 317ms (next.js: 18ms, generate-params: 0.1ms, application-code: 299ms)
+ GET /geotechnical/ar/services/material-testing-quality-control 200 in 518ms (next.js: 20ms, generate-params: 0.1ms, application-code: 498ms)
+ GET /geotechnical/en/services/geotechnical-investigation 200 in 227ms (next.js: 13ms, generate-params: 12ms, application-code: 202ms)
+ GET /geotechnical/ar/services 200 in 4.1s (next.js: 3.5s, application-code: 571ms)
+ GET /geotechnical/ar 200 in 3.6s (next.js: 2.3s, generate-params: 898ms, application-code: 380ms)
+[?25h

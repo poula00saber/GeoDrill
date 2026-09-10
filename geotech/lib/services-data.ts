@@ -503,45 +503,38 @@ export const servicesData: Record<string, ServiceContent> = {
       ],
     },
     gallery: [
-      // source: .../2025/09/Geodrill-profile-source-1-128.webp
       {
-        src: "/images/services/geophysical-survey/gallery-1.webp",
+        src: "/images/geotech/services/geophysical/1.jpg",
         alt: "Geophysical survey field equipment",
         caption: "Geophysical survey field equipment setup",
       },
-      // source: .../2025/09/Geophysical-Survey.webp
       {
-        src: "/images/services/geophysical-survey/gallery-2.webp",
+        src: "/images/geotech/services/geophysical/2.jpg",
         alt: "Geophysical survey crew on site",
         caption: "GEODRILL geophysics crew on site",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-140.webp
       {
-        src: "/images/services/geophysical-survey/gallery-3.webp",
+        src: "/images/geotech/services/geophysical/3.jpg",
         alt: "MASW survey array",
         caption: "MASW geophone array in the field",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-142.webp
       {
-        src: "/images/services/geophysical-survey/gallery-4.webp",
+        src: "/images/geotech/services/geophysical/4.jpeg",
         alt: "GPR survey in progress",
         caption: "Ground penetrating radar (GPR) survey in progress",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-146.webp
       {
-        src: "/images/services/geophysical-survey/gallery-5.webp",
+        src: "/images/geotech/services/geophysical/5.jpeg",
         alt: "Seismic refraction survey setup",
         caption: "Seismic refraction survey setup",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-161.webp
       {
-        src: "/images/services/geophysical-survey/gallery-6.webp",
+        src: "/images/geotech/services/geophysical/6.jpeg",
         alt: "Magnetic survey equipment",
         caption: "Magnetic survey equipment in the field",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-172.webp
       {
-        src: "/images/services/geophysical-survey/gallery-7.webp",
+        src: "/images/geotech/services/geophysical/7.jpg",
         alt: "Suspension logging in borehole",
         caption: "Suspension logging operation at a borehole",
       },
@@ -740,21 +733,18 @@ export const servicesData: Record<string, ServiceContent> = {
       ],
     },
     gallery: [
-      // source: .../2025/09/Geodrill-profile-source-1-194.webp
       {
-        src: "/images/services/geological-survey/gallery-1.webp",
+        src: "/images/geotech/services/geological servey/1.jpeg",
         alt: "Geological field mapping",
         caption: "Geological field mapping in mountainous terrain",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-197.webp
       {
-        src: "/images/services/geological-survey/gallery-2.webp",
+        src: "/images/geotech/services/geological servey/2.jpeg",
         alt: "Rock slope assessment site",
         caption: "Rock slope stability assessment on site",
       },
-      // source: .../2025/09/Geodrill-profile-source-1-200.webp
       {
-        src: "/images/services/geological-survey/gallery-3.webp",
+        src: "/images/geotech/services/geological servey/3.jpeg",
         alt: "Terrain classification survey",
         caption: "Terrain classification and structural mapping",
       },

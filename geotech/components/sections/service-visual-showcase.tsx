@@ -300,7 +300,7 @@ export function ServiceVisualShowcase({
                 alt={active.label}
                 fill
                 sizes="(max-width: 768px) 100vw, 60vw"
-                className="object-cover"
+                className="h-full w-full object-contain p-2"
                 onError={(event) => {
                   event.currentTarget.src = "/images/contact-us-hero.jpg";
                 }}
