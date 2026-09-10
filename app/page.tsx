@@ -66,7 +66,7 @@ const portals = [
       ar: "خدمات جيوتقنية متقدمة ومختبرات هندسية لأساس أكثر أماناً.",
     },
     cta: { en: "Visit Geotechnical Site", ar: "زيارة موقع الجيوتقنية" },
-    href: "https://old.geodrillksa.com",
+    href: "/geotechnical/ar",
     external: false,
     accent: "yellow",
     img: "/images/geotech-portal-placeholder.png",
