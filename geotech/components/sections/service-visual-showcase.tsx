@@ -149,7 +149,15 @@ export function capabilitiesFromStrings(
       features: [],
       image: fallbackImage,
       tone: (
-        ["primary", "amber", "sky", "violet", "emerald", "rose", "blue"] as const
+        [
+          "primary",
+          "amber",
+          "sky",
+          "violet",
+          "emerald",
+          "rose",
+          "blue",
+        ] as const
       )[i % 7],
     };
   });
@@ -260,7 +268,7 @@ export function ServiceVisualShowcase({
           const isActive = i === activeIdx;
           const t = TONE[cap.tone ?? "primary"];
           const Icon2 = cap.icon ?? Sparkles;
-          const chipLabel = isAr ? cap.labelAr ?? cap.label : cap.label;
+          const chipLabel = isAr ? (cap.labelAr ?? cap.label) : cap.label;
           return (
             <button
               key={cap.id ?? i}
@@ -372,20 +380,20 @@ export function ServiceVisualShowcase({
               </span>
 
               <h3 className="mt-2 text-balance text-xl font-bold leading-tight tracking-tight text-foreground sm:text-2xl lg:text-3xl">
-                {isAr ? active.labelAr ?? active.label : active.label}
+                {isAr ? (active.labelAr ?? active.label) : active.label}
               </h3>
 
               <p className="mt-4 text-balance text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {isAr ? active.descriptionAr ?? active.description : active.description}
+                {isAr
+                  ? (active.descriptionAr ?? active.description)
+                  : active.description}
               </p>
 
-              {(isAr
-                ? active.featuresAr ?? active.features
-                : active.features
-              ).length > 0 && (
+              {(isAr ? (active.featuresAr ?? active.features) : active.features)
+                .length > 0 && (
                 <ul className="mt-6 grid gap-2.5">
                   {(isAr
-                    ? active.featuresAr ?? active.features
+                    ? (active.featuresAr ?? active.features)
                     : active.features
                   ).map((f, fi) => (
                     <motion.li
