@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { metadata as studioMetadata, viewport as studioViewport } from "next-sanity/studio";
-import StudioClient from "./studio-client";
+import StudioClient from "@/components/studio/studio-client";
 
 /**
  * Sanity Studio mounted at /contracting/[lang]/studio (lang = "en" | "ar").
  * Both locales render the same (first) content Studio — the [lang] segment is
  * kept only so the URL shape matches the rest of the branded contracting site.
+ * The Studio is also available at /studio (see app/studio/page.tsx).
  *
  * The page is a static server component for SSR; the actual Studio is mounted
  * in the client component <StudioClient /> and navigates via URL hashes, so no

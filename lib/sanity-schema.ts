@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { LinkIcon } from "@sanity/icons/Link";
 
 /**
  * Content model for the GEODRILL blog. The field names here must match
@@ -184,4 +185,70 @@ export const project = defineType({
   ],
 });
 
-export const schemaTypes = [post, project];
+/**
+ * Singleton that stores the permanent destination (currently a Microsoft
+ * OneDrive share URL`` used by the GeoDrill printed QR code.
+ *
+ * The printed QR code encodes ONLY the permanent site URL (e.g.
+ * `https://geodrillksa.com/documents`). When Microsoft changes the actual
+ * OneDrive share link, the owner edits ONLY this record's `destinationUrl`
+ * in Sanity — the already-printed QR keeps working with no reprint needed.
+ *
+ * The single active record is enforced as a singleton in Sanity Studio via
+ * the custom structure (see `sanity.config.ts`), using the fixed document ID
+ * `geoDrillQrRedirect`.
+ */
+export const geoDrillQrRedirect = defineType({
+  name: "geoDrillQrRedirect",
+  title: "QR Redirect (Documents)",
+  type: "document",
+  icon: LinkIcon,
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required().max(120),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "destinationUrl",
+      title: "Documents destination URL",
+      description:
+        "Permanent destination used by the GeoDrill printed QR code. Change this URL when the OneDrive folder/share link changes. The printed QR code does not need to be replaced.",
+      type: "url",
+      validation: (Rule) =>
+        Rule.required().uri({
+          scheme: ["http", "https"],
+          allowRelative: false,
+        }),
+    }),
+    defineField({
+      name: "active",
+      title: "Active",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
+      name: "updatedAt",
+      title: "Last updated",
+      type: "datetime",
+      options: { dateFormat: "YYYY-MM-DD", timeFormat: "HH:mm" },
+    }),
+  ],
+
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "destinationUrl",
+    },
+  },
+});
+
+export const schemaTypes = [post, project, geoDrillQrRedirect];
