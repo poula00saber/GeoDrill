@@ -17,15 +17,16 @@ export function proxy(request: NextRequest) {
   )
     .split(":")[0]
     .toLowerCase();
-  const protocol =
+  const protocol = (
     request.headers.get("x-forwarded-proto")?.split(",")[0] ??
-    request.nextUrl.protocol;
+    request.nextUrl.protocol
+  ).trim().toLowerCase().replace(/:$/, "");
 
   if (
     hostname === "geodrillksa.com" ||
     (hostname.endsWith(".geodrillksa.com") &&
       hostname !== "www.geodrillksa.com") ||
-    (hostname === "www.geodrillksa.com" && protocol !== "https:")
+    (hostname === "www.geodrillksa.com" && protocol !== "https")
   ) {
     const canonicalUrl = request.nextUrl.clone();
     canonicalUrl.protocol = "https:";
