@@ -30,5 +30,12 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "geotech/app",
+    "geotech/next-env.d.ts",
+    "geotech/next.config.js",
+    "geotech/postcss.config.js",
+    "geotech/tailwind.config.ts"
+  ]
 }

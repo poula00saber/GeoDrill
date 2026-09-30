@@ -184,18 +184,42 @@ const PROJECTS: Record<Category, ProjectEntry> = {
     ),
     thumbnails: [
       P("05_waterproofing_and_insulation", "insulation_rooftop_finished.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_bridge_deck_waterproof.jpg"),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_bridge_deck_waterproof.jpg",
+      ),
       P("05_waterproofing_and_insulation", "insulation_drainage_cells.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_epoxy_corridor_floor.jpg"),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_epoxy_corridor_floor.jpg",
+      ),
       P("05_waterproofing_and_insulation", "insulation_epoxy_floor_dots.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_membrane_seam_detail.jpg"),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_membrane_seam_detail.jpg",
+      ),
       P("05_waterproofing_and_insulation", "insulation_pool_waterproofing.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_rooftop_curved_coating.jpg"),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_rooftop_curved_coating.jpg",
+      ),
       P("05_waterproofing_and_insulation", "insulation_rooftop_hvac_units.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_rooftop_membrane_wet.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_rooftop_white_coating.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_warehouse_floor_pour.jpg"),
-      P("05_waterproofing_and_insulation", "insulation_warehouse_floor_wide.jpg"),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_rooftop_membrane_wet.jpg",
+      ),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_rooftop_white_coating.jpg",
+      ),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_warehouse_floor_pour.jpg",
+      ),
+      P(
+        "05_waterproofing_and_insulation",
+        "insulation_warehouse_floor_wide.jpg",
+      ),
     ],
   },
   industrial: {
@@ -225,13 +249,16 @@ const PROJECTS: Record<Category, ProjectEntry> = {
 const tabs: Category[] = CATEGORY_ORDER;
 const FADE = { duration: 0.28, ease: "easeOut" } as const;
 
-export function Projects() {
+export function Projects({
+  includeGalleryCatalog = false,
+}: {
+  includeGalleryCatalog?: boolean;
+}) {
   const { t, lang } = useLanguage();
   const p = t.projects;
 
-  const override = (
-    p as { categories?: Partial<Record<Category, string>> }
-  ).categories;
+  const override = (p as { categories?: Partial<Record<Category, string>> })
+    .categories;
   const labelOf = (key: Category) =>
     override?.[key] ?? DEFAULT_CATEGORY_LABELS[key][lang];
 
@@ -241,7 +268,7 @@ export function Projects() {
   // Tracks the direction of the last photo step so the hero can slide into
   // view following the site's reading direction (next/prev respected per
   // language: English slides right-to-left, Arabic slides left-to-right).
-  const navDirRef = useRef<1 | -1>(1);
+  const [navDirection, setNavDirection] = useState<1 | -1>(1);
 
   const displayed: Category = activeTab;
   const entry = PROJECTS[displayed];
@@ -253,19 +280,18 @@ export function Projects() {
   //  - EN (LTR): photo enters from the right and moves left (rtl motion)
   //  - AR (RTL): photo enters from the left and moves right (ltr motion)
   // For "prev" the directions are reversed.
-  const enterX =
-    navDirRef.current === 1 ? (isAr ? -60 : 60) : isAr ? 60 : -60;
+  const enterX = navDirection === 1 ? (isAr ? -60 : 60) : isAr ? 60 : -60;
   const exitX = -enterX;
 
   const selectCategory = (tab: Category) => {
     setActiveTab(tab);
     setFocused(0);
-    navDirRef.current = 1;
+    setNavDirection(1);
   };
 
   // Step strictly inside current category's thumbnails array
   const stepPhoto = (dir: 1 | -1) => {
-    navDirRef.current = dir;
+    setNavDirection(dir);
     const total = entry.thumbnails.length;
     setFocused((prev) => (prev + dir + total) % total);
   };
@@ -279,7 +305,9 @@ export function Projects() {
     const activeEl = container.children[heroIdx] as HTMLElement | undefined;
     if (!activeEl) return;
     const targetLeft =
-      activeEl.offsetLeft - container.clientWidth / 2 + activeEl.clientWidth / 2;
+      activeEl.offsetLeft -
+      container.clientWidth / 2 +
+      activeEl.clientWidth / 2;
     container.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, [heroIdx, displayed]);
 
@@ -456,6 +484,64 @@ export function Projects() {
           </div>
         </Reveal>
       </div>
+      {includeGalleryCatalog && (
+        <div className="mx-auto mt-16 max-w-7xl space-y-4 px-6">
+          {CATEGORY_ORDER.map((category) => {
+            const categoryProject = PROJECTS[category];
+            const categoryLabel = labelOf(category);
+            const imageContext = {
+              en: `${categoryLabel}: ${categoryProject.title.en}`,
+              ar: `${categoryLabel}: ${categoryProject.title.ar}`,
+            }[lang];
+
+            return (
+              <section key={category} className="border-b border-border py-4">
+                <h2 className="text-lg font-bold text-foreground">
+                  {categoryLabel}
+                </h2>
+                <details className="mt-2">
+                  <summary className="cursor-pointer text-sm text-muted-foreground">
+                    {categoryProject.title[lang]} ·{" "}
+                    {categoryProject.thumbnails.length}
+                  </summary>
+                  <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
+                    {categoryProject.meta.scope[lang]}
+                  </p>
+                  <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                    {categoryProject.thumbnails.map((src, index) => {
+                      const filename =
+                        src
+                          .split("/")
+                          .pop()
+                          ?.replace(/\.[^.]+$/, "") ?? "";
+                      const caption = filename.replace(/[_-]+/g, " ");
+
+                      return (
+                        <figure key={src} className="min-w-0">
+                          <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-muted">
+                            <Image
+                              src={src}
+                              alt={`${imageContext}; ${caption}`}
+                              fill
+                              sizes="(max-width: 768px) 50vw, 25vw"
+                              className="object-cover"
+                            />
+                          </div>
+                          <figcaption className="mt-2 text-xs text-muted-foreground">
+                            {lang === "ar"
+                              ? `${categoryProject.title.ar} ${index + 1}`
+                              : caption}
+                          </figcaption>
+                        </figure>
+                      );
+                    })}
+                  </div>
+                </details>
+              </section>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }

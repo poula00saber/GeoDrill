@@ -144,9 +144,7 @@ export function AboutHero() {
                     {stat.value}
                   </div>
                   <div className="text-xs text-white/60 sm:text-sm">
-                    {dict?.about?.[stat.labelKey] ||
-                      copy.stats[i] ||
-                      stat.fallback}
+                    {copy.stats[i] || stat.fallback}
                   </div>
                 </div>
               </div>

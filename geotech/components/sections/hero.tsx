@@ -3,9 +3,7 @@
 //
 // Changes from the previous version, and why:
 //
-// 1. Headline is now 3 lines (dict.hero.titleLine1 / titleLine2 / titleAccent)
-//    to match the reference layout, instead of 2 (title / titleAccent).
-//    Update en.json / ar.json accordingly — see the dict shape note below.
+// 1. The headline uses the localized title and accent fields from the dictionaries.
 //
 // 2. Background is now a small rotating carousel with dot indicators
 //    (matching the reference's slide dots), not a single static image.
@@ -139,15 +137,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.5 }}
               className="block"
             >
-              {dict.hero.titleLine1}
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.65 }}
-              className="block"
-            >
-              {dict.hero.titleLine2}
+              {dict.hero.title}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 30 }}

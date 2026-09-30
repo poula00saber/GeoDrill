@@ -3,6 +3,9 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ClientsGallery } from "@/components/pages/clients-gallery";
 import { CLIENT_LOGOS } from "@/lib/clients-data";
+import { buildPageMetadata } from "@/lib/seo";
+import { isLocale } from "@/geotech/lib/i18n";
+import { notFound } from "next/navigation";
 
 // Pre-render the clients page for both locales.
 export function generateStaticParams() {
@@ -17,13 +20,19 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const locale = lang === "ar" ? "ar" : "en";
-  return {
-    title: locale === "ar" ? `عملاؤنا | جيو دريل` : `Our Clients | GEODRILL`,
+  if (!isLocale(lang)) notFound();
+  const locale = lang;
+  return buildPageMetadata({
+    title:
+      locale === "ar" ? "عملاؤنا | GEODRILL KSA" : "Our Clients | GEODRILL KSA",
     description:
-      CLIENT_LOGOS.length +
-      "+ organizations trust GEODRILL across the Kingdom.",
-  };
+      locale === "ar"
+        ? `تثق أكثر من ${CLIENT_LOGOS.length} جهة بخدمات GEODRILL في المملكة العربية السعودية.`
+        : `${CLIENT_LOGOS.length}+ organizations trust GEODRILL across Saudi Arabia.`,
+    path: `/contracting/${locale}/clients`,
+    image: "/logo.png",
+    locale,
+  });
 }
 
 export default async function ClientsPage({
@@ -32,7 +41,8 @@ export default async function ClientsPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const locale = lang === "ar" ? "ar" : "en";
+  if (!isLocale(lang)) notFound();
+  const locale = lang;
 
   return (
     <>

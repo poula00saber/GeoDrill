@@ -1,4 +1,5 @@
-import { ContractingSite } from "@/components/contracting-site";
+import { notFound, permanentRedirect } from "next/navigation";
+import { isLocale } from "@/geotech/lib/i18n";
 
 export default async function Page({
   params,
@@ -6,7 +7,9 @@ export default async function Page({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const locale = lang === "ar" ? "ar" : "en";
+  if (!isLocale(lang)) {
+    notFound();
+  }
 
-  return <ContractingSite locale={locale} />;
+  permanentRedirect(`/contracting/${lang}`);
 }

@@ -79,7 +79,7 @@ export function WhatAreYouSolving() {
         <SectionHeading
           eyebrow="Discovery"
           title="What are you trying to solve?"
-          subtitle="Select your project need to explore relevant services"
+          description="Select your project need to explore relevant services"
           align="center"
           className="mb-16"
         />

@@ -238,7 +238,7 @@ const listItemVariants = {
     transition: {
       delay: i * 0.06,
       duration: 0.35,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   }),
 };
@@ -469,7 +469,7 @@ export function QhseEnhanced() {
                 </div>
 
                 {/* Policy Scope */}
-                {t.safety.scope && (
+                {"scope" in t.safety && typeof t.safety.scope === "string" && (
                   <div className="rounded-xl border border-primary/25 bg-primary/5 p-5">
                     <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary">
                       <Eye className="h-4 w-4" />

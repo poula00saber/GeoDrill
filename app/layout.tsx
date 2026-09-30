@@ -15,10 +15,31 @@ const ibmPlex = IBM_Plex_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "GEODRILL Construction Experts | Strength in Execution",
+  metadataBase: new URL("https://www.geodrillksa.com"),
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
+  title: "GEODRILL KSA | Geotechnical, Geoscience & Construction Experts",
   description:
-    "GEODRILL Construction Experts delivers integrated engineering and construction solutions across Saudi Arabia, general contracting, infrastructure, concrete, steel, MEP, and finishing.",
-  generator: "v0.app",
+    "GEODRILL KSA provides geotechnical, geoscience, engineering investigation, general contracting and construction solutions across Saudi Arabia.",
+  generator: "GEODRILL KSA",
+  openGraph: {
+    title: "GEODRILL KSA | Geotechnical, Geoscience & Construction Experts",
+    description:
+      "GEODRILL KSA provides geotechnical, geoscience, engineering investigation, general contracting and construction solutions across Saudi Arabia.",
+    url: "https://www.geodrillksa.com/",
+    siteName: "GEODRILL KSA",
+    type: "website",
+    locale: "en_US",
+    images: [{ url: "/logo.png", alt: "GEODRILL KSA" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GEODRILL KSA | Geotechnical, Geoscience & Construction Experts",
+    description:
+      "GEODRILL KSA provides geotechnical, geoscience, engineering investigation, general contracting and construction solutions across Saudi Arabia.",
+    images: ["/logo.png"],
+  },
   icons: {
     icon: [
       { url: "/logo.png", media: "(prefers-color-scheme: light)" },
@@ -43,7 +64,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="und"
       dir="ltr"
       suppressHydrationWarning
       className={`${ibmPlex.variable} bg-background`}

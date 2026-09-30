@@ -14,6 +14,9 @@ import { Navbar } from "@/components/navbar";
 import { getBlogPost, getBlogPosts, type BlogPost } from "@/lib/blog";
 import { sanityImage } from "@/lib/sanity";
 import { content, type Lang } from "@/lib/content";
+import { buildPageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl } from "@/lib/seo";
 
 function pick(locale: Lang, ar?: string | null, en?: string | null) {
   return locale === "ar" && ar ? ar : (en ?? "");
@@ -69,6 +72,24 @@ function BrandBackdrop() {
   );
 }
 
+type PortableTextMarkDef = {
+  _key?: string;
+  _type?: string;
+  href?: string;
+};
+
+type PortableTextSpan = {
+  text?: string;
+  marks?: string[];
+};
+
+type PortableTextBlock = {
+  children: PortableTextSpan[];
+  style?: string;
+  listItem?: "bullet" | "number";
+  markDefs?: PortableTextMarkDef[];
+};
+
 export async function BlogIndexPage({ locale }: { locale: Lang }) {
   const posts = await getBlogPosts();
   const copy = content[locale].blog;
@@ -103,7 +124,7 @@ export async function BlogIndexPage({ locale }: { locale: Lang }) {
           {featured ? (
             <FeaturedPost post={featured} locale={locale} />
           ) : (
-            <EmptyState locale={locale} message={copy.empty} />
+            <EmptyState message={copy.empty} />
           )}
 
           {remaining.length > 0 && (
@@ -268,7 +289,7 @@ export function BlogCard({ post, locale }: { post: BlogPost; locale: Lang }) {
   );
 }
 
-function EmptyState({ locale, message }: { locale: Lang; message: string }) {
+function EmptyState({ message }: { message: string }) {
   return (
     <div className="flex flex-col items-center gap-4 rounded-3xl border border-dashed border-border py-24 text-center">
       <span className="flex size-14 items-center justify-center rounded-full bg-teal/10 text-teal">
@@ -286,7 +307,11 @@ function EmptyState({ locale, message }: { locale: Lang; message: string }) {
  * version silently flattened all of this to <p> tags — any heading, list, or
  * bold text in the CMS content was being dropped, not just unstyled.
  */
-function renderMarks(text: string, marks: string[] = [], markDefs: any[] = []) {
+function renderMarks(
+  text: string,
+  marks: string[] = [],
+  markDefs: PortableTextMarkDef[] = [],
+) {
   let node: React.ReactNode = text;
   for (const mark of marks) {
     const linkDef = markDefs?.find(
@@ -320,7 +345,13 @@ function PortableText({
   blocks?: unknown[] | null;
   locale: Lang;
 }) {
-  const items = (blocks ?? []) as any[];
+  const items = (blocks ?? []).filter(
+    (block): block is PortableTextBlock =>
+      block !== null &&
+      typeof block === "object" &&
+      "children" in block &&
+      Array.isArray(block.children),
+  );
   if (!items.length) {
     return (
       <p className="text-muted-foreground">
@@ -354,13 +385,7 @@ function PortableText({
   };
 
   items.forEach((block, index) => {
-    if (!block || typeof block !== "object" || !("children" in block)) return;
-    const { style, listItem, children, markDefs } = block as {
-      style?: string;
-      listItem?: "bullet" | "number";
-      children?: any[];
-      markDefs?: any[];
-    };
+    const { style, listItem, children, markDefs } = block;
 
     const content = (children ?? []).map((child, i) =>
       child && typeof child === "object" && "text" in child ? (
@@ -443,9 +468,53 @@ export async function BlogPostPage({
     : null;
   const body = isAr && post.bodyAr?.length ? post.bodyAr : post.body;
   const readMins = estimateReadMinutes(body, locale);
+  const pageUrl = absoluteUrl(`/contracting/${locale}/blog/${slug}`);
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: isAr ? "الرئيسية" : "Home",
+              item: absoluteUrl(`/contracting/${locale}`),
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: isAr ? "المدونة" : "Blog",
+              item: absoluteUrl(`/contracting/${locale}/blog`),
+            },
+            { "@type": "ListItem", position: 3, name: title, item: pageUrl },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: title,
+          description: pick(locale, post.excerptAr, post.excerpt),
+          image: image ?? undefined,
+          datePublished: post.publishedAt ?? undefined,
+          author: post.author
+            ? {
+                "@type": "Person",
+                name: pick(locale, post.authorAr, post.author),
+              }
+            : { "@type": "Organization", name: "GEODRILL KSA" },
+          publisher: {
+            "@type": "Organization",
+            name: "GEODRILL KSA",
+            logo: { "@type": "ImageObject", url: absoluteUrl("/logo.png") },
+          },
+          mainEntityOfPage: pageUrl,
+        }}
+      />
       <Navbar />
       <main
         className="min-h-svh bg-background text-foreground"
@@ -493,12 +562,22 @@ export async function BlogPostPage({
 }
 
 export function blogMetadata(locale: Lang, post?: BlogPost | null): Metadata {
-  return {
-    title: post
-      ? `${pick(locale, post.titleAr, post.title)} | GEODRILL`
-      : `${content[locale].blog.title} | GEODRILL`,
-    description: post
-      ? pick(locale, post.excerptAr, post.excerpt)
-      : content[locale].blog.sub,
-  };
+  const slug = post?.slug?.current;
+  const title = post
+    ? `${pick(locale, post.titleAr, post.title)} | GEODRILL`
+    : `${content[locale].blog.title} | GEODRILL`;
+  const description = post
+    ? pick(locale, post.excerptAr, post.excerpt) || content[locale].blog.sub
+    : content[locale].blog.sub;
+  const image = post?.coverImage
+    ? sanityImage(post.coverImage)?.url()
+    : undefined;
+
+  return buildPageMetadata({
+    title,
+    description,
+    path: `/contracting/${locale}/blog${slug ? `/${slug}` : ""}`,
+    image,
+    locale,
+  });
 }

@@ -10,10 +10,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  return getGeotechPageMetadata(lang, "services");
+  return getGeotechPageMetadata(lang, "projects");
 }
 
-export default function ServicesLayout({
+export default function ProjectsLayout({
   children,
 }: {
   children: React.ReactNode;

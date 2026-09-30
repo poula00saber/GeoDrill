@@ -14,7 +14,7 @@ export function SelectedExperience() {
         <SectionHeading
           eyebrow="Track Record"
           title={dict.selectedExperience.title}
-          subtitle={dict.selectedExperience.subtitle}
+          description={dict.selectedExperience.subtitle}
           align="center"
           className="mb-16"
         />

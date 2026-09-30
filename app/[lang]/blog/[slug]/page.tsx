@@ -1,4 +1,5 @@
-import { redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { isLocale } from "@/geotech/lib/i18n";
 
 export default async function BlogPostPage({
   params,
@@ -6,5 +7,9 @@ export default async function BlogPostPage({
   params: Promise<{ lang: string; slug: string }>;
 }) {
   const { lang, slug } = await params;
-  redirect(`/contracting/${lang === "ar" ? "ar" : "en"}/blog/${slug}`);
+  if (!isLocale(lang)) {
+    notFound();
+  }
+
+  permanentRedirect(`/contracting/${lang}/blog/${slug}`);
 }

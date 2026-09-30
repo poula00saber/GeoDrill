@@ -96,7 +96,7 @@ export function SoftwareSection() {
               : "Software & Tools We Use"
           }
           title={dict.software.title}
-          subtitle={dict.software.subtitle}
+          description={dict.software.subtitle}
           align="center"
           className="mb-16"
         />

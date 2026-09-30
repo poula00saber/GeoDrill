@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Faq } from "@/components/sections/faq";
 import { content, type Lang } from "@/lib/content";
+import { isLocale } from "@/geotech/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "ar" }];
@@ -15,11 +18,16 @@ export async function generateMetadata({
 }: {
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
-  const locale: Lang = (await params).lang === "ar" ? "ar" : "en";
-  return {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Lang = lang;
+  return buildPageMetadata({
     title: `${content[locale].faq.title} | GEODRILL`,
     description: content[locale].faq.sub,
-  };
+    path: `/contracting/${locale}/faq`,
+    image: "/logo.png",
+    locale,
+  });
 }
 
 export default async function ContractingFaqPage({
@@ -27,7 +35,9 @@ export default async function ContractingFaqPage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  const locale: Lang = (await params).lang === "ar" ? "ar" : "en";
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Lang = lang;
   return (
     <>
       <Navbar />

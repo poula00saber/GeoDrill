@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { PageTransition } from "@/geotech/components/page-transition";
 import { Navigation } from "@/geotech/components/navigation";
 import { Hero } from "@/geotech/components/sections/hero";
@@ -37,5 +37,5 @@ export function GeotechHome() {
 }
 
 export default function GeotechnicalIndex() {
-  redirect("/geotechnical/en");
+  permanentRedirect("/geotechnical/en");
 }

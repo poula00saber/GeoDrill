@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BlogIndexPage, blogMetadata } from "@/components/blog-pages";
-import { content, type Lang } from "@/lib/content";
+import type { Lang } from "@/lib/content";
+import { isLocale } from "@/geotech/lib/i18n";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return ["en", "ar"].map((lang) => ({ lang }));
@@ -13,7 +15,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
-  const locale: Lang = (await params).lang === "ar" ? "ar" : "en";
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Lang = lang;
   return blogMetadata(locale);
 }
 
@@ -22,6 +26,8 @@ export default async function ContractingBlogPage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  const locale: Lang = (await params).lang === "ar" ? "ar" : "en";
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Lang = lang;
   return <BlogIndexPage locale={locale} />;
 }

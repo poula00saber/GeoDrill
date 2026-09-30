@@ -11,6 +11,9 @@ import {
 } from "@/geotech/lib/services-data";
 import { getLocalizedService } from "@/geotech/lib/services-page-i18n";
 import { notFound } from "next/navigation";
+import { isLocale } from "@/geotech/lib/i18n";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl, buildPageMetadata } from "@/lib/seo";
 
 interface ServicePageProps {
   params: Promise<{
@@ -37,29 +40,24 @@ export async function generateMetadata({
   params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
   const { lang, slug } = await params;
+  if (!isLocale(lang)) notFound();
   const service = getServiceBySlug(slug);
-
-  if (!service) {
-    return {
-      title: "Service Not Found",
-    };
-  }
+  if (!service) notFound();
 
   const localizedService = getLocalizedService(service, lang);
 
-  return {
+  return buildPageMetadata({
     title: `${localizedService.title} | GEODRILL KSA`,
     description: localizedService.shortDescription,
-    openGraph: {
-      title: localizedService.title,
-      description: localizedService.shortDescription,
-      type: "website",
-    },
-  };
+    path: `/geotechnical/${lang}/services/${slug}`,
+    image: service.heroImage,
+    locale: lang,
+  });
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
   const { slug, lang } = await params;
+  if (!isLocale(lang)) notFound();
   const service = getServiceBySlug(slug);
 
   if (!service) {
@@ -67,6 +65,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   const localizedService = getLocalizedService(service, lang);
+  const isArabic = lang === "ar";
+  const pageUrl = absoluteUrl(`/geotechnical/${lang}/services/${slug}`);
 
   // Canonical services list for the bottom pager (same order as /services).
   const allServices = (Object.keys(serviceCategories) as ServiceCategory[])
@@ -76,6 +76,38 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: isArabic ? "الرئيسية" : "Home",
+              item: absoluteUrl(`/geotechnical/${lang}`),
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: isArabic ? "الخدمات" : "Services",
+              item: absoluteUrl(`/geotechnical/${lang}/services`),
+            },
+            { "@type": "ListItem", position: 3, name: localizedService.title },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ImageObject",
+          contentUrl: absoluteUrl(service.heroImage),
+          name: localizedService.title,
+          description: localizedService.shortDescription,
+          representativeOfPage: true,
+          url: pageUrl,
+        }}
+      />
       <Navigation />
       <main className="min-h-screen w-full">
         <ServicePageTemplate

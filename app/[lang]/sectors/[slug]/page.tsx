@@ -7,6 +7,10 @@ import { PageHero } from "@/components/page-hero";
 import { SectorGallery } from "@/components/pages/sector-gallery";
 import { SectorNav } from "@/components/pages/sector-nav";
 import { SECTORS, getSectorByKey } from "@/lib/sector-data";
+import { isLocale } from "@/geotech/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ lang: string; slug: string }>;
@@ -24,17 +28,27 @@ export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;
+  if (!isLocale(lang)) notFound();
   const sector = getSectorByKey(slug);
-  const locale = lang === "ar" ? "ar" : "en";
-  return {
-    title: sector ? `${sector.name[locale]} | GEODRILL` : "GEODRILL",
-    description: sector?.short[locale],
-  };
+  if (!sector) notFound();
+  const locale = lang;
+
+  return buildPageMetadata({
+    title:
+      locale === "ar"
+        ? `مقاولات ${sector.name.ar} في السعودية | GEODRILL`
+        : `${sector.name.en} Construction in Saudi Arabia | GEODRILL`,
+    description: sector.short[locale],
+    path: `/contracting/${locale}/sectors/${sector.key}`,
+    image: sector.image,
+    locale,
+  });
 }
 
 export default async function SectorPage({ params }: Props) {
   const { lang, slug } = await params;
-  const locale = lang === "ar" ? "ar" : "en";
+  if (!isLocale(lang)) notFound();
+  const locale = lang;
   const sector = getSectorByKey(slug);
   if (!sector) notFound();
 
@@ -43,6 +57,7 @@ export default async function SectorPage({ params }: Props) {
     locale === "ar"
       ? "ما الذي ننفذه في هذا القطاع؟"
       : "Capabilities we deliver in this sector";
+  const pageUrl = absoluteUrl(`/contracting/${locale}/sectors/${sector.key}`);
 
   const statItems = [
     {
@@ -58,76 +73,109 @@ export default async function SectorPage({ params }: Props) {
   ];
 
   return (
-    <main className="min-h-svh bg-background text-foreground transition-colors duration-300">
-      <Navbar />
-      <PageHero
-        image={sector.image}
-        kicker={`${locale === "ar" ? "القطاع" : "Sector"} · ${sector.name[locale]}`}
-        title={sector.name[locale]}
-        sub={sector.short[locale]}
-        crumb={sector.name[locale]}
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: locale === "ar" ? "الرئيسية" : "Home",
+              item: absoluteUrl(`/contracting/${locale}`),
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: sector.name[locale],
+              item: pageUrl,
+            },
+          ],
+        }}
       />
-
-      {/* ── Teal Accent Intro Band ── */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-teal/10 via-background to-background py-10 md:py-14">
-        {/* Ambient Radial Teal Glow */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-24 end-1/4 size-96 rounded-full bg-teal/15 blur-3xl dark:bg-teal/10"
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ImageObject",
+          contentUrl: absoluteUrl(sector.image),
+          name: sector.name[locale],
+          description: sector.short[locale],
+          representativeOfPage: true,
+          url: pageUrl,
+        }}
+      />
+      <main className="min-h-svh bg-background text-foreground transition-colors duration-300">
+        <Navbar />
+        <PageHero
+          image={sector.image}
+          kicker={`${locale === "ar" ? "القطاع" : "Sector"} · ${sector.name[locale]}`}
+          title={sector.name[locale]}
+          sub={sector.short[locale]}
+          crumb={sector.name[locale]}
         />
 
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 md:px-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/10 px-3 py-1 text-xs font-semibold text-teal dark:text-teal">
-              <Sparkles className="size-3.5" />
-              <span>
-                {locale === "ar" ? "قدرات القطاع" : "Sector Capabilities"}
-              </span>
+        {/* ── Teal Accent Intro Band ── */}
+        <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-teal/10 via-background to-background py-10 md:py-14">
+          {/* Ambient Radial Teal Glow */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-24 end-1/4 size-96 rounded-full bg-teal/15 blur-3xl dark:bg-teal/10"
+          />
+
+          <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 md:px-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/10 px-3 py-1 text-xs font-semibold text-teal dark:text-teal">
+                <Sparkles className="size-3.5" />
+                <span>
+                  {locale === "ar" ? "قدرات القطاع" : "Sector Capabilities"}
+                </span>
+              </div>
+              <h2 className="text-xl font-bold leading-snug tracking-tight text-foreground md:text-2xl lg:text-3xl">
+                {introLabel}
+              </h2>
             </div>
-            <h2 className="text-xl font-bold leading-snug tracking-tight text-foreground md:text-2xl lg:text-3xl">
-              {introLabel}
-            </h2>
-          </div>
 
-          {/* Glassmorphic Stat Cards (Using theme CSS variables) */}
-          <div className="grid flex-shrink-0 grid-cols-2 gap-3 sm:gap-4 lg:w-[480px]">
-            {statItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.label}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-teal/20 bg-card/60 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-teal/50 hover:bg-card hover:shadow-lg hover:shadow-teal/10 dark:bg-card/40 dark:hover:bg-card/80"
-                >
-                  <div className="flex items-center justify-between">
-                    <Icon className="size-4 text-teal transition-transform duration-300 group-hover:scale-110" />
-                    <span className="size-1.5 rounded-full bg-teal opacity-60 group-hover:opacity-100" />
+            {/* Glassmorphic Stat Cards (Using theme CSS variables) */}
+            <div className="grid flex-shrink-0 grid-cols-2 gap-3 sm:gap-4 lg:w-[480px]">
+              {statItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-teal/20 bg-card/60 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-teal/50 hover:bg-card hover:shadow-lg hover:shadow-teal/10 dark:bg-card/40 dark:hover:bg-card/80"
+                  >
+                    <div className="flex items-center justify-between">
+                      <Icon className="size-4 text-teal transition-transform duration-300 group-hover:scale-110" />
+                      <span className="size-1.5 rounded-full bg-teal opacity-60 group-hover:opacity-100" />
+                    </div>
+                    <div className="mt-4">
+                      <span className="block text-2xl font-black text-teal sm:text-3xl">
+                        {item.value}
+                      </span>
+                      <span className="mt-0.5 block text-xs font-medium text-muted-foreground transition-colors group-hover:text-foreground sm:text-sm">
+                        {item.label}
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-4">
-                    <span className="block text-2xl font-black text-teal sm:text-3xl">
-                      {item.value}
-                    </span>
-                    <span className="mt-0.5 block text-xs font-medium text-muted-foreground transition-colors group-hover:text-foreground sm:text-sm">
-                      {item.label}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Modern bento gallery of this sector's works */}
-      <section className="bg-background py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <SectorGallery items={sector.gallery} title={galleryTitle} />
-        </div>
-      </section>
+        {/* Modern bento gallery of this sector's works */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectorGallery items={sector.gallery} title={galleryTitle} />
+          </div>
+        </section>
 
-      {/* Related sectors */}
-      <SectorNav current={sector.key} currentName={sector.name[locale]} />
+        {/* Related sectors */}
+        <SectorNav current={sector.key} currentName={sector.name[locale]} />
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </>
   );
 }
