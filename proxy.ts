@@ -20,7 +20,10 @@ export function proxy(request: NextRequest) {
   const protocol = (
     request.headers.get("x-forwarded-proto")?.split(",")[0] ??
     request.nextUrl.protocol
-  ).trim().toLowerCase().replace(/:$/, "");
+  )
+    .trim()
+    .toLowerCase()
+    .replace(/:$/, "");
 
   if (
     hostname === "geodrillksa.com" ||
@@ -39,6 +42,88 @@ export function proxy(request: NextRequest) {
     const response = NextResponse.next();
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
     return response;
+  }
+
+  const legacyRedirects: Record<string, string> = {
+    "/services": "/geotechnical/en/services",
+    "/services/": "/geotechnical/en/services",
+    "/about": "/geotechnical/en/about",
+    "/about/": "/geotechnical/en/about",
+    "/contact": "/geotechnical/en/contact",
+    "/contact/": "/geotechnical/en/contact",
+    "/qhse": "/geotechnical/en/qhse",
+    "/qhse/": "/geotechnical/en/qhse",
+    "/geotechnical-investigation":
+      "/geotechnical/en/services/geotechnical-investigation",
+    "/geotechnical-investigation/":
+      "/geotechnical/en/services/geotechnical-investigation",
+    "/geophysical-survey":
+      "/geotechnical/en/services/geophysical-survey",
+    "/geophysical-survey/":
+      "/geotechnical/en/services/geophysical-survey",
+    "/hydrology-studies": "/geotechnical/en/services/hydrology-studies",
+    "/hydrology-studies/": "/geotechnical/en/services/hydrology-studies",
+    "/hydrogeological-studies":
+      "/geotechnical/en/services/hydrogeological-studies",
+    "/hydrogeological-studies/":
+      "/geotechnical/en/services/hydrogeological-studies",
+    "/dewatering-design-and-execution":
+      "/geotechnical/en/services/dewatering-design-execution",
+    "/dewatering-design-and-execution/":
+      "/geotechnical/en/services/dewatering-design-execution",
+    "/soil-improvement-and-concrete-repair-services":
+      "/geotechnical/en/services/soil-improvement-concrete-repair",
+    "/soil-improvement-and-concrete-repair-services/":
+      "/geotechnical/en/services/soil-improvement-concrete-repair",
+    "/anchoring-shoring-design-and-execution":
+      "/geotechnical/en/services/anchoring-shoring-design-execution",
+    "/anchoring-shoring-design-and-execution/":
+      "/geotechnical/en/services/anchoring-shoring-design-execution",
+    "/material-testing-quality-control":
+      "/geotechnical/en/services/material-testing-quality-control",
+    "/material-testing-quality-control/":
+      "/geotechnical/en/services/material-testing-quality-control",
+    "/topographical-survey":
+      "/geotechnical/en/services/topographical-survey",
+    "/topographical-survey/":
+      "/geotechnical/en/services/topographical-survey",
+    "/mining-exploration": "/geotechnical/en/services/mining-exploration",
+    "/mining-exploration/": "/geotechnical/en/services/mining-exploration",
+  };
+
+  const legacyTarget = legacyRedirects[pathname];
+  if (legacyTarget) {
+    return NextResponse.redirect(new URL(legacyTarget, request.url), 308);
+  }
+
+  const localizedLegacyMatch = pathname.match(
+    /^\/(en|ar)\/(services|about|contact|qhse|geotechnical-investigation|geophysical-survey|hydrology-studies|hydrogeological-studies|dewatering-design-and-execution|soil-improvement-and-concrete-repair-services|anchoring-shoring-design-and-execution|material-testing-quality-control|topographical-survey|mining-exploration)\/?$/,
+  );
+  if (localizedLegacyMatch) {
+    const [, locale, legacyPath] = localizedLegacyMatch;
+    const serviceSlug: Record<string, string> = {
+      "geotechnical-investigation": "geotechnical-investigation",
+      "geophysical-survey": "geophysical-survey",
+      "hydrology-studies": "hydrology-studies",
+      "hydrogeological-studies": "hydrogeological-studies",
+      "dewatering-design-and-execution": "dewatering-design-execution",
+      "soil-improvement-and-concrete-repair-services":
+        "soil-improvement-concrete-repair",
+      "anchoring-shoring-design-and-execution":
+        "anchoring-shoring-design-execution",
+      "material-testing-quality-control": "material-testing-quality-control",
+      "topographical-survey": "topographical-survey",
+      "mining-exploration": "mining-exploration",
+    };
+    const target =
+      legacyPath === "services"
+        ? `/geotechnical/${locale}/services`
+        : legacyPath === "about" ||
+            legacyPath === "contact" ||
+            legacyPath === "qhse"
+          ? `/geotechnical/${locale}/${legacyPath}`
+          : `/geotechnical/${locale}/services/${serviceSlug[legacyPath]}`;
+    return NextResponse.redirect(new URL(target, request.url), 308);
   }
 
   const legacyProjectMatch = pathname.match(
@@ -60,11 +145,14 @@ export function proxy(request: NextRequest) {
   if (pathname === "/construction") {
     return NextResponse.redirect(new URL("/contracting/en", request.url), 308);
   }
-  if (pathname === "/en" || pathname === "/ar") {
-    return NextResponse.redirect(
-      new URL(`/contracting/${pathname.slice(1)}`, request.url),
-      308,
-    );
+  if (pathname === "/en" || pathname === "/en/" || pathname === "/ar" || pathname === "/ar/") {
+    const locale = pathname.replace(/\//g, "");
+    return new Response(null, {
+      status: 308,
+      headers: {
+        Location: new URL(`/contracting/${locale}`, request.url).toString(),
+      },
+    });
   }
 
   const legacySectorMatch = pathname.match(/^\/(en|ar)\/sectors\/(.+)$/);
@@ -82,6 +170,13 @@ export function proxy(request: NextRequest) {
   if (legacyClientsMatch) {
     return NextResponse.redirect(
       new URL(`/contracting/${legacyClientsMatch[1]}/clients`, request.url),
+      308,
+    );
+  }
+
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return NextResponse.redirect(
+      new URL(pathname.slice(0, -1), request.url),
       308,
     );
   }

@@ -63,6 +63,16 @@ export default async function ProjectDetailPage({ params }: Props) {
   const isArabic = lang === "ar";
   const name = isArabic ? project.nameAr : project.nameEn;
   const category = categoryLabels[project.category][lang];
+  const relatedServiceSlug =
+    project.category === "geophysical"
+      ? "geophysical-survey"
+      : project.category === "testing"
+        ? "material-testing-quality-control"
+        : project.category === "structural"
+          ? "structural-assessment"
+          : project.category === "slope" || project.category === "shoring"
+            ? "anchoring-shoring-design-execution"
+            : "geotechnical-investigation";
   const breadcrumbItems = [
     {
       "@type": "ListItem",
@@ -162,6 +172,12 @@ export default async function ProjectDetailPage({ params }: Props) {
             className="mt-8 inline-flex font-semibold text-primary hover:underline"
           >
             {isArabic ? "العودة إلى المشاريع" : "Back to projects"}
+          </Link>
+          <Link
+            href={`/geotechnical/${lang}/services/${relatedServiceSlug}`}
+            className="ms-6 inline-flex font-semibold text-primary hover:underline"
+          >
+            {isArabic ? "الخدمة ذات الصلة" : "Related service"}
           </Link>
         </article>
       </main>

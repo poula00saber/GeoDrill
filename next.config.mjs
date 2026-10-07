@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  skipTrailingSlashRedirect: true,
   images: {
     unoptimized: true,
   },
@@ -10,6 +11,7 @@ const nextConfig = {
         destination: "https://www.geodrillksa.com/contracting/en",
         permanent: true,
       },
+
       {
         source: "/contracting",
         destination: "https://www.geodrillksa.com/contracting/en",
@@ -23,16 +25,6 @@ const nextConfig = {
       {
         source: "/geotechnical",
         destination: "https://www.geodrillksa.com/geotechnical/en",
-        permanent: true,
-      },
-      {
-        source: "/en",
-        destination: "https://www.geodrillksa.com/contracting/en",
-        permanent: true,
-      },
-      {
-        source: "/ar",
-        destination: "https://www.geodrillksa.com/contracting/ar",
         permanent: true,
       },
     ];

@@ -26,7 +26,9 @@ export function Navbar() {
   const prevScrollY = useRef(0);
   const rafId = useRef<number | null>(null);
   const openRef = useRef(open);
-  openRef.current = open;
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
 
   const isContractingHome = /^\/contracting\/(en|ar)\/?$/.test(pathname);
   const isHomePage =
@@ -60,19 +62,23 @@ export function Navbar() {
     }
   };
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const id = window.setTimeout(() => setMounted(true), 0);
+    return () => window.clearTimeout(id);
+  }, []);
   const isDark = mounted && resolvedTheme === "dark";
 
   // Check for hero banner element on current page
   useEffect(() => {
     const heroEl = document.querySelector<HTMLElement>("[data-hero-banner]");
     if (!heroEl) {
-      setHasHero(false);
+      // The DOM is the source of truth for this client-only layout state.
+      queueMicrotask(() => setHasHero(false));
       heroHeightRef.current = NO_HERO_THRESHOLD;
       return;
     }
 
-    setHasHero(true);
+    queueMicrotask(() => setHasHero(true));
     const update = () => {
       heroHeightRef.current = heroEl.offsetHeight;
     };

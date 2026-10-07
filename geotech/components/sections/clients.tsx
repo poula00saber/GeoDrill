@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import {
   motion,
   useAnimationFrame,
@@ -82,7 +82,9 @@ function LogoRow({
   // x between `0%` and `-50%` (of the element width) is one seamless loop.
   const [paused, setPaused] = useState(false);
   const pausedRef = useRef(paused);
-  pausedRef.current = paused;
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
   // Loop distance for x is 50 (percent of element width). A full loop equals
   // one row width, so we travel 50% over `duration` seconds → 50/duration %/s.

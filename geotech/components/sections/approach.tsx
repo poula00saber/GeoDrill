@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
+import type { Dictionary } from "@/geotech/lib/i18n";
 
 export function Approach() {
   const { dict } = useLanguage();
@@ -12,7 +13,7 @@ export function Approach() {
   return <ApproachContent dict={dict} />;
 }
 
-function ApproachContent({ dict }: { dict: any }) {
+function ApproachContent({ dict }: { dict: Dictionary }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -75,7 +76,7 @@ function StageNode({
   total,
   progress,
 }: {
-  stage: any;
+  stage: Dictionary["approach"]["stages"]["investigate"] & { num: string };
   index: number;
   total: number;
   progress: MotionValue<number>;

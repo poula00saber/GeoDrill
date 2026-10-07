@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContractingSite } from "@/components/contracting-site";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl } from "@/lib/seo";
 import { isLocale, locales } from "@/geotech/lib/i18n";
 
 /**
@@ -76,5 +78,63 @@ export default async function Page({
   if (!isLocale(lang)) notFound();
   const locale = lang;
 
-  return <ContractingSite locale={locale} />;
+  const pageUrl = absoluteUrl(`/contracting/${locale}`);
+  const arabic = locale === "ar";
+  const title = arabic
+    ? "شركة المقاولات العامة في الرياض | GEODRILL"
+    : "General Contractor in Riyadh | GEODRILL";
+  const description = arabic
+    ? "تقدم GEODRILL خدمات المقاولات العامة، الأعمال الخرسانية، والأعمال المعدنية والمباني في السعودية."
+    : "GEODRILL delivers general contracting, groundworks, concrete works, steel structures, MEP, and finishing solutions across Saudi Arabia.";
+
+  return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.geodrillksa.com/#organization",
+          name: "GEODRILL KSA",
+          url: "https://www.geodrillksa.com/",
+          description:
+            "Geotechnical, geoscience, engineering investigation, general contracting and construction services in Saudi Arabia.",
+          department: {
+            "@type": "Organization",
+            name: arabic
+              ? "قسم المقاولات العامة في GEODRILL"
+              : "GEODRILL General Contracting Division",
+            url: pageUrl,
+          },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: title,
+          description,
+          inLanguage: locale,
+          isPartOf: { "@id": "https://www.geodrillksa.com/#website" },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: arabic ? "الرئيسية" : "Home",
+              item: absoluteUrl("/"),
+            },
+            { "@type": "ListItem", position: 2, name: title, item: pageUrl },
+          ],
+        }}
+      />
+      <ContractingSite locale={locale} />
+    </>
+  );
 }

@@ -32,7 +32,7 @@ export function Footer() {
     const base = href.substring(0, hashIndex);
     const targetId = href.substring(hashIndex + 1);
     if (base && base !== window.location.pathname) {
-      window.location.href = href;
+      window.location.assign(href);
       return;
     }
     e.preventDefault();

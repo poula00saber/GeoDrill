@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GeotechHome } from "@/app/geotechnical/page";
+import { GeotechnicalSeoShell } from "@/components/geotechnical-seo-shell";
 import { isLocale, locales } from "@/geotech/lib/i18n";
 
 export function generateStaticParams() {
@@ -70,5 +71,10 @@ export default async function GeotechnicalLocalePage({
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
 
-  return <GeotechHome />;
+  return (
+    <>
+      <GeotechnicalSeoShell locale={lang} />
+      <GeotechHome />
+    </>
+  );
 }

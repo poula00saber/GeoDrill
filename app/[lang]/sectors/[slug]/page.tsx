@@ -173,6 +173,20 @@ export default async function SectorPage({ params }: Props) {
 
         {/* Related sectors */}
         <SectorNav current={sector.key} currentName={sector.name[locale]} />
+        <div className="mx-auto flex max-w-7xl flex-wrap gap-5 px-5 pb-12 md:px-8">
+          <a
+            href={`/contracting/${locale}/projects`}
+            className="font-semibold text-primary hover:underline"
+          >
+            {locale === "ar" ? "مشاريع المقاولات" : "Contracting projects"}
+          </a>
+          <a
+            href={`/contracting/${locale}#services`}
+            className="font-semibold text-primary hover:underline"
+          >
+            {locale === "ar" ? "خدمات المقاولات" : "Contracting services"}
+          </a>
+        </div>
 
         <Footer />
       </main>

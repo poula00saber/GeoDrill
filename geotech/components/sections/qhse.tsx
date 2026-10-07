@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ShieldCheck, HeartPulse, Leaf, Award } from "lucide-react";
 import { useLanguage } from "@/geotech/components/providers/language-provider";
 import { SectionHeading } from "@/geotech/components/section-heading";
+import type { Dictionary } from "@/geotech/lib/i18n";
 
 export function QhseSection() {
   const { dict } = useLanguage();
@@ -13,7 +14,7 @@ export function QhseSection() {
   return <QhseContent dict={dict} />;
 }
 
-function QhseContent({ dict }: { dict: any }) {
+function QhseContent({ dict }: { dict: Dictionary }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,

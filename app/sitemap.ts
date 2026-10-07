@@ -74,7 +74,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   const rootEntry: MetadataRoute.Sitemap[number] = {
-    url: `${SITE_URL}/`,
+    url: SITE_URL,
   };
   const mainPages = [
     ...geotechnicalPages.flatMap((suffix) =>

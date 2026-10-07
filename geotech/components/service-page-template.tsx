@@ -22,6 +22,7 @@ import {
 } from "@/geotech/components/sections/capability-visualizer";
 import { CapabilitiesGrid } from "@/geotech/components/sections/capabilities-grid";
 import { ServicePager } from "@/geotech/components/sections/service-pager";
+import { projects } from "@/geotech/lib/projects-data";
 import { serviceShowcaseConfig } from "@/geotech/lib/service-showcase-data";
 
 interface ServicePageTemplateProps {
@@ -58,6 +59,17 @@ export function ServicePageTemplate({
 }: ServicePageTemplateProps) {
   const baseHref = `/geotechnical/${locale}`;
   const ServiceVisual = serviceVisuals[service.slug];
+  const relatedProjectCategory =
+    service.category === "Testing"
+      ? "testing"
+      : service.category === "Engineering"
+        ? "structural"
+        : service.category === "Studies"
+          ? "geophysical"
+          : "geotechnical";
+  const relatedProject = projects.find(
+    (project) => project.category === relatedProjectCategory,
+  );
   const isArabic = locale === "ar";
 
   // Build the canonical services list for the bottom pager. Falls back to
@@ -346,6 +358,13 @@ export function ServicePageTemplate({
             <Button asChild size="lg" variant="outline">
               <Link href={`${baseHref}/services`}>{labels.allServices}</Link>
             </Button>
+            {relatedProject && (
+              <Button asChild size="lg" variant="outline">
+                <Link href={`${baseHref}/projects/${relatedProject.slug}`}>
+                  {isArabic ? "مشروع ذو صلة" : "Related project"}
+                </Link>
+              </Button>
+            )}
           </div>
         </motion.section>
       </div>

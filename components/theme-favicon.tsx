@@ -53,7 +53,11 @@ export default function ThemeFavicon() {
 
   // Derive "is geotech route" from the path (client-side, post-hydration).
   useEffect(() => {
-    setGeotech(pathname === "/geotechnical" || pathname?.startsWith("/geotechnical/"));
+    queueMicrotask(() =>
+      setGeotech(
+        pathname === "/geotechnical" || pathname?.startsWith("/geotechnical/"),
+      ),
+    );
   }, [pathname]);
 
   useEffect(() => {

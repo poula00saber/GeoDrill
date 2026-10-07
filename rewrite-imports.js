@@ -10,8 +10,10 @@
  * Usage: node rewrite-imports.js
  */
 
-const fs = require("fs");
-const path = require("path");
+// This utility is intentionally CommonJS so it can run directly with Node.
+/* eslint-disable @typescript-eslint/no-require-imports */
+const fs = require("node:fs");
+const path = require("node:path");
 const roots = [path.join("geotech", "components"), path.join("geotech", "lib")];
 let count = 0;
 function walk(dir) {
