@@ -9,7 +9,7 @@ import { projects } from "@/geotech/lib/projects-data";
  *   /construction -> /contracting/en
  */
 export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const pathname = decodeURIComponent(request.nextUrl.pathname);
   const hostname = (
     request.headers.get("x-forwarded-host") ??
     request.headers.get("host") ??
@@ -44,6 +44,33 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
+  const arabicServiceRedirects: Record<string, string> = {
+    "التحريات-الجيوتقنية":
+      "/geotechnical/ar/services/geotechnical-investigation",
+    "اختبار-المواد-ومراقبة-الجودة":
+      "/geotechnical/ar/services/material-testing-quality-control",
+    "المسح-الطبوغرافي": "/geotechnical/ar/services/topographical-survey",
+    "المسح-الجيوفيزيائي": "/geotechnical/ar/services/geophysical-survey",
+    "الدراسات-الهيدرولوجية": "/geotechnical/ar/services/hydrology-studies",
+    "الدراسات-الهيدروجيولوجية":
+      "/geotechnical/ar/services/hydrogeological-studies",
+    "تحري-التجاويف-والحقن-والخوازيق-الدقيقة":
+      "/geotechnical/ar/services/cavity-probing-grouting-micro-piling",
+    "المسح-الجيولوجي-وثبات-المنحدرات-الصخرية":
+      "/geotechnical/ar/services/geological-survey-rock-slope-stability",
+    "التقييم-الإنشائي-للمباني":
+      "/geotechnical/ar/services/structural-assessment",
+    "الدراسات-البيئية": "/geotechnical/ar/services/environmental-survey",
+    "تصميم-وتنفيذ-أنظمة-التدعيم-وسند-جوانب-الحفر":
+      "/geotechnical/ar/services/anchoring-shoring-design-execution",
+    "تصميم-وتنفيذ-خفض-منسوب-المياه":
+      "/geotechnical/ar/services/dewatering-design-execution",
+    "تحسين-التربة-وإصلاح-الخرسانة":
+      "/geotechnical/ar/services/soil-improvement-concrete-repair",
+    "استكشاف-المعادن-وتقييم-الخامات":
+      "/geotechnical/ar/services/mining-exploration",
+  };
+
   const legacyRedirects: Record<string, string> = {
     "/services": "/geotechnical/en/services",
     "/services/": "/geotechnical/en/services",
@@ -57,10 +84,8 @@ export function proxy(request: NextRequest) {
       "/geotechnical/en/services/geotechnical-investigation",
     "/geotechnical-investigation/":
       "/geotechnical/en/services/geotechnical-investigation",
-    "/geophysical-survey":
-      "/geotechnical/en/services/geophysical-survey",
-    "/geophysical-survey/":
-      "/geotechnical/en/services/geophysical-survey",
+    "/geophysical-survey": "/geotechnical/en/services/geophysical-survey",
+    "/geophysical-survey/": "/geotechnical/en/services/geophysical-survey",
     "/hydrology-studies": "/geotechnical/en/services/hydrology-studies",
     "/hydrology-studies/": "/geotechnical/en/services/hydrology-studies",
     "/hydrogeological-studies":
@@ -83,13 +108,28 @@ export function proxy(request: NextRequest) {
       "/geotechnical/en/services/material-testing-quality-control",
     "/material-testing-quality-control/":
       "/geotechnical/en/services/material-testing-quality-control",
-    "/topographical-survey":
-      "/geotechnical/en/services/topographical-survey",
-    "/topographical-survey/":
-      "/geotechnical/en/services/topographical-survey",
+    "/topographical-survey": "/geotechnical/en/services/topographical-survey",
+    "/topographical-survey/": "/geotechnical/en/services/topographical-survey",
     "/mining-exploration": "/geotechnical/en/services/mining-exploration",
     "/mining-exploration/": "/geotechnical/en/services/mining-exploration",
+    "/ar/الكشف-عن-التكهفات-في-الصخور":
+      "/geotechnical/ar/services/cavity-probing-grouting-micro-piling",
+    "/ar/الكشف-عن-التكهفات-في-الصخور/":
+      "/geotechnical/ar/services/cavity-probing-grouting-micro-piling",
+    "/ar/تواصل-معنا": "/geotechnical/ar/contact",
+    "/ar/تواصل-معنا/": "/geotechnical/ar/contact",
+    "/ar/الدراسات-الجيولوجية-وثبات-المنحدرات":
+      "/geotechnical/ar/services/geological-survey-rock-slope-stability",
+    "/ar/الدراسات-الجيولوجية-وثبات-المنحدرات/":
+      "/geotechnical/ar/services/geological-survey-rock-slope-stability",
+    "/typography": "/geotechnical/en/services/topographical-survey",
+    "/typography/": "/geotechnical/en/services/topographical-survey",
   };
+
+  for (const [arabicSlug, target] of Object.entries(arabicServiceRedirects)) {
+    legacyRedirects[`/ar/${arabicSlug}`] = target;
+    legacyRedirects[`/ar/${arabicSlug}/`] = target;
+  }
 
   const legacyTarget = legacyRedirects[pathname];
   if (legacyTarget) {
